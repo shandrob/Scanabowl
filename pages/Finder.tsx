@@ -208,7 +208,7 @@ const Finder: React.FC = () => {
             className="bg-shibui-charcoal text-white px-4 rounded-xl flex items-center justify-center hover:bg-black transition-colors"
             title="Scan Barcode"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
           </button>
         </div>
 
@@ -380,6 +380,22 @@ const ProductDetailModal: React.FC<{ product: Product, onClose: () => void, alle
               </li>
             </ul>
           </div>
+          
+          {/* Shop Link Section */}
+          {product.url && (
+            <a 
+              href={product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block w-full text-center bg-shibui-moss text-white font-bold py-4 rounded-xl shadow-lg shadow-shibui-moss/20 hover:bg-shibui-mossLight hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <span className="relative flex items-center justify-center">
+                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                 Koop hier het product
+              </span>
+            </a>
+          )}
 
           <div>
              <h4 className="font-serif font-bold mb-2 text-shibui-ink">Ingrediënten</h4>

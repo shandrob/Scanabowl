@@ -73,6 +73,7 @@ export const sheetService = {
         graanvrij: /ja|yes|true|1/i.test(getVal('graanvrij') || ''),
         score: parseFloat(getVal('score')) || 0,
         score_explanation: getVal('explanation') || getVal('uitleg') || getVal('score_explanation') || '',
+        url: getVal('url') || getVal('link') || getVal('shop') || '',
       } as Product;
     });
   },

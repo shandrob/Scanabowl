@@ -9,6 +9,7 @@ export interface Product {
   graanvrij: boolean;
   score: number;
   score_explanation: string;
+  url: string; // Link naar de webshop
 }
 
 export interface PetProfile {
