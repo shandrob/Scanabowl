@@ -1,7 +1,0 @@
-{
-  "name": "Scanabowl Hub",
-  "description": "A minimalist, Shibui-inspired pet nutrition guide and tracker.",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}
