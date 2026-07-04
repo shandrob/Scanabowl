@@ -1,78 +1,420 @@
 <!DOCTYPE html>
 <html lang="nl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scanabowl Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['"Noto Serif JP"', 'serif'],
-              sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
-            },
-            colors: {
-              shibui: {
-                paper: '#F4F4F0', // Off-white background
-                stone: '#E5E5E0', // Subtle borders/cards
-                charcoal: '#363636', // Primary text
-                ink: '#1A1A1A', // Headers
-                moss: '#556B2F', // Primary Action (Green)
-                mossLight: '#7E8F5E',
-                clay: '#A0522D', // Secondary/Warn
-                sand: '#D2CFC5', // Muted accents
-              }
-            },
-            boxShadow: {
-              'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-            }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scanabowl — Onafhankelijke voeranalyse voor hond &amp; kat</title>
+  <meta name="description" content="Scanabowl analyseert en vergelijkt honden- en kattenvoer op basis van ingrediënten, macronutriënten en prijs per dag. Vind wetenschappelijk onderbouwd het beste voer voor jouw huisdier." />
+  <meta property="og:title" content="Scanabowl — Weet écht wat er in de bak zit" />
+  <meta property="og:description" content="Onafhankelijke voeranalyse en vergelijking voor honden en katten." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scanabowl.com" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 14h24c0 8-5 13-12 13S4 22 4 14z' fill='%23065f46'/%3E%3Ccircle cx='11' cy='8' r='2.6' fill='%23065f46'/%3E%3Ccircle cx='21' cy='8' r='2.6' fill='%23065f46'/%3E%3C/svg%3E" />
+
+  <!-- Fonts: Fraunces (display) · Schibsted Grotesk (body) · IBM Plex Mono (data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS (Play CDN — 100% gratis) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:  { DEFAULT: '#065f46', dark: '#04412f', mid: '#0b7a57', soft: '#e7f4ed', tint: '#d9eee4' },
+            cream:  { DEFAULT: '#faf7f0', deep: '#f3eee3', line: '#e6dfd0' },
+            ink:    { DEFAULT: '#1e293b', soft: '#475569', faint: '#94a3b8' },
+            amber:  { star: '#f59e0b' }
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['"Schibsted Grotesk"', 'system-ui', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+          },
+          boxShadow: {
+            card: '0 1px 2px rgba(30,41,59,.06), 0 8px 24px -12px rgba(6,95,70,.18)',
+            lift: '0 2px 4px rgba(30,41,59,.08), 0 16px 40px -12px rgba(6,95,70,.28)'
           }
         }
       }
-    </script>
-    <style>
-      body {
-        background-color: #F4F4F0;
-        color: #363636;
-      }
-      /* Hide scrollbar for clean look */
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      /* Scanner specific styles */
-      #reader {
-        width: 100%;
-        border: none !important;
-      }
-      #reader video {
-        object-fit: cover;
-        border-radius: 1rem;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
-    "papaparse": "https://esm.sh/papaparse@5.4.1",
-    "html5-qrcode": "https://esm.sh/html5-qrcode@2.3.8"
-  }
-}
-</script>
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body class="bg-cream text-ink font-sans antialiased">
+
+  <!-- ══════════════════ NAVIGATION ══════════════════ -->
+  <header class="sticky top-0 z-40 border-b border-cream-line/80 bg-cream/90 backdrop-blur supports-[backdrop-filter]:bg-cream/75">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+      <a href="#home" class="group flex items-center gap-2.5" aria-label="Scanabowl — home">
+        <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 14h24c0 8-5 13-12 13S4 22 4 14z" fill="#065f46"/>
+          <circle cx="11" cy="8" r="2.6" fill="#065f46"/>
+          <circle cx="21" cy="8" r="2.6" fill="#065f46"/>
+          <line x1="6" y1="17.5" x2="26" y2="17.5" stroke="#faf7f0" stroke-width="1.4" class="logo-scanline"/>
+        </svg>
+        <span class="font-display text-xl font-semibold tracking-tight text-brand">Scanabowl</span>
+      </a>
+
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Hoofdnavigatie">
+        <a href="#home"   class="nav-link" data-nav="home">Home</a>
+        <a href="#finder" class="nav-link" data-nav="finder">Food Finder</a>
+        <a href="#wizard" class="nav-link" data-nav="wizard">Profiel-wizard</a>
+        <a href="#blog"   class="nav-link" data-nav="blog">Blog</a>
+        <a href="#about"  class="nav-link" data-nav="about">Over ons</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#finder" class="hidden rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-mid sm:inline-flex">Vind voer</a>
+        <button id="mobile-menu-btn" class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-cream-line md:hidden" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden border-t border-cream-line bg-cream px-4 py-3 md:hidden">
+      <nav class="flex flex-col gap-1" aria-label="Mobiele navigatie">
+        <a href="#home"   class="nav-link" data-nav="home">Home</a>
+        <a href="#finder" class="nav-link" data-nav="finder">Food Finder</a>
+        <a href="#wizard" class="nav-link" data-nav="wizard">Profiel-wizard</a>
+        <a href="#blog"   class="nav-link" data-nav="blog">Blog</a>
+        <a href="#about"  class="nav-link" data-nav="about">Over ons</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Global data status banner -->
+  <div id="data-status" class="hidden"></div>
+
+  <main id="main">
+
+    <!-- ══════════════════ HOME ══════════════════ -->
+    <section id="page-home" class="page">
+      <!-- Hero -->
+      <div class="relative overflow-hidden">
+        <div class="pointer-events-none absolute inset-0 hero-grid" aria-hidden="true"></div>
+        <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
+          <div>
+            <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-3 py-1 font-mono text-xs font-medium tracking-wide text-brand">
+              <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand"></span>
+              ONAFHANKELIJKE VOERANALYSE · NL
+            </p>
+            <h1 class="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+              Weet écht wat er<br />in de bak zit.
+            </h1>
+            <p class="mt-5 max-w-lg text-lg leading-relaxed text-ink-soft">
+              Scanabowl ontleedt honden- en kattenvoer tot op het ingrediënt: eiwit, vet, koolhydraten én de werkelijke prijs per dag. Geen marketing — alleen het etiket.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#finder" class="btn-primary">Vind het beste voer
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+              <a href="#wizard" class="btn-secondary">Analyseer mijn huisdierprofiel</a>
+            </div>
+            <div id="home-stats" class="mt-10 flex flex-wrap gap-8 font-mono text-sm text-ink-soft"></div>
+          </div>
+
+          <!-- Signature: de scanner-bowl -->
+          <div class="relative mx-auto w-full max-w-md" aria-hidden="true">
+            <svg viewBox="0 0 420 360" class="w-full drop-shadow-xl">
+              <defs>
+                <linearGradient id="bowlfill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0b7a57"/><stop offset="1" stop-color="#065f46"/>
+                </linearGradient>
+                <linearGradient id="scanbeam" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#34d399" stop-opacity="0"/>
+                  <stop offset=".5" stop-color="#34d399" stop-opacity=".55"/>
+                  <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+                </linearGradient>
+                <clipPath id="bowlclip"><path d="M60 160h300c0 84-56 136-150 136S60 244 60 160z"/></clipPath>
+              </defs>
+              <!-- kibble -->
+              <g fill="#b45309" opacity=".9">
+                <circle cx="150" cy="150" r="13"/><circle cx="196" cy="138" r="15"/><circle cx="243" cy="148" r="13"/>
+                <circle cx="172" cy="126" r="11"/><circle cx="222" cy="122" r="11"/><circle cx="270" cy="136" r="11"/>
+              </g>
+              <path d="M60 160h300c0 84-56 136-150 136S60 244 60 160z" fill="url(#bowlfill)"/>
+              <ellipse cx="210" cy="160" rx="150" ry="16" fill="#04412f"/>
+              <!-- scanning beam -->
+              <g clip-path="url(#bowlclip)">
+                <rect class="scanbeam" x="60" y="150" width="300" height="60" fill="url(#scanbeam)"/>
+              </g>
+              <!-- floating readouts -->
+              <g font-family="'IBM Plex Mono', monospace" font-size="12.5" font-weight="500">
+                <g class="chip chip-1"><rect x="18" y="60" rx="8" width="118" height="30" fill="#faf7f0" stroke="#e6dfd0"/><text x="30" y="80" fill="#065f46">EIWIT 32%</text></g>
+                <g class="chip chip-2"><rect x="286" y="52" rx="8" width="112" height="30" fill="#faf7f0" stroke="#e6dfd0"/><text x="298" y="72" fill="#065f46">VET 18%</text></g>
+                <g class="chip chip-3"><rect x="300" y="216" rx="8" width="112" height="30" fill="#faf7f0" stroke="#e6dfd0"/><text x="312" y="236" fill="#b45309">€0,84/dag</text></g>
+                <g class="chip chip-4"><rect x="6" y="212" rx="8" width="132" height="30" fill="#faf7f0" stroke="#e6dfd0"/><text x="18" y="232" fill="#1e293b">GRAANVRIJ ✓</text></g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hoe het werkt -->
+      <div class="border-y border-cream-line bg-cream-deep">
+        <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <p class="font-mono text-xs font-medium tracking-widest text-brand">METHODE</p>
+          <h2 class="mt-2 font-display text-3xl font-semibold tracking-tight">Zo leest Scanabowl een etiket</h2>
+          <div class="mt-10 grid gap-6 md:grid-cols-3">
+            <div class="method-card">
+              <div class="method-icon">🔬</div>
+              <h3 class="font-display text-lg font-semibold">1 · Ingrediënten ontleden</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-soft">De eerste vijf ingrediënten bepalen de kwaliteit van een voer. Wij lichten ze uit en beoordelen de eiwitbron, vulstoffen en toevoegingen.</p>
+            </div>
+            <div class="method-card">
+              <div class="method-icon">📊</div>
+              <h3 class="font-display text-lg font-semibold">2 · Macro's berekenen</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-soft">Fabrikanten vermelden koolhydraten zelden. Wij berekenen ze uit de analytische bestanddelen, zodat je het volledige plaatje ziet.</p>
+            </div>
+            <div class="method-card">
+              <div class="method-icon">💶</div>
+              <h3 class="font-display text-lg font-semibold">3 · Prijs per dag</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-soft">De zakprijs zegt niets. Wij rekenen om naar de werkelijke voerkosten per dag op basis van de energiebehoefte van jouw dier.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topbeoordeeld -->
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs font-medium tracking-widest text-brand">TOPSCORES</p>
+            <h2 class="mt-2 font-display text-3xl font-semibold tracking-tight">Hoogst beoordeelde voeders</h2>
+          </div>
+          <a href="#finder" class="hidden shrink-0 text-sm font-semibold text-brand hover:underline sm:block">Alle voeders →</a>
+        </div>
+        <div id="home-top-products" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4"></div>
+      </div>
+
+      <!-- Recente blogs -->
+      <div class="border-t border-cream-line bg-cream-deep">
+        <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <div class="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p class="font-mono text-xs font-medium tracking-widest text-brand">KENNISBANK</p>
+              <h2 class="mt-2 font-display text-3xl font-semibold tracking-tight">Laatste artikelen</h2>
+            </div>
+            <a href="#blog" class="hidden shrink-0 text-sm font-semibold text-brand hover:underline sm:block">Alle artikelen →</a>
+          </div>
+          <div id="home-blogs" class="grid gap-5 md:grid-cols-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ FOOD FINDER ══════════════════ -->
+    <section id="page-finder" class="page hidden">
+      <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+        <p class="font-mono text-xs font-medium tracking-widest text-brand">FOOD FINDER</p>
+        <h1 class="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Vergelijk elk voer op het etiket</h1>
+        <p class="mt-2 max-w-2xl text-ink-soft">Filter op dier, merk, voedingstype en levensfase. Klik op een product voor de volledige ingrediënten-analyse, macroverdeling en dagkosten.</p>
+
+        <div id="wizard-active-banner" class="hidden"></div>
+
+        <div class="mt-8 grid gap-8 lg:grid-cols-[280px_1fr]">
+          <!-- Filters -->
+          <aside class="lg:sticky lg:top-24 lg:self-start" aria-label="Filters">
+            <button id="filters-toggle" class="mb-3 flex w-full items-center justify-between rounded-xl border border-cream-line bg-white px-4 py-3 text-sm font-semibold lg:hidden" aria-expanded="false" aria-controls="filters-panel">
+              Filters <span id="filters-count" class="rounded-full bg-brand px-2 py-0.5 font-mono text-xs text-white">0</span>
+            </button>
+            <div id="filters-panel" class="hidden space-y-6 rounded-2xl border border-cream-line bg-white p-5 shadow-card lg:block">
+              <div>
+                <label for="f-search" class="filter-label">Zoeken</label>
+                <input id="f-search" type="search" placeholder="Naam, merk of ingrediënt…" class="input-base" autocomplete="off" />
+              </div>
+              <fieldset>
+                <legend class="filter-label">Dier</legend>
+                <div id="f-animal" class="flex gap-2"></div>
+              </fieldset>
+              <fieldset>
+                <legend class="filter-label">Merk</legend>
+                <div id="f-brand" class="max-h-48 space-y-1.5 overflow-y-auto pr-1"></div>
+              </fieldset>
+              <fieldset>
+                <legend class="filter-label">Voedingstype</legend>
+                <div id="f-type" class="space-y-1.5"></div>
+              </fieldset>
+              <fieldset>
+                <legend class="filter-label">Levensfase</legend>
+                <div id="f-stage" class="space-y-1.5"></div>
+              </fieldset>
+              <fieldset>
+                <legend class="filter-label">Samenstelling</legend>
+                <label class="check-row"><input type="checkbox" id="f-grainfree" class="check-input" /> <span>Alleen graanvrij</span></label>
+              </fieldset>
+              <button id="f-reset" class="w-full rounded-lg border border-cream-line px-3 py-2 text-sm font-medium text-ink-soft transition hover:border-brand hover:text-brand">Filters wissen</button>
+            </div>
+          </aside>
+
+          <!-- Resultaten -->
+          <div>
+            <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <p id="results-count" class="font-mono text-sm text-ink-soft" aria-live="polite">—</p>
+              <div class="flex items-center gap-2">
+                <label for="f-sort" class="text-sm text-ink-soft">Sorteer:</label>
+                <select id="f-sort" class="input-base !w-auto !py-1.5 text-sm">
+                  <option value="score-desc">Score (hoog → laag)</option>
+                  <option value="price-asc">Prijs (laag → hoog)</option>
+                  <option value="price-desc">Prijs (hoog → laag)</option>
+                  <option value="ppkg-asc">Prijs per kg (laag → hoog)</option>
+                  <option value="name-asc">Naam (A → Z)</option>
+                </select>
+              </div>
+            </div>
+            <div id="products-grid" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"></div>
+            <div id="products-empty" class="hidden rounded-2xl border border-dashed border-cream-line bg-white p-12 text-center">
+              <p class="font-display text-lg font-semibold">Geen voeders gevonden</p>
+              <p class="mt-1 text-sm text-ink-soft">Verbreed je filters of wis je zoekopdracht om meer resultaten te zien.</p>
+            </div>
+            <div class="mt-8 text-center">
+              <button id="load-more" class="btn-secondary hidden">Meer laden</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ PET PROFILE WIZARD ══════════════════ -->
+    <section id="page-wizard" class="page hidden">
+      <div class="mx-auto max-w-2xl px-4 py-12 sm:px-6">
+        <p class="font-mono text-xs font-medium tracking-widest text-brand">PROFIEL-WIZARD</p>
+        <h1 class="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Voer op maat van jouw dier</h1>
+        <p class="mt-2 text-ink-soft">Zes korte vragen. Wij matchen daarna de best scorende voeders op soort, levensfase, energiebehoefte en allergieën. Je profiel wordt alleen lokaal in je browser bewaard.</p>
+
+        <div class="mt-8 rounded-2xl border border-cream-line bg-white p-6 shadow-card sm:p-8">
+          <div class="mb-6 flex items-center gap-2" id="wizard-progress" aria-hidden="true"></div>
+          <form id="wizard-form" novalidate>
+            <div id="wizard-steps"></div>
+            <div class="mt-8 flex items-center justify-between gap-3">
+              <button type="button" id="wizard-back" class="btn-secondary invisible">← Terug</button>
+              <button type="button" id="wizard-next" class="btn-primary">Volgende →</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="wizard-saved" class="mt-6 hidden"></div>
+      </div>
+
+      <div id="wizard-results" class="mx-auto hidden max-w-7xl px-4 pb-16 sm:px-6">
+        <h2 class="font-display text-2xl font-semibold tracking-tight">Aanbevolen voor <span id="wizard-pet-name" class="text-brand"></span></h2>
+        <p class="mt-1 text-sm text-ink-soft" id="wizard-results-sub"></p>
+        <div id="wizard-results-grid" class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ BLOG ══════════════════ -->
+    <section id="page-blog" class="page hidden">
+      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <p class="font-mono text-xs font-medium tracking-widest text-brand">KENNISBANK</p>
+        <h1 class="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Blog &amp; voedingsgidsen</h1>
+        <p class="mt-2 max-w-2xl text-ink-soft">Onderbouwde artikelen over huisdiervoeding: van etiketten lezen tot allergieën herkennen.</p>
+        <div id="blog-grid" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ ARTIKEL ══════════════════ -->
+    <section id="page-article" class="page hidden">
+      <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        <a href="#blog" class="text-sm font-semibold text-brand hover:underline">← Alle artikelen</a>
+        <div id="article-content" class="mt-6"></div>
+      </article>
+    </section>
+
+    <!-- ══════════════════ OVER ONS ══════════════════ -->
+    <section id="page-about" class="page hidden">
+      <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        <p class="font-mono text-xs font-medium tracking-widest text-brand">OVER ONS</p>
+        <h1 class="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Waarom Scanabowl bestaat</h1>
+        <div class="prose-scan mt-6 space-y-5 leading-relaxed text-ink-soft">
+          <p>De verpakking van diervoer is gemaakt om te verkopen, niet om te informeren. Termen als "premium", "natuurlijk" en "met verse kip" zeggen weinig over wat er werkelijk in de brok zit. De informatie die er wél toe doet — de ingrediëntendeclaratie en de analytische bestanddelen — staat in kleine letters op de achterkant.</p>
+          <p>Scanabowl draait dat om. Wij lezen uitsluitend het etiket en maken het vergelijkbaar: welke eiwitbron staat er op plek één? Hoeveel koolhydraten bevat het voer werkelijk? En wat kost een dag voeren nu écht, omgerekend naar de energiebehoefte van jouw hond of kat?</p>
+          <h2 class="font-display text-xl font-semibold text-ink">Onze werkwijze</h2>
+          <p>Elke productpagina toont de volledige ingrediëntenlijst met de eerste vijf ingrediënten uitgelicht — deze bepalen het grootste deel van de receptuur. Koolhydraten worden, wanneer de fabrikant ze niet vermeldt, berekend als 100% minus eiwit, vet, ruwe as, ruwe celstof en vocht. De dagprijs berekenen we op basis van de metabolische energiebehoefte (70 × lichaamsgewicht<sup>0,75</sup>, vermenigvuldigd met een activiteitsfactor).</p>
+          <h2 class="font-display text-xl font-semibold text-ink">Onafhankelijkheid &amp; verdienmodel</h2>
+          <p>Scanabowl is gratis te gebruiken. Wanneer je via een link op onze site een product koopt bij bol.com, ontvangen wij mogelijk een kleine commissie via het Bol.com Partnerprogramma. Dit heeft geen enkele invloed op onze scores of rangschikking: die worden uitsluitend bepaald door de samenstelling op het etiket. Prijzen en beschikbaarheid kunnen afwijken; controleer deze altijd bij de winkel.</p>
+          <h2 class="font-display text-xl font-semibold text-ink">Geen dierenarts</h2>
+          <p>Scanabowl geeft algemene voedingsinformatie en is geen vervanging voor veterinair advies. Heeft jouw dier gezondheidsklachten, overgewicht of een medische aandoening? Raadpleeg dan altijd een dierenarts voordat je van voer wisselt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ JURIDISCHE PAGINA'S ══════════════════ -->
+    <section id="page-legal" class="page hidden">
+      <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        <div id="legal-content"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════ PRODUCT MODAL ══════════════════ -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-backdrop" class="absolute inset-0 bg-ink/50 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 flex items-start justify-center overflow-y-auto p-4 sm:p-8">
+      <div id="modal-panel" class="relative w-full max-w-3xl rounded-3xl bg-white shadow-lift">
+        <button id="modal-close" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-cream-line bg-white text-ink-soft transition hover:border-brand hover:text-brand" aria-label="Sluiten">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg>
+        </button>
+        <div id="modal-body" class="max-h-[85vh] overflow-y-auto p-6 sm:p-8"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="border-t border-cream-line bg-brand-dark text-white/80">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+      <div class="grid gap-10 md:grid-cols-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M4 14h24c0 8-5 13-12 13S4 22 4 14z" fill="#faf7f0"/>
+              <circle cx="11" cy="8" r="2.6" fill="#faf7f0"/><circle cx="21" cy="8" r="2.6" fill="#faf7f0"/>
+            </svg>
+            <span class="font-display text-lg font-semibold text-white">Scanabowl</span>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed">Onafhankelijke analyse en vergelijking van honden- en kattenvoer, op basis van het etiket.</p>
+        </div>
+        <div>
+          <h3 class="footer-head">Navigatie</h3>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a class="footer-link" href="#finder">Food Finder</a></li>
+            <li><a class="footer-link" href="#wizard">Profiel-wizard</a></li>
+            <li><a class="footer-link" href="#blog">Blog</a></li>
+            <li><a class="footer-link" href="#about">Over ons</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-head">Juridisch</h3>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a class="footer-link" href="#legal/privacy">Privacybeleid</a></li>
+            <li><a class="footer-link" href="#legal/voorwaarden">Algemene voorwaarden</a></li>
+            <li><a class="footer-link" href="#legal/disclaimer">Affiliate-disclaimer</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-head">Bedrijfsgegevens</h3>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>Scanabowl</li>
+            <li>KvK: <span class="font-mono">[KvK-nummer invullen]</span></li>
+            <li>BTW: <span class="font-mono">[BTW-id invullen]</span></li>
+            <li>E-mail: <a class="footer-link" href="mailto:info@scanabowl.com">info@scanabowl.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 border-t border-white/15 pt-6 text-xs leading-relaxed text-white/60">
+        <p><strong class="text-white/80">Affiliate-disclaimer:</strong> Scanabowl neemt deel aan het Bol.com Partnerprogramma. Links naar bol.com op deze website zijn affiliate-links: koop je via zo'n link, dan ontvangen wij mogelijk een commissie. Dit kost jou niets extra en beïnvloedt onze beoordelingen niet. Prijzen en beschikbaarheid kunnen wijzigen; de actuele prijs bij bol.com is leidend.</p>
+        <p class="mt-3">© <span id="footer-year"></span> Scanabowl · scanabowl.com · Alle rechten voorbehouden. Deze site geeft geen veterinair advies.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Papa Parse (gratis CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
