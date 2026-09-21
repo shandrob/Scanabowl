@@ -1,0 +1,765 @@
+{
+  "meta": {
+    "title": "Scanabowl – Is your pet’s food really good? Independent scores for dog & cat food",
+    "description": "Look up any dog or cat food and see an independent score based on its ingredients and nutrients. Personalised for your pet, with allergies filtered out."
+  },
+  "nav": {
+    "main": "Main navigation",
+    "home": "Home",
+    "foods": "Find food",
+    "myPet": "My pet",
+    "blog": "Blog",
+    "howWeScore": "How we score",
+    "about": "About us",
+    "suggest": "Suggest a food",
+    "brands": "For brands",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms of use",
+    "affiliate": "Affiliate disclosure",
+    "addPet": "Add your pet",
+    "petNamed": "{name}’s profile",
+    "language": "Change language",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "skip": "Skip to content"
+  },
+  "common": {
+    "dog": "Dog",
+    "cat": "Cat",
+    "dogs": "Dogs",
+    "cats": "Cats",
+    "all": "All",
+    "yes": "Yes",
+    "no": "No",
+    "add": "Add",
+    "reset": "Reset filters",
+    "close": "Close",
+    "loading": "Loading…",
+    "day": "day",
+    "grainFree": "Grain-free",
+    "showMore": "Show {count} more",
+    "breadcrumb": "Breadcrumb"
+  },
+  "type": { "dry": "Dry food", "wet": "Wet food", "frozen": "Frozen / raw", "semi": "Semi-moist", "other": "Other" },
+  "stage": { "youngDog": "Puppy / junior", "youngCat": "Kitten / junior", "adult": "Adult", "senior": "Senior", "all": "All life stages" },
+  "grade": {
+    "A": "Excellent",
+    "B": "Good",
+    "C": "Average",
+    "D": "Below average",
+    "E": "Weak",
+    "desc": {
+      "A": "A meat-based recipe with a strong nutrient profile and a clean ingredient list.",
+      "B": "A good recipe with only minor weak points.",
+      "C": "An acceptable everyday food, but there are clearly better options.",
+      "D": "Several weak points in the recipe or nutrients – look for alternatives.",
+      "E": "Weak on ingredients and/or nutrients, or contains something a pet should not eat."
+    }
+  },
+  "confidence": {
+    "high": "Complete label data – high reliability",
+    "medium": "Some label values were estimated – medium reliability",
+    "low": "Limited label data – treat this score as indicative"
+  },
+  "score": {
+    "aria": "Score {score} out of 100, rated {grade}",
+    "none": "No score",
+    "notScoredShort": "Not scored",
+    "pillars": { "nutrition": "Nutrient profile", "ingredients": "Ingredient quality", "formulation": "Clean formulation" }
+  },
+  "allergen": {
+    "beef": "Beef",
+    "chicken": "Chicken",
+    "dairy": "Dairy",
+    "fish": "Fish & seafood",
+    "wheat": "Wheat / gluten",
+    "egg": "Egg",
+    "lamb": "Lamb",
+    "pork": "Pork",
+    "turkey": "Turkey",
+    "duck": "Duck / goose",
+    "rabbit": "Rabbit",
+    "horse": "Horse",
+    "game": "Game / venison",
+    "insect": "Insects",
+    "corn": "Corn / maize",
+    "rice": "Rice",
+    "barley": "Barley",
+    "oats": "Oats",
+    "soy": "Soy",
+    "legume": "Peas & pulses",
+    "potato": "Potato",
+    "yeast": "Yeast"
+  },
+  "search": {
+    "label": "Search foods by name, brand or barcode",
+    "placeholder": "Product, brand or barcode…",
+    "button": "Search",
+    "scan": "Scan barcode",
+    "notFound": "We don’t know barcode {ean} yet.",
+    "suggestIt": "Tell us about this food →"
+  },
+  "scan": {
+    "title": "Scan a barcode",
+    "starting": "Starting the camera…",
+    "hint": "Hold the barcode inside the frame. The image stays on your phone.",
+    "denied": "Camera access was blocked. Allow the camera in your browser settings, or type the number under the barcode.",
+    "unsupported": "Scanning is not available on this device or browser. Please type the number under the barcode instead."
+  },
+  "home": {
+    "badge": "Independent · Science-based · Free",
+    "title": "Is your pet’s food really as good as the pack says?",
+    "subtitle": "Look up any dog or cat food and get an independent score from 0 to 100 – calculated from the ingredients and nutrients on the label, using veterinary nutrition guidelines.",
+    "searchHint": "Tip: scan the barcode in the shop or type the EAN number.",
+    "browseDogs": "Dog food",
+    "browseCats": "Cat food",
+    "ctaPet": "Personalise for my pet",
+    "statFoods": "foods scored",
+    "statBrands": "brands",
+    "howTitle": "How Scanabowl works",
+    "step": "Step {n}",
+    "step1Title": "Find your food",
+    "step1Text": "Search by name or brand, or scan the barcode with your phone. Dogs and cats are always assessed separately.",
+    "step2Title": "See the score – and why",
+    "step2Text": "Every food gets a 0–100 score with a plain-language breakdown: what is good, what is not, and how it compares with FEDIAF nutrition guidelines.",
+    "step3Title": "Make it personal",
+    "step3Text": "Add your pet’s age, weight and allergies. Foods with ingredients your pet reacts to disappear, and you see the daily portion for your pet.",
+    "topTitle": "Highest-scoring foods right now",
+    "topText": "Automatically ranked by score – no brand can pay for a place here. Scores describe the label, not a promise for every individual pet.",
+    "howScore": "How the score works",
+    "topDogs": "Top dog foods",
+    "topCats": "Top cat foods",
+    "allDogs": "All dog foods",
+    "allCats": "All cat foods",
+    "persTitle": "A food guide that knows your pet",
+    "persText": "Tell us about your dog or cat once. Scanabowl then only shows foods that fit – and warns you when a food does not.",
+    "persButton": "Create a pet profile",
+    "persA": "Allergies and intolerances filtered out of every list",
+    "persB": "Life stage, size and weight goals taken into account",
+    "persC": "Daily calories and grams per day, calculated with FEDIAF formulas",
+    "persD": "Stored only on your device – no account needed",
+    "blogTitle": "From the blog",
+    "allPosts": "All articles",
+    "faqTitle": "Frequently asked questions",
+    "brandTitle": "Do you make pet food?",
+    "brandText": "Submit your products for free. We check every submission and score it with exactly the same method as every other food.",
+    "brandButton": "Add your food",
+    "faq": [
+      {
+        "q": "Is the score veterinary advice?",
+        "a": "No. The score rates what is printed on the pack against published nutrition guidelines. It cannot replace advice from your vet – especially if your pet has a health condition."
+      },
+      {
+        "q": "How is the score calculated?",
+        "a": "Out of 100 points: 35 for the nutrient profile (protein, fat, carbohydrates, fibre, minerals compared with FEDIAF), 50 for ingredient quality (where the protein comes from, how clearly it is declared) and 15 for a clean formulation (no sugar, colourants, synthetic preservatives). Everything is explained on the [methodology page](/{lang}/how-we-score)."
+      },
+      {
+        "q": "Do brands pay to get a better score?",
+        "a": "No. Scores are calculated by the same formula for every food. We earn a small commission when you order via our bol.com links, at no extra cost to you – see the [affiliate disclosure](/{lang}/affiliate)."
+      },
+      {
+        "q": "Why is a prescription or veterinary diet not scored?",
+        "a": "Therapeutic diets are designed for medical conditions and are meant to be used under veterinary supervision. Their nutrient profile deliberately differs from normal foods, so a general score would be misleading."
+      },
+      {
+        "q": "Is grain-free food better?",
+        "a": "Not automatically. Grains are not harmful for most dogs and cats, and grain-free foods often replace them with peas or potato. We do not give points for grain-free – but you can filter for it, for example if your pet is allergic to wheat."
+      },
+      {
+        "q": "How does the allergy filter work?",
+        "a": "Choose your pet’s allergens in the pet profile. Foods that list them are hidden. By default we also hide foods with vague wording such as “meat and animal derivatives”, because these can hide the ingredient your pet reacts to."
+      }
+    ]
+  },
+  "finder": {
+    "metaTitle": "Find dog & cat food – independent scores",
+    "metaDescription": "Browse and compare dog and cat foods by score, type and life stage. Filter by brand and allergy, sorted by an independent 0–100 score.",
+    "title": "Find the right food",
+    "subtitle": "Compare {count} scored dog and cat foods. Dogs and cats are assessed separately.",
+    "species": "Animal",
+    "type": "Type of food",
+    "stage": "Life stage",
+    "brand": "Brand",
+    "minScore": "Minimum score: {score}",
+    "grainFree": "Grain-free only",
+    "includeUnscored": "Also show foods without a score (veterinary diets, treats, incomplete data)",
+    "filters": "Filters",
+    "count": "{count} foods",
+    "sort": "Sort by",
+    "sortMatch": "Best match for {name}",
+    "sortScore": "Highest score",
+    "sortName": "Name (A–Z)",
+    "sortKcal": "Fewest calories",
+    "forPet": "For {name}: {score}",
+    "petBanner": "Showing foods for {name}.",
+    "hiddenAllergy": "{count} foods hidden because of allergies ({allergens}).",
+    "petIgnored": "Showing all foods – {name}’s profile is switched off.",
+    "editProfile": "Edit profile",
+    "ignorePet": "Show everything",
+    "usePet": "Use {name}’s profile",
+    "noPet": "Tip: with a pet profile, foods your pet cannot eat are hidden automatically.",
+    "createProfile": "Create profile",
+    "emptyTitle": "No foods match these filters",
+    "emptyText": "Try removing a filter or searching for something else.",
+    "suggestMissing": "Can’t find your food? Tell us about it →",
+    "error": "The food list could not be loaded. Please check your connection and reload the page."
+  },
+  "product": {
+    "metaTitle": "{name} – score {score}/100",
+    "metaDescription": "{name} by {brand}: independent Scanabowl score {score}/100 for {species} food, with ingredient analysis, nutrients and allergy check.",
+    "metaDescriptionNoScore": "{name} by {brand}: ingredients and nutrients for {species} food.",
+    "jsonLdDescription": "{name} by {brand} – pet food analysed by Scanabowl.",
+    "scoreTitle": "Scanabowl Score",
+    "howCalculated": "How is this calculated?",
+    "noScoreTitle": "No score for this food",
+    "notScored": {
+      "veterinary": "This is a veterinary or prescription diet. These foods are meant for specific medical conditions and should only be fed on your vet’s advice, so we do not give them a general score.",
+      "treat": "This is a treat or snack, not a complete food, so it is not scored.",
+      "supplement": "This is a supplement, not a complete food, so it is not scored.",
+      "complementary": "This is a complementary food – it is not meant to be the only food your pet eats – so it is not scored.",
+      "no_ingredients": "We do not have the ingredient list for this food yet, so we cannot calculate a score. You can help by sending it to us."
+    },
+    "hazardTitle": "Contains an ingredient that is harmful to this animal",
+    "goodTitle": "What is good",
+    "badTitle": "What could be better",
+    "nothingGood": "No standout strengths were found.",
+    "nothingBad": "No weak points were found.",
+    "ingredientsTitle": "Ingredients",
+    "estimateNote": "Estimated from the order on the label and declared percentages. Fresh meat is about 70% water, so dried and fresh ingredients are compared on a dry-matter basis.",
+    "group": { "animal": "Animal", "fat": "Fats & oils", "plant": "Plants", "other": "Additives & other" },
+    "originalText": "Show the ingredient text as printed",
+    "originalLanguageNote": "Shown in the language of the pack.",
+    "noIngredients": "The ingredient list of this food is not available yet.",
+    "analysisTitle": "Nutrients",
+    "noAnalysis": "The analytical constituents of this food are not available yet, so the nutrient part of the score is an estimate.",
+    "alternativesTitle": "Higher-scoring alternatives",
+    "alternativesText": "Similar foods of the same type and life stage that score higher.",
+    "alternativesPet": "Similar foods that score higher and are safe for {name}.",
+    "dataTitle": "About this data",
+    "dataPack": "Ingredients and analysis as printed on the pack, checked by Scanabowl.",
+    "dataBrand": "Provided by the manufacturer and checked by Scanabowl. It is scored with exactly the same method as every other food.",
+    "reportError": "Something wrong? Report a correction",
+    "disclaimer": "The score describes the label and is not veterinary advice. Always introduce a new food gradually and ask your vet if your pet has a health condition."
+  },
+  "analysis": {
+    "nutrient": "Nutrient",
+    "asFed": "As fed",
+    "dryMatter": "Dry matter",
+    "protein": "Crude protein",
+    "fat": "Crude fat",
+    "fibre": "Crude fibre",
+    "ash": "Crude ash",
+    "moisture": "Moisture",
+    "carbs": "Carbohydrates (estimated)",
+    "calcium": "Calcium",
+    "phosphorus": "Phosphorus",
+    "energy": "Energy",
+    "kcal": { "label": "from the label", "calculated": "calculated with the FEDIAF/NRC equation" },
+    "estimated": "estimated",
+    "estimatedNote": "Not printed on the label or calculated – a typical value for this type of food was used.",
+    "fediafTitle": "Compared with FEDIAF minimums",
+    "proteinPer1000": "Protein: {value} g per 1,000 kcal (minimum {min} g)",
+    "fatPer1000": "Fat: {value} g per 1,000 kcal (minimum {min} g)",
+    "energyShare": "Share of energy: {p}% protein · {f}% fat · {c}% carbohydrates",
+    "fediafNote": "FEDIAF Nutritional Guidelines 2021. A food that meets the minimum is not automatically “complete” – only the manufacturer’s statement and feeding trials can confirm that."
+  },
+  "reasons": {
+    "animal_protein_high": "An estimated {pct}% of the protein comes from animal ingredients.",
+    "meat_rich": "Animal ingredients make up an estimated {pct}% of the dry matter – a genuinely meat-based recipe.",
+    "first_named_animal": "The list starts with a named animal ingredient: {name}.",
+    "named_sources": "Animal ingredients are named by species instead of vague “animal derivatives”.",
+    "protein_level_good": "Protein is {pct}% of dry matter, comfortably above the FEDIAF minimum.",
+    "low_carb": "Only about {pct}% of the energy comes from carbohydrates – close to what a cat’s body is built for.",
+    "high_moisture": "{pct}% moisture supports hydration and urinary health.",
+    "omega3": "Contains fish or algae oil as a source of EPA/DHA (omega-3).",
+    "prebiotic": "Contains prebiotic fibres (e.g. chicory, inulin, FOS/MOS) that feed gut bacteria.",
+    "joint": "Contains joint-support ingredients (glucosamine / chondroitin).",
+    "probiotic": "Contains probiotics.",
+    "clean_formulation": "No added sugar, artificial colourants or synthetic preservatives were found.",
+    "analysis_missing": "The analytical constituents are missing, so the nutrient part of the score is a cautious estimate.",
+    "protein_low": "Protein is only {pct}% of dry matter – low for this animal.",
+    "protein_below_min": "Provides {g} g protein per 1,000 kcal – below the FEDIAF minimum of {min} g.",
+    "carbs_high": "An estimated {pct}% of the energy comes from carbohydrates.",
+    "dry_food_cat": "Dry food ({pct}% moisture): cats drink little, so dry-only diets give less hydration than wet food.",
+    "fibre_high": "Crude fibre is high ({pct}% of dry matter).",
+    "ash_high": "Ash (minerals) is high at {pct}% of dry matter.",
+    "fat_low": "Fat is low ({pct}% of dry matter).",
+    "fat_high": "Very high fat ({pct}% of dry matter) – energy-dense, which can promote weight gain.",
+    "calcium_phosphorus": "The calcium:phosphorus ratio of {ratio}:1 lies outside the recommended 1:1 to 2:1.",
+    "animal_protein_low": "Only about {pct}% of the protein comes from animal ingredients; the rest comes from plants.",
+    "meat_poor": "Animal ingredients make up only about {pct}% of the dry matter.",
+    "first_not_animal": "The first ingredient is not an animal ingredient: {name}.",
+    "generic_animal": "Mostly unspecified “meat and animal derivatives” – you cannot see which animals or parts are used.",
+    "vague_plant": "Contains vague plant ingredients such as “cereals” or “vegetable by-products”.",
+    "sugar": "Contains added sugar or sweeteners (sugar, caramel, syrup) that no pet needs.",
+    "colourant": "Contains artificial colourants, which only serve the owner’s eye.",
+    "preservative": "Contains synthetic preservatives (e.g. BHA, BHT, ethoxyquin, sorbates or nitrite).",
+    "plant_protein_isolates": "About {pct}% of the protein comes from plant protein concentrates (gluten, pea or potato protein).",
+    "cereal_filler": "Cereals make up about {pct}% of the recipe – inexpensive filler for a carnivore.",
+    "legume_heavy": "Peas, legumes or potato make up about {pct}% of the recipe. The US FDA has investigated a possible link between very legume-rich, grain-free diets and heart disease (DCM) in dogs; a cause has not been proven."
+  },
+  "flags": {
+    "onion": "Contains onion, which damages red blood cells in dogs and cats.",
+    "garlic": "Contains garlic, which is toxic to cats.",
+    "garlic_dog": "Contains garlic. Dogs tolerate small amounts, larger amounts are harmful.",
+    "xylitol": "Contains xylitol, which is highly toxic to dogs.",
+    "raisins": "Contains raisins or currants, which are toxic to dogs (kidney failure).",
+    "grapes": "Contains grapes or a grape ingredient. Grapes and raisins are toxic to dogs; the safety of grape extracts in food is unclear.",
+    "chocolate": "Contains cocoa or chocolate (theobromine), which is toxic to pets.",
+    "macadamia": "Contains macadamia nuts, which are toxic to dogs.",
+    "propylene_glycol": "Contains propylene glycol, which is not allowed in cat food because it damages red blood cells.",
+    "values_estimated": "Some values (moisture, ash or fibre) were missing on the label and were estimated."
+  },
+  "personal": {
+    "ctaTitle": "Does this food suit your pet?",
+    "ctaText": "Create a profile with your pet’s age, weight and allergies to check this food, see a personal score and find out how many grams per day to feed.",
+    "ctaButton": "Create a pet profile",
+    "wrongSpecies": "This is food for {food}, while {name} is one of the {pet}.",
+    "switchPet": "Switch or add a pet",
+    "title": "For {name}",
+    "allergyBad": "This food is not suitable for {name}.",
+    "allergyDefinite": "It contains: {list}.",
+    "allergyPossible": "Vague wording on the label (such as “meat and animal derivatives”) could also hide: {list}.",
+    "allergyOk": "No ingredients that {name} reacts to were found.",
+    "allergyChecked": "Checked against: {list}.",
+    "noAllergies": "No allergies are set for {name}. You can add them in the pet profile.",
+    "matchFor": "Match for {name}",
+    "sameAsBase": "Same as the base score",
+    "deltaUp": "+{delta} points for {name}",
+    "deltaDown": "−{delta} points for {name}",
+    "notes": {
+      "stage_match": "Made for {name}’s life stage.",
+      "stage_all": "Suitable for all life stages, including growth.",
+      "stage_young_needed": "Not made for growing animals – {name} needs a puppy/kitten (or all-life-stages) food.",
+      "stage_too_rich": "A growth food is too rich in energy and minerals for {name}’s life stage.",
+      "stage_senior_only": "Formulated for senior pets. Fine, but not necessary for {name}.",
+      "weight_fat_high": "High fat ({pct}% of energy) – not ideal to keep {name}’s weight in check.",
+      "weight_lean": "Lean recipe ({pct}% of energy from fat), helpful for weight management.",
+      "energy_dense": "Energy-dense, useful for gaining weight.",
+      "size_match": "Suits {name}’s size.",
+      "size_mismatch": "Made for a different size of dog than {name}.",
+      "calcium_large_puppy": "Calcium ({ca}% of dry matter) is above the FEDIAF maximum of 1.8% for growing large-breed puppies.",
+      "urinary_wet": "Wet food adds moisture – good for {name}’s urinary tract.",
+      "urinary_dry": "Dry food gives little moisture, which is less ideal with urinary problems.",
+      "urinary_ash": "High ash ({pct}% of dry matter) – the mineral load matters for urinary health.",
+      "digestion_simple": "Few protein sources – easier on a sensitive stomach.",
+      "digestion_fat": "High fat can upset a sensitive stomach."
+    },
+    "portionTitle": "How much should {name} eat?",
+    "portionText": "About {kcal} kcal per day, which is around {grams} g of this food per day.",
+    "costText": "That costs roughly €{cost} per day.",
+    "energyBasis": {
+      "dog_adult": "Based on {factor} kcal per kg^0.75 (FEDIAF adult dog).",
+      "dog_puppy": "Based on the FEDIAF growth equation for puppies ({factor} kcal per kg^0.75).",
+      "cat_adult": "Based on {factor} kcal per kg^0.67 (FEDIAF adult cat).",
+      "kitten": "Based on the FEDIAF energy needs of kittens ({factor} kcal per kg^0.67)."
+    },
+    "portionNote": "This is a starting point: weigh your pet regularly and adjust to keep a healthy body condition. Follow your vet’s advice."
+  },
+  "order": {
+    "title": "Order this food",
+    "text": "Check the current price and delivery at bol.com.",
+    "button": "View on bol.com",
+    "disclosure": "Affiliate link: if you buy via this link we may earn a commission, at no extra cost to you. This never influences the score.",
+    "moreInfo": "More information",
+    "dutchOnly": "bol.com delivers in the Netherlands and Belgium."
+  },
+  "pet": {
+    "metaTitle": "My pet – personal food guide",
+    "metaDescription": "Create a profile for your dog or cat with age, weight and allergies. Scanabowl hides foods your pet can’t eat and calculates the daily portion.",
+    "title": "Your pet’s profile",
+    "subtitle": "Tell us about your dog or cat. Everything stays on this device – there is no account and nothing is sent to us.",
+    "yourPets": "Your pets",
+    "addAnother": "Add another pet",
+    "basicsTitle": "The basics",
+    "species": "Animal",
+    "name": "Name",
+    "namePlaceholder": "e.g. Bella",
+    "nameRequired": "Please enter a name.",
+    "birthDate": "Date of birth",
+    "ageYears": "Age (years)",
+    "useAge": "I only know the age",
+    "useBirthDate": "I know the date of birth",
+    "ageHint": "Used to work out the life stage: growing, adult or senior.",
+    "weight": "Weight (kg)",
+    "weightInvalid": "Enter a weight between 0.5 and 100 kg.",
+    "size": "Size (adult)",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "sizeGiant": "Giant",
+    "neutered": "Neutered / spayed?",
+    "lifestyleTitle": "Lifestyle & health",
+    "activity": "Activity level",
+    "activityLow": "Calm",
+    "activityMod": "Normal",
+    "activityHigh": "Very active",
+    "activityLowHint": { "dog": "Under 1 hour of walking a day", "cat": "Mostly sleeps, strictly indoors" },
+    "activityModHint": { "dog": "1–3 hours of exercise a day", "cat": "Normal play and roaming" },
+    "activityHighHint": { "dog": "3+ hours, sport or working dog", "cat": "Very active, lots of outdoor time" },
+    "condition": "Body condition",
+    "condUnder": "Too thin",
+    "condUnderHint": "Ribs clearly visible",
+    "condIdeal": "Ideal",
+    "condIdealHint": "Ribs can be felt easily",
+    "condOver": "Overweight",
+    "condOverHint": "Ribs hard to feel",
+    "urinary": "History of urinary problems",
+    "urinaryHint": "Crystals, stones or cystitis. Wet food is generally preferred.",
+    "digestion": "Sensitive digestion",
+    "digestionHint": "Loose stools or an easily upset stomach.",
+    "allergyTitle": "Allergies & intolerances",
+    "allergyIntro": "Select everything your pet reacts to. Foods containing these ingredients will not be shown. The most common food allergens are listed first.",
+    "showMoreAllergens": "Show {count} more ingredients",
+    "customAllergy": "Something else?",
+    "customPlaceholder": "Type an ingredient, e.g. kangaroo",
+    "removeAllergen": "Remove {name}",
+    "strict": "Also hide foods with vague ingredients",
+    "strictHint": "Recommended. Wording like “meat and animal derivatives” can hide the ingredient your pet reacts to.",
+    "save": "Save profile",
+    "saveChanges": "Save changes",
+    "delete": "Delete profile",
+    "confirmDelete": "Delete the profile of {name}?",
+    "saved": "{name}’s profile is saved.",
+    "seeFoods": "See foods for {name}",
+    "previewTitle": "Your pet",
+    "previewStage": "Life stage",
+    "previewEnergy": "Daily energy need",
+    "previewAllergies": "Allergies",
+    "previewEmpty": "Fill in a name and weight to see a preview.",
+    "none": "None",
+    "stage": { "young": "Growing (puppy / kitten)", "adult": "Adult", "senior": "Senior" },
+    "privacyNote": "Stored only in this browser on this device. Nothing is sent to a server, and we cannot see your pet’s profile."
+  },
+  "blog": {
+    "metaTitle": "Blog – pet nutrition explained",
+    "metaDescription": "Practical, evidence-based articles about dog and cat nutrition.",
+    "title": "Blog",
+    "subtitle": "Practical, evidence-based articles about feeding your dog or cat.",
+    "empty": "The first articles are on their way.",
+    "minutes": "{n} min read",
+    "back": "All articles",
+    "notTranslated": "This article has not been translated yet – you are reading the original ({lang}) version.",
+    "ctaTitle": "Find a food that fits your pet",
+    "ctaText": "See independent scores for thousands of dog and cat foods.",
+    "ctaFoods": "Find food",
+    "ctaPet": "Create a pet profile",
+    "more": "More articles"
+  },
+  "method": {
+    "metaTitle": "How we score pet food",
+    "metaDescription": "Exactly how the Scanabowl Score is calculated: nutrient profile, ingredient quality and clean formulation – with the scientific sources behind it.",
+    "title": "How we score pet food",
+    "intro": "Every food gets a score from 0 to 100. It is calculated by a fixed formula from the ingredient list and analytical constituents on the pack, using published veterinary nutrition guidelines. This page explains every step so you can judge it yourself.",
+    "glance": "The score at a glance",
+    "pillar": {
+      "nutrition": "Do the numbers on the pack match what a dog or cat needs? Protein, fat, carbohydrates, fibre, minerals and – for cats – moisture, compared with FEDIAF.",
+      "ingredients": "Where does the protein come from, how much of the recipe is animal-based, and is it declared clearly?",
+      "formulation": "Points are taken off for added sugar, artificial colourants, synthetic preservatives and cheap filler."
+    },
+    "gradesTitle": "Scores and grades",
+    "sections": [
+      {
+        "h": "What the score is – and what it is not",
+        "p": [
+          "The Scanabowl Score rates the **label**: the ingredient list and the analytical constituents printed on the pack. It cannot see how digestible a food really is, how well it is manufactured, or whether it has been proven in feeding trials.",
+          "The World Small Animal Veterinary Association (WSAVA) points out that an ingredient list alone says little about the quality of a food, and recommends also looking at the manufacturer’s quality control and research. Use our score to compare recipes and spot weak points – and talk to your vet, especially if your pet has a medical condition."
+        ]
+      },
+      {
+        "h": "1. Nutrient profile (35 points)",
+        "p": ["We convert the analysis to dry matter and to energy (kcal), so wet and dry foods can be compared fairly. If the label gives no energy value, we calculate it with the equation published by FEDIAF (based on NRC 2006). We then compare with the FEDIAF Nutritional Guidelines (2021):"],
+        "ul": [
+          "**Protein** – the FEDIAF minimum for adult dogs is 18–21 g per 100 g dry matter (45–52 g per 1,000 kcal), for adult cats 25–33 g (62.5–83 g per 1,000 kcal). Growing animals need more. Points rise above the minimum and then level off: more protein is not automatically better for a healthy dog.",
+          "**Fat** – FEDIAF minimum 5.5 g per 100 g dry matter for adult dogs (8.5 g for puppies) and 9 g for cats. Very high fat is penalised, as it promotes weight gain and can trigger pancreatitis.",
+          "**Carbohydrates (cats: 10 points, dogs: 4 points)** – estimated from what remains after protein, fat, fibre, ash and moisture. Cats are obligate carnivores: when they can choose, they select a diet with roughly 52% of energy from protein, 36% from fat and only 12% from carbohydrates (Hewson-Hughes et al., 2011). Dogs are more flexible, so carbohydrates count far less for them.",
+          "**Moisture (cats only, 7.5 points)** – cats have a weak thirst drive. Cats eating a high-moisture food take in more water in total and produce more dilute urine, with lower saturation of the minerals that form urinary crystals (Buckley et al., 2011).",
+          "**Fibre and ash** – too much of either lowers the score (a high mineral load matters especially for the urinary tract of cats).",
+          "**Dogs: calcium:phosphorus ratio and label completeness** – when calcium and phosphorus are printed, the ratio should lie between 1:1 and 2:1 (FEDIAF). Foods that print a complete analysis score better than foods that leave values out."
+        ]
+      },
+      {
+        "h": "2. Ingredient quality (50 points)",
+        "p": ["Ingredients are listed in descending order of weight *as mixed* – including the water in fresh meat, which makes up about 70% of its weight. So we estimate the share of each ingredient from its position and declared percentages, and compare on a dry-matter basis. That is why a food that starts with “fresh chicken” is not necessarily a meat-heavy food."],
+        "ul": [
+          "**Protein origin (12 points)** – the estimated share of the food’s protein that comes from animal ingredients rather than plant concentrates such as gluten or pea protein. Cats need a higher share than dogs.",
+          "**Animal share of the dry matter (12 points)** – how much of the recipe itself is animal-derived.",
+          "**The first ingredients (10 points)** – is the list led by a named animal ingredient or by cereals?",
+          "**Named sources (10 points)** – “chicken” or “salmon” is precise. “Meat and animal derivatives” could be anything from muscle meat to feathers. By-products are not automatically bad, but you cannot see what you are feeding – and it makes allergies harder to manage.",
+          "**Useful extras (up to 6 points)** – EPA/DHA from fish or algae oil, prebiotic fibres, probiotics, glucosamine/chondroitin, taurine for cats."
+        ]
+      },
+      {
+        "h": "3. Clean formulation (15 points)",
+        "p": ["We start at 15 points and deduct for things a pet does not need:"],
+        "ul": [
+          "**Added sugar** (sugar, caramel, syrup) – no nutritional need; cats cannot even taste sweetness.",
+          "**Artificial colourants** – they only make the food look better to the owner.",
+          "**Synthetic preservatives** (BHA, BHT, ethoxyquin, sorbates, nitrite) – natural alternatives such as tocopherols exist.",
+          "**Filler load** – for cats: a high share of cereals or plant protein concentrates; for dogs: a very high share of peas, legumes or potato. The US FDA has investigated an association between very legume-rich, grain-free diets and dilated cardiomyopathy in dogs. A cause has not been established – so this is a small deduction, not a ban."
+        ]
+      },
+      {
+        "h": "Toxic ingredients",
+        "p": ["If an ingredient is toxic for the species – for example onion, xylitol or chocolate, raisins for dogs, garlic or propylene glycol for cats – the score is capped at 25, whatever else is in the recipe."]
+      },
+      {
+        "h": "Dogs and cats are scored differently",
+        "p": ["Cats are obligate carnivores with specific needs (taurine, arachidonic acid, preformed vitamin A, a higher protein requirement), while dogs are more flexible. That is why the weights for carbohydrates, moisture and animal protein differ per species. We give no points for “grain-free” as such: grains are not harmful for most pets, and grain-free is not a quality mark. We do let you filter on it, for example for wheat allergies."]
+      },
+      {
+        "h": "What is not scored",
+        "p": ["Veterinary and prescription diets, treats, supplements and complementary foods are not scored. Their purpose is different, so a general score would mislead. Foods without an ingredient list cannot be scored. When the analysis is missing, the nutrient part is a cautious estimate and we show a lower reliability."]
+      },
+      {
+        "h": "Your pet’s profile",
+        "p": ["The base score never changes. In your pet’s profile we add a personal match of at most a few points up or down for what the label cannot know: life stage (a growth food for an adult pet, or the other way round), a weight goal, dog size, urinary problems in cats and a sensitive stomach. Daily calories follow the FEDIAF energy tables (for example 110 kcal per kg^0.75 for an average adult dog, and 75 kcal per kg^0.67 for a neutered indoor cat)."]
+      },
+      {
+        "h": "Allergies",
+        "p": ["In the pet profile you choose the ingredients your pet reacts to. We recognise each of them in Dutch, English, German and French label wording. Foods that name an allergen are always hidden. Vague wording such as “meat and animal derivatives”, “cereals” or “poultry” could contain it, so with the default setting those foods are hidden too. Fats and oils from that animal, such as chicken fat, count as well, because they can carry traces of protein.", "The most common food allergens are, for dogs, beef, dairy, chicken and wheat, and for cats beef, fish and chicken (Mueller et al., 2016). A food allergy can only be diagnosed by an elimination diet with your vet."]
+      },
+      {
+        "h": "Data, independence and errors",
+        "p": ["Product data comes from public product information and from manufacturers who submit their products. We always check submissions before they are published, and the same formula is applied to every food – no brand can influence its score. We earn a commission on orders via our bol.com links; that is explained in the [affiliate disclosure](/{lang}/affiliate).", "Spotted an error? Use the “Report a correction” link on the product page. We fix mistakes quickly."]
+      }
+    ],
+    "refsTitle": "Scientific sources",
+    "refs": [
+      "FEDIAF (2021). *Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs*, Tables III-3, III-4 and Annex 7.2 (energy requirements and ME equations). [europeanpetfood.org](https://europeanpetfood.org/self-regulation/nutritional-guidelines/)",
+      "National Research Council (2006). *Nutrient Requirements of Dogs and Cats*. National Academies Press.",
+      "AAFCO. *Dog and Cat Food Nutrient Profiles*. Association of American Feed Control Officials.",
+      "WSAVA Global Nutrition Committee. *Selecting the best food for your pet*. [wsava.org](https://wsava.org/global-guidelines/global-nutrition-guidelines/)",
+      "Hewson-Hughes AK et al. (2011). Geometric analysis of macronutrient selection in the adult domestic cat, *Felis catus*. *J Exp Biol* 214:1039–1051. [PubMed](https://pubmed.ncbi.nlm.nih.gov/21346132/)",
+      "Buckley CMF et al. (2011). Effect of dietary water intake on urinary output, specific gravity and relative supersaturation for calcium oxalate and struvite in the cat. *Br J Nutr* 106:S128–S130. [Cambridge Core](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S0007114511001875)",
+      "Mueller RS, Olivry T, Prélaud P (2016). Critically appraised topic on adverse food reactions of companion animals (2): common food allergen sources in dogs and cats. *BMC Vet Res* 12:9. [PubMed](https://pubmed.ncbi.nlm.nih.gov/26753610/)",
+      "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
+    ],
+    "versionTitle": "Version",
+    "version": "Scoring method version 1.0 (September 2026). When we improve the method, all scores are recalculated and this page is updated.",
+    "feedback": "Do you have feedback on the method? Let us know."
+  },
+  "suggest": {
+    "metaTitle": "Suggest a food",
+    "metaDescription": "Can’t find your pet’s food? Send us its details and we will add it after checking.",
+    "title": "Suggest a food",
+    "intro": "Can’t find your pet’s food, or is something wrong? Send us the details from the pack. We check every suggestion before it appears on the site."
+  },
+  "brands": {
+    "metaTitle": "For pet food brands – add your food",
+    "metaDescription": "Pet food companies can submit their products for free. Every submission is checked and scored with the same independent method.",
+    "title": "Add your pet food",
+    "intro": "Make it easy for pet owners to find your food. Submit your products with the full ingredient list and analysis. We check everything and score every food with exactly the same method.",
+    "howTitle": "How it works",
+    "steps": [
+      "Fill in the form with your company details and the label information of each product.",
+      "We check the details against the pack and contact you if something is unclear.",
+      "Once approved, your food appears with its independent score and a link to order it."
+    ],
+    "promiseTitle": "Our promise",
+    "promises": [
+      "**Free** – no fee to be listed.",
+      "**Independent** – the score is calculated by the same formula for every food. Brands cannot pay for a better score.",
+      "**Transparent** – the score is explained on the product page and on the [methodology page](/{lang}/how-we-score).",
+      "**Checked first** – nothing is published without our review."
+    ],
+    "companyTitle": "Your company",
+    "companyName": "Company / brand name",
+    "website": "Website",
+    "contact": "Contact person",
+    "role": "Role",
+    "phone": "Phone",
+    "productN": "Product {n}",
+    "addProduct": "Add another product",
+    "removeProduct": "Remove this product",
+    "message": "Anything else we should know?",
+    "messageHint": "For example: certifications, feeding trials, where your food is sold.",
+    "authorised": "I confirm that I am authorised to submit this information on behalf of the company, and that it matches the packaging.",
+    "submit": "Submit for review"
+  },
+  "forms": {
+    "productName": "Product name",
+    "productNamePh": "e.g. Adult Salmon & Rice",
+    "brand": "Brand",
+    "species": "Animal",
+    "ean": "Barcode (EAN)",
+    "eanHint": "The number under the barcode, 8 or 13 digits.",
+    "ingredients": "Ingredients / composition",
+    "ingredientsHint": "Copy the composition from the pack exactly as printed, including percentages.",
+    "analysis": "Analytical constituents",
+    "analysisHint": "For example: Crude protein 30%, crude fat 15%, crude ash 7%, crude fibre 3%, moisture 9%.",
+    "pack": "Pack size",
+    "url": "Link (optional)",
+    "urlHint": "A page where we can see the product.",
+    "email": "Email address",
+    "emailNotify": "Your email (optional)",
+    "emailOptional": "Your email (optional)",
+    "emailPrivacy": "Only used to reply to you about this message.",
+    "consent": "I agree that Scanabowl stores my email address and message to handle this request, as described in the privacy policy.",
+    "sendSuggestion": "Send suggestion",
+    "sendReport": "Send correction",
+    "sending": "Sending…",
+    "reportAbout": "Correction for:",
+    "reportMessage": "What is wrong?",
+    "reportHint": "For example: the ingredient list is different on my pack. Please tell us what it says.",
+    "reviewNote": "We review every message manually. Nothing you send is published automatically.",
+    "thanksTitle": "Thank you!",
+    "thanksText": "We received your message and will review it as soon as possible.",
+    "errorTitle": "We could not send your message",
+    "errorText": "Something went wrong on our side. You can still reach us by email:",
+    "errorMail": "Email {email}",
+    "err": { "required": "This field is required.", "invalid": "This value is not valid." }
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Questions, feedback or a food we should add? Get in touch with Scanabowl.",
+    "title": "Contact",
+    "intro": "Questions, ideas or feedback? Send us a message or email us at",
+    "message": "Your message",
+    "send": "Send message"
+  },
+  "about": {
+    "metaTitle": "About Scanabowl",
+    "metaDescription": "Scanabowl makes pet food labels understandable with independent, science-based scores.",
+    "title": "About Scanabowl",
+    "intro": "Scanabowl helps pet owners understand what is really in their dog’s or cat’s bowl.",
+    "sections": [
+      {
+        "h": "Why we exist",
+        "p": ["Pet food packaging is full of claims – “natural”, “premium”, “complete” – but the actual information is hidden in small print. Scanabowl translates the ingredient list and nutrient analysis into a clear score, with an explanation of every point."]
+      },
+      {
+        "h": "What makes us different",
+        "ul": [
+          "**Science-based** – our scoring follows published FEDIAF and NRC guidelines and peer-reviewed research, and we list our sources.",
+          "**Dogs and cats scored separately** – their nutritional needs are very different.",
+          "**Personal** – your pet’s allergies, age and weight change what you see.",
+          "**Independent** – brands cannot pay for a better score."
+        ]
+      },
+      {
+        "h": "How we are funded",
+        "p": ["Scanabowl is free to use. When you order a food via our bol.com links, we may earn a small commission at no extra cost to you. That income is reinvested in the website. Read more in the [affiliate disclosure](/{lang}/affiliate)."]
+      },
+      {
+        "h": "Get involved",
+        "p": ["Is your pet’s food missing? [Suggest it](/{lang}/suggest). Do you make pet food? [Add your products](/{lang}/brands). Found a mistake? Tell us via the [contact page](/{lang}/contact)."]
+      }
+    ]
+  },
+  "legal": {
+    "updated": "Last updated: {date}",
+    "companyTitle": "Who we are",
+    "email": "Email"
+  },
+  "privacy": {
+    "metaTitle": "Privacy policy",
+    "metaDescription": "How Scanabowl handles your data: your pet’s profile stays on your device, and we only use your email address to reply to you.",
+    "title": "Privacy policy",
+    "intro": "We collect as little data as possible. You can use Scanabowl without an account and without giving us any personal data.",
+    "sections": [
+      {
+        "h": "Your pet’s profile",
+        "p": ["The profile of your pet (name, age, weight, allergies) is stored only in your browser (local storage) on your own device. It is never sent to our servers, so we cannot see it. Clearing your browser data deletes it."]
+      },
+      {
+        "h": "Forms",
+        "p": ["If you send a suggestion, correction, contact message or brand submission, we receive the information you enter (including your email address, if you give it). We use it only to review your submission and to reply to you. Product information you submit may be published on the site after we have checked it; personal details are not."]
+      },
+      {
+        "h": "Cookies and tracking",
+        "p": ["We do not use advertising or tracking cookies. We store one small functional cookie (your chosen language, for one year) and local-storage entries for your pet profile. Because these are strictly functional, no cookie banner is needed. If we ever add analytics, we will use a privacy-friendly tool and update this page."]
+      },
+      {
+        "h": "Service providers",
+        "ul": [
+          "**Vercel** hosts the website and processes technical data such as IP addresses in server logs.",
+          "**Resend** delivers the emails generated by our forms.",
+          "**bol.com** – when you click an affiliate link, bol.com and its partner platform may set their own cookies under their own privacy policy."
+        ]
+      },
+      {
+        "h": "Retention",
+        "p": ["We keep messages only as long as needed to handle them, and no longer than two years unless the law requires otherwise."]
+      },
+      {
+        "h": "Your rights",
+        "p": ["Under the GDPR you may ask us for access to, correction or deletion of your personal data, and object to its use. Email us at the address below. You can also complain to the Dutch Data Protection Authority (Autoriteit Persoonsgegevens)."]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Terms of use",
+    "metaDescription": "The terms for using Scanabowl.",
+    "title": "Terms of use",
+    "intro": "By using Scanabowl you agree to these terms.",
+    "sections": [
+      {
+        "h": "Information, not advice",
+        "p": ["Scanabowl provides general information about pet food. The scores and comments are not veterinary advice and are no substitute for a consultation with your vet. Always consult a vet before changing the diet of a pet with a medical condition."]
+      },
+      {
+        "h": "Accuracy",
+        "p": ["We work hard to keep the data correct, but product recipes change and label information can be incomplete or contain errors. The score reflects the information we have. Always check the pack before you buy or feed. We do not guarantee that information is complete, current or free of errors."]
+      },
+      {
+        "h": "Third-party links and shops",
+        "p": ["Links to bol.com and other sites are provided for convenience. Prices, stock and delivery are determined by the shop. Any purchase is a contract between you and the shop; Scanabowl is not a party to it."]
+      },
+      {
+        "h": "Submitted information",
+        "p": ["If you submit product information as a company, you confirm that you are authorised to do so and that it is accurate. You grant Scanabowl the right to publish and score this information. Submitting does not guarantee publication or a particular score."]
+      },
+      {
+        "h": "Intellectual property",
+        "p": ["The design, text, scoring method and software of Scanabowl are protected. You may share links and short quotes with attribution. Bulk copying of the database is not permitted without permission."]
+      },
+      {
+        "h": "Liability and governing law",
+        "p": ["To the extent permitted by law, Scanabowl is not liable for damage resulting from the use of this site or reliance on its content. Dutch law applies, and disputes are handled by the competent Dutch court."]
+      }
+    ]
+  },
+  "affiliate": {
+    "metaTitle": "Affiliate disclosure",
+    "metaDescription": "How Scanabowl earns money through bol.com affiliate links – and why this never influences the scores.",
+    "title": "Affiliate disclosure",
+    "intro": "Scanabowl is free to use. This page explains how we earn money.",
+    "sections": [
+      {
+        "h": "bol.com Partner Programme",
+        "p": ["Scanabowl takes part in the bol.com Partner Programme. When you click a “View on bol.com” button and buy something, we may earn a commission from bol.com. It costs you nothing extra."]
+      },
+      {
+        "h": "Scores are never for sale",
+        "ul": [
+          "Every food is scored with the same formula, whether or not it is sold at bol.com or earns a commission.",
+          "Brands cannot pay for a place, a ranking or a better score.",
+          "The highest-scoring lists are generated automatically."
+        ]
+      },
+      {
+        "h": "How you can recognise affiliate links",
+        "p": ["Links to bol.com are marked as sponsored links and are accompanied by a short notice. Prices and availability are shown by bol.com; the price at the time you order is what counts."]
+      },
+      {
+        "h": "What we do with the income",
+        "p": ["The income is reinvested in Scanabowl: hosting, keeping the database up to date and building new features."]
+      }
+    ]
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundText": "The page you are looking for does not exist or has moved.",
+    "home": "Back to the home page"
+  },
+  "footer": {
+    "blurb": "Independent, science-based scores for dog and cat food – personal for your pet.",
+    "explore": "Explore",
+    "contribute": "Get involved",
+    "legal": "Legal",
+    "vat": "VAT",
+    "disclaimer": "Scanabowl provides general information and no veterinary advice. Scores describe product labels and are calculated automatically. Links to bol.com are affiliate links."
+  }
+}

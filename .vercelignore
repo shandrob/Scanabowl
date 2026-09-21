@@ -1,0 +1,10 @@
+node_modules
+.next
+data/generated
+public/data
+public/products
+public/blog-images
+database/build-report.txt
+database/scraped/*.done.txt
+tests
+tools
