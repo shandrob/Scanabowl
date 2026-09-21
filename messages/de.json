@@ -1,0 +1,765 @@
+{
+  "meta": {
+    "title": "Scanabowl – Ist das Futter Ihres Tieres wirklich gut? Unabhängige Bewertungen für Hunde- und Katzenfutter",
+    "description": "Suchen Sie jedes Hunde- oder Katzenfutter und sehen Sie eine unabhängige Bewertung auf Basis von Zutaten und Nährwerten. Persönlich für Ihr Tier, Allergene werden herausgefiltert."
+  },
+  "nav": {
+    "main": "Hauptnavigation",
+    "home": "Startseite",
+    "foods": "Futter finden",
+    "myPet": "Mein Tier",
+    "blog": "Blog",
+    "howWeScore": "So bewerten wir",
+    "about": "Über uns",
+    "suggest": "Futter vorschlagen",
+    "brands": "Für Hersteller",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "affiliate": "Affiliate-Hinweis",
+    "addPet": "Tier hinzufügen",
+    "petNamed": "Profil von {name}",
+    "language": "Sprache ändern",
+    "menu": "Menü öffnen",
+    "close": "Menü schließen",
+    "skip": "Zum Inhalt springen"
+  },
+  "common": {
+    "dog": "Hund",
+    "cat": "Katze",
+    "dogs": "Hunde",
+    "cats": "Katzen",
+    "all": "Alle",
+    "yes": "Ja",
+    "no": "Nein",
+    "add": "Hinzufügen",
+    "reset": "Filter zurücksetzen",
+    "close": "Schließen",
+    "loading": "Wird geladen…",
+    "day": "Tag",
+    "grainFree": "Getreidefrei",
+    "showMore": "{count} weitere anzeigen",
+    "breadcrumb": "Brotkrumen-Navigation"
+  },
+  "type": { "dry": "Trockenfutter", "wet": "Nassfutter", "frozen": "Tiefgefroren / roh", "semi": "Halbfeucht", "other": "Sonstiges" },
+  "stage": { "youngDog": "Welpe / Junghund", "youngCat": "Kitten / Jungkatze", "adult": "Erwachsen", "senior": "Senior", "all": "Alle Lebensphasen" },
+  "grade": {
+    "A": "Ausgezeichnet",
+    "B": "Gut",
+    "C": "Durchschnittlich",
+    "D": "Unterdurchschnittlich",
+    "E": "Schwach",
+    "desc": {
+      "A": "Eine fleischbasierte Rezeptur mit starkem Nährstoffprofil und sauberer Zutatenliste.",
+      "B": "Eine gute Rezeptur mit nur kleinen Schwächen.",
+      "C": "Ein akzeptables Alltagsfutter, aber es gibt deutlich bessere Optionen.",
+      "D": "Mehrere Schwächen bei Rezeptur oder Nährstoffen – suchen Sie Alternativen.",
+      "E": "Schwach bei Zutaten und/oder Nährstoffen oder enthält etwas, das ein Tier nicht fressen sollte."
+    }
+  },
+  "confidence": {
+    "high": "Vollständige Etikettendaten – hohe Zuverlässigkeit",
+    "medium": "Einige Etikettenwerte wurden geschätzt – mittlere Zuverlässigkeit",
+    "low": "Begrenzte Etikettendaten – Bewertung nur als Anhaltspunkt"
+  },
+  "score": {
+    "aria": "Bewertung {score} von 100, eingestuft als {grade}",
+    "none": "Keine Bewertung",
+    "notScoredShort": "Nicht bewertet",
+    "pillars": { "nutrition": "Nährstoffprofil", "ingredients": "Qualität der Zutaten", "formulation": "Saubere Rezeptur" }
+  },
+  "allergen": {
+    "beef": "Rind",
+    "chicken": "Huhn",
+    "dairy": "Milchprodukte",
+    "fish": "Fisch & Meeresfrüchte",
+    "wheat": "Weizen / Gluten",
+    "egg": "Ei",
+    "lamb": "Lamm",
+    "pork": "Schwein",
+    "turkey": "Pute",
+    "duck": "Ente / Gans",
+    "rabbit": "Kaninchen",
+    "horse": "Pferd",
+    "game": "Wild / Hirsch",
+    "insect": "Insekten",
+    "corn": "Mais",
+    "rice": "Reis",
+    "barley": "Gerste",
+    "oats": "Hafer",
+    "soy": "Soja",
+    "legume": "Erbsen & Hülsenfrüchte",
+    "potato": "Kartoffel",
+    "yeast": "Hefe"
+  },
+  "search": {
+    "label": "Futter nach Name, Marke oder Barcode suchen",
+    "placeholder": "Produkt, Marke oder Barcode…",
+    "button": "Suchen",
+    "scan": "Barcode scannen",
+    "notFound": "Den Barcode {ean} kennen wir noch nicht.",
+    "suggestIt": "Erzählen Sie uns von diesem Futter →"
+  },
+  "scan": {
+    "title": "Barcode scannen",
+    "starting": "Kamera wird gestartet…",
+    "hint": "Halten Sie den Barcode in den Rahmen. Das Bild bleibt auf Ihrem Handy.",
+    "denied": "Der Kamerazugriff wurde blockiert. Erlauben Sie die Kamera in den Browsereinstellungen oder tippen Sie die Nummer unter dem Barcode ein.",
+    "unsupported": "Scannen ist auf diesem Gerät oder in diesem Browser nicht möglich. Bitte tippen Sie stattdessen die Nummer unter dem Barcode ein."
+  },
+  "home": {
+    "badge": "Unabhängig · Wissenschaftlich · Kostenlos",
+    "title": "Ist das Futter Ihres Tieres wirklich so gut, wie die Verpackung verspricht?",
+    "subtitle": "Suchen Sie jedes Hunde- oder Katzenfutter und erhalten Sie eine unabhängige Bewertung von 0 bis 100 – berechnet aus Zutaten und Nährwerten auf dem Etikett, nach tierärztlichen Ernährungsrichtlinien.",
+    "searchHint": "Tipp: Scannen Sie den Barcode im Laden oder tippen Sie die EAN-Nummer ein.",
+    "browseDogs": "Hundefutter",
+    "browseCats": "Katzenfutter",
+    "ctaPet": "Für mein Tier personalisieren",
+    "statFoods": "Futter bewertet",
+    "statBrands": "Marken",
+    "howTitle": "So funktioniert Scanabowl",
+    "step": "Schritt {n}",
+    "step1Title": "Futter finden",
+    "step1Text": "Suchen Sie nach Name oder Marke oder scannen Sie den Barcode mit dem Handy. Hunde und Katzen werden immer getrennt bewertet.",
+    "step2Title": "Bewertung sehen – und warum",
+    "step2Text": "Jedes Futter erhält eine Bewertung von 0–100 mit verständlicher Erklärung: was gut ist, was nicht, und wie es im Vergleich zu den FEDIAF-Ernährungsrichtlinien abschneidet.",
+    "step3Title": "Persönlich machen",
+    "step3Text": "Geben Sie Alter, Gewicht und Allergien Ihres Tieres an. Futter mit Zutaten, auf die Ihr Tier reagiert, verschwindet, und Sie sehen die Tagesration für Ihr Tier.",
+    "topTitle": "Die aktuell am besten bewerteten Futter",
+    "topText": "Automatisch nach Bewertung sortiert – keine Marke kann sich hier einen Platz kaufen. Die Bewertungen beschreiben das Etikett, nicht ein Versprechen für jedes einzelne Tier.",
+    "howScore": "So funktioniert die Bewertung",
+    "topDogs": "Beste Hundefutter",
+    "topCats": "Beste Katzenfutter",
+    "allDogs": "Alle Hundefutter",
+    "allCats": "Alle Katzenfutter",
+    "persTitle": "Ein Futterberater, der Ihr Tier kennt",
+    "persText": "Erzählen Sie einmal von Ihrem Hund oder Ihrer Katze. Scanabowl zeigt danach nur passendes Futter – und warnt, wenn ein Futter nicht passt.",
+    "persButton": "Tierprofil erstellen",
+    "persA": "Allergien und Unverträglichkeiten werden aus jeder Liste gefiltert",
+    "persB": "Lebensphase, Größe und Gewichtsziel werden berücksichtigt",
+    "persC": "Tageskalorien und Gramm pro Tag, berechnet mit FEDIAF-Formeln",
+    "persD": "Nur auf Ihrem Gerät gespeichert – kein Konto nötig",
+    "blogTitle": "Aus dem Blog",
+    "allPosts": "Alle Artikel",
+    "faqTitle": "Häufig gestellte Fragen",
+    "brandTitle": "Stellen Sie Tierfutter her?",
+    "brandText": "Reichen Sie Ihre Produkte kostenlos ein. Wir prüfen jede Einreichung und bewerten sie nach exakt derselben Methode wie jedes andere Futter.",
+    "brandButton": "Futter hinzufügen",
+    "faq": [
+      {
+        "q": "Ist die Bewertung eine tierärztliche Beratung?",
+        "a": "Nein. Die Bewertung beurteilt, was auf der Verpackung steht, anhand veröffentlichter Ernährungsrichtlinien. Sie ersetzt nicht den Rat Ihres Tierarztes – besonders nicht, wenn Ihr Tier gesundheitliche Probleme hat."
+      },
+      {
+        "q": "Wie wird die Bewertung berechnet?",
+        "a": "Von 100 Punkten: 35 für das Nährstoffprofil (Protein, Fett, Kohlenhydrate, Rohfaser, Mineralstoffe im Vergleich zu FEDIAF), 50 für die Qualität der Zutaten (woher das Protein stammt, wie klar es deklariert ist) und 15 für eine saubere Rezeptur (kein Zucker, keine Farbstoffe, keine synthetischen Konservierungsstoffe). Alles wird auf der [Methodenseite](/{lang}/how-we-score) erklärt."
+      },
+      {
+        "q": "Zahlen Marken für eine bessere Bewertung?",
+        "a": "Nein. Die Bewertung wird für jedes Futter mit derselben Formel berechnet. Wir erhalten eine kleine Provision, wenn Sie über unsere bol.com-Links bestellen, ohne Mehrkosten für Sie – siehe [Affiliate-Hinweis](/{lang}/affiliate)."
+      },
+      {
+        "q": "Warum hat ein Diätfutter vom Tierarzt keine Bewertung?",
+        "a": "Therapeutische Diäten sind für medizinische Erkrankungen gedacht und sollen unter tierärztlicher Aufsicht gefüttert werden. Ihr Nährstoffprofil weicht bewusst von normalem Futter ab, eine allgemeine Bewertung wäre daher irreführend."
+      },
+      {
+        "q": "Ist getreidefreies Futter besser?",
+        "a": "Nicht automatisch. Getreide ist für die meisten Hunde und Katzen nicht schädlich, und getreidefreies Futter ersetzt es oft durch Erbsen oder Kartoffeln. Wir vergeben keine Punkte für „getreidefrei“ – Sie können aber danach filtern, zum Beispiel bei einer Weizenallergie."
+      },
+      {
+        "q": "Wie funktioniert der Allergiefilter?",
+        "a": "Wählen Sie im Tierprofil die Allergene Ihres Tieres. Futter, das sie aufführt, wird ausgeblendet. Standardmäßig blenden wir auch Futter mit vagen Angaben wie „Fleisch und tierische Nebenerzeugnisse“ aus, weil sich dahinter genau die Zutat verbergen kann, auf die Ihr Tier reagiert."
+      }
+    ]
+  },
+  "finder": {
+    "metaTitle": "Hunde- und Katzenfutter finden – unabhängige Bewertungen",
+    "metaDescription": "Hunde- und Katzenfutter nach Bewertung, Art und Lebensphase durchsuchen und vergleichen. Nach Marke und Allergie filtern, sortiert nach einer unabhängigen Bewertung von 0–100.",
+    "title": "Das richtige Futter finden",
+    "subtitle": "Vergleichen Sie {count} bewertete Futter für Hunde und Katzen. Hunde und Katzen werden getrennt bewertet.",
+    "species": "Tier",
+    "type": "Futterart",
+    "stage": "Lebensphase",
+    "brand": "Marke",
+    "minScore": "Mindestbewertung: {score}",
+    "grainFree": "Nur getreidefrei",
+    "includeUnscored": "Auch Futter ohne Bewertung anzeigen (Diätfutter vom Tierarzt, Snacks, unvollständige Daten)",
+    "filters": "Filter",
+    "count": "{count} Futter",
+    "sort": "Sortieren nach",
+    "sortMatch": "Beste Übereinstimmung für {name}",
+    "sortScore": "Höchste Bewertung",
+    "sortName": "Name (A–Z)",
+    "sortKcal": "Wenigste Kalorien",
+    "forPet": "Für {name}: {score}",
+    "petBanner": "Futter für {name}.",
+    "hiddenAllergy": "{count} Futter wegen Allergien ausgeblendet ({allergens}).",
+    "petIgnored": "Alle Futter werden angezeigt – das Profil von {name} ist ausgeschaltet.",
+    "editProfile": "Profil bearbeiten",
+    "ignorePet": "Alles anzeigen",
+    "usePet": "Profil von {name} verwenden",
+    "noPet": "Tipp: Mit einem Tierprofil werden Futter, die Ihr Tier nicht fressen darf, automatisch ausgeblendet.",
+    "createProfile": "Profil erstellen",
+    "emptyTitle": "Keine Futter zu diesen Filtern gefunden",
+    "emptyText": "Entfernen Sie einen Filter oder suchen Sie etwas anderes.",
+    "suggestMissing": "Ihr Futter nicht gefunden? Sagen Sie uns Bescheid →",
+    "error": "Die Futterliste konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und laden Sie die Seite neu."
+  },
+  "product": {
+    "metaTitle": "{name} – Bewertung {score}/100",
+    "metaDescription": "{name} von {brand}: unabhängige Scanabowl-Bewertung {score}/100 für {species}futter, mit Zutatenanalyse, Nährwerten und Allergiecheck.",
+    "metaDescriptionNoScore": "{name} von {brand}: Zutaten und Nährwerte von {species}futter.",
+    "jsonLdDescription": "{name} von {brand} – von Scanabowl analysiertes Tierfutter.",
+    "scoreTitle": "Scanabowl-Bewertung",
+    "howCalculated": "Wie wird das berechnet?",
+    "noScoreTitle": "Keine Bewertung für dieses Futter",
+    "notScored": {
+      "veterinary": "Dies ist ein Diät- bzw. Verschreibungsfutter. Solche Futter sind für bestimmte Erkrankungen gedacht und sollten nur auf Rat Ihres Tierarztes gefüttert werden, daher vergeben wir keine allgemeine Bewertung.",
+      "treat": "Dies ist ein Snack oder Leckerli und kein Alleinfuttermittel, daher wird es nicht bewertet.",
+      "supplement": "Dies ist ein Ergänzungsmittel und kein Alleinfuttermittel, daher wird es nicht bewertet.",
+      "complementary": "Dies ist ein Ergänzungsfuttermittel – nicht als einzige Nahrung Ihres Tieres gedacht – und wird daher nicht bewertet.",
+      "no_ingredients": "Die Zutatenliste dieses Futters liegt uns noch nicht vor, deshalb können wir keine Bewertung berechnen. Sie können helfen, indem Sie sie uns senden."
+    },
+    "hazardTitle": "Enthält eine für dieses Tier schädliche Zutat",
+    "goodTitle": "Was gut ist",
+    "badTitle": "Was besser sein könnte",
+    "nothingGood": "Es wurden keine besonderen Stärken gefunden.",
+    "nothingBad": "Es wurden keine Schwächen gefunden.",
+    "ingredientsTitle": "Zutaten",
+    "estimateNote": "Geschätzt anhand der Reihenfolge auf dem Etikett und angegebener Prozentwerte. Frisches Fleisch besteht zu etwa 70 % aus Wasser, daher vergleichen wir getrocknete und frische Zutaten auf Trockenmasse-Basis.",
+    "group": { "animal": "Tierisch", "fat": "Fette & Öle", "plant": "Pflanzlich", "other": "Zusatzstoffe & Sonstiges" },
+    "originalText": "Zutatentext wie gedruckt anzeigen",
+    "originalLanguageNote": "In der Sprache der Verpackung angezeigt.",
+    "noIngredients": "Die Zutatenliste dieses Futters ist noch nicht verfügbar.",
+    "analysisTitle": "Nährwerte",
+    "noAnalysis": "Die Analysewerte dieses Futters sind noch nicht verfügbar, daher ist der Nährstoffteil der Bewertung eine Schätzung.",
+    "alternativesTitle": "Alternativen mit höherer Bewertung",
+    "alternativesText": "Ähnliche Futter derselben Art und Lebensphase mit höherer Bewertung.",
+    "alternativesPet": "Ähnliche Futter mit höherer Bewertung, die für {name} sicher sind.",
+    "dataTitle": "Über diese Daten",
+    "dataPack": "Zutaten und Analyse wie auf der Verpackung gedruckt, von Scanabowl geprüft.",
+    "dataBrand": "Vom Hersteller bereitgestellt und von Scanabowl geprüft. Es wird nach exakt derselben Methode bewertet wie jedes andere Futter.",
+    "reportError": "Stimmt etwas nicht? Korrektur melden",
+    "disclaimer": "Die Bewertung beschreibt das Etikett und ist keine tierärztliche Beratung. Stellen Sie neues Futter immer schrittweise um und fragen Sie Ihren Tierarzt, wenn Ihr Tier gesundheitliche Probleme hat."
+  },
+  "analysis": {
+    "nutrient": "Nährstoff",
+    "asFed": "Wie gefüttert",
+    "dryMatter": "Trockenmasse",
+    "protein": "Rohprotein",
+    "fat": "Rohfett",
+    "fibre": "Rohfaser",
+    "ash": "Rohasche",
+    "moisture": "Feuchtigkeit",
+    "carbs": "Kohlenhydrate (geschätzt)",
+    "calcium": "Calcium",
+    "phosphorus": "Phosphor",
+    "energy": "Energie",
+    "kcal": { "label": "vom Etikett", "calculated": "mit der FEDIAF/NRC-Gleichung berechnet" },
+    "estimated": "geschätzt",
+    "estimatedNote": "Nicht auf dem Etikett angegeben bzw. berechnet – es wurde ein typischer Wert für diese Futterart verwendet.",
+    "fediafTitle": "Im Vergleich zu den FEDIAF-Mindestwerten",
+    "proteinPer1000": "Protein: {value} g pro 1.000 kcal (Minimum {min} g)",
+    "fatPer1000": "Fett: {value} g pro 1.000 kcal (Minimum {min} g)",
+    "energyShare": "Energieanteil: {p} % Protein · {f} % Fett · {c} % Kohlenhydrate",
+    "fediafNote": "FEDIAF Nutritional Guidelines 2021. Ein Futter, das den Mindestwert erreicht, ist nicht automatisch „vollständig“ – das können nur die Herstellererklärung und Fütterungsstudien bestätigen."
+  },
+  "reasons": {
+    "animal_protein_high": "Schätzungsweise {pct} % des Proteins stammen aus tierischen Zutaten.",
+    "meat_rich": "Tierische Zutaten machen schätzungsweise {pct} % der Trockenmasse aus – eine wirklich fleischbasierte Rezeptur.",
+    "first_named_animal": "Die Liste beginnt mit einer benannten tierischen Zutat: {name}.",
+    "named_sources": "Tierische Zutaten werden nach Tierart benannt statt als vage „tierische Nebenerzeugnisse“.",
+    "protein_level_good": "Protein macht {pct} % der Trockenmasse aus, deutlich über dem FEDIAF-Minimum.",
+    "low_carb": "Nur etwa {pct} % der Energie stammen aus Kohlenhydraten – nah an dem, wofür der Körper einer Katze gebaut ist.",
+    "high_moisture": "{pct} % Feuchtigkeit unterstützen die Flüssigkeitsaufnahme und die Gesundheit der Harnwege.",
+    "omega3": "Enthält Fisch- oder Algenöl als Quelle für EPA/DHA (Omega-3).",
+    "prebiotic": "Enthält präbiotische Ballaststoffe (z. B. Chicorée, Inulin, FOS/MOS), die Darmbakterien füttern.",
+    "joint": "Enthält Zutaten für die Gelenke (Glucosamin / Chondroitin).",
+    "probiotic": "Enthält Probiotika.",
+    "clean_formulation": "Kein zugesetzter Zucker, keine künstlichen Farbstoffe oder synthetischen Konservierungsstoffe gefunden.",
+    "analysis_missing": "Die Analysewerte fehlen, daher ist der Nährstoffteil der Bewertung eine vorsichtige Schätzung.",
+    "protein_low": "Protein macht nur {pct} % der Trockenmasse aus – wenig für dieses Tier.",
+    "protein_below_min": "Liefert {g} g Protein pro 1.000 kcal – unter dem FEDIAF-Minimum von {min} g.",
+    "carbs_high": "Schätzungsweise {pct} % der Energie stammen aus Kohlenhydraten.",
+    "dry_food_cat": "Trockenfutter ({pct} % Feuchtigkeit): Katzen trinken wenig, deshalb liefert reines Trockenfutter weniger Flüssigkeit als Nassfutter.",
+    "fibre_high": "Der Rohfasergehalt ist hoch ({pct} % der Trockenmasse).",
+    "ash_high": "Rohasche (Mineralstoffe) ist mit {pct} % der Trockenmasse hoch.",
+    "fat_low": "Der Fettgehalt ist niedrig ({pct} % der Trockenmasse).",
+    "fat_high": "Sehr hoher Fettgehalt ({pct} % der Trockenmasse) – energiereich, was Gewichtszunahme fördern kann.",
+    "calcium_phosphorus": "Das Calcium-Phosphor-Verhältnis von {ratio}:1 liegt außerhalb des empfohlenen Bereichs von 1:1 bis 2:1.",
+    "animal_protein_low": "Nur etwa {pct} % des Proteins stammen aus tierischen Zutaten; der Rest kommt aus Pflanzen.",
+    "meat_poor": "Tierische Zutaten machen nur etwa {pct} % der Trockenmasse aus.",
+    "first_not_animal": "Die erste Zutat ist keine tierische Zutat: {name}.",
+    "generic_animal": "Überwiegend nicht näher bezeichnete „Fleisch und tierische Nebenerzeugnisse“ – man sieht nicht, welche Tiere oder Teile verwendet werden.",
+    "vague_plant": "Enthält vage pflanzliche Zutaten wie „Getreide“ oder „pflanzliche Nebenerzeugnisse“.",
+    "sugar": "Enthält zugesetzten Zucker oder Süßungsmittel (Zucker, Karamell, Sirup), die kein Tier braucht.",
+    "colourant": "Enthält künstliche Farbstoffe, die nur dem Auge des Besitzers dienen.",
+    "preservative": "Enthält synthetische Konservierungsstoffe (z. B. BHA, BHT, Ethoxyquin, Sorbate oder Nitrit).",
+    "plant_protein_isolates": "Etwa {pct} % des Proteins stammen aus pflanzlichen Proteinkonzentraten (Gluten, Erbsen- oder Kartoffelprotein).",
+    "cereal_filler": "Getreide macht etwa {pct} % der Rezeptur aus – billiger Füllstoff für einen Fleischfresser.",
+    "legume_heavy": "Erbsen, Hülsenfrüchte oder Kartoffeln machen etwa {pct} % der Rezeptur aus. Die US-Behörde FDA untersuchte einen möglichen Zusammenhang zwischen sehr hülsenfruchtreichem, getreidefreiem Futter und Herzerkrankungen (DCM) bei Hunden; eine Ursache ist nicht bewiesen."
+  },
+  "flags": {
+    "onion": "Enthält Zwiebel, die rote Blutkörperchen von Hunden und Katzen schädigt.",
+    "garlic": "Enthält Knoblauch, der für Katzen giftig ist.",
+    "garlic_dog": "Enthält Knoblauch. Hunde vertragen kleine Mengen, größere Mengen sind schädlich.",
+    "xylitol": "Enthält Xylit (Xylitol), das für Hunde hochgiftig ist.",
+    "raisins": "Enthält Rosinen oder Korinthen, die für Hunde giftig sind (Nierenversagen).",
+    "grapes": "Enthält Weintrauben oder eine Traubenzutat. Trauben und Rosinen sind für Hunde giftig; die Sicherheit von Traubenextrakten im Futter ist unklar.",
+    "chocolate": "Enthält Kakao oder Schokolade (Theobromin), das für Haustiere giftig ist.",
+    "macadamia": "Enthält Macadamianüsse, die für Hunde giftig sind.",
+    "propylene_glycol": "Enthält Propylenglykol, das in Katzenfutter nicht erlaubt ist, weil es rote Blutkörperchen schädigt.",
+    "values_estimated": "Einige Werte (Feuchtigkeit, Asche oder Rohfaser) fehlten auf dem Etikett und wurden geschätzt."
+  },
+  "personal": {
+    "ctaTitle": "Passt dieses Futter zu Ihrem Tier?",
+    "ctaText": "Erstellen Sie ein Profil mit Alter, Gewicht und Allergien Ihres Tieres, um dieses Futter zu prüfen, eine persönliche Bewertung zu sehen und zu erfahren, wie viel Gramm pro Tag Sie füttern sollten.",
+    "ctaButton": "Tierprofil erstellen",
+    "wrongSpecies": "Dies ist Futter für {food}, {name} gehört jedoch zu den {pet}.",
+    "switchPet": "Tier wechseln oder hinzufügen",
+    "title": "Für {name}",
+    "allergyBad": "Dieses Futter ist für {name} nicht geeignet.",
+    "allergyDefinite": "Es enthält: {list}.",
+    "allergyPossible": "Vage Angaben auf dem Etikett (wie „Fleisch und tierische Nebenerzeugnisse“) könnten außerdem enthalten: {list}.",
+    "allergyOk": "Es wurden keine Zutaten gefunden, auf die {name} reagiert.",
+    "allergyChecked": "Geprüft auf: {list}.",
+    "noAllergies": "Für {name} sind keine Allergien hinterlegt. Sie können sie im Tierprofil hinzufügen.",
+    "matchFor": "Passung für {name}",
+    "sameAsBase": "Gleich wie die Basisbewertung",
+    "deltaUp": "+{delta} Punkte für {name}",
+    "deltaDown": "−{delta} Punkte für {name}",
+    "notes": {
+      "stage_match": "Für die Lebensphase von {name} gemacht.",
+      "stage_all": "Für alle Lebensphasen geeignet, auch für das Wachstum.",
+      "stage_young_needed": "Nicht für wachsende Tiere gemacht – {name} braucht Welpen-/Kittenfutter (oder Futter für alle Lebensphasen).",
+      "stage_too_rich": "Wachstumsfutter ist für die Lebensphase von {name} zu reich an Energie und Mineralstoffen.",
+      "stage_senior_only": "Für Seniorentiere entwickelt. In Ordnung, aber für {name} nicht nötig.",
+      "weight_fat_high": "Viel Fett ({pct} % der Energie) – nicht ideal, um das Gewicht von {name} im Griff zu behalten.",
+      "weight_lean": "Magere Rezeptur ({pct} % der Energie aus Fett), hilfreich beim Gewichtsmanagement.",
+      "energy_dense": "Energiereich, nützlich zum Zunehmen.",
+      "size_match": "Passt zur Größe von {name}.",
+      "size_mismatch": "Für eine andere Hundegröße gemacht als {name}.",
+      "calcium_large_puppy": "Calcium ({ca} % der Trockenmasse) liegt über dem FEDIAF-Maximum von 1,8 % für wachsende Welpen großer Rassen.",
+      "urinary_wet": "Nassfutter liefert Flüssigkeit – gut für die Harnwege von {name}.",
+      "urinary_dry": "Trockenfutter liefert wenig Flüssigkeit, was bei Harnproblemen weniger ideal ist.",
+      "urinary_ash": "Hoher Aschegehalt ({pct} % der Trockenmasse) – die Mineralstoffbelastung ist für die Harnwege wichtig.",
+      "digestion_simple": "Wenige Proteinquellen – schonender für einen empfindlichen Magen.",
+      "digestion_fat": "Viel Fett kann einen empfindlichen Magen belasten."
+    },
+    "portionTitle": "Wie viel sollte {name} fressen?",
+    "portionText": "Etwa {kcal} kcal pro Tag, das sind rund {grams} g dieses Futters pro Tag.",
+    "costText": "Das kostet etwa {cost} € pro Tag.",
+    "energyBasis": {
+      "dog_adult": "Basiert auf {factor} kcal pro kg^0,75 (FEDIAF, erwachsener Hund).",
+      "dog_puppy": "Basiert auf der FEDIAF-Wachstumsformel für Welpen ({factor} kcal pro kg^0,75).",
+      "cat_adult": "Basiert auf {factor} kcal pro kg^0,67 (FEDIAF, erwachsene Katze).",
+      "kitten": "Basiert auf dem FEDIAF-Energiebedarf von Kitten ({factor} kcal pro kg^0,67)."
+    },
+    "portionNote": "Dies ist ein Ausgangspunkt: Wiegen Sie Ihr Tier regelmäßig und passen Sie die Menge an, um eine gesunde Körperkondition zu halten. Folgen Sie dem Rat Ihres Tierarztes."
+  },
+  "order": {
+    "title": "Dieses Futter bestellen",
+    "text": "Aktuellen Preis und Lieferung bei bol.com ansehen.",
+    "button": "Bei bol.com ansehen",
+    "disclosure": "Affiliate-Link: Wenn Sie über diesen Link kaufen, erhalten wir möglicherweise eine Provision, ohne Mehrkosten für Sie. Das beeinflusst die Bewertung nie.",
+    "moreInfo": "Mehr Informationen",
+    "dutchOnly": "bol.com liefert in die Niederlande und nach Belgien."
+  },
+  "pet": {
+    "metaTitle": "Mein Tier – persönlicher Futterberater",
+    "metaDescription": "Erstellen Sie ein Profil für Ihren Hund oder Ihre Katze mit Alter, Gewicht und Allergien. Scanabowl blendet Futter aus, das Ihr Tier nicht fressen darf, und berechnet die Tagesration.",
+    "title": "Das Profil Ihres Tieres",
+    "subtitle": "Erzählen Sie uns von Ihrem Hund oder Ihrer Katze. Alles bleibt auf diesem Gerät – es gibt kein Konto und nichts wird an uns gesendet.",
+    "yourPets": "Ihre Tiere",
+    "addAnother": "Weiteres Tier hinzufügen",
+    "basicsTitle": "Die Grundlagen",
+    "species": "Tier",
+    "name": "Name",
+    "namePlaceholder": "z. B. Bella",
+    "nameRequired": "Bitte geben Sie einen Namen ein.",
+    "birthDate": "Geburtsdatum",
+    "ageYears": "Alter (Jahre)",
+    "useAge": "Ich kenne nur das Alter",
+    "useBirthDate": "Ich kenne das Geburtsdatum",
+    "ageHint": "Dient zur Bestimmung der Lebensphase: wachsend, erwachsen oder Senior.",
+    "weight": "Gewicht (kg)",
+    "weightInvalid": "Geben Sie ein Gewicht zwischen 0,5 und 100 kg ein.",
+    "size": "Größe (erwachsen)",
+    "sizeSmall": "Klein",
+    "sizeMedium": "Mittel",
+    "sizeLarge": "Groß",
+    "sizeGiant": "Riesig",
+    "neutered": "Kastriert / sterilisiert?",
+    "lifestyleTitle": "Lebensstil & Gesundheit",
+    "activity": "Aktivitätsniveau",
+    "activityLow": "Ruhig",
+    "activityMod": "Normal",
+    "activityHigh": "Sehr aktiv",
+    "activityLowHint": { "dog": "Weniger als 1 Stunde Spaziergang pro Tag", "cat": "Schläft viel, nur drinnen" },
+    "activityModHint": { "dog": "1–3 Stunden Bewegung pro Tag", "cat": "Normales Spielen und Streunen" },
+    "activityHighHint": { "dog": "3+ Stunden, Sport- oder Arbeitshund", "cat": "Sehr aktiv, viel draußen" },
+    "condition": "Körperkondition",
+    "condUnder": "Zu dünn",
+    "condUnderHint": "Rippen deutlich sichtbar",
+    "condIdeal": "Ideal",
+    "condIdealHint": "Rippen gut zu ertasten",
+    "condOver": "Übergewichtig",
+    "condOverHint": "Rippen schwer zu ertasten",
+    "urinary": "Frühere Harnprobleme",
+    "urinaryHint": "Kristalle, Steine oder Blasenentzündung. Nassfutter wird dann meist bevorzugt.",
+    "digestion": "Empfindliche Verdauung",
+    "digestionHint": "Weicher Kot oder ein schnell gereizter Magen.",
+    "allergyTitle": "Allergien & Unverträglichkeiten",
+    "allergyIntro": "Wählen Sie alles aus, worauf Ihr Tier reagiert. Futter mit diesen Zutaten wird nicht angezeigt. Die häufigsten Futtermittelallergene stehen zuerst.",
+    "showMoreAllergens": "{count} weitere Zutaten anzeigen",
+    "customAllergy": "Etwas anderes?",
+    "customPlaceholder": "Zutat eingeben, z. B. Känguru",
+    "removeAllergen": "{name} entfernen",
+    "strict": "Auch Futter mit vagen Zutaten ausblenden",
+    "strictHint": "Empfohlen. Angaben wie „Fleisch und tierische Nebenerzeugnisse“ können die Zutat verbergen, auf die Ihr Tier reagiert.",
+    "save": "Profil speichern",
+    "saveChanges": "Änderungen speichern",
+    "delete": "Profil löschen",
+    "confirmDelete": "Das Profil von {name} löschen?",
+    "saved": "Das Profil von {name} wurde gespeichert.",
+    "seeFoods": "Futter für {name} ansehen",
+    "previewTitle": "Ihr Tier",
+    "previewStage": "Lebensphase",
+    "previewEnergy": "Täglicher Energiebedarf",
+    "previewAllergies": "Allergien",
+    "previewEmpty": "Geben Sie Name und Gewicht ein, um eine Vorschau zu sehen.",
+    "none": "Keine",
+    "stage": { "young": "Wachsend (Welpe / Kitten)", "adult": "Erwachsen", "senior": "Senior" },
+    "privacyNote": "Nur in diesem Browser auf diesem Gerät gespeichert. Es wird nichts an einen Server gesendet, und wir können das Profil Ihres Tieres nicht sehen."
+  },
+  "blog": {
+    "metaTitle": "Blog – Tierernährung erklärt",
+    "metaDescription": "Praxisnahe, wissenschaftlich fundierte Artikel über die Ernährung von Hunden und Katzen.",
+    "title": "Blog",
+    "subtitle": "Praxisnahe, wissenschaftlich fundierte Artikel über die Fütterung von Hund und Katze.",
+    "empty": "Die ersten Artikel sind unterwegs.",
+    "minutes": "{n} Min. Lesezeit",
+    "back": "Alle Artikel",
+    "notTranslated": "Dieser Artikel wurde noch nicht übersetzt – Sie lesen die Originalversion ({lang}).",
+    "ctaTitle": "Finden Sie Futter, das zu Ihrem Tier passt",
+    "ctaText": "Sehen Sie unabhängige Bewertungen für Tausende Hunde- und Katzenfutter.",
+    "ctaFoods": "Futter finden",
+    "ctaPet": "Tierprofil erstellen",
+    "more": "Weitere Artikel"
+  },
+  "method": {
+    "metaTitle": "So bewerten wir Tierfutter",
+    "metaDescription": "Genau, wie die Scanabowl-Bewertung berechnet wird: Nährstoffprofil, Qualität der Zutaten und saubere Rezeptur – mit den wissenschaftlichen Quellen dahinter.",
+    "title": "So bewerten wir Tierfutter",
+    "intro": "Jedes Futter erhält eine Bewertung von 0 bis 100. Sie wird mit einer festen Formel aus der Zutatenliste und den Analysewerten auf der Verpackung berechnet, nach veröffentlichten tierärztlichen Ernährungsrichtlinien. Diese Seite erklärt jeden Schritt, damit Sie es selbst beurteilen können.",
+    "glance": "Die Bewertung auf einen Blick",
+    "pillar": {
+      "nutrition": "Passen die Zahlen auf der Verpackung zu dem, was ein Hund oder eine Katze braucht? Protein, Fett, Kohlenhydrate, Rohfaser, Mineralstoffe und – bei Katzen – Feuchtigkeit, verglichen mit FEDIAF.",
+      "ingredients": "Woher stammt das Protein, wie viel der Rezeptur ist tierisch, und wird das klar deklariert?",
+      "formulation": "Punkte werden abgezogen für zugesetzten Zucker, künstliche Farbstoffe, synthetische Konservierungsstoffe und billige Füllstoffe."
+    },
+    "gradesTitle": "Bewertungen und Noten",
+    "sections": [
+      {
+        "h": "Was die Bewertung ist – und was nicht",
+        "p": [
+          "Die Scanabowl-Bewertung beurteilt das **Etikett**: die Zutatenliste und die Analysewerte, die auf der Verpackung stehen. Sie kann nicht sehen, wie verdaulich ein Futter wirklich ist, wie gut es hergestellt wird oder ob es in Fütterungsstudien belegt wurde.",
+          "Die World Small Animal Veterinary Association (WSAVA) weist darauf hin, dass eine Zutatenliste allein wenig über die Qualität eines Futters aussagt, und empfiehlt, auch die Qualitätskontrolle und Forschung des Herstellers zu betrachten. Nutzen Sie unsere Bewertung, um Rezepturen zu vergleichen und Schwächen zu erkennen – und sprechen Sie mit Ihrem Tierarzt, besonders wenn Ihr Tier eine Erkrankung hat."
+        ]
+      },
+      {
+        "h": "1. Nährstoffprofil (35 Punkte)",
+        "p": ["Wir rechnen die Analyse auf Trockenmasse und auf Energie (kcal) um, damit Nass- und Trockenfutter fair verglichen werden können. Gibt das Etikett keinen Energiewert an, berechnen wir ihn mit der von FEDIAF veröffentlichten Gleichung (basierend auf NRC 2006). Dann vergleichen wir mit den FEDIAF Nutritional Guidelines (2021):"],
+        "ul": [
+          "**Protein** – das FEDIAF-Minimum für erwachsene Hunde beträgt 18–21 g pro 100 g Trockenmasse (45–52 g pro 1.000 kcal), für erwachsene Katzen 25–33 g (62,5–83 g pro 1.000 kcal). Wachsende Tiere brauchen mehr. Die Punkte steigen über dem Minimum und flachen dann ab: Mehr Protein ist für einen gesunden Hund nicht automatisch besser.",
+          "**Fett** – FEDIAF-Minimum 5,5 g pro 100 g Trockenmasse für erwachsene Hunde (8,5 g für Welpen) und 9 g für Katzen. Sehr viel Fett wird abgewertet, da es Gewichtszunahme fördert und eine Bauchspeicheldrüsenentzündung auslösen kann.",
+          "**Kohlenhydrate (Katzen: 10 Punkte, Hunde: 4 Punkte)** – geschätzt aus dem, was nach Protein, Fett, Rohfaser, Asche und Feuchtigkeit übrig bleibt. Katzen sind Fleischfresser: Wenn sie wählen können, stellen sie sich eine Ration mit etwa 52 % der Energie aus Protein, 36 % aus Fett und nur 12 % aus Kohlenhydraten zusammen (Hewson-Hughes et al., 2011). Hunde sind flexibler, daher zählen Kohlenhydrate bei ihnen viel weniger.",
+          "**Feuchtigkeit (nur Katzen, 7,5 Punkte)** – Katzen haben einen schwachen Durstreiz. Katzen, die ein feuchtigkeitsreiches Futter fressen, nehmen insgesamt mehr Wasser auf und scheiden verdünnteren Urin aus, mit geringerer Sättigung der Mineralstoffe, die Harnkristalle bilden (Buckley et al., 2011).",
+          "**Rohfaser und Asche** – zu viel von beidem senkt die Bewertung (eine hohe Mineralstoffbelastung ist besonders für die Harnwege von Katzen wichtig).",
+          "**Hunde: Calcium-Phosphor-Verhältnis und Vollständigkeit des Etiketts** – wenn Calcium und Phosphor angegeben sind, sollte das Verhältnis zwischen 1:1 und 2:1 liegen (FEDIAF). Futter mit vollständiger Analyse schneidet besser ab als Futter, das Werte weglässt."
+        ]
+      },
+      {
+        "h": "2. Qualität der Zutaten (50 Punkte)",
+        "p": ["Zutaten sind nach absteigendem Gewicht *wie gemischt* aufgeführt – einschließlich des Wassers in frischem Fleisch, das etwa 70 % seines Gewichts ausmacht. Deshalb schätzen wir den Anteil jeder Zutat aus ihrer Position und den angegebenen Prozentwerten und vergleichen auf Trockenmasse-Basis. Darum ist ein Futter, das mit „frischem Huhn“ beginnt, nicht zwangsläufig fleischreich."],
+        "ul": [
+          "**Herkunft des Proteins (12 Punkte)** – der geschätzte Anteil des Proteins, der aus tierischen Zutaten statt aus pflanzlichen Konzentraten wie Gluten oder Erbsenprotein stammt. Katzen brauchen einen höheren Anteil als Hunde.",
+          "**Tierischer Anteil der Trockenmasse (12 Punkte)** – wie viel der Rezeptur selbst tierischen Ursprungs ist.",
+          "**Die ersten Zutaten (10 Punkte)** – wird die Liste von einer benannten tierischen Zutat oder von Getreide angeführt?",
+          "**Benannte Quellen (10 Punkte)** – „Huhn“ oder „Lachs“ ist präzise. „Fleisch und tierische Nebenerzeugnisse“ kann alles von Muskelfleisch bis Federn sein. Nebenerzeugnisse sind nicht automatisch schlecht, aber man sieht nicht, was man füttert – und Allergien lassen sich damit schwerer handhaben.",
+          "**Nützliche Extras (bis zu 6 Punkte)** – EPA/DHA aus Fisch- oder Algenöl, präbiotische Ballaststoffe, Probiotika, Glucosamin/Chondroitin, Taurin für Katzen."
+        ]
+      },
+      {
+        "h": "3. Saubere Rezeptur (15 Punkte)",
+        "p": ["Wir beginnen mit 15 Punkten und ziehen für Dinge ab, die ein Tier nicht braucht:"],
+        "ul": [
+          "**Zugesetzter Zucker** (Zucker, Karamell, Sirup) – kein Nährstoffbedarf; Katzen können Süße nicht einmal schmecken.",
+          "**Künstliche Farbstoffe** – sie lassen das Futter nur für den Besitzer schöner aussehen.",
+          "**Synthetische Konservierungsstoffe** (BHA, BHT, Ethoxyquin, Sorbate, Nitrit) – es gibt natürliche Alternativen wie Tocopherole.",
+          "**Füllstoffanteil** – bei Katzen: ein hoher Anteil an Getreide oder pflanzlichen Proteinkonzentraten; bei Hunden: ein sehr hoher Anteil an Erbsen, Hülsenfrüchten oder Kartoffeln. Die US-Behörde FDA untersuchte einen Zusammenhang zwischen sehr hülsenfruchtreichem, getreidefreiem Futter und dilatativer Kardiomyopathie bei Hunden. Eine Ursache ist nicht festgestellt – daher ist dies ein kleiner Abzug, kein Verbot."
+        ]
+      },
+      {
+        "h": "Giftige Zutaten",
+        "p": ["Ist eine Zutat für die Tierart giftig – zum Beispiel Zwiebel, Xylit oder Schokolade, Rosinen für Hunde, Knoblauch oder Propylenglykol für Katzen –, wird die Bewertung auf 25 begrenzt, was auch immer sonst in der Rezeptur steckt."]
+      },
+      {
+        "h": "Hunde und Katzen werden unterschiedlich bewertet",
+        "p": ["Katzen sind strikte Fleischfresser mit besonderen Bedürfnissen (Taurin, Arachidonsäure, vorgeformtes Vitamin A, höherer Proteinbedarf), Hunde sind flexibler. Deshalb unterscheiden sich die Gewichtungen für Kohlenhydrate, Feuchtigkeit und tierisches Protein je nach Tierart. Für „getreidefrei“ als solches vergeben wir keine Punkte: Getreide ist für die meisten Tiere nicht schädlich, und getreidefrei ist kein Qualitätsmerkmal. Sie können aber danach filtern, zum Beispiel bei einer Weizenallergie."]
+      },
+      {
+        "h": "Was nicht bewertet wird",
+        "p": ["Diät- und Verschreibungsfutter, Snacks, Ergänzungsmittel und Ergänzungsfuttermittel werden nicht bewertet. Ihr Zweck ist ein anderer, eine allgemeine Bewertung wäre irreführend. Futter ohne Zutatenliste kann nicht bewertet werden. Fehlt die Analyse, ist der Nährstoffteil eine vorsichtige Schätzung und wir zeigen eine niedrigere Zuverlässigkeit an."]
+      },
+      {
+        "h": "Das Profil Ihres Tieres",
+        "p": ["Die Basisbewertung ändert sich nie. Im Tierprofil fügen wir eine persönliche Passung von höchstens einigen Punkten nach oben oder unten hinzu, für das, was das Etikett nicht wissen kann: Lebensphase (Wachstumsfutter für ein erwachsenes Tier oder umgekehrt), Gewichtsziel, Hundegröße, Harnprobleme bei Katzen und einen empfindlichen Magen. Die Tageskalorien folgen den FEDIAF-Energietabellen (zum Beispiel 110 kcal pro kg^0,75 für einen durchschnittlichen erwachsenen Hund und 75 kcal pro kg^0,67 für eine kastrierte Wohnungskatze)."]
+      },
+      {
+        "h": "Allergien",
+        "p": ["Im Tierprofil wählen Sie die Zutaten, auf die Ihr Tier reagiert. Wir erkennen jede davon in niederländischer, englischer, deutscher und französischer Etikettenformulierung. Futter, das ein Allergen namentlich nennt, wird immer ausgeblendet. Vage Angaben wie „Fleisch und tierische Nebenerzeugnisse“, „Getreide“ oder „Geflügel“ könnten es enthalten, daher werden bei der Standardeinstellung auch diese Futter ausgeblendet. Fette und Öle von diesem Tier, etwa Hühnerfett, zählen ebenfalls, da sie Spuren von Protein enthalten können.", "Die häufigsten Futtermittelallergene sind bei Hunden Rind, Milchprodukte, Huhn und Weizen, bei Katzen Rind, Fisch und Huhn (Mueller et al., 2016). Eine Futtermittelallergie kann nur mit einer Eliminationsdiät gemeinsam mit Ihrem Tierarzt diagnostiziert werden."]
+      },
+      {
+        "h": "Daten, Unabhängigkeit und Fehler",
+        "p": ["Produktdaten stammen aus öffentlichen Produktinformationen und von Herstellern, die ihre Produkte einreichen. Wir prüfen Einreichungen immer, bevor sie veröffentlicht werden, und dieselbe Formel gilt für jedes Futter – keine Marke kann ihre Bewertung beeinflussen. Wir erhalten eine Provision für Bestellungen über unsere bol.com-Links; das wird im [Affiliate-Hinweis](/{lang}/affiliate) erklärt.", "Fehler entdeckt? Nutzen Sie den Link „Korrektur melden“ auf der Produktseite. Wir beheben Fehler schnell."]
+      }
+    ],
+    "refsTitle": "Wissenschaftliche Quellen",
+    "refs": [
+      "FEDIAF (2021). *Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs*, Tabellen III-3, III-4 und Anhang 7.2 (Energiebedarf und ME-Gleichungen). [europeanpetfood.org](https://europeanpetfood.org/self-regulation/nutritional-guidelines/)",
+      "National Research Council (2006). *Nutrient Requirements of Dogs and Cats*. National Academies Press.",
+      "AAFCO. *Dog and Cat Food Nutrient Profiles*. Association of American Feed Control Officials.",
+      "WSAVA Global Nutrition Committee. *Selecting the best food for your pet*. [wsava.org](https://wsava.org/global-guidelines/global-nutrition-guidelines/)",
+      "Hewson-Hughes AK et al. (2011). Geometric analysis of macronutrient selection in the adult domestic cat, *Felis catus*. *J Exp Biol* 214:1039–1051. [PubMed](https://pubmed.ncbi.nlm.nih.gov/21346132/)",
+      "Buckley CMF et al. (2011). Effect of dietary water intake on urinary output, specific gravity and relative supersaturation for calcium oxalate and struvite in the cat. *Br J Nutr* 106:S128–S130. [Cambridge Core](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S0007114511001875)",
+      "Mueller RS, Olivry T, Prélaud P (2016). Critically appraised topic on adverse food reactions of companion animals (2): common food allergen sources in dogs and cats. *BMC Vet Res* 12:9. [PubMed](https://pubmed.ncbi.nlm.nih.gov/26753610/)",
+      "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
+    ],
+    "versionTitle": "Version",
+    "version": "Bewertungsmethode Version 1.0 (September 2026). Wenn wir die Methode verbessern, werden alle Bewertungen neu berechnet und diese Seite aktualisiert.",
+    "feedback": "Haben Sie Feedback zur Methode? Sagen Sie es uns."
+  },
+  "suggest": {
+    "metaTitle": "Futter vorschlagen",
+    "metaDescription": "Sie finden das Futter Ihres Tieres nicht? Senden Sie uns die Daten, wir fügen es nach Prüfung hinzu.",
+    "title": "Futter vorschlagen",
+    "intro": "Sie finden das Futter Ihres Tieres nicht, oder stimmt etwas nicht? Senden Sie uns die Angaben von der Verpackung. Wir prüfen jeden Vorschlag, bevor er auf der Seite erscheint."
+  },
+  "brands": {
+    "metaTitle": "Für Tierfutter-Hersteller – Futter hinzufügen",
+    "metaDescription": "Tierfutter-Hersteller können ihre Produkte kostenlos einreichen. Jede Einreichung wird geprüft und mit derselben unabhängigen Methode bewertet.",
+    "title": "Ihr Tierfutter hinzufügen",
+    "intro": "Machen Sie es Tierhaltern leicht, Ihr Futter zu finden. Reichen Sie Ihre Produkte mit vollständiger Zutatenliste und Analyse ein. Wir prüfen alles und bewerten jedes Futter nach exakt derselben Methode.",
+    "howTitle": "So funktioniert es",
+    "steps": [
+      "Füllen Sie das Formular mit Ihren Firmendaten und den Etikettenangaben jedes Produkts aus.",
+      "Wir prüfen die Angaben anhand der Verpackung und melden uns, wenn etwas unklar ist.",
+      "Nach der Freigabe erscheint Ihr Futter mit seiner unabhängigen Bewertung und einem Link zur Bestellung."
+    ],
+    "promiseTitle": "Unser Versprechen",
+    "promises": [
+      "**Kostenlos** – keine Gebühr für die Aufnahme.",
+      "**Unabhängig** – die Bewertung wird für jedes Futter mit derselben Formel berechnet. Marken können keine bessere Bewertung kaufen.",
+      "**Transparent** – die Bewertung wird auf der Produktseite und auf der [Methodenseite](/{lang}/how-we-score) erklärt.",
+      "**Erst geprüft** – ohne unsere Prüfung wird nichts veröffentlicht."
+    ],
+    "companyTitle": "Ihr Unternehmen",
+    "companyName": "Firmen- / Markenname",
+    "website": "Website",
+    "contact": "Ansprechpartner",
+    "role": "Funktion",
+    "phone": "Telefon",
+    "productN": "Produkt {n}",
+    "addProduct": "Weiteres Produkt hinzufügen",
+    "removeProduct": "Dieses Produkt entfernen",
+    "message": "Gibt es noch etwas, das wir wissen sollten?",
+    "messageHint": "Zum Beispiel: Zertifizierungen, Fütterungsstudien, wo Ihr Futter verkauft wird.",
+    "authorised": "Ich bestätige, dass ich berechtigt bin, diese Informationen im Namen des Unternehmens einzureichen, und dass sie mit der Verpackung übereinstimmen.",
+    "submit": "Zur Prüfung einreichen"
+  },
+  "forms": {
+    "productName": "Produktname",
+    "productNamePh": "z. B. Adult Lachs & Reis",
+    "brand": "Marke",
+    "species": "Tier",
+    "ean": "Barcode (EAN)",
+    "eanHint": "Die Nummer unter dem Barcode, 8 oder 13 Ziffern.",
+    "ingredients": "Zutaten / Zusammensetzung",
+    "ingredientsHint": "Übernehmen Sie die Zusammensetzung exakt von der Verpackung, einschließlich Prozentangaben.",
+    "analysis": "Analytische Bestandteile",
+    "analysisHint": "Zum Beispiel: Rohprotein 30 %, Rohfett 15 %, Rohasche 7 %, Rohfaser 3 %, Feuchtigkeit 9 %.",
+    "pack": "Packungsgröße",
+    "url": "Link (optional)",
+    "urlHint": "Eine Seite, auf der wir das Produkt sehen können.",
+    "email": "E-Mail-Adresse",
+    "emailNotify": "Ihre E-Mail (optional)",
+    "emailOptional": "Ihre E-Mail (optional)",
+    "emailPrivacy": "Wird nur verwendet, um Ihnen zu dieser Nachricht zu antworten.",
+    "consent": "Ich bin einverstanden, dass Scanabowl meine E-Mail-Adresse und Nachricht zur Bearbeitung dieser Anfrage speichert, wie in der Datenschutzerklärung beschrieben.",
+    "sendSuggestion": "Vorschlag senden",
+    "sendReport": "Korrektur senden",
+    "sending": "Wird gesendet…",
+    "reportAbout": "Korrektur für:",
+    "reportMessage": "Was stimmt nicht?",
+    "reportHint": "Zum Beispiel: Die Zutatenliste auf meiner Verpackung ist anders. Bitte schreiben Sie uns, was dort steht.",
+    "reviewNote": "Wir prüfen jede Nachricht manuell. Nichts, was Sie senden, wird automatisch veröffentlicht.",
+    "thanksTitle": "Vielen Dank!",
+    "thanksText": "Wir haben Ihre Nachricht erhalten und prüfen sie so bald wie möglich.",
+    "errorTitle": "Wir konnten Ihre Nachricht nicht senden",
+    "errorText": "Bei uns ist etwas schiefgelaufen. Sie erreichen uns weiterhin per E-Mail:",
+    "errorMail": "E-Mail an {email}",
+    "err": { "required": "Dieses Feld ist erforderlich.", "invalid": "Dieser Wert ist ungültig." }
+  },
+  "contact": {
+    "metaTitle": "Kontakt",
+    "metaDescription": "Fragen, Feedback oder ein Futter, das wir hinzufügen sollten? Nehmen Sie Kontakt mit Scanabowl auf.",
+    "title": "Kontakt",
+    "intro": "Fragen, Ideen oder Feedback? Senden Sie uns eine Nachricht oder schreiben Sie an",
+    "message": "Ihre Nachricht",
+    "send": "Nachricht senden"
+  },
+  "about": {
+    "metaTitle": "Über Scanabowl",
+    "metaDescription": "Scanabowl macht Tierfutteretiketten mit unabhängigen, wissenschaftlich fundierten Bewertungen verständlich.",
+    "title": "Über Scanabowl",
+    "intro": "Scanabowl hilft Tierhaltern zu verstehen, was wirklich im Napf ihres Hundes oder ihrer Katze steckt.",
+    "sections": [
+      {
+        "h": "Warum es uns gibt",
+        "p": ["Tierfutterverpackungen sind voller Versprechen – „natürlich“, „Premium“, „vollständig“ –, aber die eigentlichen Informationen stehen im Kleingedruckten. Scanabowl übersetzt Zutatenliste und Nährstoffanalyse in eine klare Bewertung, mit einer Erklärung für jeden Punkt."]
+      },
+      {
+        "h": "Was uns unterscheidet",
+        "ul": [
+          "**Wissenschaftlich fundiert** – unsere Bewertung folgt veröffentlichten FEDIAF- und NRC-Richtlinien sowie begutachteter Forschung, und wir nennen unsere Quellen.",
+          "**Hunde und Katzen getrennt bewertet** – ihre Ernährungsbedürfnisse unterscheiden sich stark.",
+          "**Persönlich** – Allergien, Alter und Gewicht Ihres Tieres bestimmen, was Sie sehen.",
+          "**Unabhängig** – Marken können keine bessere Bewertung kaufen."
+        ]
+      },
+      {
+        "h": "Wie wir finanziert werden",
+        "p": ["Scanabowl ist kostenlos nutzbar. Wenn Sie ein Futter über unsere bol.com-Links bestellen, erhalten wir möglicherweise eine kleine Provision, ohne Mehrkosten für Sie. Diese Einnahmen investieren wir in die Website. Mehr dazu im [Affiliate-Hinweis](/{lang}/affiliate)."]
+      },
+      {
+        "h": "Machen Sie mit",
+        "p": ["Fehlt das Futter Ihres Tieres? [Schlagen Sie es vor](/{lang}/suggest). Stellen Sie Tierfutter her? [Fügen Sie Ihre Produkte hinzu](/{lang}/brands). Einen Fehler gefunden? Sagen Sie es uns über die [Kontaktseite](/{lang}/contact)."]
+      }
+    ]
+  },
+  "legal": {
+    "updated": "Zuletzt aktualisiert: {date}",
+    "companyTitle": "Wer wir sind",
+    "email": "E-Mail"
+  },
+  "privacy": {
+    "metaTitle": "Datenschutzerklärung",
+    "metaDescription": "Wie Scanabowl mit Ihren Daten umgeht: Das Profil Ihres Tieres bleibt auf Ihrem Gerät, und wir verwenden Ihre E-Mail-Adresse nur, um Ihnen zu antworten.",
+    "title": "Datenschutzerklärung",
+    "intro": "Wir erheben so wenig Daten wie möglich. Sie können Scanabowl ohne Konto und ohne Angabe personenbezogener Daten nutzen.",
+    "sections": [
+      {
+        "h": "Das Profil Ihres Tieres",
+        "p": ["Das Profil Ihres Tieres (Name, Alter, Gewicht, Allergien) wird nur in Ihrem Browser (Local Storage) auf Ihrem eigenen Gerät gespeichert. Es wird nie an unsere Server gesendet, wir können es also nicht sehen. Wenn Sie Ihre Browserdaten löschen, ist es weg."]
+      },
+      {
+        "h": "Formulare",
+        "p": ["Wenn Sie einen Vorschlag, eine Korrektur, eine Kontaktnachricht oder eine Herstellereinreichung senden, erhalten wir die von Ihnen eingegebenen Angaben (einschließlich Ihrer E-Mail-Adresse, falls angegeben). Wir verwenden sie nur, um Ihre Einreichung zu prüfen und Ihnen zu antworten. Von Ihnen eingereichte Produktinformationen können nach unserer Prüfung auf der Seite veröffentlicht werden; personenbezogene Daten nicht."]
+      },
+      {
+        "h": "Cookies und Tracking",
+        "p": ["Wir verwenden keine Werbe- oder Tracking-Cookies. Wir speichern ein kleines funktionales Cookie (Ihre gewählte Sprache, ein Jahr lang) und Local-Storage-Einträge für Ihr Tierprofil. Da diese rein funktional sind, ist kein Cookie-Banner nötig. Sollten wir jemals Analysen hinzufügen, verwenden wir ein datenschutzfreundliches Tool und aktualisieren diese Seite."]
+      },
+      {
+        "h": "Dienstleister",
+        "ul": [
+          "**Vercel** hostet die Website und verarbeitet technische Daten wie IP-Adressen in Server-Logs.",
+          "**Resend** stellt die von unseren Formularen erzeugten E-Mails zu.",
+          "**bol.com** – wenn Sie auf einen Affiliate-Link klicken, können bol.com und seine Partnerplattform eigene Cookies gemäß ihrer eigenen Datenschutzerklärung setzen."
+        ]
+      },
+      {
+        "h": "Speicherdauer",
+        "p": ["Wir bewahren Nachrichten nur so lange auf, wie es zur Bearbeitung nötig ist, und nicht länger als zwei Jahre, sofern das Gesetz nichts anderes verlangt."]
+      },
+      {
+        "h": "Ihre Rechte",
+        "p": ["Nach der DSGVO können Sie Auskunft über Ihre personenbezogenen Daten, deren Berichtigung oder Löschung verlangen und der Verwendung widersprechen. Schreiben Sie uns an die unten stehende Adresse. Sie können sich auch bei der niederländischen Datenschutzbehörde (Autoriteit Persoonsgegevens) beschweren."]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Nutzungsbedingungen",
+    "metaDescription": "Die Bedingungen für die Nutzung von Scanabowl.",
+    "title": "Nutzungsbedingungen",
+    "intro": "Mit der Nutzung von Scanabowl erklären Sie sich mit diesen Bedingungen einverstanden.",
+    "sections": [
+      {
+        "h": "Information, keine Beratung",
+        "p": ["Scanabowl liefert allgemeine Informationen über Tierfutter. Die Bewertungen und Hinweise sind keine tierärztliche Beratung und ersetzen keinen Tierarztbesuch. Fragen Sie immer einen Tierarzt, bevor Sie die Ernährung eines Tieres mit einer Erkrankung ändern."]
+      },
+      {
+        "h": "Richtigkeit",
+        "p": ["Wir bemühen uns, die Daten korrekt zu halten, aber Rezepturen ändern sich und Etiketteninformationen können unvollständig oder fehlerhaft sein. Die Bewertung spiegelt die uns vorliegenden Informationen wider. Prüfen Sie vor dem Kauf oder Füttern immer die Verpackung. Wir garantieren nicht, dass Informationen vollständig, aktuell oder fehlerfrei sind."]
+      },
+      {
+        "h": "Links zu Dritten und Shops",
+        "p": ["Links zu bol.com und anderen Seiten dienen der Bequemlichkeit. Preise, Bestand und Lieferung bestimmt der Shop. Jeder Kauf ist ein Vertrag zwischen Ihnen und dem Shop; Scanabowl ist daran nicht beteiligt."]
+      },
+      {
+        "h": "Eingereichte Informationen",
+        "p": ["Wenn Sie als Unternehmen Produktinformationen einreichen, bestätigen Sie, dass Sie dazu berechtigt sind und dass sie zutreffen. Sie räumen Scanabowl das Recht ein, diese Informationen zu veröffentlichen und zu bewerten. Eine Einreichung garantiert weder Veröffentlichung noch eine bestimmte Bewertung."]
+      },
+      {
+        "h": "Geistiges Eigentum",
+        "p": ["Design, Texte, Bewertungsmethode und Software von Scanabowl sind geschützt. Sie dürfen Links und kurze Zitate mit Quellenangabe teilen. Das massenhafte Kopieren der Datenbank ist ohne Genehmigung nicht gestattet."]
+      },
+      {
+        "h": "Haftung und anwendbares Recht",
+        "p": ["Soweit gesetzlich zulässig, haftet Scanabowl nicht für Schäden, die aus der Nutzung dieser Seite oder dem Vertrauen auf ihren Inhalt entstehen. Es gilt niederländisches Recht, Streitigkeiten werden vom zuständigen niederländischen Gericht entschieden."]
+      }
+    ]
+  },
+  "affiliate": {
+    "metaTitle": "Affiliate-Hinweis",
+    "metaDescription": "Wie Scanabowl mit bol.com-Affiliate-Links Geld verdient – und warum das die Bewertungen nie beeinflusst.",
+    "title": "Affiliate-Hinweis",
+    "intro": "Scanabowl ist kostenlos nutzbar. Diese Seite erklärt, wie wir Geld verdienen.",
+    "sections": [
+      {
+        "h": "bol.com-Partnerprogramm",
+        "p": ["Scanabowl nimmt am bol.com-Partnerprogramm teil. Wenn Sie auf eine Schaltfläche „Bei bol.com ansehen“ klicken und etwas kaufen, erhalten wir möglicherweise eine Provision von bol.com. Für Sie entstehen keine Mehrkosten."]
+      },
+      {
+        "h": "Bewertungen sind nie käuflich",
+        "ul": [
+          "Jedes Futter wird mit derselben Formel bewertet, ganz gleich, ob es bei bol.com verkauft wird oder eine Provision einbringt.",
+          "Marken können keinen Platz, kein Ranking und keine bessere Bewertung kaufen.",
+          "Die Listen mit den höchsten Bewertungen werden automatisch erzeugt."
+        ]
+      },
+      {
+        "h": "So erkennen Sie Affiliate-Links",
+        "p": ["Links zu bol.com sind als gesponserte Links gekennzeichnet und mit einem kurzen Hinweis versehen. Preise und Verfügbarkeit zeigt bol.com an; maßgeblich ist der Preis zum Zeitpunkt Ihrer Bestellung."]
+      },
+      {
+        "h": "Was wir mit den Einnahmen tun",
+        "p": ["Die Einnahmen investieren wir in Scanabowl: Hosting, die Aktualität der Datenbank und neue Funktionen."]
+      }
+    ]
+  },
+  "errors": {
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundText": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "home": "Zurück zur Startseite"
+  },
+  "footer": {
+    "blurb": "Unabhängige, wissenschaftlich fundierte Bewertungen für Hunde- und Katzenfutter – persönlich für Ihr Tier.",
+    "explore": "Entdecken",
+    "contribute": "Mitmachen",
+    "legal": "Rechtliches",
+    "vat": "USt-IdNr.",
+    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet. Links zu bol.com sind Affiliate-Links."
+  }
+}

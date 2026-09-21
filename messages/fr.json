@@ -1,0 +1,765 @@
+{
+  "meta": {
+    "title": "Scanabowl – La nourriture de votre animal est-elle vraiment bonne ? Notes indépendantes pour croquettes et pâtées",
+    "description": "Recherchez n’importe quel aliment pour chien ou chat et obtenez une note indépendante basée sur ses ingrédients et ses valeurs nutritionnelles. Personnalisé pour votre animal, allergènes exclus."
+  },
+  "nav": {
+    "main": "Navigation principale",
+    "home": "Accueil",
+    "foods": "Trouver un aliment",
+    "myPet": "Mon animal",
+    "blog": "Blog",
+    "howWeScore": "Notre méthode",
+    "about": "À propos",
+    "suggest": "Proposer un aliment",
+    "brands": "Pour les marques",
+    "contact": "Contact",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d’utilisation",
+    "affiliate": "Mention d’affiliation",
+    "addPet": "Ajouter votre animal",
+    "petNamed": "Profil de {name}",
+    "language": "Changer de langue",
+    "menu": "Ouvrir le menu",
+    "close": "Fermer le menu",
+    "skip": "Aller au contenu"
+  },
+  "common": {
+    "dog": "Chien",
+    "cat": "Chat",
+    "dogs": "Chiens",
+    "cats": "Chats",
+    "all": "Tous",
+    "yes": "Oui",
+    "no": "Non",
+    "add": "Ajouter",
+    "reset": "Réinitialiser les filtres",
+    "close": "Fermer",
+    "loading": "Chargement…",
+    "day": "jour",
+    "grainFree": "Sans céréales",
+    "showMore": "Afficher {count} de plus",
+    "breadcrumb": "Fil d’Ariane"
+  },
+  "type": { "dry": "Croquettes", "wet": "Pâtée / aliment humide", "frozen": "Surgelé / cru", "semi": "Semi-humide", "other": "Autre" },
+  "stage": { "youngDog": "Chiot / junior", "youngCat": "Chaton / junior", "adult": "Adulte", "senior": "Senior", "all": "Tous les âges" },
+  "grade": {
+    "A": "Excellent",
+    "B": "Bon",
+    "C": "Moyen",
+    "D": "Inférieur à la moyenne",
+    "E": "Faible",
+    "desc": {
+      "A": "Une recette à base de viande, avec un profil nutritionnel solide et une liste d’ingrédients propre.",
+      "B": "Une bonne recette, avec seulement de petits points faibles.",
+      "C": "Un aliment quotidien acceptable, mais il existe clairement mieux.",
+      "D": "Plusieurs points faibles dans la recette ou les nutriments – cherchez des alternatives.",
+      "E": "Faible sur les ingrédients et/ou les nutriments, ou contient quelque chose qu’un animal ne devrait pas manger."
+    }
+  },
+  "confidence": {
+    "high": "Données d’étiquette complètes – fiabilité élevée",
+    "medium": "Certaines valeurs de l’étiquette ont été estimées – fiabilité moyenne",
+    "low": "Données d’étiquette limitées – considérez cette note comme indicative"
+  },
+  "score": {
+    "aria": "Note {score} sur 100, évaluée comme {grade}",
+    "none": "Pas de note",
+    "notScoredShort": "Non noté",
+    "pillars": { "nutrition": "Profil nutritionnel", "ingredients": "Qualité des ingrédients", "formulation": "Formule propre" }
+  },
+  "allergen": {
+    "beef": "Bœuf",
+    "chicken": "Poulet",
+    "dairy": "Produits laitiers",
+    "fish": "Poisson et fruits de mer",
+    "wheat": "Blé / gluten",
+    "egg": "Œuf",
+    "lamb": "Agneau",
+    "pork": "Porc",
+    "turkey": "Dinde",
+    "duck": "Canard / oie",
+    "rabbit": "Lapin",
+    "horse": "Cheval",
+    "game": "Gibier / cerf",
+    "insect": "Insectes",
+    "corn": "Maïs",
+    "rice": "Riz",
+    "barley": "Orge",
+    "oats": "Avoine",
+    "soy": "Soja",
+    "legume": "Pois et légumineuses",
+    "potato": "Pomme de terre",
+    "yeast": "Levure"
+  },
+  "search": {
+    "label": "Rechercher un aliment par nom, marque ou code-barres",
+    "placeholder": "Produit, marque, code-barres…",
+    "button": "Rechercher",
+    "scan": "Scanner un code-barres",
+    "notFound": "Nous ne connaissons pas encore le code-barres {ean}.",
+    "suggestIt": "Parlez-nous de cet aliment →"
+  },
+  "scan": {
+    "title": "Scanner un code-barres",
+    "starting": "Démarrage de la caméra…",
+    "hint": "Placez le code-barres dans le cadre. L’image reste sur votre téléphone.",
+    "denied": "L’accès à la caméra a été bloqué. Autorisez la caméra dans les paramètres du navigateur, ou saisissez le numéro sous le code-barres.",
+    "unsupported": "Le scan n’est pas disponible sur cet appareil ou ce navigateur. Saisissez plutôt le numéro sous le code-barres."
+  },
+  "home": {
+    "badge": "Indépendant · Scientifique · Gratuit",
+    "title": "La nourriture de votre animal est-elle vraiment aussi bonne que l’emballage le prétend ?",
+    "subtitle": "Recherchez n’importe quel aliment pour chien ou chat et obtenez une note indépendante de 0 à 100 – calculée à partir des ingrédients et des valeurs nutritionnelles de l’étiquette, selon les recommandations de nutrition vétérinaire.",
+    "searchHint": "Astuce : scannez le code-barres en magasin ou saisissez le numéro EAN.",
+    "browseDogs": "Aliments pour chiens",
+    "browseCats": "Aliments pour chats",
+    "ctaPet": "Personnaliser pour mon animal",
+    "statFoods": "aliments notés",
+    "statBrands": "marques",
+    "howTitle": "Comment fonctionne Scanabowl",
+    "step": "Étape {n}",
+    "step1Title": "Trouvez votre aliment",
+    "step1Text": "Recherchez par nom ou marque, ou scannez le code-barres avec votre téléphone. Chiens et chats sont toujours évalués séparément.",
+    "step2Title": "Voyez la note – et pourquoi",
+    "step2Text": "Chaque aliment reçoit une note de 0 à 100 avec une explication en langage clair : ce qui est bien, ce qui ne l’est pas, et comment il se situe par rapport aux recommandations nutritionnelles FEDIAF.",
+    "step3Title": "Personnalisez",
+    "step3Text": "Indiquez l’âge, le poids et les allergies de votre animal. Les aliments contenant des ingrédients auxquels il réagit disparaissent, et vous voyez la ration quotidienne pour votre animal.",
+    "topTitle": "Les aliments les mieux notés en ce moment",
+    "topText": "Classés automatiquement par note – aucune marque ne peut acheter une place ici. Les notes décrivent l’étiquette, pas une promesse pour chaque animal.",
+    "howScore": "Comment fonctionne la note",
+    "topDogs": "Meilleurs aliments pour chiens",
+    "topCats": "Meilleurs aliments pour chats",
+    "allDogs": "Tous les aliments pour chiens",
+    "allCats": "Tous les aliments pour chats",
+    "persTitle": "Un guide alimentaire qui connaît votre animal",
+    "persText": "Parlez-nous une fois de votre chien ou chat. Scanabowl n’affiche ensuite que les aliments adaptés – et vous avertit quand ce n’est pas le cas.",
+    "persButton": "Créer un profil d’animal",
+    "persA": "Allergies et intolérances exclues de chaque liste",
+    "persB": "Âge, taille et objectif de poids pris en compte",
+    "persC": "Calories quotidiennes et grammes par jour, calculés avec les formules FEDIAF",
+    "persD": "Stocké uniquement sur votre appareil – aucun compte nécessaire",
+    "blogTitle": "Du blog",
+    "allPosts": "Tous les articles",
+    "faqTitle": "Questions fréquentes",
+    "brandTitle": "Vous fabriquez des aliments pour animaux ?",
+    "brandText": "Soumettez vos produits gratuitement. Nous vérifions chaque soumission et la notons avec exactement la même méthode que tout autre aliment.",
+    "brandButton": "Ajouter votre aliment",
+    "faq": [
+      {
+        "q": "La note est-elle un avis vétérinaire ?",
+        "a": "Non. La note évalue ce qui est imprimé sur l’emballage à l’aide de recommandations nutritionnelles publiées. Elle ne remplace pas l’avis de votre vétérinaire – surtout si votre animal a un problème de santé."
+      },
+      {
+        "q": "Comment la note est-elle calculée ?",
+        "a": "Sur 100 points : 35 pour le profil nutritionnel (protéines, matières grasses, glucides, fibres, minéraux comparés à la FEDIAF), 50 pour la qualité des ingrédients (origine des protéines, clarté de la déclaration) et 15 pour une formule propre (pas de sucre, de colorants ni de conservateurs de synthèse). Tout est expliqué sur la [page méthodologie](/{lang}/how-we-score)."
+      },
+      {
+        "q": "Les marques paient-elles pour une meilleure note ?",
+        "a": "Non. La note est calculée avec la même formule pour chaque aliment. Nous touchons une petite commission lorsque vous commandez via nos liens bol.com, sans frais supplémentaires pour vous – voir la [mention d’affiliation](/{lang}/affiliate)."
+      },
+      {
+        "q": "Pourquoi un aliment vétérinaire n’est-il pas noté ?",
+        "a": "Les régimes thérapeutiques sont conçus pour des maladies et doivent être utilisés sous contrôle vétérinaire. Leur profil nutritionnel diffère volontairement de celui des aliments courants ; une note générale serait donc trompeuse."
+      },
+      {
+        "q": "Les aliments sans céréales sont-ils meilleurs ?",
+        "a": "Pas automatiquement. Les céréales ne sont pas nocives pour la plupart des chiens et chats, et les aliments sans céréales les remplacent souvent par des pois ou des pommes de terre. Nous ne donnons pas de points pour « sans céréales » – mais vous pouvez filtrer dessus, par exemple en cas d’allergie au blé."
+      },
+      {
+        "q": "Comment fonctionne le filtre d’allergies ?",
+        "a": "Choisissez les allergènes de votre animal dans son profil. Les aliments qui les mentionnent sont masqués. Par défaut, nous masquons aussi les aliments à la formulation vague, comme « viandes et sous-produits animaux », car ils peuvent cacher l’ingrédient auquel votre animal réagit."
+      }
+    ]
+  },
+  "finder": {
+    "metaTitle": "Trouver des aliments pour chiens et chats – notes indépendantes",
+    "metaDescription": "Parcourez et comparez les aliments pour chiens et chats par note, type et âge. Filtrez par marque et allergie, triés par une note indépendante de 0 à 100.",
+    "title": "Trouvez le bon aliment",
+    "subtitle": "Comparez {count} aliments notés pour chiens et chats. Chiens et chats sont évalués séparément.",
+    "species": "Animal",
+    "type": "Type d’aliment",
+    "stage": "Âge",
+    "brand": "Marque",
+    "minScore": "Note minimale : {score}",
+    "grainFree": "Sans céréales uniquement",
+    "includeUnscored": "Afficher aussi les aliments sans note (aliments vétérinaires, friandises, données incomplètes)",
+    "filters": "Filtres",
+    "count": "{count} aliments",
+    "sort": "Trier par",
+    "sortMatch": "Meilleure adéquation pour {name}",
+    "sortScore": "Meilleure note",
+    "sortName": "Nom (A–Z)",
+    "sortKcal": "Moins de calories",
+    "forPet": "Pour {name} : {score}",
+    "petBanner": "Aliments pour {name}.",
+    "hiddenAllergy": "{count} aliments masqués à cause des allergies ({allergens}).",
+    "petIgnored": "Tous les aliments sont affichés – le profil de {name} est désactivé.",
+    "editProfile": "Modifier le profil",
+    "ignorePet": "Tout afficher",
+    "usePet": "Utiliser le profil de {name}",
+    "noPet": "Astuce : avec un profil d’animal, les aliments que votre animal ne peut pas manger sont masqués automatiquement.",
+    "createProfile": "Créer un profil",
+    "emptyTitle": "Aucun aliment ne correspond à ces filtres",
+    "emptyText": "Essayez de retirer un filtre ou de chercher autre chose.",
+    "suggestMissing": "Vous ne trouvez pas votre aliment ? Dites-le-nous →",
+    "error": "La liste des aliments n’a pas pu être chargée. Vérifiez votre connexion et rechargez la page."
+  },
+  "product": {
+    "metaTitle": "{name} – note {score}/100",
+    "metaDescription": "{name} de {brand} : note indépendante Scanabowl {score}/100 pour aliment {species}, avec analyse des ingrédients, valeurs nutritionnelles et contrôle des allergies.",
+    "metaDescriptionNoScore": "{name} de {brand} : ingrédients et valeurs nutritionnelles d’un aliment {species}.",
+    "jsonLdDescription": "{name} de {brand} – aliment pour animaux analysé par Scanabowl.",
+    "scoreTitle": "Note Scanabowl",
+    "howCalculated": "Comment est-elle calculée ?",
+    "noScoreTitle": "Pas de note pour cet aliment",
+    "notScored": {
+      "veterinary": "Il s’agit d’un aliment vétérinaire ou diététique. Ces aliments sont destinés à des maladies précises et ne doivent être donnés que sur avis de votre vétérinaire ; nous ne leur attribuons donc pas de note générale.",
+      "treat": "Il s’agit d’une friandise et non d’un aliment complet ; il n’est donc pas noté.",
+      "supplement": "Il s’agit d’un complément et non d’un aliment complet ; il n’est donc pas noté.",
+      "complementary": "Il s’agit d’un aliment complémentaire – non destiné à être la seule nourriture de votre animal – et il n’est donc pas noté.",
+      "no_ingredients": "Nous n’avons pas encore la liste d’ingrédients de cet aliment, nous ne pouvons donc pas calculer de note. Vous pouvez aider en nous l’envoyant."
+    },
+    "hazardTitle": "Contient un ingrédient nocif pour cet animal",
+    "goodTitle": "Ce qui est bien",
+    "badTitle": "Ce qui pourrait être mieux",
+    "nothingGood": "Aucun point fort particulier n’a été trouvé.",
+    "nothingBad": "Aucun point faible n’a été trouvé.",
+    "ingredientsTitle": "Ingrédients",
+    "estimateNote": "Estimé d’après l’ordre sur l’étiquette et les pourcentages déclarés. La viande fraîche contient environ 70 % d’eau ; nous comparons donc ingrédients secs et frais sur la base de la matière sèche.",
+    "group": { "animal": "Animal", "fat": "Graisses et huiles", "plant": "Végétal", "other": "Additifs et autres" },
+    "originalText": "Afficher le texte des ingrédients tel qu’imprimé",
+    "originalLanguageNote": "Affiché dans la langue de l’emballage.",
+    "noIngredients": "La liste d’ingrédients de cet aliment n’est pas encore disponible.",
+    "analysisTitle": "Valeurs nutritionnelles",
+    "noAnalysis": "Les constituants analytiques de cet aliment ne sont pas encore disponibles ; la partie nutritionnelle de la note est donc une estimation.",
+    "alternativesTitle": "Alternatives mieux notées",
+    "alternativesText": "Aliments similaires du même type et du même âge avec une meilleure note.",
+    "alternativesPet": "Aliments similaires mieux notés et sans danger pour {name}.",
+    "dataTitle": "À propos de ces données",
+    "dataPack": "Ingrédients et analyse tels qu’imprimés sur l’emballage, vérifiés par Scanabowl.",
+    "dataBrand": "Fournis par le fabricant et vérifiés par Scanabowl. Il est noté avec exactement la même méthode que tout autre aliment.",
+    "reportError": "Une erreur ? Signalez une correction",
+    "disclaimer": "La note décrit l’étiquette et n’est pas un avis vétérinaire. Introduisez toujours un nouvel aliment progressivement et demandez conseil à votre vétérinaire si votre animal a un problème de santé."
+  },
+  "analysis": {
+    "nutrient": "Nutriment",
+    "asFed": "Tel que distribué",
+    "dryMatter": "Matière sèche",
+    "protein": "Protéines brutes",
+    "fat": "Matières grasses brutes",
+    "fibre": "Cellulose brute",
+    "ash": "Cendres brutes",
+    "moisture": "Humidité",
+    "carbs": "Glucides (estimés)",
+    "calcium": "Calcium",
+    "phosphorus": "Phosphore",
+    "energy": "Énergie",
+    "kcal": { "label": "d’après l’étiquette", "calculated": "calculée avec l’équation FEDIAF/NRC" },
+    "estimated": "estimé",
+    "estimatedNote": "Non indiqué sur l’étiquette ou calculé – une valeur typique pour ce type d’aliment a été utilisée.",
+    "fediafTitle": "Comparé aux minimums FEDIAF",
+    "proteinPer1000": "Protéines : {value} g pour 1 000 kcal (minimum {min} g)",
+    "fatPer1000": "Matières grasses : {value} g pour 1 000 kcal (minimum {min} g)",
+    "energyShare": "Part de l’énergie : {p} % protéines · {f} % matières grasses · {c} % glucides",
+    "fediafNote": "FEDIAF Nutritional Guidelines 2021. Un aliment qui atteint le minimum n’est pas automatiquement « complet » – seuls la déclaration du fabricant et les essais d’alimentation peuvent le confirmer."
+  },
+  "reasons": {
+    "animal_protein_high": "On estime que {pct} % des protéines proviennent d’ingrédients animaux.",
+    "meat_rich": "Les ingrédients animaux représentent environ {pct} % de la matière sèche – une vraie recette à base de viande.",
+    "first_named_animal": "La liste commence par un ingrédient animal nommé : {name}.",
+    "named_sources": "Les ingrédients animaux sont nommés par espèce plutôt que sous la mention vague « sous-produits animaux ».",
+    "protein_level_good": "Les protéines représentent {pct} % de la matière sèche, largement au-dessus du minimum FEDIAF.",
+    "low_carb": "Seulement environ {pct} % de l’énergie provient des glucides – proche de ce pour quoi le corps d’un chat est conçu.",
+    "high_moisture": "{pct} % d’humidité favorisent l’hydratation et la santé urinaire.",
+    "omega3": "Contient de l’huile de poisson ou d’algues comme source d’EPA/DHA (oméga-3).",
+    "prebiotic": "Contient des fibres prébiotiques (p. ex. chicorée, inuline, FOS/MOS) qui nourrissent les bactéries intestinales.",
+    "joint": "Contient des ingrédients pour les articulations (glucosamine / chondroïtine).",
+    "probiotic": "Contient des probiotiques.",
+    "clean_formulation": "Aucun sucre ajouté, colorant artificiel ni conservateur de synthèse trouvé.",
+    "analysis_missing": "Les constituants analytiques manquent ; la partie nutritionnelle de la note est donc une estimation prudente.",
+    "protein_low": "Les protéines ne représentent que {pct} % de la matière sèche – peu pour cet animal.",
+    "protein_below_min": "Apporte {g} g de protéines pour 1 000 kcal – sous le minimum FEDIAF de {min} g.",
+    "carbs_high": "On estime que {pct} % de l’énergie provient des glucides.",
+    "dry_food_cat": "Aliment sec ({pct} % d’humidité) : les chats boivent peu, un régime uniquement sec apporte donc moins d’hydratation que la pâtée.",
+    "fibre_high": "La cellulose brute est élevée ({pct} % de la matière sèche).",
+    "ash_high": "Les cendres (minéraux) sont élevées : {pct} % de la matière sèche.",
+    "fat_low": "Les matières grasses sont faibles ({pct} % de la matière sèche).",
+    "fat_high": "Teneur en matières grasses très élevée ({pct} % de la matière sèche) – riche en énergie, ce qui peut favoriser la prise de poids.",
+    "calcium_phosphorus": "Le rapport calcium:phosphore de {ratio}:1 sort de la plage recommandée de 1:1 à 2:1.",
+    "animal_protein_low": "Seulement environ {pct} % des protéines proviennent d’ingrédients animaux ; le reste vient des plantes.",
+    "meat_poor": "Les ingrédients animaux ne représentent qu’environ {pct} % de la matière sèche.",
+    "first_not_animal": "Le premier ingrédient n’est pas un ingrédient animal : {name}.",
+    "generic_animal": "Surtout des « viandes et sous-produits animaux » non précisés – on ne voit pas quels animaux ou quelles parties sont utilisés.",
+    "vague_plant": "Contient des ingrédients végétaux vagues comme « céréales » ou « sous-produits végétaux ».",
+    "sugar": "Contient du sucre ajouté ou des édulcorants (sucre, caramel, sirop) dont aucun animal n’a besoin.",
+    "colourant": "Contient des colorants artificiels, qui ne servent qu’à l’œil du propriétaire.",
+    "preservative": "Contient des conservateurs de synthèse (p. ex. BHA, BHT, éthoxyquine, sorbates ou nitrite).",
+    "plant_protein_isolates": "Environ {pct} % des protéines proviennent de concentrés de protéines végétales (gluten, protéine de pois ou de pomme de terre).",
+    "cereal_filler": "Les céréales représentent environ {pct} % de la recette – une charge bon marché pour un carnivore.",
+    "legume_heavy": "Les pois, légumineuses ou pommes de terre représentent environ {pct} % de la recette. La FDA américaine a étudié un lien possible entre les régimes sans céréales très riches en légumineuses et la cardiomyopathie dilatée (DCM) chez le chien ; aucune cause n’a été prouvée."
+  },
+  "flags": {
+    "onion": "Contient de l’oignon, qui endommage les globules rouges des chiens et des chats.",
+    "garlic": "Contient de l’ail, toxique pour les chats.",
+    "garlic_dog": "Contient de l’ail. Les chiens tolèrent de petites quantités, de plus grandes sont nocives.",
+    "xylitol": "Contient du xylitol, très toxique pour les chiens.",
+    "raisins": "Contient des raisins secs ou du raisin de Corinthe, toxiques pour les chiens (insuffisance rénale).",
+    "grapes": "Contient du raisin ou un ingrédient dérivé du raisin. Le raisin et les raisins secs sont toxiques pour les chiens ; l’innocuité des extraits de raisin dans l’alimentation n’est pas claire.",
+    "chocolate": "Contient du cacao ou du chocolat (théobromine), toxique pour les animaux de compagnie.",
+    "macadamia": "Contient des noix de macadamia, toxiques pour les chiens.",
+    "propylene_glycol": "Contient du propylène glycol, interdit dans l’alimentation pour chats car il endommage les globules rouges.",
+    "values_estimated": "Certaines valeurs (humidité, cendres ou cellulose) manquaient sur l’étiquette et ont été estimées."
+  },
+  "personal": {
+    "ctaTitle": "Cet aliment convient-il à votre animal ?",
+    "ctaText": "Créez un profil avec l’âge, le poids et les allergies de votre animal pour vérifier cet aliment, voir une note personnelle et savoir combien de grammes donner par jour.",
+    "ctaButton": "Créer un profil d’animal",
+    "wrongSpecies": "Il s’agit d’un aliment pour {food}, alors que {name} fait partie des {pet}.",
+    "switchPet": "Changer ou ajouter un animal",
+    "title": "Pour {name}",
+    "allergyBad": "Cet aliment ne convient pas à {name}.",
+    "allergyDefinite": "Il contient : {list}.",
+    "allergyPossible": "Une formulation vague sur l’étiquette (comme « viandes et sous-produits animaux ») pourrait aussi cacher : {list}.",
+    "allergyOk": "Aucun ingrédient auquel {name} réagit n’a été trouvé.",
+    "allergyChecked": "Vérifié pour : {list}.",
+    "noAllergies": "Aucune allergie n’est définie pour {name}. Vous pouvez les ajouter dans le profil de l’animal.",
+    "matchFor": "Adéquation pour {name}",
+    "sameAsBase": "Identique à la note de base",
+    "deltaUp": "+{delta} points pour {name}",
+    "deltaDown": "−{delta} points pour {name}",
+    "notes": {
+      "stage_match": "Conçu pour l’âge de {name}.",
+      "stage_all": "Convient à tous les âges, y compris la croissance.",
+      "stage_young_needed": "Non conçu pour les animaux en croissance – {name} a besoin d’un aliment chiot/chaton (ou tous âges).",
+      "stage_too_rich": "Un aliment de croissance est trop riche en énergie et en minéraux pour l’âge de {name}.",
+      "stage_senior_only": "Formulé pour les animaux seniors. Correct, mais inutile pour {name}.",
+      "weight_fat_high": "Beaucoup de matières grasses ({pct} % de l’énergie) – pas idéal pour maîtriser le poids de {name}.",
+      "weight_lean": "Recette maigre ({pct} % de l’énergie provenant des graisses), utile pour le contrôle du poids.",
+      "energy_dense": "Riche en énergie, utile pour reprendre du poids.",
+      "size_match": "Convient à la taille de {name}.",
+      "size_mismatch": "Conçu pour une autre taille de chien que {name}.",
+      "calcium_large_puppy": "Le calcium ({ca} % de la matière sèche) dépasse le maximum FEDIAF de 1,8 % pour les chiots de grande race en croissance.",
+      "urinary_wet": "La pâtée apporte de l’humidité – bon pour les voies urinaires de {name}.",
+      "urinary_dry": "Les croquettes apportent peu d’humidité, ce qui est moins idéal en cas de problèmes urinaires.",
+      "urinary_ash": "Taux de cendres élevé ({pct} % de la matière sèche) – la charge minérale compte pour la santé urinaire.",
+      "digestion_simple": "Peu de sources de protéines – plus doux pour un estomac sensible.",
+      "digestion_fat": "Beaucoup de matières grasses peuvent perturber un estomac sensible."
+    },
+    "portionTitle": "Combien {name} doit-il manger ?",
+    "portionText": "Environ {kcal} kcal par jour, soit environ {grams} g de cet aliment par jour.",
+    "costText": "Cela coûte environ {cost} € par jour.",
+    "energyBasis": {
+      "dog_adult": "Basé sur {factor} kcal par kg^0,75 (FEDIAF, chien adulte).",
+      "dog_puppy": "Basé sur l’équation de croissance FEDIAF pour les chiots ({factor} kcal par kg^0,75).",
+      "cat_adult": "Basé sur {factor} kcal par kg^0,67 (FEDIAF, chat adulte).",
+      "kitten": "Basé sur les besoins énergétiques FEDIAF des chatons ({factor} kcal par kg^0,67)."
+    },
+    "portionNote": "Il s’agit d’un point de départ : pesez régulièrement votre animal et ajustez pour garder une bonne condition corporelle. Suivez les conseils de votre vétérinaire."
+  },
+  "order": {
+    "title": "Commander cet aliment",
+    "text": "Consultez le prix actuel et la livraison chez bol.com.",
+    "button": "Voir sur bol.com",
+    "disclosure": "Lien d’affiliation : si vous achetez via ce lien, nous pouvons toucher une commission, sans frais supplémentaires pour vous. Cela n’influence jamais la note.",
+    "moreInfo": "Plus d’informations",
+    "dutchOnly": "bol.com livre aux Pays-Bas et en Belgique."
+  },
+  "pet": {
+    "metaTitle": "Mon animal – guide alimentaire personnel",
+    "metaDescription": "Créez un profil pour votre chien ou chat avec âge, poids et allergies. Scanabowl masque les aliments que votre animal ne peut pas manger et calcule la ration quotidienne.",
+    "title": "Le profil de votre animal",
+    "subtitle": "Parlez-nous de votre chien ou chat. Tout reste sur cet appareil – il n’y a pas de compte et rien ne nous est envoyé.",
+    "yourPets": "Vos animaux",
+    "addAnother": "Ajouter un autre animal",
+    "basicsTitle": "L’essentiel",
+    "species": "Animal",
+    "name": "Nom",
+    "namePlaceholder": "p. ex. Bella",
+    "nameRequired": "Veuillez saisir un nom.",
+    "birthDate": "Date de naissance",
+    "ageYears": "Âge (années)",
+    "useAge": "Je ne connais que l’âge",
+    "useBirthDate": "Je connais la date de naissance",
+    "ageHint": "Sert à déterminer l’âge : en croissance, adulte ou senior.",
+    "weight": "Poids (kg)",
+    "weightInvalid": "Saisissez un poids entre 0,5 et 100 kg.",
+    "size": "Taille (adulte)",
+    "sizeSmall": "Petit",
+    "sizeMedium": "Moyen",
+    "sizeLarge": "Grand",
+    "sizeGiant": "Géant",
+    "neutered": "Castré / stérilisé ?",
+    "lifestyleTitle": "Mode de vie et santé",
+    "activity": "Niveau d’activité",
+    "activityLow": "Calme",
+    "activityMod": "Normal",
+    "activityHigh": "Très actif",
+    "activityLowHint": { "dog": "Moins d’1 heure de promenade par jour", "cat": "Dort beaucoup, uniquement à l’intérieur" },
+    "activityModHint": { "dog": "1 à 3 heures d’exercice par jour", "cat": "Jeux et déplacements normaux" },
+    "activityHighHint": { "dog": "Plus de 3 heures, chien de sport ou de travail", "cat": "Très actif, beaucoup dehors" },
+    "condition": "Condition corporelle",
+    "condUnder": "Trop maigre",
+    "condUnderHint": "Côtes bien visibles",
+    "condIdeal": "Idéale",
+    "condIdealHint": "Côtes faciles à sentir",
+    "condOver": "En surpoids",
+    "condOverHint": "Côtes difficiles à sentir",
+    "urinary": "Antécédents de problèmes urinaires",
+    "urinaryHint": "Cristaux, calculs ou cystite. La pâtée est alors généralement préférée.",
+    "digestion": "Digestion sensible",
+    "digestionHint": "Selles molles ou estomac qui se dérange facilement.",
+    "allergyTitle": "Allergies et intolérances",
+    "allergyIntro": "Sélectionnez tout ce à quoi votre animal réagit. Les aliments contenant ces ingrédients ne seront pas affichés. Les allergènes alimentaires les plus fréquents sont en premier.",
+    "showMoreAllergens": "Afficher {count} ingrédients de plus",
+    "customAllergy": "Autre chose ?",
+    "customPlaceholder": "Saisissez un ingrédient, p. ex. kangourou",
+    "removeAllergen": "Retirer {name}",
+    "strict": "Masquer aussi les aliments aux ingrédients vagues",
+    "strictHint": "Recommandé. Des mentions comme « viandes et sous-produits animaux » peuvent cacher l’ingrédient auquel votre animal réagit.",
+    "save": "Enregistrer le profil",
+    "saveChanges": "Enregistrer les modifications",
+    "delete": "Supprimer le profil",
+    "confirmDelete": "Supprimer le profil de {name} ?",
+    "saved": "Le profil de {name} est enregistré.",
+    "seeFoods": "Voir les aliments pour {name}",
+    "previewTitle": "Votre animal",
+    "previewStage": "Âge",
+    "previewEnergy": "Besoin énergétique quotidien",
+    "previewAllergies": "Allergies",
+    "previewEmpty": "Renseignez un nom et un poids pour voir un aperçu.",
+    "none": "Aucune",
+    "stage": { "young": "En croissance (chiot / chaton)", "adult": "Adulte", "senior": "Senior" },
+    "privacyNote": "Stocké uniquement dans ce navigateur sur cet appareil. Rien n’est envoyé à un serveur, et nous ne pouvons pas voir le profil de votre animal."
+  },
+  "blog": {
+    "metaTitle": "Blog – la nutrition animale expliquée",
+    "metaDescription": "Des articles pratiques et fondés sur des preuves sur l’alimentation des chiens et des chats.",
+    "title": "Blog",
+    "subtitle": "Des articles pratiques et fondés sur des preuves sur l’alimentation de votre chien ou chat.",
+    "empty": "Les premiers articles arrivent bientôt.",
+    "minutes": "{n} min de lecture",
+    "back": "Tous les articles",
+    "notTranslated": "Cet article n’a pas encore été traduit – vous lisez la version originale ({lang}).",
+    "ctaTitle": "Trouvez un aliment adapté à votre animal",
+    "ctaText": "Consultez des notes indépendantes pour des milliers d’aliments pour chiens et chats.",
+    "ctaFoods": "Trouver un aliment",
+    "ctaPet": "Créer un profil d’animal",
+    "more": "Autres articles"
+  },
+  "method": {
+    "metaTitle": "Comment nous notons les aliments pour animaux",
+    "metaDescription": "Exactement comment la note Scanabowl est calculée : profil nutritionnel, qualité des ingrédients et formule propre – avec les sources scientifiques.",
+    "title": "Comment nous notons les aliments pour animaux",
+    "intro": "Chaque aliment reçoit une note de 0 à 100. Elle est calculée par une formule fixe à partir de la liste d’ingrédients et des constituants analytiques de l’emballage, selon des recommandations de nutrition vétérinaire publiées. Cette page explique chaque étape pour que vous puissiez en juger vous-même.",
+    "glance": "La note en un coup d’œil",
+    "pillar": {
+      "nutrition": "Les chiffres de l’emballage correspondent-ils à ce dont un chien ou un chat a besoin ? Protéines, matières grasses, glucides, fibres, minéraux et – pour les chats – humidité, comparés à la FEDIAF.",
+      "ingredients": "D’où viennent les protéines, quelle part de la recette est animale, et est-ce déclaré clairement ?",
+      "formulation": "Des points sont retirés pour le sucre ajouté, les colorants artificiels, les conservateurs de synthèse et les charges bon marché."
+    },
+    "gradesTitle": "Notes et niveaux",
+    "sections": [
+      {
+        "h": "Ce que la note est – et n’est pas",
+        "p": [
+          "La note Scanabowl évalue l’**étiquette** : la liste d’ingrédients et les constituants analytiques imprimés sur l’emballage. Elle ne peut pas voir la digestibilité réelle d’un aliment, la qualité de sa fabrication, ni s’il a été validé par des essais d’alimentation.",
+          "La World Small Animal Veterinary Association (WSAVA) souligne qu’une liste d’ingrédients seule dit peu de chose sur la qualité d’un aliment, et recommande de regarder aussi le contrôle qualité et la recherche du fabricant. Utilisez notre note pour comparer des recettes et repérer des points faibles – et parlez-en à votre vétérinaire, surtout si votre animal a une maladie."
+        ]
+      },
+      {
+        "h": "1. Profil nutritionnel (35 points)",
+        "p": ["Nous convertissons l’analyse en matière sèche et en énergie (kcal) afin de comparer équitablement pâtée et croquettes. Si l’étiquette n’indique pas la valeur énergétique, nous la calculons avec l’équation publiée par la FEDIAF (basée sur le NRC 2006). Nous comparons ensuite aux FEDIAF Nutritional Guidelines (2021) :"],
+        "ul": [
+          "**Protéines** – le minimum FEDIAF pour les chiens adultes est de 18 à 21 g pour 100 g de matière sèche (45 à 52 g pour 1 000 kcal), pour les chats adultes de 25 à 33 g (62,5 à 83 g pour 1 000 kcal). Les animaux en croissance ont besoin de plus. Les points augmentent au-dessus du minimum puis se stabilisent : plus de protéines n’est pas automatiquement mieux pour un chien en bonne santé.",
+          "**Matières grasses** – minimum FEDIAF de 5,5 g pour 100 g de matière sèche pour les chiens adultes (8,5 g pour les chiots) et 9 g pour les chats. Une teneur très élevée est pénalisée, car elle favorise la prise de poids et peut déclencher une pancréatite.",
+          "**Glucides (chats : 10 points, chiens : 4 points)** – estimés d’après ce qui reste après protéines, graisses, cellulose, cendres et humidité. Les chats sont des carnivores stricts : quand ils peuvent choisir, ils composent un régime avec environ 52 % de l’énergie issue des protéines, 36 % des graisses et seulement 12 % des glucides (Hewson-Hughes et al., 2011). Les chiens sont plus flexibles ; les glucides comptent donc beaucoup moins pour eux.",
+          "**Humidité (chats uniquement, 7,5 points)** – les chats ont une faible sensation de soif. Les chats qui mangent un aliment riche en humidité absorbent davantage d’eau au total et produisent une urine plus diluée, avec une moindre saturation des minéraux formant les cristaux urinaires (Buckley et al., 2011).",
+          "**Cellulose et cendres** – trop de l’un ou de l’autre abaisse la note (une forte charge minérale compte surtout pour les voies urinaires des chats).",
+          "**Chiens : rapport calcium:phosphore et exhaustivité de l’étiquette** – quand le calcium et le phosphore sont indiqués, le rapport doit se situer entre 1:1 et 2:1 (FEDIAF). Les aliments qui impriment une analyse complète sont mieux notés que ceux qui omettent des valeurs."
+        ]
+      },
+      {
+        "h": "2. Qualité des ingrédients (50 points)",
+        "p": ["Les ingrédients sont listés par poids décroissant *tel que mélangé* – y compris l’eau de la viande fraîche, qui représente environ 70 % de son poids. Nous estimons donc la part de chaque ingrédient d’après sa position et les pourcentages déclarés, et comparons sur la base de la matière sèche. C’est pourquoi un aliment qui commence par « poulet frais » n’est pas forcément riche en viande."],
+        "ul": [
+          "**Origine des protéines (12 points)** – la part estimée des protéines provenant d’ingrédients animaux plutôt que de concentrés végétaux comme le gluten ou la protéine de pois. Les chats ont besoin d’une part plus élevée que les chiens.",
+          "**Part animale de la matière sèche (12 points)** – quelle part de la recette elle-même est d’origine animale.",
+          "**Les premiers ingrédients (10 points)** – la liste est-elle menée par un ingrédient animal nommé ou par des céréales ?",
+          "**Sources nommées (10 points)** – « poulet » ou « saumon » est précis. « Viandes et sous-produits animaux » peut désigner n’importe quoi, du muscle aux plumes. Les sous-produits ne sont pas automatiquement mauvais, mais on ne voit pas ce que l’on donne – et cela complique la gestion des allergies.",
+          "**Extras utiles (jusqu’à 6 points)** – EPA/DHA d’huile de poisson ou d’algues, fibres prébiotiques, probiotiques, glucosamine/chondroïtine, taurine pour les chats."
+        ]
+      },
+      {
+        "h": "3. Formule propre (15 points)",
+        "p": ["Nous partons de 15 points et retirons pour ce dont un animal n’a pas besoin :"],
+        "ul": [
+          "**Sucre ajouté** (sucre, caramel, sirop) – aucun besoin nutritionnel ; les chats ne perçoivent même pas le goût sucré.",
+          "**Colorants artificiels** – ils n’embellissent l’aliment que pour le propriétaire.",
+          "**Conservateurs de synthèse** (BHA, BHT, éthoxyquine, sorbates, nitrite) – il existe des alternatives naturelles comme les tocophérols.",
+          "**Charges bon marché** – pour les chats : une forte part de céréales ou de concentrés de protéines végétales ; pour les chiens : une très forte part de pois, légumineuses ou pommes de terre. La FDA américaine a étudié un lien entre les régimes sans céréales très riches en légumineuses et la cardiomyopathie dilatée chez le chien. Aucune cause n’est établie – il s’agit donc d’une petite déduction, pas d’une interdiction."
+        ]
+      },
+      {
+        "h": "Ingrédients toxiques",
+        "p": ["Si un ingrédient est toxique pour l’espèce – par exemple l’oignon, le xylitol ou le chocolat, les raisins secs pour les chiens, l’ail ou le propylène glycol pour les chats – la note est plafonnée à 25, quoi qu’il y ait d’autre dans la recette."]
+      },
+      {
+        "h": "Chiens et chats sont notés différemment",
+        "p": ["Les chats sont des carnivores stricts aux besoins spécifiques (taurine, acide arachidonique, vitamine A préformée, besoin en protéines plus élevé), alors que les chiens sont plus flexibles. C’est pourquoi les pondérations pour les glucides, l’humidité et les protéines animales diffèrent selon l’espèce. Nous ne donnons aucun point pour « sans céréales » en tant que tel : les céréales ne sont pas nocives pour la plupart des animaux, et « sans céréales » n’est pas un label de qualité. Vous pouvez néanmoins filtrer dessus, par exemple en cas d’allergie au blé."]
+      },
+      {
+        "h": "Ce qui n’est pas noté",
+        "p": ["Les aliments vétérinaires ou diététiques, les friandises, les compléments et les aliments complémentaires ne sont pas notés. Leur but est différent, une note générale serait trompeuse. Un aliment sans liste d’ingrédients ne peut pas être noté. Quand l’analyse manque, la partie nutritionnelle est une estimation prudente et nous affichons une fiabilité plus faible."]
+      },
+      {
+        "h": "Le profil de votre animal",
+        "p": ["La note de base ne change jamais. Dans le profil de l’animal, nous ajoutons une adéquation personnelle de quelques points au plus, en plus ou en moins, pour ce que l’étiquette ne peut pas savoir : l’âge (aliment de croissance pour un adulte, ou l’inverse), un objectif de poids, la taille du chien, les problèmes urinaires du chat et un estomac sensible. Les calories quotidiennes suivent les tables énergétiques FEDIAF (par exemple 110 kcal par kg^0,75 pour un chien adulte moyen et 75 kcal par kg^0,67 pour un chat d’appartement stérilisé)."]
+      },
+      {
+        "h": "Allergies",
+        "p": ["Dans le profil de l’animal, vous choisissez les ingrédients auxquels il réagit. Nous les reconnaissons tous dans les formulations d’étiquettes en néerlandais, anglais, allemand et français. Les aliments qui nomment un allergène sont toujours masqués. Des mentions vagues comme « viandes et sous-produits animaux », « céréales » ou « volaille » pourraient le contenir ; avec le réglage par défaut, ces aliments sont donc aussi masqués. Les graisses et huiles de cet animal, comme la graisse de poulet, comptent aussi, car elles peuvent contenir des traces de protéines.", "Les allergènes alimentaires les plus fréquents sont, chez le chien, le bœuf, les produits laitiers, le poulet et le blé, et chez le chat le bœuf, le poisson et le poulet (Mueller et al., 2016). Une allergie alimentaire ne peut être diagnostiquée que par un régime d’éviction avec votre vétérinaire."]
+      },
+      {
+        "h": "Données, indépendance et erreurs",
+        "p": ["Les données produits proviennent d’informations produits publiques et de fabricants qui soumettent leurs produits. Nous vérifions toujours les soumissions avant publication, et la même formule s’applique à chaque aliment – aucune marque ne peut influencer sa note. Nous touchons une commission sur les commandes via nos liens bol.com ; cela est expliqué dans la [mention d’affiliation](/{lang}/affiliate).", "Une erreur ? Utilisez le lien « Signaler une correction » sur la page produit. Nous corrigeons rapidement."]
+      }
+    ],
+    "refsTitle": "Sources scientifiques",
+    "refs": [
+      "FEDIAF (2021). *Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs*, tableaux III-3, III-4 et annexe 7.2 (besoins énergétiques et équations d’EM). [europeanpetfood.org](https://europeanpetfood.org/self-regulation/nutritional-guidelines/)",
+      "National Research Council (2006). *Nutrient Requirements of Dogs and Cats*. National Academies Press.",
+      "AAFCO. *Dog and Cat Food Nutrient Profiles*. Association of American Feed Control Officials.",
+      "WSAVA Global Nutrition Committee. *Selecting the best food for your pet*. [wsava.org](https://wsava.org/global-guidelines/global-nutrition-guidelines/)",
+      "Hewson-Hughes AK et al. (2011). Geometric analysis of macronutrient selection in the adult domestic cat, *Felis catus*. *J Exp Biol* 214:1039–1051. [PubMed](https://pubmed.ncbi.nlm.nih.gov/21346132/)",
+      "Buckley CMF et al. (2011). Effect of dietary water intake on urinary output, specific gravity and relative supersaturation for calcium oxalate and struvite in the cat. *Br J Nutr* 106:S128–S130. [Cambridge Core](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S0007114511001875)",
+      "Mueller RS, Olivry T, Prélaud P (2016). Critically appraised topic on adverse food reactions of companion animals (2): common food allergen sources in dogs and cats. *BMC Vet Res* 12:9. [PubMed](https://pubmed.ncbi.nlm.nih.gov/26753610/)",
+      "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
+    ],
+    "versionTitle": "Version",
+    "version": "Méthode de notation version 1.0 (septembre 2026). Quand nous améliorons la méthode, toutes les notes sont recalculées et cette page est mise à jour.",
+    "feedback": "Un retour sur la méthode ? Dites-le-nous."
+  },
+  "suggest": {
+    "metaTitle": "Proposer un aliment",
+    "metaDescription": "Vous ne trouvez pas l’aliment de votre animal ? Envoyez-nous ses informations et nous l’ajouterons après vérification.",
+    "title": "Proposer un aliment",
+    "intro": "Vous ne trouvez pas l’aliment de votre animal, ou quelque chose est faux ? Envoyez-nous les informations de l’emballage. Nous vérifions chaque proposition avant qu’elle n’apparaisse sur le site."
+  },
+  "brands": {
+    "metaTitle": "Pour les marques d’aliments pour animaux – ajoutez votre aliment",
+    "metaDescription": "Les fabricants d’aliments pour animaux peuvent soumettre leurs produits gratuitement. Chaque soumission est vérifiée et notée avec la même méthode indépendante.",
+    "title": "Ajoutez votre aliment pour animaux",
+    "intro": "Facilitez la tâche des propriétaires pour trouver votre aliment. Soumettez vos produits avec la liste complète des ingrédients et l’analyse. Nous vérifions tout et notons chaque aliment avec exactement la même méthode.",
+    "howTitle": "Comment ça marche",
+    "steps": [
+      "Remplissez le formulaire avec les informations de votre entreprise et les données d’étiquette de chaque produit.",
+      "Nous vérifions les informations sur l’emballage et vous contactons si quelque chose n’est pas clair.",
+      "Une fois approuvé, votre aliment apparaît avec sa note indépendante et un lien pour le commander."
+    ],
+    "promiseTitle": "Notre promesse",
+    "promises": [
+      "**Gratuit** – aucun frais pour être référencé.",
+      "**Indépendant** – la note est calculée avec la même formule pour chaque aliment. Les marques ne peuvent pas acheter une meilleure note.",
+      "**Transparent** – la note est expliquée sur la page du produit et sur la [page méthodologie](/{lang}/how-we-score).",
+      "**Vérifié d’abord** – rien n’est publié sans notre contrôle."
+    ],
+    "companyTitle": "Votre entreprise",
+    "companyName": "Nom de l’entreprise / de la marque",
+    "website": "Site web",
+    "contact": "Personne de contact",
+    "role": "Fonction",
+    "phone": "Téléphone",
+    "productN": "Produit {n}",
+    "addProduct": "Ajouter un autre produit",
+    "removeProduct": "Supprimer ce produit",
+    "message": "Autre chose à nous dire ?",
+    "messageHint": "Par exemple : certifications, essais d’alimentation, points de vente de votre aliment.",
+    "authorised": "Je confirme être autorisé(e) à soumettre ces informations au nom de l’entreprise et qu’elles correspondent à l’emballage.",
+    "submit": "Soumettre pour vérification"
+  },
+  "forms": {
+    "productName": "Nom du produit",
+    "productNamePh": "p. ex. Adult Saumon & Riz",
+    "brand": "Marque",
+    "species": "Animal",
+    "ean": "Code-barres (EAN)",
+    "eanHint": "Le numéro sous le code-barres, 8 ou 13 chiffres.",
+    "ingredients": "Ingrédients / composition",
+    "ingredientsHint": "Recopiez la composition exactement comme sur l’emballage, pourcentages compris.",
+    "analysis": "Constituants analytiques",
+    "analysisHint": "Par exemple : protéines brutes 30 %, matières grasses brutes 15 %, cendres brutes 7 %, cellulose brute 3 %, humidité 9 %.",
+    "pack": "Taille de l’emballage",
+    "url": "Lien (facultatif)",
+    "urlHint": "Une page où nous pouvons voir le produit.",
+    "email": "Adresse e-mail",
+    "emailNotify": "Votre e-mail (facultatif)",
+    "emailOptional": "Votre e-mail (facultatif)",
+    "emailPrivacy": "Utilisé uniquement pour vous répondre à propos de ce message.",
+    "consent": "J’accepte que Scanabowl conserve mon adresse e-mail et mon message pour traiter cette demande, comme décrit dans la politique de confidentialité.",
+    "sendSuggestion": "Envoyer la proposition",
+    "sendReport": "Envoyer la correction",
+    "sending": "Envoi…",
+    "reportAbout": "Correction pour :",
+    "reportMessage": "Qu’est-ce qui ne va pas ?",
+    "reportHint": "Par exemple : la liste d’ingrédients sur mon emballage est différente. Dites-nous ce qui y est écrit.",
+    "reviewNote": "Nous examinons chaque message manuellement. Rien de ce que vous envoyez n’est publié automatiquement.",
+    "thanksTitle": "Merci !",
+    "thanksText": "Nous avons bien reçu votre message et l’examinerons dès que possible.",
+    "errorTitle": "Nous n’avons pas pu envoyer votre message",
+    "errorText": "Un problème est survenu de notre côté. Vous pouvez toujours nous joindre par e-mail :",
+    "errorMail": "Écrire à {email}",
+    "err": { "required": "Ce champ est obligatoire.", "invalid": "Cette valeur n’est pas valide." }
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Des questions, des retours ou un aliment à ajouter ? Contactez Scanabowl.",
+    "title": "Contact",
+    "intro": "Des questions, des idées ou des retours ? Envoyez-nous un message ou écrivez à",
+    "message": "Votre message",
+    "send": "Envoyer le message"
+  },
+  "about": {
+    "metaTitle": "À propos de Scanabowl",
+    "metaDescription": "Scanabowl rend compréhensibles les étiquettes d’aliments pour animaux grâce à des notes indépendantes et scientifiques.",
+    "title": "À propos de Scanabowl",
+    "intro": "Scanabowl aide les propriétaires à comprendre ce qu’il y a vraiment dans la gamelle de leur chien ou chat.",
+    "sections": [
+      {
+        "h": "Pourquoi nous existons",
+        "p": ["Les emballages d’aliments pour animaux regorgent de promesses – « naturel », « premium », « complet » – mais l’information réelle est cachée en petits caractères. Scanabowl traduit la liste d’ingrédients et l’analyse nutritionnelle en une note claire, avec une explication de chaque point."]
+      },
+      {
+        "h": "Ce qui nous distingue",
+        "ul": [
+          "**Fondé sur la science** – notre notation suit les recommandations FEDIAF et NRC publiées et la recherche évaluée par des pairs, et nous citons nos sources.",
+          "**Chiens et chats notés séparément** – leurs besoins nutritionnels sont très différents.",
+          "**Personnel** – les allergies, l’âge et le poids de votre animal changent ce que vous voyez.",
+          "**Indépendant** – les marques ne peuvent pas acheter une meilleure note."
+        ]
+      },
+      {
+        "h": "Comment nous sommes financés",
+        "p": ["Scanabowl est gratuit. Lorsque vous commandez un aliment via nos liens bol.com, nous pouvons toucher une petite commission, sans frais supplémentaires pour vous. Ces revenus sont réinvestis dans le site. En savoir plus dans la [mention d’affiliation](/{lang}/affiliate)."]
+      },
+      {
+        "h": "Participez",
+        "p": ["L’aliment de votre animal est absent ? [Proposez-le](/{lang}/suggest). Vous fabriquez des aliments pour animaux ? [Ajoutez vos produits](/{lang}/brands). Une erreur ? Signalez-la via la [page contact](/{lang}/contact)."]
+      }
+    ]
+  },
+  "legal": {
+    "updated": "Dernière mise à jour : {date}",
+    "companyTitle": "Qui nous sommes",
+    "email": "E-mail"
+  },
+  "privacy": {
+    "metaTitle": "Politique de confidentialité",
+    "metaDescription": "Comment Scanabowl traite vos données : le profil de votre animal reste sur votre appareil, et nous n’utilisons votre adresse e-mail que pour vous répondre.",
+    "title": "Politique de confidentialité",
+    "intro": "Nous collectons le moins de données possible. Vous pouvez utiliser Scanabowl sans compte et sans nous donner de données personnelles.",
+    "sections": [
+      {
+        "h": "Le profil de votre animal",
+        "p": ["Le profil de votre animal (nom, âge, poids, allergies) est stocké uniquement dans votre navigateur (stockage local) sur votre propre appareil. Il n’est jamais envoyé à nos serveurs, nous ne pouvons donc pas le voir. Effacer les données de votre navigateur le supprime."]
+      },
+      {
+        "h": "Formulaires",
+        "p": ["Si vous envoyez une proposition, une correction, un message de contact ou une soumission de marque, nous recevons les informations que vous saisissez (y compris votre adresse e-mail, si vous la donnez). Nous ne les utilisons que pour examiner votre envoi et vous répondre. Les informations produit que vous soumettez peuvent être publiées sur le site après vérification ; les données personnelles ne le sont pas."]
+      },
+      {
+        "h": "Cookies et suivi",
+        "p": ["Nous n’utilisons pas de cookies publicitaires ni de suivi. Nous enregistrons un petit cookie fonctionnel (la langue choisie, pendant un an) et des entrées de stockage local pour le profil de votre animal. Étant strictement fonctionnels, ils ne nécessitent pas de bannière de cookies. Si nous ajoutons un jour des statistiques, nous utiliserons un outil respectueux de la vie privée et mettrons cette page à jour."]
+      },
+      {
+        "h": "Prestataires",
+        "ul": [
+          "**Vercel** héberge le site et traite des données techniques comme les adresses IP dans les journaux du serveur.",
+          "**Resend** achemine les e-mails générés par nos formulaires.",
+          "**bol.com** – lorsque vous cliquez sur un lien d’affiliation, bol.com et sa plateforme partenaire peuvent déposer leurs propres cookies selon leur propre politique de confidentialité."
+        ]
+      },
+      {
+        "h": "Durée de conservation",
+        "p": ["Nous ne conservons les messages que le temps nécessaire à leur traitement, et pas plus de deux ans, sauf obligation légale contraire."]
+      },
+      {
+        "h": "Vos droits",
+        "p": ["Conformément au RGPD, vous pouvez demander l’accès à vos données personnelles, leur rectification ou leur suppression, et vous opposer à leur utilisation. Écrivez-nous à l’adresse ci-dessous. Vous pouvez aussi déposer une plainte auprès de l’autorité néerlandaise de protection des données (Autoriteit Persoonsgegevens)."]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Conditions d’utilisation",
+    "metaDescription": "Les conditions d’utilisation de Scanabowl.",
+    "title": "Conditions d’utilisation",
+    "intro": "En utilisant Scanabowl, vous acceptez ces conditions.",
+    "sections": [
+      {
+        "h": "Information, pas un conseil",
+        "p": ["Scanabowl fournit des informations générales sur les aliments pour animaux. Les notes et commentaires ne constituent pas un avis vétérinaire et ne remplacent pas une consultation chez votre vétérinaire. Consultez toujours un vétérinaire avant de modifier l’alimentation d’un animal atteint d’une maladie."]
+      },
+      {
+        "h": "Exactitude",
+        "p": ["Nous faisons de notre mieux pour que les données soient correctes, mais les recettes changent et les informations d’étiquette peuvent être incomplètes ou erronées. La note reflète les informations dont nous disposons. Vérifiez toujours l’emballage avant d’acheter ou de nourrir. Nous ne garantissons pas que les informations soient complètes, actuelles ou exemptes d’erreurs."]
+      },
+      {
+        "h": "Liens vers des tiers et boutiques",
+        "p": ["Les liens vers bol.com et d’autres sites sont fournis par commodité. Les prix, le stock et la livraison sont déterminés par la boutique. Tout achat est un contrat entre vous et la boutique ; Scanabowl n’y est pas partie."]
+      },
+      {
+        "h": "Informations soumises",
+        "p": ["Si vous soumettez des informations produit en tant qu’entreprise, vous confirmez y être autorisé(e) et qu’elles sont exactes. Vous accordez à Scanabowl le droit de publier et de noter ces informations. Une soumission ne garantit ni la publication ni une note particulière."]
+      },
+      {
+        "h": "Propriété intellectuelle",
+        "p": ["Le design, les textes, la méthode de notation et le logiciel de Scanabowl sont protégés. Vous pouvez partager des liens et de courtes citations avec mention de la source. La copie massive de la base de données n’est pas autorisée sans permission."]
+      },
+      {
+        "h": "Responsabilité et droit applicable",
+        "p": ["Dans la mesure permise par la loi, Scanabowl n’est pas responsable des dommages résultant de l’utilisation de ce site ou de la confiance accordée à son contenu. Le droit néerlandais s’applique et les litiges sont portés devant le tribunal néerlandais compétent."]
+      }
+    ]
+  },
+  "affiliate": {
+    "metaTitle": "Mention d’affiliation",
+    "metaDescription": "Comment Scanabowl gagne de l’argent avec les liens d’affiliation bol.com – et pourquoi cela n’influence jamais les notes.",
+    "title": "Mention d’affiliation",
+    "intro": "Scanabowl est gratuit. Cette page explique comment nous gagnons de l’argent.",
+    "sections": [
+      {
+        "h": "Programme partenaire bol.com",
+        "p": ["Scanabowl participe au programme partenaire de bol.com. Lorsque vous cliquez sur un bouton « Voir sur bol.com » et achetez quelque chose, nous pouvons recevoir une commission de bol.com. Cela ne vous coûte rien de plus."]
+      },
+      {
+        "h": "Les notes ne sont jamais à vendre",
+        "ul": [
+          "Chaque aliment est noté avec la même formule, qu’il soit vendu chez bol.com ou rapporte une commission ou non.",
+          "Les marques ne peuvent acheter ni une place, ni un classement, ni une meilleure note.",
+          "Les listes des mieux notés sont générées automatiquement."
+        ]
+      },
+      {
+        "h": "Comment reconnaître les liens d’affiliation",
+        "p": ["Les liens vers bol.com sont signalés comme liens sponsorisés et accompagnés d’une courte mention. Les prix et la disponibilité sont affichés par bol.com ; le prix au moment de votre commande fait foi."]
+      },
+      {
+        "h": "Ce que nous faisons des revenus",
+        "p": ["Les revenus sont réinvestis dans Scanabowl : hébergement, mise à jour de la base de données et création de nouvelles fonctionnalités."]
+      }
+    ]
+  },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundText": "La page que vous cherchez n’existe pas ou a été déplacée.",
+    "home": "Retour à l’accueil"
+  },
+  "footer": {
+    "blurb": "Des notes indépendantes et scientifiques pour les aliments pour chiens et chats – personnalisées pour votre animal.",
+    "explore": "Explorer",
+    "contribute": "Participer",
+    "legal": "Mentions légales",
+    "vat": "TVA",
+    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement. Les liens vers bol.com sont des liens d’affiliation."
+  }
+}

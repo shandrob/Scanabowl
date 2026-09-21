@@ -1,0 +1,765 @@
+{
+  "meta": {
+    "title": "Scanabowl – Is het voer van jouw huisdier echt goed? Onafhankelijke scores voor hondenvoer en kattenvoer",
+    "description": "Zoek elk hondenvoer of kattenvoer op en zie een onafhankelijke score op basis van ingrediënten en voedingswaarden. Persoonlijk voor jouw huisdier, met allergieën uitgefilterd."
+  },
+  "nav": {
+    "main": "Hoofdmenu",
+    "home": "Home",
+    "foods": "Voer zoeken",
+    "myPet": "Mijn huisdier",
+    "blog": "Blog",
+    "howWeScore": "Zo scoren wij",
+    "about": "Over ons",
+    "suggest": "Voer voorstellen",
+    "brands": "Voor merken",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Gebruiksvoorwaarden",
+    "affiliate": "Affiliate-vermelding",
+    "addPet": "Voeg je huisdier toe",
+    "petNamed": "Profiel van {name}",
+    "language": "Taal wijzigen",
+    "menu": "Menu openen",
+    "close": "Menu sluiten",
+    "skip": "Ga naar de inhoud"
+  },
+  "common": {
+    "dog": "Hond",
+    "cat": "Kat",
+    "dogs": "Honden",
+    "cats": "Katten",
+    "all": "Alle",
+    "yes": "Ja",
+    "no": "Nee",
+    "add": "Toevoegen",
+    "reset": "Filters wissen",
+    "close": "Sluiten",
+    "loading": "Laden…",
+    "day": "dag",
+    "grainFree": "Graanvrij",
+    "showMore": "Toon nog {count}",
+    "breadcrumb": "Kruimelpad"
+  },
+  "type": { "dry": "Droogvoer", "wet": "Natvoer", "frozen": "Diepvries / rauw", "semi": "Halfvochtig", "other": "Overig" },
+  "stage": { "youngDog": "Puppy / junior", "youngCat": "Kitten / junior", "adult": "Volwassen", "senior": "Senior", "all": "Alle leeftijden" },
+  "grade": {
+    "A": "Uitstekend",
+    "B": "Goed",
+    "C": "Gemiddeld",
+    "D": "Onder gemiddeld",
+    "E": "Zwak",
+    "desc": {
+      "A": "Een receptuur op basis van vlees, met een sterk voedingsprofiel en een schone ingrediëntenlijst.",
+      "B": "Een goede receptuur met slechts kleine zwakke punten.",
+      "C": "Een acceptabel dagelijks voer, maar er zijn duidelijk betere opties.",
+      "D": "Meerdere zwakke punten in de receptuur of voedingswaarden – kijk naar alternatieven.",
+      "E": "Zwak qua ingrediënten en/of voedingswaarden, of bevat iets wat een huisdier niet mag eten."
+    }
+  },
+  "confidence": {
+    "high": "Volledige etiketgegevens – hoge betrouwbaarheid",
+    "medium": "Sommige etiketwaarden zijn geschat – gemiddelde betrouwbaarheid",
+    "low": "Beperkte etiketgegevens – zie deze score als indicatie"
+  },
+  "score": {
+    "aria": "Score {score} van de 100, beoordeeld als {grade}",
+    "none": "Geen score",
+    "notScoredShort": "Geen score",
+    "pillars": { "nutrition": "Voedingsprofiel", "ingredients": "Kwaliteit ingrediënten", "formulation": "Schone receptuur" }
+  },
+  "allergen": {
+    "beef": "Rund",
+    "chicken": "Kip",
+    "dairy": "Zuivel",
+    "fish": "Vis & zeevruchten",
+    "wheat": "Tarwe / gluten",
+    "egg": "Ei",
+    "lamb": "Lam",
+    "pork": "Varken",
+    "turkey": "Kalkoen",
+    "duck": "Eend / gans",
+    "rabbit": "Konijn",
+    "horse": "Paard",
+    "game": "Wild / hert",
+    "insect": "Insecten",
+    "corn": "Maïs",
+    "rice": "Rijst",
+    "barley": "Gerst",
+    "oats": "Haver",
+    "soy": "Soja",
+    "legume": "Erwten & peulvruchten",
+    "potato": "Aardappel",
+    "yeast": "Gist"
+  },
+  "search": {
+    "label": "Zoek voer op naam, merk of barcode",
+    "placeholder": "Product, merk of barcode…",
+    "button": "Zoeken",
+    "scan": "Scan barcode",
+    "notFound": "Barcode {ean} kennen we nog niet.",
+    "suggestIt": "Vertel ons over dit voer →"
+  },
+  "scan": {
+    "title": "Scan een barcode",
+    "starting": "Camera wordt gestart…",
+    "hint": "Houd de barcode in het kader. Het beeld blijft op je telefoon.",
+    "denied": "Toegang tot de camera is geblokkeerd. Sta de camera toe in de instellingen van je browser, of typ het nummer onder de barcode.",
+    "unsupported": "Scannen is niet beschikbaar op dit apparaat of in deze browser. Typ in plaats daarvan het nummer onder de barcode."
+  },
+  "home": {
+    "badge": "Onafhankelijk · Wetenschappelijk · Gratis",
+    "title": "Is het voer van jouw huisdier echt zo goed als op de verpakking staat?",
+    "subtitle": "Zoek elk hondenvoer of kattenvoer op en krijg een onafhankelijke score van 0 tot 100 – berekend uit de ingrediënten en voedingswaarden op het etiket, met richtlijnen uit de diervoeding.",
+    "searchHint": "Tip: scan de barcode in de winkel of typ het EAN-nummer.",
+    "browseDogs": "Hondenvoer",
+    "browseCats": "Kattenvoer",
+    "ctaPet": "Maak het persoonlijk",
+    "statFoods": "voeders beoordeeld",
+    "statBrands": "merken",
+    "howTitle": "Zo werkt Scanabowl",
+    "step": "Stap {n}",
+    "step1Title": "Zoek je voer",
+    "step1Text": "Zoek op naam of merk, of scan de barcode met je telefoon. Honden en katten worden altijd apart beoordeeld.",
+    "step2Title": "Zie de score – en waarom",
+    "step2Text": "Elk voer krijgt een score van 0–100 met een uitleg in gewone taal: wat is goed, wat niet, en hoe verhoudt het zich tot de FEDIAF-voedingsrichtlijnen.",
+    "step3Title": "Maak het persoonlijk",
+    "step3Text": "Vul leeftijd, gewicht en allergieën van je huisdier in. Voer met ingrediënten waar je huisdier op reageert verdwijnt, en je ziet de dagelijkse portie voor jouw dier.",
+    "topTitle": "Nu hoogst scorende voeders",
+    "topText": "Automatisch gerangschikt op score – geen enkel merk kan hier een plek kopen. Scores beschrijven het etiket, niet een garantie voor elk individueel dier.",
+    "howScore": "Hoe de score werkt",
+    "topDogs": "Beste hondenvoer",
+    "topCats": "Beste kattenvoer",
+    "allDogs": "Al het hondenvoer",
+    "allCats": "Al het kattenvoer",
+    "persTitle": "Een voedergids die jouw huisdier kent",
+    "persText": "Vertel één keer over je hond of kat. Scanabowl toont daarna alleen voer dat past – en waarschuwt je als een voer dat niet doet.",
+    "persButton": "Maak een huisdierprofiel",
+    "persA": "Allergieën en intoleranties uit elke lijst gefilterd",
+    "persB": "Rekening met levensfase, grootte en gewichtsdoel",
+    "persC": "Dagelijkse calorieën en grammen per dag, berekend met FEDIAF-formules",
+    "persD": "Alleen op je eigen apparaat opgeslagen – geen account nodig",
+    "blogTitle": "Uit de blog",
+    "allPosts": "Alle artikelen",
+    "faqTitle": "Veelgestelde vragen",
+    "brandTitle": "Maak je zelf dierenvoer?",
+    "brandText": "Dien je producten gratis in. We controleren elke inzending en beoordelen die met precies dezelfde methode als elk ander voer.",
+    "brandButton": "Voeg je voer toe",
+    "faq": [
+      {
+        "q": "Is de score een diergeneeskundig advies?",
+        "a": "Nee. De score beoordeelt wat op de verpakking staat aan de hand van gepubliceerde voedingsrichtlijnen. Het vervangt geen advies van je dierenarts – zeker niet als je huisdier een gezondheidsprobleem heeft."
+      },
+      {
+        "q": "Hoe wordt de score berekend?",
+        "a": "Uit 100 punten: 35 voor het voedingsprofiel (eiwit, vet, koolhydraten, vezels en mineralen vergeleken met FEDIAF), 50 voor de kwaliteit van de ingrediënten (waar het eiwit vandaan komt en hoe duidelijk dat vermeld is) en 15 voor een schone receptuur (geen suiker, kleurstoffen of synthetische conserveermiddelen). Alles staat uitgelegd op de [pagina over onze methode](/{lang}/how-we-score)."
+      },
+      {
+        "q": "Betalen merken voor een betere score?",
+        "a": "Nee. Scores worden voor elk voer met dezelfde formule berekend. We verdienen een kleine commissie als je via onze bol.com-links bestelt, zonder extra kosten voor jou – zie de [affiliate-vermelding](/{lang}/affiliate)."
+      },
+      {
+        "q": "Waarom heeft een dieetvoer van de dierenarts geen score?",
+        "a": "Therapeutische diëten zijn bedoeld voor medische aandoeningen en worden onder toezicht van een dierenarts gegeven. Hun voedingsprofiel wijkt bewust af van gewoon voer, dus een algemene score zou misleidend zijn."
+      },
+      {
+        "q": "Is graanvrij voer beter?",
+        "a": "Niet automatisch. Granen zijn voor de meeste honden en katten niet schadelijk, en graanvrij voer vervangt ze vaak door erwten of aardappel. We geven geen punten voor graanvrij – maar je kunt er wel op filteren, bijvoorbeeld bij een tarweallergie."
+      },
+      {
+        "q": "Hoe werkt het allergiefilter?",
+        "a": "Kies in het huisdierprofiel de allergenen van je dier. Voer waarin die genoemd worden, verdwijnt uit de lijst. Standaard verbergen we ook voer met vage omschrijvingen zoals “vlees en dierlijke bijproducten”, want daarin kan precies het ingrediënt zitten waar je dier op reageert."
+      }
+    ]
+  },
+  "finder": {
+    "metaTitle": "Hondenvoer en kattenvoer zoeken – onafhankelijke scores",
+    "metaDescription": "Bekijk en vergelijk hondenvoer en kattenvoer op score, type en levensfase. Filter op merk en allergie, gesorteerd op een onafhankelijke score van 0–100.",
+    "title": "Vind het juiste voer",
+    "subtitle": "Vergelijk {count} beoordeelde voeders voor honden en katten. Honden en katten worden apart beoordeeld.",
+    "species": "Dier",
+    "type": "Soort voer",
+    "stage": "Levensfase",
+    "brand": "Merk",
+    "minScore": "Minimale score: {score}",
+    "grainFree": "Alleen graanvrij",
+    "includeUnscored": "Toon ook voer zonder score (dieetvoer van de dierenarts, snacks, onvolledige gegevens)",
+    "filters": "Filters",
+    "count": "{count} voeders",
+    "sort": "Sorteren op",
+    "sortMatch": "Beste match voor {name}",
+    "sortScore": "Hoogste score",
+    "sortName": "Naam (A–Z)",
+    "sortKcal": "Minste calorieën",
+    "forPet": "Voor {name}: {score}",
+    "petBanner": "Voer voor {name}.",
+    "hiddenAllergy": "{count} voeders verborgen vanwege allergieën ({allergens}).",
+    "petIgnored": "Alle voeders worden getoond – het profiel van {name} staat uit.",
+    "editProfile": "Profiel aanpassen",
+    "ignorePet": "Toon alles",
+    "usePet": "Gebruik profiel van {name}",
+    "noPet": "Tip: met een huisdierprofiel worden voeders die je dier niet mag eten automatisch verborgen.",
+    "createProfile": "Profiel maken",
+    "emptyTitle": "Geen voeders gevonden met deze filters",
+    "emptyText": "Haal een filter weg of zoek op iets anders.",
+    "suggestMissing": "Kun je je voer niet vinden? Vertel het ons →",
+    "error": "De voerlijst kon niet worden geladen. Controleer je verbinding en laad de pagina opnieuw."
+  },
+  "product": {
+    "metaTitle": "{name} – score {score}/100",
+    "metaDescription": "{name} van {brand}: onafhankelijke Scanabowl-score {score}/100 voor {species}voer, met ingrediëntenanalyse, voedingswaarden en allergiecheck.",
+    "metaDescriptionNoScore": "{name} van {brand}: ingrediënten en voedingswaarden van {species}voer.",
+    "jsonLdDescription": "{name} van {brand} – dierenvoer geanalyseerd door Scanabowl.",
+    "scoreTitle": "Scanabowl-score",
+    "howCalculated": "Hoe wordt dit berekend?",
+    "noScoreTitle": "Geen score voor dit voer",
+    "notScored": {
+      "veterinary": "Dit is een dieetvoer van de dierenarts. Zulke voeders zijn bedoeld voor specifieke medische aandoeningen en horen alleen op advies van je dierenarts gegeven te worden, daarom geven we ze geen algemene score.",
+      "treat": "Dit is een snack of traktatie en geen volledig voer, dus het krijgt geen score.",
+      "supplement": "Dit is een supplement en geen volledig voer, dus het krijgt geen score.",
+      "complementary": "Dit is aanvullend voer – niet bedoeld als enige voeding van je dier – en krijgt daarom geen score.",
+      "no_ingredients": "We hebben de ingrediëntenlijst van dit voer nog niet, dus we kunnen geen score berekenen. Je kunt helpen door hem naar ons te sturen."
+    },
+    "hazardTitle": "Bevat een ingrediënt dat schadelijk is voor dit dier",
+    "goodTitle": "Wat is goed",
+    "badTitle": "Wat beter kan",
+    "nothingGood": "Er zijn geen opvallende sterke punten gevonden.",
+    "nothingBad": "Er zijn geen zwakke punten gevonden.",
+    "ingredientsTitle": "Ingrediënten",
+    "estimateNote": "Geschat op basis van de volgorde op het etiket en opgegeven percentages. Vers vlees bestaat voor ongeveer 70% uit water, daarom vergelijken we gedroogde en verse ingrediënten op droge-stofbasis.",
+    "group": { "animal": "Dierlijk", "fat": "Vetten & oliën", "plant": "Plantaardig", "other": "Toevoegingen & overig" },
+    "originalText": "Toon de ingrediëntentekst zoals gedrukt",
+    "originalLanguageNote": "Weergegeven in de taal van de verpakking.",
+    "noIngredients": "De ingrediëntenlijst van dit voer is nog niet beschikbaar.",
+    "analysisTitle": "Voedingswaarden",
+    "noAnalysis": "De analytische bestanddelen van dit voer zijn nog niet beschikbaar, dus het voedingsdeel van de score is een schatting.",
+    "alternativesTitle": "Alternatieven met een hogere score",
+    "alternativesText": "Vergelijkbaar voer van hetzelfde type en dezelfde levensfase met een hogere score.",
+    "alternativesPet": "Vergelijkbaar voer met een hogere score dat veilig is voor {name}.",
+    "dataTitle": "Over deze gegevens",
+    "dataPack": "Ingrediënten en analyse zoals gedrukt op de verpakking, gecontroleerd door Scanabowl.",
+    "dataBrand": "Aangeleverd door de fabrikant en gecontroleerd door Scanabowl. Het wordt met precies dezelfde methode beoordeeld als elk ander voer.",
+    "reportError": "Klopt er iets niet? Meld een correctie",
+    "disclaimer": "De score beschrijft het etiket en is geen diergeneeskundig advies. Bouw nieuw voer altijd geleidelijk op en vraag je dierenarts om advies als je dier een gezondheidsprobleem heeft."
+  },
+  "analysis": {
+    "nutrient": "Voedingsstof",
+    "asFed": "Zoals gevoerd",
+    "dryMatter": "Droge stof",
+    "protein": "Ruw eiwit",
+    "fat": "Ruw vet",
+    "fibre": "Ruwe celstof",
+    "ash": "Ruwe as",
+    "moisture": "Vocht",
+    "carbs": "Koolhydraten (geschat)",
+    "calcium": "Calcium",
+    "phosphorus": "Fosfor",
+    "energy": "Energie",
+    "kcal": { "label": "van het etiket", "calculated": "berekend met de FEDIAF/NRC-formule" },
+    "estimated": "geschat",
+    "estimatedNote": "Niet vermeld op het etiket of berekend – er is een typische waarde voor dit soort voer gebruikt.",
+    "fediafTitle": "Vergeleken met FEDIAF-minima",
+    "proteinPer1000": "Eiwit: {value} g per 1.000 kcal (minimum {min} g)",
+    "fatPer1000": "Vet: {value} g per 1.000 kcal (minimum {min} g)",
+    "energyShare": "Aandeel energie: {p}% eiwit · {f}% vet · {c}% koolhydraten",
+    "fediafNote": "FEDIAF Nutritional Guidelines 2021. Voer dat aan het minimum voldoet is niet automatisch “compleet” – dat kunnen alleen de verklaring van de fabrikant en voedingsproeven bevestigen."
+  },
+  "reasons": {
+    "animal_protein_high": "Naar schatting {pct}% van het eiwit komt uit dierlijke ingrediënten.",
+    "meat_rich": "Dierlijke ingrediënten vormen naar schatting {pct}% van de droge stof – echt een receptuur op basis van vlees.",
+    "first_named_animal": "De lijst begint met een benoemd dierlijk ingrediënt: {name}.",
+    "named_sources": "Dierlijke ingrediënten worden per diersoort genoemd in plaats van vage “dierlijke bijproducten”.",
+    "protein_level_good": "Eiwit is {pct}% van de droge stof, ruim boven het FEDIAF-minimum.",
+    "low_carb": "Slechts ongeveer {pct}% van de energie komt uit koolhydraten – dicht bij waar het lichaam van een kat op is gebouwd.",
+    "high_moisture": "{pct}% vocht ondersteunt de vochtinname en de gezondheid van de urinewegen.",
+    "omega3": "Bevat vis- of algenolie als bron van EPA/DHA (omega-3).",
+    "prebiotic": "Bevat prebiotische vezels (bijv. cichorei, inuline, FOS/MOS) die darmbacteriën voeden.",
+    "joint": "Bevat ingrediënten voor de gewrichten (glucosamine / chondroïtine).",
+    "probiotic": "Bevat probiotica.",
+    "clean_formulation": "Geen toegevoegde suiker, kunstmatige kleurstoffen of synthetische conserveermiddelen gevonden.",
+    "analysis_missing": "De analytische bestanddelen ontbreken, dus het voedingsdeel van de score is een voorzichtige schatting.",
+    "protein_low": "Eiwit is slechts {pct}% van de droge stof – laag voor dit dier.",
+    "protein_below_min": "Levert {g} g eiwit per 1.000 kcal – onder het FEDIAF-minimum van {min} g.",
+    "carbs_high": "Naar schatting {pct}% van de energie komt uit koolhydraten.",
+    "dry_food_cat": "Droogvoer ({pct}% vocht): katten drinken weinig, dus droogvoer alleen geeft minder vocht dan natvoer.",
+    "fibre_high": "Ruwe celstof is hoog ({pct}% van de droge stof).",
+    "ash_high": "Ruwe as (mineralen) is hoog: {pct}% van de droge stof.",
+    "fat_low": "Vet is laag ({pct}% van de droge stof).",
+    "fat_high": "Zeer hoog vetgehalte ({pct}% van de droge stof) – energierijk, wat gewichtstoename kan bevorderen.",
+    "calcium_phosphorus": "De calcium:fosfor-verhouding van {ratio}:1 valt buiten de aanbevolen 1:1 tot 2:1.",
+    "animal_protein_low": "Slechts ongeveer {pct}% van het eiwit komt uit dierlijke ingrediënten; de rest komt uit planten.",
+    "meat_poor": "Dierlijke ingrediënten vormen slechts ongeveer {pct}% van de droge stof.",
+    "first_not_animal": "Het eerste ingrediënt is geen dierlijk ingrediënt: {name}.",
+    "generic_animal": "Grotendeels niet-gespecificeerde “vlees en dierlijke bijproducten” – je kunt niet zien welke dieren of onderdelen gebruikt zijn.",
+    "vague_plant": "Bevat vage plantaardige ingrediënten zoals “granen” of “plantaardige bijproducten”.",
+    "sugar": "Bevat toegevoegde suiker of zoetstoffen (suiker, karamel, siroop) die geen enkel huisdier nodig heeft.",
+    "colourant": "Bevat kunstmatige kleurstoffen, die alleen het oog van de eigenaar dienen.",
+    "preservative": "Bevat synthetische conserveermiddelen (bijv. BHA, BHT, ethoxyquin, sorbaten of nitriet).",
+    "plant_protein_isolates": "Ongeveer {pct}% van het eiwit komt uit plantaardige eiwitconcentraten (gluten, erwten- of aardappeleiwit).",
+    "cereal_filler": "Granen vormen ongeveer {pct}% van de receptuur – goedkope vulstof voor een vleeseter.",
+    "legume_heavy": "Erwten, peulvruchten of aardappel vormen ongeveer {pct}% van de receptuur. De Amerikaanse FDA onderzocht een mogelijk verband tussen zeer peulvruchtrijk, graanvrij voer en hartspierziekte (DCM) bij honden; een oorzaak is niet bewezen."
+  },
+  "flags": {
+    "onion": "Bevat ui, dat de rode bloedcellen van honden en katten beschadigt.",
+    "garlic": "Bevat knoflook, dat giftig is voor katten.",
+    "garlic_dog": "Bevat knoflook. Honden verdragen kleine hoeveelheden, grotere hoeveelheden zijn schadelijk.",
+    "xylitol": "Bevat xylitol, dat zeer giftig is voor honden.",
+    "raisins": "Bevat rozijnen of krenten, die giftig zijn voor honden (nierfalen).",
+    "grapes": "Bevat druiven of een druivenproduct. Druiven en rozijnen zijn giftig voor honden; de veiligheid van druivenextracten in voer is onduidelijk.",
+    "chocolate": "Bevat cacao of chocolade (theobromine), dat giftig is voor huisdieren.",
+    "macadamia": "Bevat macadamianoten, die giftig zijn voor honden.",
+    "propylene_glycol": "Bevat propyleenglycol, dat niet is toegestaan in kattenvoer omdat het de rode bloedcellen beschadigt.",
+    "values_estimated": "Sommige waarden (vocht, as of celstof) ontbraken op het etiket en zijn geschat."
+  },
+  "personal": {
+    "ctaTitle": "Past dit voer bij jouw huisdier?",
+    "ctaText": "Maak een profiel met leeftijd, gewicht en allergieën van je dier om dit voer te checken, een persoonlijke score te zien en te weten hoeveel gram je per dag moet geven.",
+    "ctaButton": "Maak een huisdierprofiel",
+    "wrongSpecies": "Dit is voer voor {food}, terwijl {name} bij de {pet} hoort.",
+    "switchPet": "Wissel of voeg een huisdier toe",
+    "title": "Voor {name}",
+    "allergyBad": "Dit voer is niet geschikt voor {name}.",
+    "allergyDefinite": "Het bevat: {list}.",
+    "allergyPossible": "Vage omschrijvingen op het etiket (zoals “vlees en dierlijke bijproducten”) kunnen ook dit verbergen: {list}.",
+    "allergyOk": "Er zijn geen ingrediënten gevonden waar {name} op reageert.",
+    "allergyChecked": "Gecontroleerd op: {list}.",
+    "noAllergies": "Voor {name} zijn geen allergieën ingesteld. Die kun je toevoegen in het huisdierprofiel.",
+    "matchFor": "Match voor {name}",
+    "sameAsBase": "Gelijk aan de basisscore",
+    "deltaUp": "+{delta} punten voor {name}",
+    "deltaDown": "−{delta} punten voor {name}",
+    "notes": {
+      "stage_match": "Gemaakt voor de levensfase van {name}.",
+      "stage_all": "Geschikt voor alle levensfases, ook voor groei.",
+      "stage_young_needed": "Niet gemaakt voor groeiende dieren – {name} heeft puppy-/kittenvoer (of voer voor alle levensfases) nodig.",
+      "stage_too_rich": "Groeivoer is te rijk aan energie en mineralen voor de levensfase van {name}.",
+      "stage_senior_only": "Ontwikkeld voor oudere dieren. Prima, maar niet nodig voor {name}.",
+      "weight_fat_high": "Veel vet ({pct}% van de energie) – niet ideaal om het gewicht van {name} onder controle te houden.",
+      "weight_lean": "Magere receptuur ({pct}% van de energie uit vet), handig bij gewichtsbeheersing.",
+      "energy_dense": "Energierijk, handig om aan te komen.",
+      "size_match": "Past bij de grootte van {name}.",
+      "size_mismatch": "Gemaakt voor een andere hondengrootte dan {name}.",
+      "calcium_large_puppy": "Calcium ({ca}% van de droge stof) ligt boven het FEDIAF-maximum van 1,8% voor groeiende pups van grote rassen.",
+      "urinary_wet": "Natvoer voegt vocht toe – goed voor de urinewegen van {name}.",
+      "urinary_dry": "Droogvoer geeft weinig vocht, wat minder ideaal is bij urineproblemen.",
+      "urinary_ash": "Hoog asgehalte ({pct}% van de droge stof) – de mineralenbelasting is belangrijk voor de urinewegen.",
+      "digestion_simple": "Weinig eiwitbronnen – prettiger voor een gevoelige maag.",
+      "digestion_fat": "Veel vet kan een gevoelige maag van streek maken."
+    },
+    "portionTitle": "Hoeveel moet {name} eten?",
+    "portionText": "Ongeveer {kcal} kcal per dag, dat is circa {grams} g van dit voer per dag.",
+    "costText": "Dat kost ongeveer €{cost} per dag.",
+    "energyBasis": {
+      "dog_adult": "Gebaseerd op {factor} kcal per kg^0,75 (FEDIAF, volwassen hond).",
+      "dog_puppy": "Gebaseerd op de FEDIAF-groeiformule voor pups ({factor} kcal per kg^0,75).",
+      "cat_adult": "Gebaseerd op {factor} kcal per kg^0,67 (FEDIAF, volwassen kat).",
+      "kitten": "Gebaseerd op de FEDIAF-energiebehoefte van kittens ({factor} kcal per kg^0,67)."
+    },
+    "portionNote": "Dit is een startpunt: weeg je dier regelmatig en pas aan om een gezonde lichaamsconditie te houden. Volg het advies van je dierenarts."
+  },
+  "order": {
+    "title": "Bestel dit voer",
+    "text": "Bekijk de actuele prijs en levering bij bol.com.",
+    "button": "Bekijk bij bol.com",
+    "disclosure": "Affiliate-link: als je via deze link koopt, verdienen wij mogelijk een commissie, zonder extra kosten voor jou. Dit beïnvloedt de score nooit.",
+    "moreInfo": "Meer informatie",
+    "dutchOnly": "bol.com levert in Nederland en België."
+  },
+  "pet": {
+    "metaTitle": "Mijn huisdier – persoonlijke voedergids",
+    "metaDescription": "Maak een profiel voor je hond of kat met leeftijd, gewicht en allergieën. Scanabowl verbergt voer dat je dier niet mag eten en berekent de dagelijkse portie.",
+    "title": "Het profiel van je huisdier",
+    "subtitle": "Vertel ons over je hond of kat. Alles blijft op dit apparaat – er is geen account en er wordt niets naar ons gestuurd.",
+    "yourPets": "Jouw huisdieren",
+    "addAnother": "Nog een huisdier toevoegen",
+    "basicsTitle": "De basis",
+    "species": "Dier",
+    "name": "Naam",
+    "namePlaceholder": "bijv. Bella",
+    "nameRequired": "Vul een naam in.",
+    "birthDate": "Geboortedatum",
+    "ageYears": "Leeftijd (jaren)",
+    "useAge": "Ik weet alleen de leeftijd",
+    "useBirthDate": "Ik weet de geboortedatum",
+    "ageHint": "Wordt gebruikt om de levensfase te bepalen: groeiend, volwassen of senior.",
+    "weight": "Gewicht (kg)",
+    "weightInvalid": "Vul een gewicht in tussen 0,5 en 100 kg.",
+    "size": "Grootte (volwassen)",
+    "sizeSmall": "Klein",
+    "sizeMedium": "Middelgroot",
+    "sizeLarge": "Groot",
+    "sizeGiant": "Reusachtig",
+    "neutered": "Gecastreerd / gesteriliseerd?",
+    "lifestyleTitle": "Leefstijl & gezondheid",
+    "activity": "Activiteitsniveau",
+    "activityLow": "Rustig",
+    "activityMod": "Normaal",
+    "activityHigh": "Zeer actief",
+    "activityLowHint": { "dog": "Minder dan 1 uur wandelen per dag", "cat": "Slaapt veel, alleen binnen" },
+    "activityModHint": { "dog": "1–3 uur beweging per dag", "cat": "Normaal spelen en rondlopen" },
+    "activityHighHint": { "dog": "3+ uur, sport- of werkhond", "cat": "Zeer actief, veel buiten" },
+    "condition": "Lichaamsconditie",
+    "condUnder": "Te mager",
+    "condUnderHint": "Ribben duidelijk zichtbaar",
+    "condIdeal": "Ideaal",
+    "condIdealHint": "Ribben zijn goed te voelen",
+    "condOver": "Te zwaar",
+    "condOverHint": "Ribben moeilijk te voelen",
+    "urinary": "Eerder urineproblemen gehad",
+    "urinaryHint": "Kristallen, stenen of blaasontsteking. Natvoer heeft dan meestal de voorkeur.",
+    "digestion": "Gevoelige spijsvertering",
+    "digestionHint": "Zachte ontlasting of een snel van streek geraakte maag.",
+    "allergyTitle": "Allergieën & intoleranties",
+    "allergyIntro": "Selecteer alles waar je dier op reageert. Voer met deze ingrediënten wordt niet getoond. De meest voorkomende voedselallergenen staan vooraan.",
+    "showMoreAllergens": "Toon nog {count} ingrediënten",
+    "customAllergy": "Iets anders?",
+    "customPlaceholder": "Typ een ingrediënt, bijv. kangoeroe",
+    "removeAllergen": "Verwijder {name}",
+    "strict": "Verberg ook voer met vage ingrediënten",
+    "strictHint": "Aanbevolen. Omschrijvingen als “vlees en dierlijke bijproducten” kunnen het ingrediënt verbergen waar je dier op reageert.",
+    "save": "Profiel opslaan",
+    "saveChanges": "Wijzigingen opslaan",
+    "delete": "Profiel verwijderen",
+    "confirmDelete": "Het profiel van {name} verwijderen?",
+    "saved": "Het profiel van {name} is opgeslagen.",
+    "seeFoods": "Bekijk voer voor {name}",
+    "previewTitle": "Je huisdier",
+    "previewStage": "Levensfase",
+    "previewEnergy": "Dagelijkse energiebehoefte",
+    "previewAllergies": "Allergieën",
+    "previewEmpty": "Vul een naam en gewicht in om een voorbeeld te zien.",
+    "none": "Geen",
+    "stage": { "young": "Groeiend (puppy / kitten)", "adult": "Volwassen", "senior": "Senior" },
+    "privacyNote": "Alleen opgeslagen in deze browser op dit apparaat. Er wordt niets naar een server gestuurd, en wij kunnen het profiel van je dier niet zien."
+  },
+  "blog": {
+    "metaTitle": "Blog – dierenvoeding uitgelegd",
+    "metaDescription": "Praktische, onderbouwde artikelen over voeding voor honden en katten.",
+    "title": "Blog",
+    "subtitle": "Praktische, onderbouwde artikelen over het voeren van je hond of kat.",
+    "empty": "De eerste artikelen komen eraan.",
+    "minutes": "{n} min lezen",
+    "back": "Alle artikelen",
+    "notTranslated": "Dit artikel is nog niet vertaald – je leest de originele versie ({lang}).",
+    "ctaTitle": "Vind voer dat bij je huisdier past",
+    "ctaText": "Bekijk onafhankelijke scores voor duizenden voeders voor honden en katten.",
+    "ctaFoods": "Voer zoeken",
+    "ctaPet": "Maak een huisdierprofiel",
+    "more": "Meer artikelen"
+  },
+  "method": {
+    "metaTitle": "Zo beoordelen wij dierenvoer",
+    "metaDescription": "Precies hoe de Scanabowl-score wordt berekend: voedingsprofiel, kwaliteit van ingrediënten en schone receptuur – met de wetenschappelijke bronnen erachter.",
+    "title": "Zo beoordelen wij dierenvoer",
+    "intro": "Elk voer krijgt een score van 0 tot 100. Die wordt met een vaste formule berekend uit de ingrediëntenlijst en de analytische bestanddelen op de verpakking, met gepubliceerde richtlijnen uit de diervoeding. Deze pagina legt elke stap uit, zodat je het zelf kunt beoordelen.",
+    "glance": "De score in een oogopslag",
+    "pillar": {
+      "nutrition": "Komen de cijfers op de verpakking overeen met wat een hond of kat nodig heeft? Eiwit, vet, koolhydraten, vezels, mineralen en – bij katten – vocht, vergeleken met FEDIAF.",
+      "ingredients": "Waar komt het eiwit vandaan, hoeveel van de receptuur is dierlijk, en wordt dat duidelijk vermeld?",
+      "formulation": "Er gaan punten af voor toegevoegde suiker, kunstmatige kleurstoffen, synthetische conserveermiddelen en goedkope vulstoffen."
+    },
+    "gradesTitle": "Scores en cijfers",
+    "sections": [
+      {
+        "h": "Wat de score wel en niet is",
+        "p": [
+          "De Scanabowl-score beoordeelt het **etiket**: de ingrediëntenlijst en de analytische bestanddelen die op de verpakking staan. Hij kan niet zien hoe goed verteerbaar een voer werkelijk is, hoe goed het gemaakt wordt of of het in voedingsproeven is aangetoond.",
+          "De World Small Animal Veterinary Association (WSAVA) wijst erop dat een ingrediëntenlijst op zichzelf weinig zegt over de kwaliteit van een voer, en adviseert ook te kijken naar kwaliteitscontrole en onderzoek van de fabrikant. Gebruik onze score om recepturen te vergelijken en zwakke punten te ontdekken – en overleg met je dierenarts, zeker als je dier een medische aandoening heeft."
+        ]
+      },
+      {
+        "h": "1. Voedingsprofiel (35 punten)",
+        "p": ["We rekenen de analyse om naar droge stof en naar energie (kcal), zodat natvoer en droogvoer eerlijk vergeleken kunnen worden. Staat er geen energiewaarde op het etiket, dan berekenen we die met de door FEDIAF gepubliceerde formule (gebaseerd op NRC 2006). Daarna vergelijken we met de FEDIAF Nutritional Guidelines (2021):"],
+        "ul": [
+          "**Eiwit** – het FEDIAF-minimum voor volwassen honden is 18–21 g per 100 g droge stof (45–52 g per 1.000 kcal), voor volwassen katten 25–33 g (62,5–83 g per 1.000 kcal). Groeiende dieren hebben meer nodig. Punten stijgen boven het minimum en vlakken dan af: meer eiwit is voor een gezonde hond niet automatisch beter.",
+          "**Vet** – FEDIAF-minimum 5,5 g per 100 g droge stof voor volwassen honden (8,5 g voor pups) en 9 g voor katten. Zeer veel vet wordt afgestraft, omdat het gewichtstoename bevordert en alvleesklierontsteking kan uitlokken.",
+          "**Koolhydraten (katten: 10 punten, honden: 4 punten)** – geschat uit wat overblijft na eiwit, vet, celstof, as en vocht. Katten zijn strikte vleeseters: als ze kunnen kiezen, stellen ze een menu samen met ongeveer 52% van de energie uit eiwit, 36% uit vet en slechts 12% uit koolhydraten (Hewson-Hughes et al., 2011). Honden zijn flexibeler, daarom tellen koolhydraten voor hen veel minder mee.",
+          "**Vocht (alleen katten, 7,5 punten)** – katten hebben een zwakke dorstprikkel. Katten die voer met veel vocht eten, nemen in totaal meer water op en produceren verdunnere urine, met een lagere verzadiging van de mineralen die urinekristallen vormen (Buckley et al., 2011).",
+          "**Celstof en as** – te veel van beide verlaagt de score (een hoge mineralenbelasting is vooral belangrijk voor de urinewegen van katten).",
+          "**Honden: calcium:fosfor-verhouding en volledigheid van het etiket** – als calcium en fosfor vermeld zijn, hoort de verhouding tussen 1:1 en 2:1 te liggen (FEDIAF). Voer dat een volledige analyse vermeldt scoort beter dan voer dat waarden weglaat."
+        ]
+      },
+      {
+        "h": "2. Kwaliteit van de ingrediënten (50 punten)",
+        "p": ["Ingrediënten staan op volgorde van aflopend gewicht *zoals gemengd* – inclusief het water in vers vlees, dat ongeveer 70% van het gewicht uitmaakt. Daarom schatten we het aandeel van elk ingrediënt uit de plek in de lijst en de opgegeven percentages, en vergelijken we op droge-stofbasis. Daarom is een voer dat begint met “verse kip” niet per se vleesrijk."],
+        "ul": [
+          "**Herkomst van het eiwit (12 punten)** – het geschatte deel van het eiwit dat uit dierlijke ingrediënten komt in plaats van uit plantaardige concentraten zoals gluten of erwteneiwit. Katten hebben een hoger aandeel nodig dan honden.",
+          "**Dierlijk aandeel van de droge stof (12 punten)** – hoeveel van de receptuur zelf van dierlijke oorsprong is.",
+          "**De eerste ingrediënten (10 punten)** – wordt de lijst aangevoerd door een benoemd dierlijk ingrediënt of door granen?",
+          "**Benoemde bronnen (10 punten)** – “kip” of “zalm” is precies. “Vlees en dierlijke bijproducten” kan van spiervlees tot veren alles zijn. Bijproducten zijn niet automatisch slecht, maar je ziet niet wat je voert – en allergieën zijn er lastiger mee te beheersen.",
+          "**Nuttige extra’s (tot 6 punten)** – EPA/DHA uit vis- of algenolie, prebiotische vezels, probiotica, glucosamine/chondroïtine, taurine voor katten."
+        ]
+      },
+      {
+        "h": "3. Schone receptuur (15 punten)",
+        "p": ["We beginnen met 15 punten en trekken af voor dingen die een huisdier niet nodig heeft:"],
+        "ul": [
+          "**Toegevoegde suiker** (suiker, karamel, siroop) – geen voedingskundige noodzaak; katten kunnen zelfs geen zoetheid proeven.",
+          "**Kunstmatige kleurstoffen** – ze laten het voer alleen voor de eigenaar mooier lijken.",
+          "**Synthetische conserveermiddelen** (BHA, BHT, ethoxyquin, sorbaten, nitriet) – er bestaan natuurlijke alternatieven zoals tocoferolen.",
+          "**Vulstofgehalte** – bij katten: een hoog aandeel granen of plantaardige eiwitconcentraten; bij honden: een zeer hoog aandeel erwten, peulvruchten of aardappel. De Amerikaanse FDA onderzocht een verband tussen zeer peulvruchtrijk, graanvrij voer en gedilateerde cardiomyopathie bij honden. Een oorzaak is niet vastgesteld – dus dit is een kleine aftrek, geen verbod."
+        ]
+      },
+      {
+        "h": "Giftige ingrediënten",
+        "p": ["Als een ingrediënt giftig is voor de diersoort – bijvoorbeeld ui, xylitol of chocolade, rozijnen voor honden, knoflook of propyleenglycol voor katten – wordt de score begrensd op 25, wat er verder ook in de receptuur zit."]
+      },
+      {
+        "h": "Honden en katten worden verschillend beoordeeld",
+        "p": ["Katten zijn strikte vleeseters met specifieke behoeften (taurine, arachidonzuur, voorgevormd vitamine A, een hogere eiwitbehoefte), terwijl honden flexibeler zijn. Daarom verschillen de gewichten voor koolhydraten, vocht en dierlijk eiwit per diersoort. We geven geen punten voor “graanvrij” als zodanig: granen zijn voor de meeste dieren niet schadelijk en graanvrij is geen kwaliteitskeurmerk. We laten je er wel op filteren, bijvoorbeeld bij een tarweallergie."]
+      },
+      {
+        "h": "Wat geen score krijgt",
+        "p": ["Dieetvoer van de dierenarts, snacks, supplementen en aanvullend voer krijgen geen score. Hun doel is anders, dus een algemene score zou misleiden. Voer zonder ingrediëntenlijst kan niet beoordeeld worden. Ontbreekt de analyse, dan is het voedingsdeel een voorzichtige schatting en tonen we een lagere betrouwbaarheid."]
+      },
+      {
+        "h": "Het profiel van je huisdier",
+        "p": ["De basisscore verandert nooit. In het huisdierprofiel voegen we een persoonlijke match toe van hooguit enkele punten omhoog of omlaag, voor wat het etiket niet kan weten: levensfase (groeivoer voor een volwassen dier, of andersom), een gewichtsdoel, hondengrootte, urineproblemen bij katten en een gevoelige maag. De dagelijkse calorieën volgen de FEDIAF-energietabellen (bijvoorbeeld 110 kcal per kg^0,75 voor een gemiddelde volwassen hond en 75 kcal per kg^0,67 voor een gesteriliseerde binnenkat)."]
+      },
+      {
+        "h": "Allergieën",
+        "p": ["In het huisdierprofiel kies je de ingrediënten waar je dier op reageert. We herkennen ze allemaal in de Nederlandse, Engelse, Duitse en Franse formulering op etiketten. Voer waarin een allergeen bij naam genoemd wordt, wordt altijd verborgen. Vage omschrijvingen zoals “vlees en dierlijke bijproducten”, “granen” of “gevogelte” kunnen het bevatten, dus bij de standaardinstelling worden ook die voeders verborgen. Vetten en oliën van dat dier, zoals kippenvet, tellen ook mee, omdat ze sporen eiwit kunnen bevatten.", "De meest voorkomende voedselallergenen zijn bij honden rund, zuivel, kip en tarwe, en bij katten rund, vis en kip (Mueller et al., 2016). Een voedselallergie kan alleen met een eliminatiedieet samen met je dierenarts worden vastgesteld."]
+      },
+      {
+        "h": "Gegevens, onafhankelijkheid en fouten",
+        "p": ["Productgegevens komen uit openbare productinformatie en van fabrikanten die hun producten indienen. We controleren inzendingen altijd voordat ze gepubliceerd worden, en dezelfde formule geldt voor elk voer – geen enkel merk kan zijn score beïnvloeden. We verdienen een commissie op bestellingen via onze bol.com-links; dat staat uitgelegd in de [affiliate-vermelding](/{lang}/affiliate).", "Een fout gezien? Gebruik de link “Meld een correctie” op de productpagina. We herstellen fouten snel."]
+      }
+    ],
+    "refsTitle": "Wetenschappelijke bronnen",
+    "refs": [
+      "FEDIAF (2021). *Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs*, tabellen III-3, III-4 en bijlage 7.2 (energiebehoefte en ME-formules). [europeanpetfood.org](https://europeanpetfood.org/self-regulation/nutritional-guidelines/)",
+      "National Research Council (2006). *Nutrient Requirements of Dogs and Cats*. National Academies Press.",
+      "AAFCO. *Dog and Cat Food Nutrient Profiles*. Association of American Feed Control Officials.",
+      "WSAVA Global Nutrition Committee. *Selecting the best food for your pet*. [wsava.org](https://wsava.org/global-guidelines/global-nutrition-guidelines/)",
+      "Hewson-Hughes AK et al. (2011). Geometric analysis of macronutrient selection in the adult domestic cat, *Felis catus*. *J Exp Biol* 214:1039–1051. [PubMed](https://pubmed.ncbi.nlm.nih.gov/21346132/)",
+      "Buckley CMF et al. (2011). Effect of dietary water intake on urinary output, specific gravity and relative supersaturation for calcium oxalate and struvite in the cat. *Br J Nutr* 106:S128–S130. [Cambridge Core](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S0007114511001875)",
+      "Mueller RS, Olivry T, Prélaud P (2016). Critically appraised topic on adverse food reactions of companion animals (2): common food allergen sources in dogs and cats. *BMC Vet Res* 12:9. [PubMed](https://pubmed.ncbi.nlm.nih.gov/26753610/)",
+      "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
+    ],
+    "versionTitle": "Versie",
+    "version": "Scoremethode versie 1.0 (september 2026). Als we de methode verbeteren, worden alle scores opnieuw berekend en wordt deze pagina bijgewerkt.",
+    "feedback": "Heb je feedback op de methode? Laat het ons weten."
+  },
+  "suggest": {
+    "metaTitle": "Voer voorstellen",
+    "metaDescription": "Kun je het voer van je huisdier niet vinden? Stuur ons de gegevens en we voegen het toe na controle.",
+    "title": "Voer voorstellen",
+    "intro": "Kun je het voer van je huisdier niet vinden, of klopt er iets niet? Stuur ons de gegevens van de verpakking. We controleren elk voorstel voordat het op de site komt."
+  },
+  "brands": {
+    "metaTitle": "Voor merken van dierenvoer – voeg je voer toe",
+    "metaDescription": "Fabrikanten van dierenvoer kunnen hun producten gratis indienen. Elke inzending wordt gecontroleerd en met dezelfde onafhankelijke methode beoordeeld.",
+    "title": "Voeg je dierenvoer toe",
+    "intro": "Maak het dierenbezitters makkelijk om jouw voer te vinden. Dien je producten in met de volledige ingrediëntenlijst en analyse. We controleren alles en beoordelen elk voer met precies dezelfde methode.",
+    "howTitle": "Zo werkt het",
+    "steps": [
+      "Vul het formulier in met je bedrijfsgegevens en de etiketinformatie van elk product.",
+      "Wij controleren de gegevens aan de hand van de verpakking en nemen contact op als iets onduidelijk is.",
+      "Na goedkeuring verschijnt je voer met zijn onafhankelijke score en een link om het te bestellen."
+    ],
+    "promiseTitle": "Onze belofte",
+    "promises": [
+      "**Gratis** – geen kosten om vermeld te worden.",
+      "**Onafhankelijk** – de score wordt voor elk voer met dezelfde formule berekend. Merken kunnen geen betere score kopen.",
+      "**Transparant** – de score wordt uitgelegd op de productpagina en op de [methodepagina](/{lang}/how-we-score).",
+      "**Eerst gecontroleerd** – er wordt niets gepubliceerd zonder onze controle."
+    ],
+    "companyTitle": "Jouw bedrijf",
+    "companyName": "Bedrijfs- / merknaam",
+    "website": "Website",
+    "contact": "Contactpersoon",
+    "role": "Functie",
+    "phone": "Telefoon",
+    "productN": "Product {n}",
+    "addProduct": "Nog een product toevoegen",
+    "removeProduct": "Dit product verwijderen",
+    "message": "Nog iets wat we moeten weten?",
+    "messageHint": "Bijvoorbeeld: certificeringen, voedingsproeven, waar je voer verkocht wordt.",
+    "authorised": "Ik bevestig dat ik bevoegd ben deze informatie namens het bedrijf in te dienen en dat zij overeenkomt met de verpakking.",
+    "submit": "Indienen ter controle"
+  },
+  "forms": {
+    "productName": "Productnaam",
+    "productNamePh": "bijv. Adult Zalm & Rijst",
+    "brand": "Merk",
+    "species": "Dier",
+    "ean": "Barcode (EAN)",
+    "eanHint": "Het nummer onder de barcode, 8 of 13 cijfers.",
+    "ingredients": "Ingrediënten / samenstelling",
+    "ingredientsHint": "Neem de samenstelling exact over van de verpakking, inclusief percentages.",
+    "analysis": "Analytische bestanddelen",
+    "analysisHint": "Bijvoorbeeld: Ruw eiwit 30%, ruw vet 15%, ruwe as 7%, ruwe celstof 3%, vocht 9%.",
+    "pack": "Verpakkingsgrootte",
+    "url": "Link (optioneel)",
+    "urlHint": "Een pagina waar we het product kunnen zien.",
+    "email": "E-mailadres",
+    "emailNotify": "Je e-mailadres (optioneel)",
+    "emailOptional": "Je e-mailadres (optioneel)",
+    "emailPrivacy": "Wordt alleen gebruikt om je over dit bericht te antwoorden.",
+    "consent": "Ik ga ermee akkoord dat Scanabowl mijn e-mailadres en bericht bewaart om dit verzoek af te handelen, zoals beschreven in het privacybeleid.",
+    "sendSuggestion": "Voorstel versturen",
+    "sendReport": "Correctie versturen",
+    "sending": "Versturen…",
+    "reportAbout": "Correctie voor:",
+    "reportMessage": "Wat klopt er niet?",
+    "reportHint": "Bijvoorbeeld: de ingrediëntenlijst op mijn verpakking is anders. Laat weten wat er staat.",
+    "reviewNote": "We bekijken elk bericht handmatig. Wat je instuurt wordt nooit automatisch gepubliceerd.",
+    "thanksTitle": "Bedankt!",
+    "thanksText": "We hebben je bericht ontvangen en bekijken het zo snel mogelijk.",
+    "errorTitle": "We konden je bericht niet versturen",
+    "errorText": "Er ging iets mis aan onze kant. Je kunt ons nog steeds per e-mail bereiken:",
+    "errorMail": "Mail naar {email}",
+    "err": { "required": "Dit veld is verplicht.", "invalid": "Deze waarde is niet geldig." }
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Vragen, feedback of een voer dat we moeten toevoegen? Neem contact op met Scanabowl.",
+    "title": "Contact",
+    "intro": "Vragen, ideeën of feedback? Stuur ons een bericht of mail naar",
+    "message": "Je bericht",
+    "send": "Bericht versturen"
+  },
+  "about": {
+    "metaTitle": "Over Scanabowl",
+    "metaDescription": "Scanabowl maakt etiketten van dierenvoer begrijpelijk met onafhankelijke, wetenschappelijk onderbouwde scores.",
+    "title": "Over Scanabowl",
+    "intro": "Scanabowl helpt dierenbezitters te begrijpen wat er echt in de voerbak van hun hond of kat zit.",
+    "sections": [
+      {
+        "h": "Waarom we bestaan",
+        "p": ["Verpakkingen van dierenvoer staan vol beloftes – “natuurlijk”, “premium”, “compleet” – maar de echte informatie staat in kleine letters. Scanabowl vertaalt de ingrediëntenlijst en voedingsanalyse naar een duidelijke score, met uitleg bij elk punt."]
+      },
+      {
+        "h": "Wat ons anders maakt",
+        "ul": [
+          "**Wetenschappelijk onderbouwd** – onze beoordeling volgt gepubliceerde FEDIAF- en NRC-richtlijnen en peer-reviewed onderzoek, en we noemen onze bronnen.",
+          "**Honden en katten apart beoordeeld** – hun voedingsbehoeften verschillen sterk.",
+          "**Persoonlijk** – allergieën, leeftijd en gewicht van je dier bepalen wat je ziet.",
+          "**Onafhankelijk** – merken kunnen geen betere score kopen."
+        ]
+      },
+      {
+        "h": "Hoe we gefinancierd worden",
+        "p": ["Scanabowl is gratis te gebruiken. Als je voer bestelt via onze bol.com-links, verdienen we mogelijk een kleine commissie, zonder extra kosten voor jou. Die inkomsten investeren we in de website. Lees meer in de [affiliate-vermelding](/{lang}/affiliate)."]
+      },
+      {
+        "h": "Doe mee",
+        "p": ["Ontbreekt het voer van je huisdier? [Stel het voor](/{lang}/suggest). Maak je zelf dierenvoer? [Voeg je producten toe](/{lang}/brands). Een fout gevonden? Laat het ons weten via de [contactpagina](/{lang}/contact)."]
+      }
+    ]
+  },
+  "legal": {
+    "updated": "Laatst bijgewerkt: {date}",
+    "companyTitle": "Wie wij zijn",
+    "email": "E-mail"
+  },
+  "privacy": {
+    "metaTitle": "Privacybeleid",
+    "metaDescription": "Hoe Scanabowl met je gegevens omgaat: het profiel van je huisdier blijft op je apparaat, en we gebruiken je e-mailadres alleen om je te antwoorden.",
+    "title": "Privacybeleid",
+    "intro": "We verzamelen zo min mogelijk gegevens. Je kunt Scanabowl gebruiken zonder account en zonder ons persoonsgegevens te geven.",
+    "sections": [
+      {
+        "h": "Het profiel van je huisdier",
+        "p": ["Het profiel van je huisdier (naam, leeftijd, gewicht, allergieën) wordt alleen in je browser (local storage) op je eigen apparaat opgeslagen. Het wordt nooit naar onze servers gestuurd, dus wij kunnen het niet zien. Als je je browsergegevens wist, verdwijnt het."]
+      },
+      {
+        "h": "Formulieren",
+        "p": ["Als je een voorstel, correctie, contactbericht of merkinzending verstuurt, ontvangen we de gegevens die je invult (inclusief je e-mailadres, als je die opgeeft). We gebruiken die alleen om je inzending te beoordelen en je te antwoorden. Productinformatie die je indient kan na onze controle op de site gepubliceerd worden; persoonsgegevens niet."]
+      },
+      {
+        "h": "Cookies en tracking",
+        "p": ["We gebruiken geen advertentie- of trackingcookies. We slaan één klein functioneel cookie op (je gekozen taal, een jaar lang) en local-storage-items voor je huisdierprofiel. Omdat deze strikt functioneel zijn, is geen cookiebanner nodig. Als we ooit analytics toevoegen, gebruiken we een privacyvriendelijke tool en werken we deze pagina bij."]
+      },
+      {
+        "h": "Dienstverleners",
+        "ul": [
+          "**Vercel** host de website en verwerkt technische gegevens zoals IP-adressen in serverlogs.",
+          "**Resend** bezorgt de e-mails die uit onze formulieren komen.",
+          "**bol.com** – als je op een affiliate-link klikt, kunnen bol.com en zijn partnerplatform eigen cookies plaatsen onder hun eigen privacybeleid."
+        ]
+      },
+      {
+        "h": "Bewaartermijn",
+        "p": ["We bewaren berichten alleen zolang nodig is om ze af te handelen, en niet langer dan twee jaar, tenzij de wet anders vereist."]
+      },
+      {
+        "h": "Jouw rechten",
+        "p": ["Op grond van de AVG kun je ons vragen om inzage in, correctie of verwijdering van je persoonsgegevens, en bezwaar maken tegen het gebruik ervan. Mail ons op het onderstaande adres. Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens."]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Gebruiksvoorwaarden",
+    "metaDescription": "De voorwaarden voor het gebruik van Scanabowl.",
+    "title": "Gebruiksvoorwaarden",
+    "intro": "Door Scanabowl te gebruiken ga je akkoord met deze voorwaarden.",
+    "sections": [
+      {
+        "h": "Informatie, geen advies",
+        "p": ["Scanabowl geeft algemene informatie over dierenvoer. De scores en toelichtingen zijn geen diergeneeskundig advies en vervangen geen bezoek aan je dierenarts. Raadpleeg altijd een dierenarts voordat je het voer van een dier met een medische aandoening wijzigt."]
+      },
+      {
+        "h": "Juistheid",
+        "p": ["We doen ons best om de gegevens correct te houden, maar recepturen veranderen en etiketinformatie kan onvolledig zijn of fouten bevatten. De score weerspiegelt de informatie die wij hebben. Controleer altijd de verpakking voordat je koopt of voert. We garanderen niet dat informatie volledig, actueel of foutloos is."]
+      },
+      {
+        "h": "Links naar derden en winkels",
+        "p": ["Links naar bol.com en andere sites staan er voor het gemak. Prijzen, voorraad en levering worden door de winkel bepaald. Elke aankoop is een overeenkomst tussen jou en de winkel; Scanabowl is daarbij geen partij."]
+      },
+      {
+        "h": "Ingezonden informatie",
+        "p": ["Als je als bedrijf productinformatie indient, bevestig je dat je daartoe bevoegd bent en dat zij juist is. Je geeft Scanabowl het recht deze informatie te publiceren en te beoordelen. Indienen geeft geen garantie op publicatie of een bepaalde score."]
+      },
+      {
+        "h": "Intellectueel eigendom",
+        "p": ["Het ontwerp, de teksten, de scoremethode en de software van Scanabowl zijn beschermd. Je mag links en korte citaten delen met bronvermelding. Massaal kopiëren van de database is niet toegestaan zonder toestemming."]
+      },
+      {
+        "h": "Aansprakelijkheid en toepasselijk recht",
+        "p": ["Voor zover de wet dat toestaat, is Scanabowl niet aansprakelijk voor schade die voortvloeit uit het gebruik van deze site of het vertrouwen op de inhoud. Nederlands recht is van toepassing en geschillen worden voorgelegd aan de bevoegde Nederlandse rechter."]
+      }
+    ]
+  },
+  "affiliate": {
+    "metaTitle": "Affiliate-vermelding",
+    "metaDescription": "Hoe Scanabowl geld verdient met bol.com-affiliate-links – en waarom dat de scores nooit beïnvloedt.",
+    "title": "Affiliate-vermelding",
+    "intro": "Scanabowl is gratis te gebruiken. Op deze pagina leggen we uit hoe we geld verdienen.",
+    "sections": [
+      {
+        "h": "bol.com Partnerprogramma",
+        "p": ["Scanabowl doet mee aan het bol.com Partnerprogramma. Als je op een knop “Bekijk bij bol.com” klikt en iets koopt, ontvangen wij mogelijk een commissie van bol.com. Het kost jou niets extra."]
+      },
+      {
+        "h": "Scores zijn nooit te koop",
+        "ul": [
+          "Elk voer wordt met dezelfde formule beoordeeld, of het nu bij bol.com verkocht wordt of een commissie oplevert of niet.",
+          "Merken kunnen geen plek, rangschikking of betere score kopen.",
+          "De lijsten met de hoogste scores worden automatisch gegenereerd."
+        ]
+      },
+      {
+        "h": "Zo herken je affiliate-links",
+        "p": ["Links naar bol.com zijn als gesponsorde links gemarkeerd en vergezeld van een korte melding. Prijzen en beschikbaarheid worden door bol.com getoond; de prijs op het moment van bestellen is bepalend."]
+      },
+      {
+        "h": "Wat we met de inkomsten doen",
+        "p": ["De inkomsten investeren we in Scanabowl: hosting, het actueel houden van de database en het bouwen van nieuwe functies."]
+      }
+    ]
+  },
+  "errors": {
+    "notFoundTitle": "Pagina niet gevonden",
+    "notFoundText": "De pagina die je zoekt bestaat niet of is verplaatst.",
+    "home": "Terug naar de startpagina"
+  },
+  "footer": {
+    "blurb": "Onafhankelijke, wetenschappelijk onderbouwde scores voor hondenvoer en kattenvoer – persoonlijk voor jouw huisdier.",
+    "explore": "Ontdekken",
+    "contribute": "Doe mee",
+    "legal": "Juridisch",
+    "vat": "BTW",
+    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend. Links naar bol.com zijn affiliate-links."
+  }
+}
