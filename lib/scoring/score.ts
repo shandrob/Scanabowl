@@ -77,6 +77,9 @@ const ANIMAL_DM_KINDS = new Set<IngredientKind>([
   "fish_oil",
 ]);
 
+const ANIMAL_NAME_RE =
+  /(?<![a-z])(kip|kalkoen|eend|gans|rund|lam|zalm|vis|tonijn|gevogelte|konijn|wild|hert|vlees|haring|makreel|forel|chicken|beef|lamb|turkey|duck|salmon|fish|tuna|meat|poultry|rabbit|venison)(?![a-z])/;
+
 type Weighted = Reason & { w: number };
 
 export function scoreProduct(input: ProductInput): ScoreResult {
@@ -103,6 +106,15 @@ export function scoreProduct(input: ProductInput): ScoreResult {
 
   if (input.category !== "complete") return { ...base, notScored: input.category };
   if (ings.length === 0) return { ...base, notScored: "no_ingredients" };
+  // A list without any animal ingredient is almost certainly a scraper glitch (marketing text, vitamin
+  // premix) when it is a cat food, when the food is named after an animal, or when most of the "ingredients"
+  // are not ingredients at all. Genuine plant-based dog foods still get a score. Better no score than a wrong one.
+  if (!ings.some((i) => ANIMAL_DM_KINDS.has(i.info.kind))) {
+    const recognised = ings.filter((i) => i.info.kind !== "other").length / ings.length;
+    if (species === "cat" || ANIMAL_NAME_RE.test(normalize(input.name ?? "")) || recognised < 0.4) {
+      return { ...base, notScored: "ingredients_unclear" };
+    }
+  }
 
   const positives: Weighted[] = [];
   const negatives: Weighted[] = [];

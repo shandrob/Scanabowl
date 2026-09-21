@@ -11,6 +11,22 @@ export interface SplitLabel {
   additives: string;
 }
 
+/** An unclosed "(" would swallow the rest of the list into one ingredient, so unmatched ones are dropped. */
+function dropUnmatchedBrackets(text: string): string {
+  const chars = [...text];
+  const open: number[] = [];
+  const stray = new Set<number>();
+  chars.forEach((ch, i) => {
+    if (ch === "(") open.push(i);
+    else if (ch === ")") {
+      if (open.length) open.pop();
+      else stray.add(i);
+    }
+  });
+  for (const i of open) stray.add(i);
+  return stray.size ? chars.map((ch, i) => (stray.has(i) ? " " : ch)).join("") : text;
+}
+
 /**
  * Scraped labels arrive with header junk ("Gewicht: 3 kg. Smaak: kip. ingredienten: ..."), "|" as
  * separator and "(bestaande uit) kip 3 %" phrasing. Normalise all of that into a plain list.
@@ -26,7 +42,12 @@ export function prepareIngredientText(text: string): string {
   }
   // "(bestaande uit) kip 3 %, granen" -> "(kip 3 %), granen"
   t = t.replace(/\((?:bestaande uit|waaronder|waarvan|w\.o\.|onder andere|o\.a\.|bevat|inclusief)\)\s*([^,|;]*)/gi, "($1)");
-  return t.replace(/\s*[|•·]\s*/g, ", ");
+  t = t.replace(/\s*[|•·]\s*/g, ", ");
+  // some labels have no commas at all: "Kipfilet 67% Kippenbouillon 24% Ham 8%"
+  if (!/[,;]/.test(t) && (t.match(/\d\s*%\s+(?=[A-Za-zÀ-ÿ])/g) ?? []).length >= 2) {
+    t = t.replace(/(\d\s*%)\s+(?=[A-Za-zÀ-ÿ])/g, "$1, ");
+  }
+  return dropUnmatchedBrackets(t);
 }
 
 /**
@@ -72,16 +93,36 @@ export function splitTopLevel(text: string): string[] {
 
 const LEAD_JUNK = /^(samenstelling|ingredienten|ingredients|zutaten|composition|ingredienten)\s*[:\-]?\s*/i;
 
+/** Separate the text outside brackets from the text inside them; nested brackets stay inside their parent. */
+function splitBrackets(t: string): { outside: string; subs: string[] } {
+  const subs: string[] = [];
+  let outside = "";
+  let cur = "";
+  let depth = 0;
+  for (const ch of t) {
+    if (ch === "(" || ch === "[") {
+      if (depth === 0) {
+        outside += " ";
+        cur = "";
+      } else cur += ch;
+      depth++;
+    } else if ((ch === ")" || ch === "]") && depth > 0) {
+      depth--;
+      if (depth === 0) subs.push(cur);
+      else cur += ch;
+    } else if (depth > 0) cur += ch;
+    else outside += ch;
+  }
+  if (depth > 0) subs.push(cur);
+  return { outside, subs };
+}
+
 function parseToken(token: string): Omit<ParsedIngredient, "share"> | null {
   const t = token.replace(/\*+/g, "").replace(/[.\s]+$/g, "").replace(LEAD_JUNK, "").trim();
   if (!t) return null;
 
   // pull out bracket content
-  const subs: string[] = [];
-  const outside = t.replace(/[([]([^)\]]*)[)\]]/g, (_, inner: string) => {
-    subs.push(inner);
-    return " ";
-  });
+  const { outside, subs } = splitBrackets(t);
   const sub = subs.join(" ");
 
   // declared percentage outside brackets: "Kip 17%", "17% kip"

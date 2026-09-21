@@ -218,7 +218,8 @@
       "treat": "This is a treat or snack, not a complete food, so it is not scored.",
       "supplement": "This is a supplement, not a complete food, so it is not scored.",
       "complementary": "This is a complementary food – it is not meant to be the only food your pet eats – so it is not scored.",
-      "no_ingredients": "We do not have the ingredient list for this food yet, so we cannot calculate a score. You can help by sending it to us."
+      "no_ingredients": "We do not have the ingredient list for this food yet, so we cannot calculate a score. You can help by sending it to us.",
+      "ingredients_unclear": "The ingredient text we have for this food does not look right (for example a weight or marketing copy instead of ingredients). We would rather show no score than a wrong one. You can help by sending us the correct list."
     },
     "hazardTitle": "Contains an ingredient that is harmful to this animal",
     "goodTitle": "What is good",
@@ -238,6 +239,7 @@
     "alternativesPet": "Similar foods that score higher and are safe for {name}.",
     "dataTitle": "About this data",
     "dataPack": "Ingredients and analysis as printed on the pack, checked by Scanabowl.",
+    "dataScraped": "Ingredients and analysis were collected from public product information and processed automatically; they have not always been checked by hand. Compare them with the pack and tell us if something is wrong.",
     "dataBrand": "Provided by the manufacturer and checked by Scanabowl. It is scored with exactly the same method as every other food.",
     "reportError": "Something wrong? Report a correction",
     "disclaimer": "The score describes the label and is not veterinary advice. Always introduce a new food gradually and ask your vet if your pet has a health condition."

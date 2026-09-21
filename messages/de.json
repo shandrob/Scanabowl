@@ -218,7 +218,8 @@
       "treat": "Dies ist ein Snack oder Leckerli und kein Alleinfuttermittel, daher wird es nicht bewertet.",
       "supplement": "Dies ist ein Ergänzungsmittel und kein Alleinfuttermittel, daher wird es nicht bewertet.",
       "complementary": "Dies ist ein Ergänzungsfuttermittel – nicht als einzige Nahrung Ihres Tieres gedacht – und wird daher nicht bewertet.",
-      "no_ingredients": "Die Zutatenliste dieses Futters liegt uns noch nicht vor, deshalb können wir keine Bewertung berechnen. Sie können helfen, indem Sie sie uns senden."
+      "no_ingredients": "Die Zutatenliste dieses Futters liegt uns noch nicht vor, deshalb können wir keine Bewertung berechnen. Sie können helfen, indem Sie sie uns senden.",
+      "ingredients_unclear": "Der Zutatentext, der uns für dieses Futter vorliegt, scheint nicht zu stimmen (zum Beispiel ein Gewicht oder Werbetext statt Zutaten). Wir zeigen lieber keine Bewertung als eine falsche. Sie können helfen, indem Sie uns die richtige Liste senden."
     },
     "hazardTitle": "Enthält eine für dieses Tier schädliche Zutat",
     "goodTitle": "Was gut ist",
@@ -238,6 +239,7 @@
     "alternativesPet": "Ähnliche Futter mit höherer Bewertung, die für {name} sicher sind.",
     "dataTitle": "Über diese Daten",
     "dataPack": "Zutaten und Analyse wie auf der Verpackung gedruckt, von Scanabowl geprüft.",
+    "dataScraped": "Zutaten und Analyse wurden aus öffentlichen Produktinformationen gesammelt und automatisch verarbeitet; sie wurden nicht immer von Hand geprüft. Vergleichen Sie sie mit der Verpackung und teilen Sie uns mit, wenn etwas nicht stimmt.",
     "dataBrand": "Vom Hersteller bereitgestellt und von Scanabowl geprüft. Es wird nach exakt derselben Methode bewertet wie jedes andere Futter.",
     "reportError": "Stimmt etwas nicht? Korrektur melden",
     "disclaimer": "Die Bewertung beschreibt das Etikett und ist keine tierärztliche Beratung. Stellen Sie neues Futter immer schrittweise um und fragen Sie Ihren Tierarzt, wenn Ihr Tier gesundheitliche Probleme hat."

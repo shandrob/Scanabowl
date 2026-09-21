@@ -247,3 +247,43 @@ describe("catalogue cleaning", () => {
     expect(extractPack("Sheba Mini Filets - Kip 40x85 g")).toBe("40x85 g");
   });
 });
+
+describe("unreliable ingredient text", () => {
+  const base = { species: "cat" as const, foodType: "dry" as const, lifeStage: "adult" as const, category: "complete" as const, analysis: "" };
+  it("reads a comma-less list with declared percentages", () => {
+    const kinds = parseIngredients("Kipfilet 67% Kippenbouillon 24% Ham 8% Rijst 1%").ingredients.map((i) => i.info.kind);
+    expect(kinds).toEqual(["meat", "broth", "meat", "cereal"]);
+  });
+  it("does not let an unclosed bracket swallow the rest of the list", () => {
+    const r = parseIngredients("Maïs, tarwe, gedroogde kip en kalkoen (18% ( kip: 10%, natuurlijke bron van glucosamine), sorghum, gerst, dierlijk vet");
+    expect(r.ingredients.length).toBeGreaterThanOrEqual(6);
+    expect(r.ingredients[2].info.kind).toBe("meat");
+  });
+  it("recognises free-range chicken compounds", () => {
+    expect(parseIngredients("Verse vrije-uitloopkip 50%, erwten").ingredients[0].info.kind).toBe("meat");
+  });
+  it("gives no score when a cat food list names no animal ingredient (marketing text)", () => {
+    const r = scoreProduct({ ...base, name: "Fokker Cat Steri-Fit Kip", ingredients: "De brokken zorgen ervoor dat alle lichaamsfuncties goed worden ondersteund" });
+    expect(r.score).toBeNull();
+    expect(r.notScored).toBe("ingredients_unclear");
+  });
+  it("gives no score when a food named after an animal lists none", () => {
+    const r = scoreProduct({ ...base, species: "dog", name: "Beneful Volwassen Kip&Groente", ingredients: "Malse brokken bevatten veel eiwitten, Bevat calcium voor sterke tanden" });
+    expect(r.notScored).toBe("ingredients_unclear");
+  });
+  it("still scores a genuinely plant-based dog food", () => {
+    const r = scoreProduct({ ...base, species: "dog", name: "Plantbased Adult Rode Biet&Pompoen", ingredients: "erwten, rijst, pompoen, rode biet, zonnebloemolie, mineralen" });
+    expect(r.score).not.toBeNull();
+  });
+});
+
+describe("label quirks", () => {
+  it("reads defatted meat as meat, not as fat", () => {
+    expect(parseIngredients("Rijst (3%), gedroogd ontvet lamsvlees (18%), gevogeltevet (8%)").ingredients[1].info.kind).toBe("meat");
+  });
+  it("keeps nested brackets inside their parent ingredient", () => {
+    const r = parseIngredients("95% kalkoen (66% (hart, lever, vlees, nek), 29% kalkoenbouillon), 4% boerenkool, 1% mineralen.");
+    expect(r.ingredients.map((i) => i.info.kind)).toEqual(["meat", expect.any(String), "mineral"]);
+    expect(r.ingredients[0].pct).toBe(95);
+  });
+});

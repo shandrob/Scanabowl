@@ -126,7 +126,7 @@ export interface ScoreResult {
   negatives: Reason[];
   flags: Flag[];
   confidence: Confidence;
-  notScored?: "veterinary" | "complementary" | "treat" | "supplement" | "no_ingredients";
+  notScored?: "veterinary" | "complementary" | "treat" | "supplement" | "no_ingredients" | "ingredients_unclear";
   animalProteinShare: number | null;
   /** estimated share of the recipe's dry matter that is animal-derived (protein and fat) */
   animalDmShare: number | null;

@@ -132,7 +132,7 @@ export default async function ProductPage({ params }: Props) {
           <OrderCard ean={p.ean} name={p.name} bolUrl={p.bolUrl} lang={lang} t={t} />
           <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft">
             <h2 className="font-display text-base font-semibold text-brand-deep">{t("product.dataTitle")}</h2>
-            <p className="mt-2">{t(p.source === "brand" ? "product.dataBrand" : "product.dataPack")}</p>
+            <p className="mt-2">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>
             <p className="mt-2">
               <Link href={`${localePath(lang, "/suggest")}?report=${encodeURIComponent(p.ean || p.id)}&name=${encodeURIComponent(p.name)}`} className="font-semibold text-brand underline underline-offset-2">
                 {t("product.reportError")}
