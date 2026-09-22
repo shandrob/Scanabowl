@@ -64,6 +64,12 @@ describe("rowToProduct", () => {
     expect(p?.foodType).toBe("dry");
     expect(p?.lifeStage).toBe("senior");
   });
+  it("treats scraper placeholders and pack sizes as missing ingredient text", () => {
+    for (const junk of ["NIET GEVONDEN", "Gewicht: 2.5 kg", "1,5 kg", "n.v.t."]) {
+      const p = rowToProduct({ naam: "Testvoer Adult Kip", doeldier: "Kat", ingredienten: junk }, ctx);
+      expect(p?.ingredients).toBe("");
+    }
+  });
   it("drops rows without a usable name, species or garbage text", () => {
     expect(rowToProduct({ naam: "Natvoer", doeldier: "Kat" }, ctx)).toBeNull();
     expect(rowToProduct({ naam: "Iets moois", doeldier: "" }, ctx)).toBeNull();

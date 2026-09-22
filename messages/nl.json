@@ -218,7 +218,8 @@
       "treat": "Dit is een snack of traktatie en geen volledig voer, dus het krijgt geen score.",
       "supplement": "Dit is een supplement en geen volledig voer, dus het krijgt geen score.",
       "complementary": "Dit is aanvullend voer – niet bedoeld als enige voeding van je dier – en krijgt daarom geen score.",
-      "no_ingredients": "We hebben de ingrediëntenlijst van dit voer nog niet, dus we kunnen geen score berekenen. Je kunt helpen door hem naar ons te sturen."
+      "no_ingredients": "We hebben de ingrediëntenlijst van dit voer nog niet, dus we kunnen geen score berekenen. Je kunt helpen door hem naar ons te sturen.",
+      "ingredients_unclear": "De ingrediëntentekst die we van dit voer hebben lijkt niet te kloppen (bijvoorbeeld een gewicht of reclametekst in plaats van ingrediënten). We tonen liever geen score dan een verkeerde. Je kunt helpen door de juiste lijst naar ons te sturen."
     },
     "hazardTitle": "Bevat een ingrediënt dat schadelijk is voor dit dier",
     "goodTitle": "Wat is goed",
@@ -238,6 +239,7 @@
     "alternativesPet": "Vergelijkbaar voer met een hogere score dat veilig is voor {name}.",
     "dataTitle": "Over deze gegevens",
     "dataPack": "Ingrediënten en analyse zoals gedrukt op de verpakking, gecontroleerd door Scanabowl.",
+    "dataScraped": "Ingrediënten en analyse zijn verzameld uit openbare productinformatie en automatisch verwerkt; ze zijn niet altijd handmatig gecontroleerd. Vergelijk ze met de verpakking en meld het ons als er iets niet klopt.",
     "dataBrand": "Aangeleverd door de fabrikant en gecontroleerd door Scanabowl. Het wordt met precies dezelfde methode beoordeeld als elk ander voer.",
     "reportError": "Klopt er iets niet? Meld een correctie",
     "disclaimer": "De score beschrijft het etiket en is geen diergeneeskundig advies. Bouw nieuw voer altijd geleidelijk op en vraag je dierenarts om advies als je dier een gezondheidsprobleem heeft."
@@ -729,7 +731,7 @@
     "sections": [
       {
         "h": "bol.com Partnerprogramma",
-        "p": ["Scanabowl doet mee aan het bol.com Partnerprogramma. Als je op een knop “Bekijk bij bol.com” klikt en iets koopt, ontvangen wij mogelijk een commissie van bol.com. Het kost jou niets extra."]
+        "p": ["Scanabowl doet mee aan het bol.com Partnerprogramma. Als je op een knop “Bekijk bij bol.com” klikt en iets koopt, ontvangen wij mogelijk een commissie van bol.com. Het kost jou niets extra.", "Scanabowl is een onafhankelijke website en is niet eigendom van of verbonden aan bol.com. bol.com heeft geen invloed op onze inhoud, scores of aanbevelingen. Bestellingen plaats je rechtstreeks bij bol.com; bol.com is verantwoordelijk voor prijs, levering en klantenservice."]
       },
       {
         "h": "Scores zijn nooit te koop",

@@ -21,14 +21,14 @@ export const SPECIES: Array<{ id: string; re: RegExp; clarity: number; family: "
   // eggs & dairy first so "kippenei" is an egg, not a chicken
   { id: "egg", re: new RegExp(`${W}(kippenei\\w*|eieren|eiproducten|eipoeder|eierschal\\w*|egg|eggs|eier|oeufs?|ei)(?![a-z])`), clarity: 1, family: "animal" },
   { id: "dairy", re: new RegExp(`${W}(melk(?!zuur)\\w*|zuivel\\w*|kaas|wei(?:poeder|eiwit\\w*)?|lactose|milk|whey|cheese|dairy|yogh?urt|kefir|molke|milch|kase|lait|fromage|lactoserum|caseine?|casein|boter|butter)(?![a-z])`), clarity: 1, family: "animal" },
-  { id: "chicken", re: new RegExp(`${W}(kip|kippen|kuiken|kuikens|hoen|hoenders|chicken|huhn|huhner|hahnchen|poulet|poule)\\w*`), clarity: 1, family: "animal" },
+  { id: "chicken", re: new RegExp(`${W}(kip|kippen|kuiken|kuikens|hoen|hoenders|chicken|huhn|huhner|hahnchen|poulet|poule)\\w*|${W}[a-z-]*(?:uitloop|scharrel)kip\\w*`), clarity: 1, family: "animal" },
   { id: "turkey", re: new RegExp(`${W}(kalkoen|turkey|pute|puten|truthahn|dinde)\\w*`), clarity: 1, family: "animal" },
   { id: "duck", re: new RegExp(`${W}(eend|eenden|eendje|eendenvlees|duck|ente|enten|canard)\\w*`), clarity: 1, family: "animal" },
   { id: "goose", re: new RegExp(`${W}(gans|ganzen|goose|oie)(?![a-z])`), clarity: 1, family: "animal" },
-  { id: "poultry", re: new RegExp(`${W}(gevogelte|poultry|geflugel|volaille)\\w*`), clarity: 0.5, family: "animal" },
+  { id: "poultry", re: new RegExp(`${W}(gevogelte|pluimvee|poultry|geflugel|volaille)\\w*`), clarity: 0.5, family: "animal" },
   { id: "beef", re: new RegExp(`${W}(rund|runder|rundvlees|rundvet|beef|rind|rinder|boeuf|vache|kalf|kalfs\\w*|veal|kalb|veau)\\w*|${W}(koe|koeien)(?![a-z])`), clarity: 1, family: "animal" },
-  { id: "lamb", re: new RegExp(`${W}(lam(?![a-z])|lams\\w*|lammeren|lamb|lamm|agneau|schaap\\w*|schapen\\w*|mutton|hammel|mouton)`), clarity: 1, family: "animal" },
-  { id: "pork", re: new RegExp(`${W}(varken\\w*|pork|schwein\\w*|porc|spek|bacon)`), clarity: 1, family: "animal" },
+  { id: "lamb", re: new RegExp(`${W}(lam(?![a-z])|lameiwit|lams\\w*|lammeren|lamb|lamm|agneau|schaap\\w*|schapen\\w*|mutton|hammel|mouton)`), clarity: 1, family: "animal" },
+  { id: "pork", re: new RegExp(`${W}(varken\\w*|pork|schwein\\w*|porc|spek|bacon|ham(?![a-z]))`), clarity: 1, family: "animal" },
   { id: "horse", re: new RegExp(`${W}(paard\\w*|horse|pferd\\w*|cheval)`), clarity: 1, family: "animal" },
   { id: "rabbit", re: new RegExp(`${W}(konijn\\w*|rabbit|kaninchen|lapin)`), clarity: 1, family: "animal" },
   { id: "game", re: new RegExp(`${W}(wild(?![a-z])|wildvlees|hert\\w*|ree(?![a-z])|venison|wildbret|gibier|everzwijn|wild boar|cerf|kangoeroe\\w*|kangaroo|struis\\w*|ostrich|rendier|reindeer|geit(?![a-z])|goat|bison|buffel\\w*)`), clarity: 1, family: "animal" },
@@ -58,7 +58,7 @@ export function speciesIn(text: string): string[] {
 // ---------------------------------------------------------------------------
 // Form detection (what has been done to the ingredient)
 // ---------------------------------------------------------------------------
-const FAT_RE = /(vet|vetten|olie|oil|fat|fats|fett|graisse|huile)(?![a-z])/;
+const FAT_RE = /(?<!ont)(vet|vetten|olie|oil|fat|fats|fett|graisse|huile)(?![a-z])/;
 const MEAL_RE = /(meel|meal|gedroogd|gedehydreerd|dehydrat|dried|getrocknet|deshydrat|poeder|powder)/;
 const HYDRO_RE = /(gehydrolyseerd|hydrolys|hydroliz|extract|digest|eiwit|protein|eiweiss|proteine)/;
 const BROTH_RE = /(bouillon|broth|brodo|fond(?![a-z])|jus(?![a-z]))/;
@@ -111,7 +111,7 @@ const ADDITIVE_RULES: Array<{ re: RegExp; kind: IngredientKind; tags?: Ingredien
 const CEREAL_PROTEIN_RE = /(gluten|tarweeiwit|rijsteiwit|maiseiwit|graaneiwit|cereal proteins?|corn gluten|wheat gluten|getreideeiwei)/;
 const LEGUME_PROTEIN_RE = /(erwteneiwit\w*|erwtenproteine|pea protein|sojaeiwit|soja-?eiwit\w*|soy protein|sojaproteine|aardappeleiwit|aardappelproteine|potato protein|lupine-?eiwit|plantaardige eiwit\w*|plantaardig eiwit\w*|vegetable protein\w*|pflanzliche eiwei\w*|proteines? vegetales?|plant protein\w*)/;
 const VAGUE_PLANT_RE = /(^|[^a-z])(granen|graan(?![a-z])|cereals?(?![a-z])|getreide|cereales|plantaardige (?:bij)?producten|plantaardige bijproducten|vegetable by-?products?|pflanzliche nebenerzeugnisse|sous-produits vegetaux)/;
-const OIL_RE = /(olie|oil|huile|(?<=[a-z]{3})ol(?![a-z]))/;
+const OIL_RE = /(olie|oil|huile|(?<=[a-z]{3})(?<!o)ol(?![a-z]))/;
 const FIBRE_RE = /(cellulose|houtvezel\w*|bietenpulp|beet pulp|betterave|pulp(?![a-z])|psyllium|vezels?|fibre|fiber|faser|zemelen|bran(?![a-z])|inulin\w*|cichorei\w*|chicory|chicoree|fos(?![a-z])|fructo|oligosacchar\w*|mos(?![a-z])|manno|pectine|arabinogalact\w*|lignocellulose)/;
 const PREBIOTIC_RE = /(inulin\w*|cichorei\w*|chicory|chicoree|fos(?![a-z])|fructo|oligosacchar\w*|mos(?![a-z])|manno)/;
 const TUBER_RE = /(zetmeel|starch|starke|amidon|tapioca|cassave|cassava|maniok|quinoa|boekweit|buckwheat|amarant\w*|topinamboer)/;

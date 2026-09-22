@@ -10,7 +10,8 @@ const GROUP_STYLE: Record<KindGroup, { chip: string; bar: string }> = {
 };
 
 export function IngredientsBlock({ p, t }: { p: ProductDetail; t: TFunction }) {
-  if (!p.ingredients.length) {
+  // an unreliable ingredient text (see scoring) is not shown or broken down at all
+  if (!p.ingredients.length || p.notScored === "ingredients_unclear") {
     return <p className="text-ink-soft">{t("product.noIngredients")}</p>;
   }
   const totals: Record<KindGroup, number> = { animal: 0, fat: 0, plant: 0, other: 0 };

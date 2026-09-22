@@ -77,12 +77,16 @@ function parsePrice(raw: string): number | undefined {
   return Number.isFinite(n) && n > 0 && n < 1000 ? n : undefined;
 }
 
+/** What the scraper writes when a page had no ingredient/analysis block. It is "no data", not a value. */
+const PLACEHOLDER = /^(niet gevonden|not found|n\.?v\.?t\.?|onbekend|unknown|geen (?:informatie|gegevens)|(?:gewicht\s*:\s*)?\d+(?:[.,]\d+)?\s*(?:kg|g|gr|gram|ml|l)|[-–—.?]+)$/i;
+
 function cleanText(input: string): string {
-  return stripControl(input)
+  const t = stripControl(input)
     .replace(/_x001F_/g, "")
     .replace(/\s+/g, " ")
     .replace(/(?:Product Details.*)$/i, "")
     .trim();
+  return PLACEHOLDER.test(t) ? "" : t;
 }
 
 export interface RowContext {

@@ -218,7 +218,8 @@
       "treat": "Il s’agit d’une friandise et non d’un aliment complet ; il n’est donc pas noté.",
       "supplement": "Il s’agit d’un complément et non d’un aliment complet ; il n’est donc pas noté.",
       "complementary": "Il s’agit d’un aliment complémentaire – non destiné à être la seule nourriture de votre animal – et il n’est donc pas noté.",
-      "no_ingredients": "Nous n’avons pas encore la liste d’ingrédients de cet aliment, nous ne pouvons donc pas calculer de note. Vous pouvez aider en nous l’envoyant."
+      "no_ingredients": "Nous n’avons pas encore la liste d’ingrédients de cet aliment, nous ne pouvons donc pas calculer de note. Vous pouvez aider en nous l’envoyant.",
+      "ingredients_unclear": "Le texte d’ingrédients dont nous disposons pour cet aliment semble incorrect (par exemple un poids ou un texte publicitaire à la place des ingrédients). Nous préférons ne pas afficher de note plutôt qu’une note erronée. Vous pouvez nous aider en nous envoyant la bonne liste."
     },
     "hazardTitle": "Contient un ingrédient nocif pour cet animal",
     "goodTitle": "Ce qui est bien",
@@ -238,6 +239,7 @@
     "alternativesPet": "Aliments similaires mieux notés et sans danger pour {name}.",
     "dataTitle": "À propos de ces données",
     "dataPack": "Ingrédients et analyse tels qu’imprimés sur l’emballage, vérifiés par Scanabowl.",
+    "dataScraped": "Les ingrédients et l’analyse proviennent d’informations produit publiques et ont été traités automatiquement ; ils n’ont pas toujours été vérifiés à la main. Comparez-les avec l’emballage et signalez-nous toute erreur.",
     "dataBrand": "Fournis par le fabricant et vérifiés par Scanabowl. Il est noté avec exactement la même méthode que tout autre aliment.",
     "reportError": "Une erreur ? Signalez une correction",
     "disclaimer": "La note décrit l’étiquette et n’est pas un avis vétérinaire. Introduisez toujours un nouvel aliment progressivement et demandez conseil à votre vétérinaire si votre animal a un problème de santé."
@@ -729,7 +731,7 @@
     "sections": [
       {
         "h": "Programme partenaire bol.com",
-        "p": ["Scanabowl participe au programme partenaire de bol.com. Lorsque vous cliquez sur un bouton « Voir sur bol.com » et achetez quelque chose, nous pouvons recevoir une commission de bol.com. Cela ne vous coûte rien de plus."]
+        "p": ["Scanabowl participe au programme partenaire de bol.com. Lorsque vous cliquez sur un bouton « Voir sur bol.com » et achetez quelque chose, nous pouvons recevoir une commission de bol.com. Cela ne vous coûte rien de plus.", "Scanabowl est un site indépendant. Il n’appartient pas à bol.com et n’y est pas affilié, et bol.com n’a aucune influence sur nos contenus, nos notes ou nos recommandations. Vous passez votre commande directement chez bol.com, qui est responsable du prix, de la livraison et du service client."]
       },
       {
         "h": "Les notes ne sont jamais à vendre",

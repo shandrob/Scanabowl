@@ -72,7 +72,7 @@ describe("dictionaries", () => {
     for (const s of ["adult", "senior", "all", "youngDog", "youngCat"]) need.push(`stage.${s}`);
     for (const s of ["young", "adult", "senior"]) need.push(`pet.stage.${s}`);
     for (const s of ["animal", "fat", "plant", "other"]) need.push(`product.group.${s}`);
-    for (const s of ["veterinary", "treat", "supplement", "complementary", "no_ingredients"]) need.push(`product.notScored.${s}`);
+    for (const s of ["veterinary", "treat", "supplement", "complementary", "no_ingredients", "ingredients_unclear"]) need.push(`product.notScored.${s}`);
     for (const s of ["nutrition", "ingredients", "formulation"]) need.push(`score.pillars.${s}`, `method.pillar.${s}`);
     for (const s of ["label", "calculated"]) need.push(`analysis.kcal.${s}`);
     for (const s of ["dog_adult", "dog_puppy", "cat_adult", "kitten"]) need.push(`personal.energyBasis.${s}`);
