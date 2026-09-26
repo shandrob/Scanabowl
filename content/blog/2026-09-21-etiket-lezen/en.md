@@ -1,7 +1,8 @@
 ---
 title: "Read a pet food label in 5 minutes: see what is really inside"
 description: "Why “fresh chicken” as the first ingredient says less than you think, how to convert the analysis to dry matter, and what to look for."
-date: 2026-09-21
+date: 2026-09-21
+cover: cover.png
 tags: [label, ingredients, guide]
 ---
 

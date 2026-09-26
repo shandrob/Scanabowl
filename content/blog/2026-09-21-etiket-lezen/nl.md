@@ -1,7 +1,8 @@
 ---
 title: "Etiket lezen in 5 minuten: zo zie je wat er echt in het voer zit"
 description: "Waarom “verse kip” als eerste ingrediënt minder zegt dan je denkt, hoe je de analyse omrekent naar droge stof en waar je op moet letten."
-date: 2026-09-21
+date: 2026-09-21
+cover: cover.png
 tags: [etiket, ingrediënten, uitleg]
 ---
 

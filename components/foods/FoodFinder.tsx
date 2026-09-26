@@ -11,7 +11,7 @@ import { loadIndex } from "@/lib/data/client";
 import type { IndexEntry, Meta } from "@/lib/data/types";
 import { localePath } from "@/lib/i18n/config";
 import { foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
-import { normalize } from "@/lib/scoring/text";
+import { matchesQuery, queryTerms, searchHaystack } from "@/lib/search";
 import { personalFit } from "@/lib/scoring/personalize";
 import type { FoodType, LifeStage, Species } from "@/lib/scoring/types";
 import { usePets } from "@/lib/pets/store";
@@ -88,7 +88,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
 
   const view = useMemo(() => {
     if (!index) return null;
-    const tokens = normalize(q).split(" ").filter(Boolean);
+    const terms = queryTerms(q);
     let hiddenByAllergy = 0;
     const rows: Array<{ e: IndexEntry; personal: number | null }> = [];
     for (const e of index) {
@@ -98,13 +98,13 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
       if (brand && e.b !== brand) continue;
       if (grainFree && e.gf !== 1) continue;
       if (minScore && (e.sc ?? 0) < minScore) continue;
-      if (tokens.length) {
+      if (terms.length) {
         let hay = searchText.get(e.i);
         if (hay === undefined) {
-          hay = normalize(`${e.b} ${e.n}`);
+          hay = searchHaystack(e.b, e.n, e.e);
           searchText.set(e.i, hay);
         }
-        if (!tokens.every((tk) => hay!.includes(tk))) continue;
+        if (!matchesQuery(hay, terms)) continue;
       }
       let personal: number | null = null;
       if (pet) {

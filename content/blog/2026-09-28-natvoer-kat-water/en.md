@@ -1,7 +1,8 @@
 ---
 title: "Why wet food is more than a treat for cats"
 description: "Cats drink very little. What research says about moisture in food, urine and bladder health – and three easy ways to get more water into your cat."
-date: 2026-09-28
+date: 2026-09-28
+cover: cover.png
 tags: [cat, moisture, wet food]
 ---
 

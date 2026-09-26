@@ -1,7 +1,8 @@
 ---
 title: "Waarom natvoer voor katten meer is dan een lekkernij"
 description: "Katten drinken weinig. Wat onderzoek zegt over vocht in het voer, urine en blaasgezondheid – en drie makkelijke manieren om je kat meer water te laten binnenkrijgen."
-date: 2026-09-28
+date: 2026-09-28
+cover: cover.png
 tags: [kat, vocht, natvoer]
 ---
 
