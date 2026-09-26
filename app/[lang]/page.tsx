@@ -87,6 +87,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={`${localePath(lang, "/foods")}?species=dog`} className="rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">{t("home.browseDogs")}</Link>
               <Link href={`${localePath(lang, "/foods")}?species=cat`} className="rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">{t("home.browseCats")}</Link>
+              <Link href={localePath(lang, "/foods/brand")} className="rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">{t("nav.allBrands")}</Link>
               <Link href={localePath(lang, "/my-pet")} className="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 font-semibold text-white shadow-card transition hover:bg-brand-deep">
                 <IconPaw className="h-4 w-4" /> {t("home.ctaPet")}
               </Link>

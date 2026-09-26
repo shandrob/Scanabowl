@@ -55,6 +55,15 @@ After any change run `npm run data:build` (or just `npm run dev`). Open **`datab
 lists foods with missing ingredients or analysis, suspicious scraper output and foods containing toxic
 ingredients – the fastest way to see what to fix.
 
+**Product photos from Open Pet Food Facts.** `python tools/fetch_opff_images.py` looks up every food without a
+photo on [Open Pet Food Facts](https://world.openpetfoodfacts.org) and downloads the front photo when there is one
+(about 1 lookup per second; barcodes already checked are remembered in `tools/opff-checked.txt`, so later runs
+only check new foods). Those photos are CC BY-SA 3.0: the licence requires the credit, so every photo is listed in
+`database/image-credits.csv` and the food page shows "Photo: Open Pet Food Facts" with a link. Don't remove that
+file or the credit.
+
+**Brand pages** (`/nl/foods/brand/<brand>`) are made automatically for every brand with at least 3 foods.
+
 > Tip for Excel: save as **"CSV UTF-8 (comma delimited)"** or the Dutch **";"-delimited** version – both work.
 > Keep the EAN column formatted as **text** so Excel does not turn `0064992…` into `6.4992E+10`.
 
@@ -117,6 +126,7 @@ with `##`, lists with `-`, **bold**, links), put a `cover.jpg` in the same folde
 * **Keep as draft:** `draft: true` hides a post whatever its date.
 * **Other languages:** add `en.md`, `de.md`, `fr.md` in the same folder (same front matter). A language that does not exist yet shows the Dutch text with a small notice.
 * **Images:** `cover.jpg/png` next to the text is resized automatically. In the text: `![description](my-image.jpg)`.
+* No photo? `node scripts/make-covers.mjs` draws simple covers in the Scanabowl colours; add a drawing for the new post's folder in that script.
 * Folders that start with `_` (like `_TEMPLATE`) are never published. Look at `_TEMPLATE/nl.md` for a commented example.
 
 > **Two of your old posts are set to `draft: true` on purpose.** Each mentions a 2025 study (a JFMS review; a
