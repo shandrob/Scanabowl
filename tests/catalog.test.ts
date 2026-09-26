@@ -122,3 +122,30 @@ describe("photo attachments", () => {
     expect(r.ok && r.data.photos).toBeFalsy();
   });
 });
+
+describe("non-food rows from the shop", () => {
+  const ctx = { knownBrands: [], defaultSource: "scraped" as const, trustDeclared: true };
+  it("drops bowls, containers and landing pages", () => {
+    expect(rowToProduct({ naam: "Trixie Keramiek Voerbak Bloemmotief - Hondenvoerbak", doeldier: "Hond", voertype: "Voer- & Drinkbakken", ean: "4011905123456" }, ctx)).toBeNull();
+    expect(rowToProduct({ naam: "Rotho Mypet Pet Food Container Cody - Kattenvoerbewaarbak", doeldier: "Kat", ean: "4007112123456" }, ctx)).toBeNull();
+    expect(rowToProduct({ naam: "Hondenvoer kopen?", doeldier: "Hond" }, ctx)).toBeNull();
+  });
+  it("keeps real food", () => {
+    expect(rowToProduct({ naam: "Fokker Meat Roll - Kip&Zalm 800 g", doeldier: "Hond", voertype: "Natvoer", ean: "8713447021805", ingredienten: "Kip 74,9%, Rijst 17,5%, Zalm 4,7%" }, ctx)).not.toBeNull();
+  });
+});
+
+describe("shop metadata instead of an ingredient list", () => {
+  const ctx = { knownBrands: [], defaultSource: "scraped" as const, trustDeclared: true };
+  it("is treated as no ingredient list", () => {
+    expect(rowToProduct({ naam: "Beneful Kleine Genieter Rund&Groente", doeldier: "Hond", ingredienten: "Gewicht: 1.4 kg. Smaak: Rund&Groenten." }, ctx)?.ingredients).toBe("");
+    expect(rowToProduct({ naam: "Almo Nature Holistic Vis", doeldier: "Kat", ingredienten: "Type: Holistic. Gewicht: 2 kg. Smaak: Vis&Rijst." }, ctx)?.ingredients).toBe("");
+  });
+  it("keeps a real list that follows the metadata", () => {
+    const p = rowToProduct({ naam: "Nutro Puppy Lam&Rijst", doeldier: "Hond", ingredienten: "Gewicht: 2 kg. Smaak: Lam&Rijst. Rijst (3%), maïsproteïnen, gedroogd ontvet lamsvlees (18%), gevogeltevet (8%)" }, ctx);
+    expect(p?.ingredients).toContain("maïsproteïnen");
+  });
+  it("drops the shop's 'page not found' rows", () => {
+    expect(rowToProduct({ naam: "Oeps, niet gevonden...", doeldier: "Kat", ingredienten: "Kip, rijst" }, ctx)).toBeNull();
+  });
+});

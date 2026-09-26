@@ -115,6 +115,12 @@ export function scoreProduct(input: ProductInput): ScoreResult {
       return { ...base, notScored: "ingredients_unclear" };
     }
   }
+  // Marketing prose or a variety-pack description instead of a list: ingredient names are short,
+  // sentences are not ("... bevat geen kunstmatige conserveermiddelen of kleurstoffen").
+  const words = ings.map((i) => i.raw.split(/\s+/).length).sort((a, b) => a - b);
+  if (words[Math.floor(words.length / 2)] > 6 || /\b(in dit pakket|ontdek je|in this pack)\b/i.test(input.ingredients)) {
+    return { ...base, notScored: "ingredients_unclear" };
+  }
 
   const positives: Weighted[] = [];
   const negatives: Weighted[] = [];

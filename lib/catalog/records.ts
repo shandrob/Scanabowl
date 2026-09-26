@@ -90,6 +90,19 @@ function cleanText(input: string): string {
   return PLACEHOLDER.test(t) ? "" : t;
 }
 
+/** Shop metadata such as "Type: Glutenvrij. Gewicht: 2 kg. Smaak: Vis&Rijst." */
+const META_FIELD = /(?:^|[.;]\s*)(?:type|gewicht|smaak|inhoud|verpakking|soort|leeftijd|kleur|maat)\s*:\s*(?:[^.;]|\.(?!\s))*/gi;
+
+/**
+ * An "ingredient list" that is only shop metadata, perhaps with a sentence of marketing, is no list at all:
+ * "Gewicht: 1.4 kg. Smaak: Rund&Groenten." used to be scored as if the food were 100% beef.
+ */
+function metadataOnly(text: string): boolean {
+  if (!text.match(META_FIELD)) return false;
+  const rest = text.replace(META_FIELD, " ").trim();
+  return !/[,;%]/.test(rest);
+}
+
 export interface RowContext {
   knownBrands: string[];
   defaultSource: Source;
@@ -98,6 +111,20 @@ export interface RowContext {
    * false = raw scraper output: type and life stage are re-derived from name and analysis.
    */
   trustDeclared: boolean;
+}
+
+/** Shop product groups that are never food (the shop files bowls under "kattenvoerbak" addresses). */
+const NON_FOOD_GROUP = /^(voer- ?& ?drinkbakken|voerbakken|drinkbakken|accessoires|speelgoed|verzorging|manden|halsbanden|riemen)/i;
+const NON_FOOD_NAME =
+  /(voerbak|drinkbak|waterbak|placemat|voermat|bewaarbak|bewaardoos|bewaarton|voerton|voerautomaat|drinkfontein|waterfontein|voerschep|slow ?feeder|anti.?schrok|likmat|snuffelmat|\bcontainer\b)/i;
+
+function isNotFood(name: string, group: string, ean: string): boolean {
+  if (NON_FOOD_GROUP.test(group.trim())) return true;
+  if (NON_FOOD_NAME.test(name)) return true;
+  // the shop's "page not found" title
+  if (/^oeps\b/i.test(name.trim())) return true;
+  // shop landing pages from the sitemap ("Hondenvoer kopen?", "Alles voor je kat") have no barcode
+  return !ean && /(\bkopen\?\s*$|^alles voor je\b)/i.test(name.trim());
 }
 
 function isScraped(row: Record<string, string>, ctx: RowContext): boolean {
@@ -113,12 +140,14 @@ export function rowToProduct(row: Record<string, string>, ctx: RowContext): Cata
   if (!looksLikeIngredients(ingredients) && looksLikeIngredients(analysisRaw)) {
     [ingredients, analysisRaw] = [analysisRaw, looksLikeAnalysis(ingredients) ? ingredients : ""];
   }
+  if (metadataOnly(ingredients)) ingredients = "";
   const rawName = field(row, "name");
   if (isGarbageRow({ name: rawName, ingredients })) return null;
 
   const url = field(row, "url");
   const ean = normalizeEan(field(row, "ean")) || eanFromUrl(url);
   const declaredType = field(row, "foodType");
+  if (isNotFood(rawName, declaredType, ean)) return null;
   const species = toSpecies(field(row, "species"), rawName);
   if (!species) return null;
 

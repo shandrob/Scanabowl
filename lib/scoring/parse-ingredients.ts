@@ -37,9 +37,16 @@ export function prepareIngredientText(text: string): string {
     (m) => (m.index ?? 0) < 250,
   );
   if (header) t = t.slice((header.index ?? 0) + header[0].length);
-  for (let i = 0; i < 4; i++) {
-    t = t.replace(/^(gewicht|smaak|inhoud|verpakking|weight|flavou?r|geschmack|poids)\s*:[^.]*\.\s*/i, "");
+  // shop metadata first ("Gewicht: 2 kg. Smaak: Lam. with Lamb: ..."), then the recipe labels below
+  for (let i = 0; i < 5; i++) {
+    t = t.replace(/^(type|gewicht|smaak|inhoud|verpakking|weight|flavou?r|geschmack|poids)\s*:(?:[^.]|\.(?!\s))*\.(?:\s+|$)/i, "");
   }
+  // multipacks: "Met kip en groenten: vlees ...", "met tonijn - Samenstelling: vlees ..." - keep the first
+  // recipe only, without its label; the next "Met rund: ..." starts another recipe
+  const lead = t.match(/^(?:met|with|mit|avec)\s+[^:.,;]{2,45}?(?:\s*[-–]\s*(?:samenstelling|ingredi[eë]nten|composition)\s*:|:)\s*/i);
+  if (lead) t = t.slice(lead[0].length);
+  const next = t.search(/[.;]\s*(?:met|with|mit|avec)\s+[^:.,;]{2,45}?(?:\s*[-–]\s*(?:samenstelling|ingredi[eë]nten|composition)\s*:|:)/i);
+  if (next > 20) t = t.slice(0, next);
   // "(bestaande uit) kip 3 %, granen" -> "(kip 3 %), granen"
   t = t.replace(/\((?:bestaande uit|waaronder|waarvan|w\.o\.|onder andere|o\.a\.|bevat|inclusief)\)\s*([^,|;]*)/gi, "($1)");
   t = t.replace(/\s*[|•·]\s*/g, ", ");
@@ -142,8 +149,9 @@ function parseToken(token: string): Omit<ParsedIngredient, "share"> | null {
     if (v !== undefined && v > 0 && v <= 100) pct = v;
   }
   // "vlees en dierlijke bijproducten (14%, waarvan rund 4%)" - the leading figure in brackets is the share
+  // ... but "(100% natuurlijk, waarvan 4% zalm)" says how natural it is, not how much there is
   if (pct === undefined) {
-    const lead = sub.match(/^\s*[>≥<≤~]?\s*(\d{1,3}(?:[.,]\d+)?)\s*%/);
+    const lead = sub.match(/^\s*[>≥<≤~]?\s*(\d{1,3}(?:[.,]\d+)?)\s*%(?!\s*(?:natuurlijk|natural|natürlich|naturel|biologisch|organic|bio\b|vers\b|fresh))/i);
     if (lead) {
       const v = parseLabelNumber(lead[1]);
       if (v !== undefined && v > 0 && v <= 100) pct = v;
@@ -210,6 +218,14 @@ export function parseIngredients(text: string): { ingredients: ParsedIngredient[
   for (const part of splitTopLevel(composition)) {
     const tok = parseToken(part);
     if (tok) tokens.push(tok);
+  }
+  // EU labels list ingredients from most to least: a declared share above an earlier declared share
+  // (or "100%" in a list of several) is a reading error, not a recipe - ignore it
+  let ceiling = 100;
+  for (const tok of tokens) {
+    if (tok.pct === undefined) continue;
+    if (tok.pct > ceiling + 0.5 || (tok.pct >= 99.5 && tokens.length > 1)) tok.pct = undefined;
+    else ceiling = tok.pct;
   }
   return { ingredients: estimateShares(tokens), additivesText: additives, compositionText: composition };
 }

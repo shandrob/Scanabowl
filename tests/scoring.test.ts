@@ -300,3 +300,33 @@ describe("comma-less ingredient lists", () => {
     expect(r.ingredients[0].info.kind).toBe("meat");
   });
 });
+
+describe("reading errors that made famous foods score wrong", () => {
+  it("does not read '100% natuurlijk' as the share of an ingredient", () => {
+    const r = parseIngredients("vlees en dierlijke bijproducten (34%, waarvan 94% natuurlijk), vis- en bijproducten (100% natuurlijk, waarvan 4% zalm), mineralen");
+    expect(r.ingredients[1].pct).toBeUndefined();
+  });
+  it("ignores a declared share that cannot be right in a descending list", () => {
+    const r = parseIngredients("Vers varken (16%), gedroogd varken (16%), erwten, linzen, zeewier (1,2%), gevriesdroogde varkenslever (100%), zout");
+    expect(r.ingredients.find((i) => i.raw.startsWith("gevriesdroogde"))?.pct).toBeUndefined();
+    expect(r.ingredients[0].pct).toBe(16);
+  });
+  it("reads only the first recipe of a multipack", () => {
+    const r = parseIngredients("Met kip en groenten: vlees en dierlijke bijproducten (39%, waarvan 4% kip), groenten (4%), granen, mineralen.Met rund en groenten: vlees en dierlijke bijproducten (39%), groenten, granen");
+    expect(r.ingredients.map((i) => i.raw)).toEqual(["vlees en dierlijke bijproducten", "groenten", "granen", "mineralen"]);
+    expect(parseIngredients("Samenstelling: met tonijn - Samenstelling: vlees en dierlijke bijproducten (95% natuurlijk), vis").ingredients[0].info.kind).toBe("generic_animal");
+  });
+  it("gives no score to marketing text or a variety-box description", () => {
+    const base = { species: "dog" as const, foodType: "dry" as const, lifeStage: "adult" as const, category: "complete" as const, analysis: "" };
+    expect(scoreProduct({ ...base, name: "Schesir Hond Bio Blik Paté", ingredients: "gebruikt en het bevat geen kunstmatige conserveermiddelen of kleurstoffen. Bio Organic SCHESIR BIO wordt gecontroleerd en biologisch gecertificeerd door een onafhankelijk instituut" }).notScored).toBe("ingredients_unclear");
+    expect(scoreProduct({ ...base, name: "Renske Puppy Variatiebox", ingredients: "In dit pakket speciaal voor puppy's ontdek je: 600g droogvoer met Verse Kip & Lam, 100g Renske Vers Zalm" }).notScored).toBe("ingredients_unclear");
+  });
+});
+
+describe("metadata before a recipe label", () => {
+  it("keeps the ingredient list", () => {
+    const r = parseIngredients("Gewicht: 1.5 kg. Smaak: Lam. with Lamb : gemalen rijst, maïsglutenmeel, kippen- en kalkoenenmeel, gemalen maïs, dierlijk vet, lamsmeel");
+    expect(r.ingredients.length).toBe(6);
+    expect(r.ingredients[0].info.kind).toBe("cereal");
+  });
+});
