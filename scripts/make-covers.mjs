@@ -51,6 +51,27 @@ const bowl = (x, y, s, fill = C.brand) => `
     <rect x="-130" y="-40" width="260" height="18" rx="9" fill="${C.deep}"/>
   </g>`;
 
+
+const heart = (x, y, s, fill) => `
+  <path transform="translate(${x} ${y}) scale(${s})" fill="${fill}"
+    d="M0 70 C-70 25 -130 -20 -130 -75 C-130 -125 -80 -150 -40 -135 C-15 -125 0 -105 0 -95 C0 -105 15 -125 40 -135 C80 -150 130 -125 130 -75 C130 -20 70 25 0 70 Z"/>`;
+
+const catShape = (x, y, s, fill) => `
+  <g transform="translate(${x} ${y}) scale(${s})" fill="${fill}">
+    <path d="M100 150 C215 150 235 30 165 -5" fill="none" stroke="${fill}" stroke-width="30" stroke-linecap="round"/>
+    <ellipse cx="0" cy="60" rx="110" ry="130"/>
+    <circle cx="0" cy="-110" r="80"/>
+    <path d="M-72 -148 L-62 -232 L-12 -182 Z"/>
+    <path d="M72 -148 L62 -232 L12 -182 Z"/>
+    <ellipse cx="-28" cy="-115" rx="10" ry="15" fill="${C.cream}"/>
+    <ellipse cx="28" cy="-115" rx="10" ry="15" fill="${C.cream}"/>
+  </g>`;
+
+const snowflake = (x, y, s, stroke) => `
+  <g transform="translate(${x} ${y}) scale(${s})" stroke="${stroke}" stroke-width="12" stroke-linecap="round" fill="none">
+    ${[0, 60, 120].map((a) => `<g transform="rotate(${a})"><path d="M0 -90 V90"/><path d="M-22 -68 L0 -48 L22 -68"/><path d="M-22 68 L0 48 L22 68"/></g>`).join("")}
+  </g>`;
+
 const covers = {
   // label reading: a food bag with a label and a magnifying glass
   "2026-09-21-etiket-lezen": frame(`
@@ -134,6 +155,71 @@ const covers = {
         ${[-70, -25, 20, 65].map((x) => `<circle cx="${x}" cy="-4" r="22" fill="#7cc79c"/>`).join("")}
       </g>
     </g>`),
+
+  // animal derivatives: organ, drumstick and a question-mark tag ("which animal?")
+  "2026-10-15-dierlijke-bijproducten": frame(`
+    ${heart(700, 470, 1.35, C.red)}
+    <path d="M700 380 C700 330 730 300 760 290" fill="none" stroke="${C.cream}" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+    <g transform="translate(1010 420) rotate(35)">
+      <ellipse cx="0" cy="-60" rx="95" ry="120" fill="${C.amber}"/>
+      <rect x="-20" y="40" width="40" height="150" rx="20" fill="${C.white}" stroke="${C.line}" stroke-width="6"/>
+      <circle cx="-26" cy="200" r="26" fill="${C.white}" stroke="${C.line}" stroke-width="6"/>
+      <circle cx="26" cy="200" r="26" fill="${C.white}" stroke="${C.line}" stroke-width="6"/>
+    </g>
+    <g transform="translate(1060 690)">
+      <path d="M-110 -60 H70 L120 0 L70 60 H-110 Z" fill="${C.white}" stroke="${C.brand}" stroke-width="12" stroke-linejoin="round"/>
+      <circle cx="70" cy="0" r="12" fill="${C.brand}"/>
+      <text x="-25" y="30" font-family="Georgia, serif" font-size="96" font-weight="700" fill="${C.brand}" text-anchor="middle">?</text>
+    </g>`),
+
+  // puppy food: a small and a big bowl with a growth curve
+  "2026-10-19-puppyvoer-groot-klein-ras": frame(`
+    <path d="M500 640 C650 620 800 520 900 380 C960 300 1040 240 1150 220" fill="none" stroke="${C.brand}" stroke-width="12" stroke-dasharray="4 28" stroke-linecap="round"/>
+    <path d="M1150 220 l-60 -18 m60 18 l-42 46" fill="none" stroke="${C.brand}" stroke-width="14" stroke-linecap="round"/>
+    ${bowl(600, 690, 0.8)}
+    ${bowl(1040, 640, 1.45)}
+    ${paw(560, 470, 0.9, C.mid)}
+    ${paw(1180, 420, 1.6, C.mid)}`),
+
+  // neutered cat: a sitting cat next to a small, measured portion
+  "2026-10-22-gesteriliseerde-kat-voeding": frame(`
+    ${catShape(700, 470, 1.2, C.brand)}
+    ${bowl(1080, 650, 1.05)}
+    <g transform="translate(1150 470)">
+      <circle r="78" fill="${C.white}" stroke="${C.amber}" stroke-width="12"/>
+      <path d="M-40 0 H40" stroke="#b8801f" stroke-width="20" stroke-linecap="round"/>
+    </g>`),
+
+  // raw food: a steak on a cutting board, frozen
+  "2026-10-26-rauw-voer-barf": frame(`
+    <g transform="translate(800 520)">
+      <rect x="-330" y="-190" width="600" height="380" rx="60" fill="#d8b384"/>
+      <rect x="-310" y="-170" width="560" height="340" rx="46" fill="#e6c79c"/>
+      <rect x="270" y="-40" width="90" height="80" rx="30" fill="#d8b384"/>
+      <circle cx="315" cy="0" r="16" fill="${C.tint}"/>
+      <path d="M-230 -30 C-220 -120 0 -140 110 -80 C190 -35 170 80 60 110 C-60 140 -240 70 -230 -30 Z" fill="#c2504a"/>
+      <path d="M-170 -20 C-100 -60 20 -70 90 -30" fill="none" stroke="#f3d6cf" stroke-width="14" stroke-linecap="round"/>
+      <path d="M-150 50 C-80 30 0 40 60 70" fill="none" stroke="#f3d6cf" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    ${snowflake(1150, 280, 1.2, C.mid)}`),
+
+  // senior: a clock with a paw and a food bowl
+  "2026-10-29-senior-hond-kat-voeding": frame(`
+    <g transform="translate(760 440)">
+      <circle r="230" fill="${C.white}" stroke="${C.brand}" stroke-width="22"/>
+      ${Array.from({ length: 12 }, (_, i) => `<path transform="rotate(${i * 30})" d="M0 -200 V-172" stroke="${C.deep}" stroke-width="${i % 3 === 0 ? 14 : 8}" stroke-linecap="round"/>`).join("")}
+      <path d="M0 0 L-70 -90" stroke="${C.deep}" stroke-width="18" stroke-linecap="round"/>
+      <path d="M0 0 L110 -60" stroke="${C.deep}" stroke-width="12" stroke-linecap="round"/>
+      <circle r="18" fill="${C.deep}"/>
+      ${paw(0, 110, 1.1, C.soft)}
+    </g>
+    ${bowl(1150, 680, 1.0)}`),
+
+  // taurine: a heart with a heartbeat line, and a cat
+  "2026-11-02-taurine-kat": frame(`
+    ${heart(760, 470, 1.9, C.brand)}
+    <path d="M540 400 H660 L700 330 L750 480 L800 360 L830 400 H980" fill="none" stroke="${C.white}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    ${catShape(1160, 560, 0.75, C.amber)}`),
 };
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "content", "blog");
@@ -143,6 +229,9 @@ for (const [slug, svg] of Object.entries(covers)) {
     console.warn("skip (no post folder):", slug);
     continue;
   }
-  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(path.join(dir, "cover.png"));
+  const file = path.join(dir, "cover.png");
+  // never overwrite an existing cover (it may be a real photo); use --force to redraw
+  if (fs.existsSync(file) && !process.argv.includes("--force")) continue;
+  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(file);
   console.log("cover:", slug);
 }
