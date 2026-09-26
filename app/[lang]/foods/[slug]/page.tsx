@@ -16,7 +16,11 @@ import { createT } from "@/lib/i18n/t";
 import { foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
 import { SITE } from "@/lib/site";
 
-export const revalidate = 86400;
+/**
+ * Food data only changes when the site is deployed, so a rendered page is kept until the next deployment.
+ * (A timed refresh re-stores ~12,000 pages again and again and burns through Vercel's ISR-write allowance.)
+ */
+export const revalidate = false;
 /** Pages that were not pre-built are rendered on the first visit (and then cached). */
 export const dynamicParams = true;
 

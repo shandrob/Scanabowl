@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import { DictionaryProvider } from "@/components/i18n/DictionaryProvider";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { LOCALES, LOCALE_TAGS, alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
@@ -76,14 +76,14 @@ export default async function RootLayout({ children, params }: { children: React
   return (
     <html lang={LOCALE_TAGS[lang]} className={`${fraunces.variable} ${grotesk.variable} ${plexMono.variable}`}>
       <body className="min-h-dvh">
-        <DictionaryProvider lang={lang} dict={dict}>
+        <LocaleProvider lang={lang}>
           <a href="#main" className="skip-link">
             {t("nav.skip")}
           </a>
           <Header />
           <main id="main">{children}</main>
           <Footer lang={lang} t={t} />
-        </DictionaryProvider>
+        </LocaleProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>

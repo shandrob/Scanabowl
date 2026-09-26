@@ -154,6 +154,15 @@ npx vercel --prod       # publish
 
 **Fill in your company details** (KvK, BTW-id, address) via the `NEXT_PUBLIC_…` variables. Dutch law requires them on a business website; they appear in the footer and legal pages once set.
 
+### Vercel plan and usage
+
+* The free **Hobby** plan is for non-commercial use only and pauses the whole account when a monthly limit is exceeded (this happened on 2026-09-26: "ISR Writes" reached 129 %). Scanabowl earns affiliate income, so run it on the **Pro** plan.
+* "ISR writes" are the pages the server renders after a deployment and stores; they are counted in 8 KB units. Three things keep them low, and `tests/sitemap.test.ts` guards the last one:
+  * pages stay light - never pass big data (such as the whole translation file) from a server component to a client component; translations are bundled inside `components/i18n/providers/`;
+  * no timestamps (`new Date()`) in pages or the sitemap - output that changes on every refresh is stored again every time;
+  * `sitemap.xml` is built once per deployment; only the small `sitemap-blog.xml` refreshes hourly.
+* In Vercel, **Project -> Firewall -> Bot Protection** can additionally challenge unverified bots. `robots.txt` already asks SEO scanners to stay away.
+
 ## 8. How the score works
 
 The full explanation, with scientific sources, is on the website at **`/nl/how-we-score`** (also in EN/DE/FR).

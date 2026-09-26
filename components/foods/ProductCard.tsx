@@ -29,6 +29,9 @@ export function ProductCard({
   return (
     <Link
       href={localePath(lang, `/foods/${entry.s}`)}
+      // Do not pre-load every card in a list: each pre-load makes the server render (and store) a page that
+      // the visitor may never open. The page loads when it is clicked.
+      prefetch={false}
       className="group flex gap-4 rounded-2xl border border-line bg-paper p-4 shadow-card transition hover:-translate-y-0.5 hover:border-brand-mid/50 hover:shadow-lift focus-visible:outline-offset-4"
     >
       <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-line bg-white">
