@@ -24,7 +24,7 @@ export const SPECIES: Array<{ id: string; re: RegExp; clarity: number; family: "
   { id: "chicken", re: new RegExp(`${W}(kip|kippen|kuiken|kuikens|hoen|hoenders|chicken|huhn|huhner|hahnchen|poulet|poule)\\w*|${W}[a-z-]*(?:uitloop|scharrel)kip\\w*`), clarity: 1, family: "animal" },
   { id: "turkey", re: new RegExp(`${W}(kalkoen|turkey|pute|puten|truthahn|dinde)\\w*`), clarity: 1, family: "animal" },
   { id: "duck", re: new RegExp(`${W}(eend|eenden|eendje|eendenvlees|duck|ente|enten|canard)\\w*`), clarity: 1, family: "animal" },
-  { id: "goose", re: new RegExp(`${W}(gans|ganzen|goose|oie)(?![a-z])`), clarity: 1, family: "animal" },
+  { id: "goose", re: new RegExp(`${W}(gans|goose|oie)(?![a-z])|${W}ganzen\w*`), clarity: 1, family: "animal" },
   { id: "poultry", re: new RegExp(`${W}(gevogelte|pluimvee|poultry|geflugel|volaille)\\w*`), clarity: 0.5, family: "animal" },
   { id: "beef", re: new RegExp(`${W}(rund|runder|rundvlees|rundvet|beef|rind|rinder|boeuf|vache|kalf|kalfs\\w*|veal|kalb|veau)\\w*|${W}(koe|koeien)(?![a-z])`), clarity: 1, family: "animal" },
   { id: "lamb", re: new RegExp(`${W}(lam(?![a-z])|lameiwit|lams\\w*|lammeren|lamb|lamm|agneau|schaap\\w*|schapen\\w*|mutton|hammel|mouton)`), clarity: 1, family: "animal" },

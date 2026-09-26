@@ -91,9 +91,14 @@ export function inferCategory(opts: {
   if (type.includes("supplement")) return "supplement";
   if (VET_NAME_RE.test(name)) return "veterinary";
   if (VET_CLINICAL_RE.test(name) && /(royal canin|hill|purina|pro plan|specific|virbac|farmina|eukanuba|iams|trovet)/.test(name)) return "veterinary";
-  if (SUPPLEMENT_RE.test(name) && !/(voer|brokken|nat)/.test(name)) return "supplement";
+  // a bag of several kilos is food, whatever the name says ("Renske Mighty Omega Plus 12 kg")
+  const bigBag = /\b\d+(?:[.,]\d+)?\s*kg\b/.test(name) && !/\b0[.,]\d+\s*kg\b/.test(name);
+  if (SUPPLEMENT_RE.test(name) && !/(voer|brokken|nat|geperst|adult|junior|senior|puppy|kitten)/.test(name) && !bigBag) return "supplement";
   if (TREAT_RE.test(name) && !/(voer|brokken)/.test(name)) return "treat";
   if (/(aanvull(?:end|en)\b)/.test(name)) return "complementary";
+  // soups and plain broths are toppers, never a complete meal ("Felix Soup", "Inaba Silky Broth");
+  // "... in bouillon" wet food is left alone: some of those are complete
+  if (/\b(soup|soep|suppe|soupe)\b/.test(name) || (/\bbroth\b/.test(name) && !/\bin broth\b/.test(name))) return "complementary";
   if (/(aanvullend (?:diervoeder|voer)|complementary (?:pet )?food|erganzungsfutter|aliment complementaire)/.test(normalize(opts.text ?? ""))) {
     return "complementary";
   }

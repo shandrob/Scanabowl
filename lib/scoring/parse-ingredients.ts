@@ -43,9 +43,18 @@ export function prepareIngredientText(text: string): string {
   // "(bestaande uit) kip 3 %, granen" -> "(kip 3 %), granen"
   t = t.replace(/\((?:bestaande uit|waaronder|waarvan|w\.o\.|onder andere|o\.a\.|bevat|inclusief)\)\s*([^,|;]*)/gi, "($1)");
   t = t.replace(/\s*[|•·]\s*/g, ", ");
-  // some labels have no commas at all: "Kipfilet 67% Kippenbouillon 24% Ham 8%"
-  if (!/[,;]/.test(t) && (t.match(/\d\s*%\s+(?=[A-Za-zÀ-ÿ])/g) ?? []).length >= 2) {
-    t = t.replace(/(\d\s*%)\s+(?=[A-Za-zÀ-ÿ])/g, "$1, ");
+  // some labels have no commas at all
+  if (!/[,;]/.test(t)) {
+    if ((t.match(/\.\s+(?=[A-ZÀ-Ý])/g) ?? []).length >= 3) {
+      // "Ganzenvlees 70%. Gedroogde Wortelvlokken. Stukjes Verse Aardappelen." - full stops as separators
+      t = t.replace(/\.\s+(?=[A-ZÀ-Ý])/g, ", ");
+    } else if ((t.match(/\d\s*%\s+(?=[A-Za-zÀ-ÿ])/g) ?? []).length >= 2) {
+      // "Kipfilet 67% Kippenbouillon 24% Ham 8%"
+      t = t.replace(/(\d\s*%)\s+(?=[A-Za-zÀ-ÿ])/g, "$1, ");
+    } else if ((t.match(/(?:^|\s)[A-ZÀ-Ý][a-zà-ÿ]/g) ?? []).length >= 4) {
+      // "Kip (19%) Tarwe Gedehydreerd gevogelte-eiwit Maïs" - every ingredient starts with a capital
+      t = t.replace(/\s+(?=[A-ZÀ-Ý][a-zà-ÿ])/g, ", ");
+    }
   }
   return dropUnmatchedBrackets(t);
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cleanName } from "../lib/catalog/clean";
+import { cleanName, inferCategory } from "../lib/catalog/clean";
 import { rowToProduct } from "../lib/catalog/records";
 import { parseSubmission, toCsvRows, toText } from "../lib/submissions";
 
@@ -73,5 +73,28 @@ describe("rowToProduct", () => {
   it("drops rows without a usable name, species or garbage text", () => {
     expect(rowToProduct({ naam: "Natvoer", doeldier: "Kat" }, ctx)).toBeNull();
     expect(rowToProduct({ naam: "Iets moois", doeldier: "" }, ctx)).toBeNull();
+  });
+});
+
+describe("soups and broths", () => {
+  it("are complementary, not complete", () => {
+    for (const name of ["Felix Soup Vis Selectie 6x48 g", "Schesir Soup - Kip Wortel Pompoen 40 g", "Inaba Dashi Delights Silky Broth 40 g"]) {
+      expect(inferCategory({ name })).toBe("complementary");
+    }
+  });
+  it("leave wet food 'in broth' or 'in bouillon' alone", () => {
+    expect(inferCategory({ name: "Schesir Complete In Bouillon - Tonijn 6x70 g" })).toBe("complete");
+    expect(inferCategory({ name: "Applaws Tuna Fillet in Broth" })).toBe("complete");
+  });
+});
+
+describe("supplements", () => {
+  it("does not mistake a food named 'Omega' for a supplement", () => {
+    expect(inferCategory({ name: "Renske Mighty Omega Plus - Kip 12 kg" })).toBe("complete");
+    expect(inferCategory({ name: "Renske Mighty Omega Plus Adult Geperst Zalm" })).toBe("complete");
+  });
+  it("still recognises real supplements", () => {
+    expect(inferCategory({ name: "Zalmolie Omega 3 voor honden 500 ml" })).toBe("supplement");
+    expect(inferCategory({ name: "Glucosamine tabletten" })).toBe("supplement");
   });
 });

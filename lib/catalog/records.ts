@@ -100,6 +100,11 @@ export interface RowContext {
   trustDeclared: boolean;
 }
 
+function isScraped(row: Record<string, string>, ctx: RowContext): boolean {
+  const s = field(row, "source").toLowerCase();
+  return s ? s === "scraped" : ctx.defaultSource === "scraped";
+}
+
 /** Turn any CSV row (master, scraper output, brand submission) into a clean product, or null if unusable. */
 export function rowToProduct(row: Record<string, string>, ctx: RowContext): CatalogProduct | null {
   let ingredients = cleanText(field(row, "ingredients"));
@@ -135,7 +140,9 @@ export function rowToProduct(row: Record<string, string>, ctx: RowContext): Cata
     name: rawName,
     brand,
     declaredType,
-    declaredCategory: field(row, "category"),
+    // In scraped files "Volledig" is only the default the import wrote, not information: let the name rules
+    // (soups, treats, vet diets ...) decide. Anything a person typed, or another category, is kept.
+    declaredCategory: isScraped(row, ctx) && /^volledig$/i.test(field(row, "category")) ? "" : field(row, "category"),
     text: `${ingredients} ${analysis}`,
   });
   const foodType =

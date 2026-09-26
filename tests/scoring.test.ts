@@ -287,3 +287,16 @@ describe("label quirks", () => {
     expect(r.ingredients[0].pct).toBe(95);
   });
 });
+
+describe("comma-less ingredient lists", () => {
+  it("splits a list where every ingredient starts with a capital", () => {
+    const r = parseIngredients("Kip (19%) Tarwe Gedehydreerd gevogelte-eiwit Maïs Rijst (7%) Dierlijk vet Mineralen");
+    expect(r.ingredients.map((i) => i.raw)).toEqual(["Kip", "Tarwe", "Gedehydreerd gevogelte-eiwit", "Maïs", "Rijst", "Dierlijk vet", "Mineralen"]);
+    expect(r.ingredients[0].pct).toBe(19);
+  });
+  it("uses full stops as separators when there are no commas", () => {
+    const r = parseIngredients("Ganzenvlees 70%. Gedroogde Wortelvlokken. Stukjes Verse Aardappelen. Gedehydrateerde Groene Erwten.");
+    expect(r.ingredients.length).toBe(4);
+    expect(r.ingredients[0].info.kind).toBe("meat");
+  });
+});
