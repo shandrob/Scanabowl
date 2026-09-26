@@ -4,6 +4,7 @@
     "description": "Look up any dog or cat food and see an independent score based on its ingredients and nutrients. Personalised for your pet, with allergies filtered out."
   },
   "nav": {
+    "allBrands": "All brands",
     "main": "Main navigation",
     "home": "Home",
     "foods": "Find food",
@@ -240,6 +241,7 @@
     "dataTitle": "About this data",
     "dataPack": "Ingredients and analysis as printed on the pack, checked by Scanabowl.",
     "dataScraped": "Ingredients and analysis were collected from public product information and processed automatically; they have not always been checked by hand. Compare them with the pack and tell us if something is wrong.",
+    "photoCredit": "Photo: {source}, {license}",
     "dataBrand": "Provided by the manufacturer and checked by Scanabowl. It is scored with exactly the same method as every other food.",
     "reportError": "Something wrong? Report a correction",
     "disclaimer": "The score describes the label and is not veterinary advice. Always introduce a new food gradually and ask your vet if your pet has a health condition."
@@ -762,6 +764,33 @@
     "contribute": "Get involved",
     "legal": "Legal",
     "vat": "VAT",
-    "disclaimer": "Scanabowl provides general information and no veterinary advice. Scores describe product labels and are calculated automatically. Links to bol.com are affiliate links."
+    "disclaimer": "Scanabowl provides general information and no veterinary advice. Scores describe product labels and are calculated automatically. Links to bol.com are affiliate links.",
+    "photos": "Some product photos come from {source} (licence CC BY-SA 3.0)."
+  },
+  "brandPages": {
+    "indexMetaTitle": "All dog and cat food brands compared",
+    "indexMetaDescription": "Compare {count} dog and cat food brands on their average Scanabowl score, calculated from ingredients and nutrient values.",
+    "indexTitle": "All brands",
+    "indexIntro": "How do the brands do on average? Here is every brand with at least {min} foods in our database, with the average score of the foods we can rate. Click a brand to see all its foods.",
+    "topTitle": "Highest-scoring brands",
+    "topNote": "Average of all rated complete foods of the brand; only brands with at least {min} rated foods.",
+    "azTitle": "Brands from A to Z",
+    "foods": "{count} foods",
+    "avg": "average {score}",
+    "noAvg": "not scored yet",
+    "metaTitle": "{brand}: dog and cat food rated",
+    "metaDescription": "How does {brand} score? The independent Scanabowl score of {count} {brand} foods, calculated from ingredients and nutrient values.",
+    "intro": "Scanabowl has {count} {brand} foods in its database. Every food is rated on its label – ingredients and nutrient values – with exactly the same method as every other brand.",
+    "statFoods": "Foods in the database",
+    "statAvg": "Average score",
+    "statBest": "Highest score",
+    "statTop": "Rated A or B",
+    "distribution": "How the scores are spread",
+    "dogsTitle": "{brand} dog food",
+    "catsTitle": "{brand} cat food",
+    "showAll": "All {count} foods in the food finder",
+    "notScoredNote": "{count} {brand} foods have no score: veterinary diets, treats, complementary foods, or foods whose ingredient list we do not have yet.",
+    "independent": "Scanabowl is not affiliated with {brand} and receives nothing from brands. Scores describe the label; they say nothing about production and are not advice for your pet.",
+    "moreFromBrand": "All {brand} foods"
   }
 }

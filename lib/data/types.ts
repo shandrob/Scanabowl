@@ -12,6 +12,13 @@ export interface IngredientView {
   named: boolean;
 }
 
+/** Credit line for a photo from an openly licensed source such as Open Pet Food Facts. */
+export interface ImageCredit {
+  source: string;
+  license: string;
+  url?: string;
+}
+
 /** Full record used by the product page (server side only). */
 export interface ProductDetail {
   id: string;
@@ -27,6 +34,8 @@ export interface ProductDetail {
   price?: number;
   bolUrl?: string;
   image?: string;
+  /** who took the photo, when it is not our own (licence requires the credit) */
+  imageCredit?: ImageCredit;
   source: "scraped" | "manual" | "brand" | "user";
   ingredientsText: string;
   analysisText: string;

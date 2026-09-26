@@ -27,6 +27,11 @@ export async function getProduct(slug: string): Promise<ProductDetail | null> {
   return (await table(species)).get(slug) ?? null;
 }
 
+export async function allProducts(): Promise<Record<Species, ProductDetail[]>> {
+  const [dog, cat] = await Promise.all([table("dog"), table("cat")]);
+  return { dog: [...dog.values()], cat: [...cat.values()] };
+}
+
 export function allProductSlugs(): string[] {
   return Object.keys(slugMap);
 }
@@ -50,7 +55,7 @@ export async function productCounts(): Promise<{ products: number; brands: numbe
  * Higher-scoring foods of the same kind. The browser filters this candidate list again for the
  * visitor's pet (allergies), so we hand over a generous number.
  */
-export async function alternativesFor(p: ProductDetail, count = 14): Promise<IndexEntry[]> {
+export async function alternativesFor(p: ProductDetail, count = 8): Promise<IndexEntry[]> {
   if (p.score === null) return [];
   const list = [...(await table(p.species)).values()];
   return list

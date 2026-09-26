@@ -49,30 +49,6 @@ export default async function RootLayout({ children, params }: { children: React
   const dict = await getDictionary(lang);
   const t = createT(dict);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        name: "Scanabowl",
-        url: SITE.url,
-        logo: `${SITE.url}/logo.png`,
-        email: SITE.email,
-      },
-      {
-        "@type": "WebSite",
-        name: "Scanabowl",
-        url: `${SITE.url}${localePath(lang)}`,
-        inLanguage: LOCALE_TAGS[lang],
-        potentialAction: {
-          "@type": "SearchAction",
-          target: `${SITE.url}${localePath(lang, "/foods")}?q={search_term_string}`,
-          "query-input": "required name=search_term_string",
-        },
-      },
-    ],
-  };
-
   return (
     <html lang={LOCALE_TAGS[lang]} className={`${fraunces.variable} ${grotesk.variable} ${plexMono.variable}`}>
       <body className="min-h-dvh">
@@ -84,7 +60,6 @@ export default async function RootLayout({ children, params }: { children: React
           <main id="main">{children}</main>
           <Footer lang={lang} t={t} />
         </LocaleProvider>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
   );

@@ -4,6 +4,7 @@
     "description": "Suchen Sie jedes Hunde- oder Katzenfutter und sehen Sie eine unabhängige Bewertung auf Basis von Zutaten und Nährwerten. Persönlich für Ihr Tier, Allergene werden herausgefiltert."
   },
   "nav": {
+    "allBrands": "Alle Marken",
     "main": "Hauptnavigation",
     "home": "Startseite",
     "foods": "Futter finden",
@@ -240,6 +241,7 @@
     "dataTitle": "Über diese Daten",
     "dataPack": "Zutaten und Analyse wie auf der Verpackung gedruckt, von Scanabowl geprüft.",
     "dataScraped": "Zutaten und Analyse wurden aus öffentlichen Produktinformationen gesammelt und automatisch verarbeitet; sie wurden nicht immer von Hand geprüft. Vergleichen Sie sie mit der Verpackung und teilen Sie uns mit, wenn etwas nicht stimmt.",
+    "photoCredit": "Foto: {source}, {license}",
     "dataBrand": "Vom Hersteller bereitgestellt und von Scanabowl geprüft. Es wird nach exakt derselben Methode bewertet wie jedes andere Futter.",
     "reportError": "Stimmt etwas nicht? Korrektur melden",
     "disclaimer": "Die Bewertung beschreibt das Etikett und ist keine tierärztliche Beratung. Stellen Sie neues Futter immer schrittweise um und fragen Sie Ihren Tierarzt, wenn Ihr Tier gesundheitliche Probleme hat."
@@ -762,6 +764,33 @@
     "contribute": "Mitmachen",
     "legal": "Rechtliches",
     "vat": "USt-IdNr.",
-    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet. Links zu bol.com sind Affiliate-Links."
+    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet. Links zu bol.com sind Affiliate-Links.",
+    "photos": "Ein Teil der Produktfotos stammt von {source} (Lizenz CC BY-SA 3.0)."
+  },
+  "brandPages": {
+    "indexMetaTitle": "Alle Marken für Hunde- und Katzenfutter im Vergleich",
+    "indexMetaDescription": "Vergleichen Sie {count} Marken für Hunde- und Katzenfutter anhand ihrer durchschnittlichen Scanabowl-Bewertung, berechnet aus Zutaten und Nährwerten.",
+    "indexTitle": "Alle Marken",
+    "indexIntro": "Wie schneiden die Marken im Durchschnitt ab? Hier finden Sie jede Marke mit mindestens {min} Futtersorten in unserer Datenbank, mit der Durchschnittsbewertung der Sorten, die wir bewerten können. Klicken Sie auf eine Marke, um alle Sorten zu sehen.",
+    "topTitle": "Marken mit den besten Bewertungen",
+    "topNote": "Durchschnitt aller bewerteten Alleinfuttermittel der Marke; nur Marken mit mindestens {min} bewerteten Sorten.",
+    "azTitle": "Marken von A bis Z",
+    "foods": "{count} Sorten",
+    "avg": "Durchschnitt {score}",
+    "noAvg": "noch keine Bewertung",
+    "metaTitle": "{brand}: Hunde- und Katzenfutter bewertet",
+    "metaDescription": "Wie schneidet {brand} ab? Die unabhängige Scanabowl-Bewertung von {count} Sorten von {brand}, berechnet aus Zutaten und Nährwerten.",
+    "intro": "Scanabowl hat {count} Sorten von {brand} in der Datenbank. Jedes Futter wird anhand des Etiketts – Zutaten und Nährwerte – mit genau derselben Methode bewertet wie jede andere Marke.",
+    "statFoods": "Sorten in der Datenbank",
+    "statAvg": "Durchschnittliche Bewertung",
+    "statBest": "Beste Bewertung",
+    "statTop": "Bewertung A oder B",
+    "distribution": "Verteilung der Bewertungen",
+    "dogsTitle": "Hundefutter von {brand}",
+    "catsTitle": "Katzenfutter von {brand}",
+    "showAll": "Alle {count} Sorten im Futterfinder",
+    "notScoredNote": "{count} Sorten von {brand} haben keine Bewertung: Tierarzt-Diäten, Snacks, Ergänzungsfuttermittel oder Futter, dessen Zutatenliste uns noch nicht vorliegt.",
+    "independent": "Scanabowl ist nicht mit {brand} verbunden und erhält nichts von Marken. Bewertungen beschreiben das Etikett; sie sagen nichts über die Herstellung aus und sind keine Beratung für Ihr Tier.",
+    "moreFromBrand": "Alle Sorten von {brand}"
   }
 }

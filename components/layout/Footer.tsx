@@ -32,6 +32,7 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
           </div>
           {col(t("footer.explore"), [
             ["/foods", t("nav.foods")],
+            ["/foods/brand", t("nav.allBrands")],
             ["/my-pet", t("nav.myPet")],
             ["/blog", t("nav.blog")],
             ["/how-we-score", t("nav.howWeScore")],
@@ -50,6 +51,11 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
         </div>
         <div className="mt-10 border-t border-line pt-6 text-xs leading-relaxed text-ink-faint">
           <p>{t("footer.disclaimer")}</p>
+          <p className="mt-2">
+            {t("footer.photos").split("{source}")[0]}
+            <a href="https://world.openpetfoodfacts.org" rel="noopener" className="underline underline-offset-2 hover:text-brand">Open Pet Food Facts</a>
+            {t("footer.photos").split("{source}")[1]}
+          </p>
           <p className="mt-2">
             © {new Date().getFullYear()} Scanabowl · {SITE.email}
             {SITE.company.kvk ? ` · KvK ${SITE.company.kvk}` : ""}

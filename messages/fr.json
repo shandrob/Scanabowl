@@ -4,6 +4,7 @@
     "description": "Recherchez n’importe quel aliment pour chien ou chat et obtenez une note indépendante basée sur ses ingrédients et ses valeurs nutritionnelles. Personnalisé pour votre animal, allergènes exclus."
   },
   "nav": {
+    "allBrands": "Toutes les marques",
     "main": "Navigation principale",
     "home": "Accueil",
     "foods": "Trouver un aliment",
@@ -240,6 +241,7 @@
     "dataTitle": "À propos de ces données",
     "dataPack": "Ingrédients et analyse tels qu’imprimés sur l’emballage, vérifiés par Scanabowl.",
     "dataScraped": "Les ingrédients et l’analyse proviennent d’informations produit publiques et ont été traités automatiquement ; ils n’ont pas toujours été vérifiés à la main. Comparez-les avec l’emballage et signalez-nous toute erreur.",
+    "photoCredit": "Photo : {source}, {license}",
     "dataBrand": "Fournis par le fabricant et vérifiés par Scanabowl. Il est noté avec exactement la même méthode que tout autre aliment.",
     "reportError": "Une erreur ? Signalez une correction",
     "disclaimer": "La note décrit l’étiquette et n’est pas un avis vétérinaire. Introduisez toujours un nouvel aliment progressivement et demandez conseil à votre vétérinaire si votre animal a un problème de santé."
@@ -762,6 +764,33 @@
     "contribute": "Participer",
     "legal": "Mentions légales",
     "vat": "TVA",
-    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement. Les liens vers bol.com sont des liens d’affiliation."
+    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement. Les liens vers bol.com sont des liens d’affiliation.",
+    "photos": "Une partie des photos de produits provient de {source} (licence CC BY-SA 3.0)."
+  },
+  "brandPages": {
+    "indexMetaTitle": "Toutes les marques d’aliments pour chiens et chats comparées",
+    "indexMetaDescription": "Comparez {count} marques d’aliments pour chiens et chats selon leur note Scanabowl moyenne, calculée à partir des ingrédients et des valeurs nutritionnelles.",
+    "indexTitle": "Toutes les marques",
+    "indexIntro": "Comment les marques s’en sortent-elles en moyenne ? Voici chaque marque ayant au moins {min} aliments dans notre base, avec la note moyenne des aliments que nous pouvons évaluer. Cliquez sur une marque pour voir tous ses aliments.",
+    "topTitle": "Marques les mieux notées",
+    "topNote": "Moyenne de tous les aliments complets notés de la marque ; uniquement les marques ayant au moins {min} aliments notés.",
+    "azTitle": "Marques de A à Z",
+    "foods": "{count} aliments",
+    "avg": "moyenne {score}",
+    "noAvg": "pas encore noté",
+    "metaTitle": "{brand} : aliments pour chiens et chats notés",
+    "metaDescription": "Quelle note pour {brand} ? La note Scanabowl indépendante de {count} aliments {brand}, calculée à partir des ingrédients et des valeurs nutritionnelles.",
+    "intro": "Scanabowl compte {count} aliments {brand} dans sa base. Chaque aliment est évalué d’après son étiquette – ingrédients et valeurs nutritionnelles – avec exactement la même méthode que toutes les autres marques.",
+    "statFoods": "Aliments dans la base",
+    "statAvg": "Note moyenne",
+    "statBest": "Meilleure note",
+    "statTop": "Note A ou B",
+    "distribution": "Répartition des notes",
+    "dogsTitle": "Aliments pour chiens {brand}",
+    "catsTitle": "Aliments pour chats {brand}",
+    "showAll": "Les {count} aliments dans le moteur de recherche",
+    "notScoredNote": "{count} aliments {brand} n’ont pas de note : régimes vétérinaires, friandises, aliments complémentaires ou aliments dont nous n’avons pas encore la liste d’ingrédients.",
+    "independent": "Scanabowl n’est pas lié à {brand} et ne reçoit rien des marques. Les notes décrivent l’étiquette ; elles ne disent rien de la fabrication et ne sont pas un conseil pour votre animal.",
+    "moreFromBrand": "Tous les aliments {brand}"
   }
 }

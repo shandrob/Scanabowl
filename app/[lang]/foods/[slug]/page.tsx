@@ -9,10 +9,12 @@ import { PersonalPanel } from "@/components/product/PersonalPanel";
 import { ScorePanel } from "@/components/product/ScorePanel";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { detailToIndex } from "@/lib/data/index-entry";
+import type { ImageCredit } from "@/lib/data/types";
+import { brandPageSlug } from "@/lib/data/brands";
 import { alternativesFor, getProduct } from "@/lib/data/products";
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { createT } from "@/lib/i18n/t";
+import { createT, type TFunction } from "@/lib/i18n/t";
 import { foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
 import { SITE } from "@/lib/site";
 
@@ -60,7 +62,7 @@ export default async function ProductPage({ params }: Props) {
   const p = await getProduct(slug);
   if (!p) notFound();
   const t = createT(await getDictionary(lang));
-  const [alternatives] = await Promise.all([alternativesFor(p)]);
+  const [alternatives, brandSlug] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand)]);
   const entry = detailToIndex(p);
 
   const jsonLd = {
@@ -75,6 +77,15 @@ export default async function ProductPage({ params }: Props) {
         category: speciesLabel(t, p.species, true),
         description: t("product.jsonLdDescription", { name: p.name, brand: p.brand }),
         url: `${SITE.url}${localePath(lang, `/foods/${slug}`)}`,
+        ...(p.score !== null
+          ? {
+              review: {
+                "@type": "Review",
+                author: { "@type": "Organization", name: "Scanabowl", url: SITE.url },
+                reviewRating: { "@type": "Rating", ratingValue: p.score, bestRating: 100, worstRating: 0 },
+              },
+            }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -102,8 +113,19 @@ export default async function ProductPage({ params }: Props) {
         <div className="h-40 w-40 shrink-0 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
           <ProductImage ean={p.ean} hasImage={!!p.image} alt={p.name} size={200} priority />
         </div>
+        {p.imageCredit && (
+          <p className="-mt-3 text-[0.7rem] text-ink-faint sm:hidden">
+            <PhotoCredit credit={p.imageCredit} t={t} />
+          </p>
+        )}
         <div className="min-w-0">
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">{p.brand}</p>
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">
+            {brandSlug ? (
+              <Link href={localePath(lang, `/foods/brand/${brandSlug}`)} prefetch={false} title={t("brandPages.moreFromBrand", { brand: p.brand })} className="hover:underline">{p.brand}</Link>
+            ) : (
+              p.brand
+            )}
+          </p>
           <h1 className="mt-1 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">{p.name}</h1>
           <ul className="mt-3 flex flex-wrap gap-2 text-sm">
             <li className="rounded-lg border border-line bg-paper px-2.5 py-1">{speciesLabel(t, p.species)}</li>
@@ -113,6 +135,11 @@ export default async function ProductPage({ params }: Props) {
             {p.pack && <li className="rounded-lg border border-line bg-paper px-2.5 py-1">{p.pack}</li>}
           </ul>
           {p.ean && <p className="mt-3 font-mono text-xs text-ink-faint">EAN {p.ean}</p>}
+          {p.imageCredit && (
+            <p className="mt-1 hidden text-xs text-ink-faint sm:block">
+              <PhotoCredit credit={p.imageCredit} t={t} />
+            </p>
+          )}
         </div>
       </header>
 
@@ -153,5 +180,21 @@ export default async function ProductPage({ params }: Props) {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </div>
+  );
+}
+
+/** Credit required by the licence of photos from open sources (e.g. Open Pet Food Facts, CC BY-SA 3.0). */
+function PhotoCredit({ credit, t }: { credit: ImageCredit; t: TFunction }) {
+  const [before, after] = t("product.photoCredit", { license: credit.license }).split("{source}");
+  return (
+    <>
+      {before}
+      {credit.url ? (
+        <a href={credit.url} rel="noopener" className="underline underline-offset-2 hover:text-brand">{credit.source}</a>
+      ) : (
+        credit.source
+      )}
+      {after}
+    </>
   );
 }

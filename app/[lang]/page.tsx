@@ -9,7 +9,7 @@ import { IconArrow, IconBarcode, IconPaw, IconSearch, IconShield } from "@/compo
 import { listPosts } from "@/lib/blog";
 import { detailToIndex } from "@/lib/data/index-entry";
 import { productCounts, topProducts } from "@/lib/data/products";
-import { alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
+import { LOCALE_TAGS, alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createRaw, createT } from "@/lib/i18n/t";
 import { Rich } from "@/components/ui/Rich";
@@ -44,10 +44,27 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     { icon: <IconPaw className="h-6 w-6" />, title: t("home.step3Title"), text: t("home.step3Text") },
   ];
 
+  // Site-wide facts for search engines live on the home page only (not repeated in every page's HTML)
   const faqLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a.replace(/\*\*|\[([^\]]+)\]\([^)]+\)/g, "$1") } })),
+    "@graph": [
+      { "@type": "Organization", name: "Scanabowl", url: SITE.url, logo: `${SITE.url}/logo.png`, email: SITE.email },
+      {
+        "@type": "WebSite",
+        name: "Scanabowl",
+        url: `${SITE.url}${localePath(lang)}`,
+        inLanguage: LOCALE_TAGS[lang],
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${SITE.url}${localePath(lang, "/foods")}?q={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a.replace(/\*\*|\[([^\]]+)\]\([^)]+\)/g, "$1") } })),
+      },
+    ],
   };
 
   return (

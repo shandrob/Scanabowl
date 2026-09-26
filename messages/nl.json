@@ -4,6 +4,7 @@
     "description": "Zoek elk hondenvoer of kattenvoer op en zie een onafhankelijke score op basis van ingrediënten en voedingswaarden. Persoonlijk voor jouw huisdier, met allergieën uitgefilterd."
   },
   "nav": {
+    "allBrands": "Alle merken",
     "main": "Hoofdmenu",
     "home": "Home",
     "foods": "Voer zoeken",
@@ -240,6 +241,7 @@
     "dataTitle": "Over deze gegevens",
     "dataPack": "Ingrediënten en analyse zoals gedrukt op de verpakking, gecontroleerd door Scanabowl.",
     "dataScraped": "Ingrediënten en analyse zijn verzameld uit openbare productinformatie en automatisch verwerkt; ze zijn niet altijd handmatig gecontroleerd. Vergelijk ze met de verpakking en meld het ons als er iets niet klopt.",
+    "photoCredit": "Foto: {source}, {license}",
     "dataBrand": "Aangeleverd door de fabrikant en gecontroleerd door Scanabowl. Het wordt met precies dezelfde methode beoordeeld als elk ander voer.",
     "reportError": "Klopt er iets niet? Meld een correctie",
     "disclaimer": "De score beschrijft het etiket en is geen diergeneeskundig advies. Bouw nieuw voer altijd geleidelijk op en vraag je dierenarts om advies als je dier een gezondheidsprobleem heeft."
@@ -762,6 +764,33 @@
     "contribute": "Doe mee",
     "legal": "Juridisch",
     "vat": "BTW",
-    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend. Links naar bol.com zijn affiliate-links."
+    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend. Links naar bol.com zijn affiliate-links.",
+    "photos": "Een deel van de productfoto's komt van {source} (licentie CC BY-SA 3.0)."
+  },
+  "brandPages": {
+    "indexMetaTitle": "Alle merken hondenvoer en kattenvoer vergeleken",
+    "indexMetaDescription": "Vergelijk {count} merken hondenvoer en kattenvoer op hun gemiddelde Scanabowl-score, berekend uit ingrediënten en voedingswaarden.",
+    "indexTitle": "Alle merken",
+    "indexIntro": "Hoe doen de merken het gemiddeld? Hier staat elk merk met minstens {min} voeders in onze database, met de gemiddelde score van de voeders die we kunnen beoordelen. Klik op een merk om alle voeders te zien.",
+    "topTitle": "Hoogst scorende merken",
+    "topNote": "Gemiddelde van alle beoordeelde volledige voeders van het merk; alleen merken met minstens {min} beoordeelde voeders.",
+    "azTitle": "Merken van A tot Z",
+    "foods": "{count} voeders",
+    "avg": "gemiddeld {score}",
+    "noAvg": "nog geen score",
+    "metaTitle": "{brand}: hondenvoer en kattenvoer beoordeeld",
+    "metaDescription": "Hoe scoort {brand}? De onafhankelijke Scanabowl-score van {count} voeders van {brand}, berekend uit ingrediënten en voedingswaarden.",
+    "intro": "Scanabowl heeft {count} voeders van {brand} in de database. Elk voer is beoordeeld op het etiket – ingrediënten en voedingswaarden – met precies dezelfde methode als elk ander merk.",
+    "statFoods": "Voeders in de database",
+    "statAvg": "Gemiddelde score",
+    "statBest": "Hoogste score",
+    "statTop": "Score A of B",
+    "distribution": "Verdeling van de scores",
+    "dogsTitle": "Hondenvoer van {brand}",
+    "catsTitle": "Kattenvoer van {brand}",
+    "showAll": "Alle {count} voeders in de voerzoeker",
+    "notScoredNote": "{count} voeders van {brand} hebben geen score: dieetvoer van de dierenarts, snacks, aanvullend voer, of voer waarvan we de ingrediëntenlijst nog niet hebben.",
+    "independent": "Scanabowl is niet verbonden aan {brand} en ontvangt niets van merken. Scores beschrijven het etiket; ze zeggen niets over de productie en zijn geen advies voor jouw dier.",
+    "moreFromBrand": "Alle voeders van {brand}"
   }
 }

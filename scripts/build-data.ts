@@ -115,6 +115,16 @@ async function main() {
       if (m) imgFiles.set(normalizeEan(m[1]), path.join(imgSrc, f));
     }
   }
+  // database/image-credits.csv: photos from openly licensed sources (filled by tools/fetch_opff_images.py)
+  const credits = new Map<string, { source: string; license: string; url?: string }>();
+  const creditsFile = path.join(DB, "image-credits.csv");
+  if (fs.existsSync(creditsFile)) {
+    for (const r of readCsv(creditsFile)) {
+      const ean = normalizeEan(r.ean ?? "");
+      const source = (r.bron ?? r.source ?? "").trim();
+      if (ean && source) credits.set(ean, { source, license: (r.licentie ?? r.license ?? "").trim(), ...(r.url ? { url: r.url.trim() } : {}) });
+    }
+  }
   let imagesDone = 0;
   for (const p of products) {
     const src = p.ean ? imgFiles.get(p.ean) : undefined;
@@ -131,6 +141,8 @@ async function main() {
       }
     }
     p.image = `/products/${p.ean}.webp`;
+    const credit = credits.get(p.ean);
+    if (credit) p.imageCredit = credit;
   }
 
   // ---------------------------------------------------------------- blog images
@@ -197,6 +209,7 @@ async function main() {
       ...(p.price ? { price: p.price } : {}),
       ...(p.bolUrl ? { bolUrl: p.bolUrl } : {}),
       ...(p.image ? { image: p.image } : {}),
+      ...(p.image && p.imageCredit ? { imageCredit: p.imageCredit } : {}),
       source: p.source,
       ingredientsText: p.ingredients,
       analysisText: p.analysis,

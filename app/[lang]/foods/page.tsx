@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { FoodFinder } from "@/components/foods/FoodFinder";
@@ -30,6 +31,9 @@ export default async function FoodsPage({ params }: { params: Promise<{ lang: st
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6">
       <h1 className="font-display text-4xl font-semibold text-brand-deep">{t("finder.title")}</h1>
       <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("finder.subtitle", { count: (meta.counts.scoredDog + meta.counts.scoredCat).toLocaleString(lang) })}</p>
+      <p className="mt-3">
+        <Link href={localePath(lang, "/foods/brand")} className="font-semibold text-brand underline underline-offset-2">{t("nav.allBrands")} →</Link>
+      </p>
       <div className="mt-8">
         <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl bg-line/60" />}>
           <FoodFinder brands={meta.brands} />

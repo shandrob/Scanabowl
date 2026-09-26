@@ -38,6 +38,7 @@ export interface CatalogProduct {
   price?: number;
   bolUrl?: string;
   image?: string;
+  imageCredit?: { source: string; license: string; url?: string };
   source: Source;
   sourceUrl?: string;
   notes?: string;

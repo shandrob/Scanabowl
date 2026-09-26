@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { allBrands } from "@/lib/data/brands";
 import { allProductSlugs } from "@/lib/data/products";
 import { LOCALES, LOCALE_TAGS, localePath } from "@/lib/i18n/config";
 import { SITE } from "@/lib/site";
@@ -12,17 +13,21 @@ import { SITE } from "@/lib/site";
  * Blog posts live in /sitemap-blog.xml because they appear on their publish date, without a deployment.
  */
 
-const STATIC = ["", "/foods", "/my-pet", "/blog", "/how-we-score", "/suggest", "/brands", "/about", "/contact", "/privacy", "/terms", "/affiliate"];
+const STATIC = ["", "/foods", "/foods/brand", "/my-pet", "/blog", "/how-we-score", "/suggest", "/brands", "/about", "/contact", "/privacy", "/terms", "/affiliate"];
 
 const url = (lang: (typeof LOCALES)[number], path: string) => `${SITE.url}${localePath(lang, path)}`;
 const languages = (path: string) => Object.fromEntries(LOCALES.map((l) => [LOCALE_TAGS[l], url(l, path)]));
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const out: MetadataRoute.Sitemap = [];
   for (const path of STATIC) {
     for (const lang of LOCALES) {
       out.push({ url: url(lang, path), changeFrequency: path === "" || path === "/blog" ? "weekly" : "monthly", priority: path === "" ? 1 : 0.7, alternates: { languages: languages(path) } });
     }
+  }
+  for (const b of await allBrands()) {
+    const path = `/foods/brand/${b.slug}`;
+    for (const lang of LOCALES) out.push({ url: url(lang, path), changeFrequency: "monthly", priority: 0.7, alternates: { languages: languages(path) } });
   }
   for (const slug of allProductSlugs()) {
     for (const lang of LOCALES) out.push({ url: url(lang, `/foods/${slug}`), changeFrequency: "monthly", priority: 0.6 });
