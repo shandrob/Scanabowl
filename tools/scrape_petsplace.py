@@ -77,9 +77,10 @@ def load_known_eans() -> set[str]:
         for f in (DB / folder).glob("*.csv"):
             try:
                 with open(f, encoding="utf-8-sig", newline="") as fh:
-                    sample = fh.read(2048)
+                    # decide the delimiter from the header line only: ingredient lists are full of commas
+                    header = fh.readline()
                     fh.seek(0)
-                    delim = ";" if sample.count(";") > sample.count(",") else ","
+                    delim = ";" if header.count(";") > header.count(",") else ","
                     for row in csv.DictReader(fh, delimiter=delim):
                         e = re.sub(r"\D", "", row.get("ean", "") or "")
                         if e:
@@ -87,6 +88,17 @@ def load_known_eans() -> set[str]:
             except Exception as exc:  # noqa: BLE001
                 log(f"  (could not read {f.name}: {exc})")
     return known
+
+
+def gap_eans() -> set[str]:
+    """EANs of foods whose ingredient list or analysis is missing, according to the last `npm run data:build`."""
+    gaps: set[str] = set()
+    for f in (ROOT / "data" / "generated").glob("products.*.json"):
+        for p in json.loads(f.read_text(encoding="utf-8")):
+            unusable = p.get("notScored") in ("no_ingredients", "ingredients_unclear")
+            if p.get("ean") and p.get("category") == "complete" and (unusable or not p.get("analysisText")):
+                gaps.add(str(p["ean"]).zfill(13))
+    return gaps
 
 
 def polite_session(rp: urllib.robotparser.RobotFileParser) -> tuple[requests.Session, float]:
@@ -169,9 +181,32 @@ def clean(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "").replace("\x1f", "")).strip()
 
 
+def attribute_table(soup: BeautifulSoup) -> dict[str, str]:
+    """Since 2026 the shop shows its product data in a table: <td data-td="Samenstelling">...</td>."""
+    out: dict[str, str] = {}
+    for td in soup.select("td[data-td]"):
+        label = clean(td.get("data-td") or "")
+        if label and label not in out:
+            out[label] = clean(td.get_text(" ", strip=True))
+    return out
+
+
 def parse_product(html: str, url: str) -> dict[str, str] | None:
-    attrs = embedded_attributes(html)
     soup = BeautifulSoup(html, "lxml")
+    table = attribute_table(soup)
+    # the old embedded JSON is still read as a fallback; the table wins when both exist
+    attrs = embedded_attributes(html)
+    for key, label in (
+        ("ean", "EAN"),
+        ("brd", "Merk"),
+        ("productcompositionword", "Samenstelling"),
+        ("productcompositionanalysis", "Analyse"),
+        ("product_group", "Productgroep"),
+        ("stg1", "Soort of Levensfase"),
+        ("wgt", "Gewicht"),
+    ):
+        if table.get(label):
+            attrs[key] = table[label]
     ld = json_ld_product(soup)
     ean = attrs.get("ean") or str(ld.get("gtin13") or "") or ean_from_url(url)
     name = clean(str(ld.get("name") or ""))
@@ -217,6 +252,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Scrape dog/cat food data from petsplace.nl (polite, resumable)")
     ap.add_argument("--limit", type=int, default=0, help="stop after N products (0 = no limit)")
     ap.add_argument("--refresh", action="store_true", help="also re-fetch products that are already in the database")
+    ap.add_argument("--fill-gaps", action="store_true", help="also re-fetch products in the database that have no ingredient list or analysis")
     ap.add_argument("--images", action="store_true", help="also download product photos (mind the copyright!)")
     ap.add_argument("--out", default="", help="output CSV (default: database/scraped/petsplace-<today>.csv)")
     args = ap.parse_args()
@@ -231,6 +267,10 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     done = set(state.read_text(encoding="utf-8").split()) if state.exists() else set()
     known = set() if args.refresh else load_known_eans()
+    if args.fill_gaps:
+        gaps = gap_eans()
+        known -= gaps
+        log(f"  {len(gaps)} products in the database miss ingredients or analysis - they are fetched again")
 
     urls = sitemap_product_urls(session, delay)
     todo = []

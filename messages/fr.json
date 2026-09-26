@@ -363,11 +363,12 @@
   },
   "order": {
     "title": "Commander cet aliment",
-    "text": "Consultez le prix actuel et la livraison chez bol.com.",
+    "text": "Comparez le prix actuel et la livraison chez zooplus et bol.com.",
+    "zooplusButton": "Rechercher sur zooplus",
     "button": "Voir sur bol.com",
-    "disclosure": "Lien d’affiliation : si vous achetez via ce lien, nous pouvons toucher une commission, sans frais supplémentaires pour vous. Cela n’influence jamais la note.",
+    "disclosure": "Liens d’affiliation : si vous achetez via ces liens, nous pouvons toucher une commission, sans frais supplémentaires pour vous. Cela n’influence jamais la note.",
     "moreInfo": "Plus d’informations",
-    "dutchOnly": "bol.com livre aux Pays-Bas et en Belgique."
+    "dutchOnly": "Ces liens mènent à des boutiques en ligne néerlandaises."
   },
   "pet": {
     "metaTitle": "Mon animal – guide alimentaire personnel",
@@ -687,7 +688,8 @@
         "ul": [
           "**Vercel** héberge le site et traite des données techniques comme les adresses IP dans les journaux du serveur.",
           "**Resend** achemine les e-mails générés par nos formulaires.",
-          "**bol.com** – lorsque vous cliquez sur un lien d’affiliation, bol.com et sa plateforme partenaire peuvent déposer leurs propres cookies selon leur propre politique de confidentialité."
+          "**zooplus et Awin** – lorsque vous cliquez sur un lien vers zooplus, zooplus et le réseau d’affiliation Awin peuvent déposer leurs propres cookies selon leur propre politique de confidentialité.",
+        "**bol.com** – lorsque vous cliquez sur un lien d’affiliation, bol.com et sa plateforme partenaire peuvent déposer leurs propres cookies selon leur propre politique de confidentialité."
         ]
       },
       {
@@ -734,29 +736,44 @@
   },
   "affiliate": {
     "metaTitle": "Mention d’affiliation",
-    "metaDescription": "Comment Scanabowl gagne de l’argent avec les liens d’affiliation bol.com – et pourquoi cela n’influence jamais les notes.",
+    "metaDescription": "Comment Scanabowl gagne de l’argent avec des liens d’affiliation vers zooplus et bol.com – et pourquoi cela n’influence jamais les notes.",
     "title": "Mention d’affiliation",
     "intro": "Scanabowl est gratuit. Cette page explique comment nous gagnons de l’argent.",
     "sections": [
       {
-        "h": "Programme partenaire bol.com",
-        "p": ["Scanabowl participe au programme partenaire de bol.com. Lorsque vous cliquez sur un bouton « Voir sur bol.com » et achetez quelque chose, nous pouvons recevoir une commission de bol.com. Cela ne vous coûte rien de plus.", "Scanabowl est un site indépendant. Il n’appartient pas à bol.com et n’y est pas affilié, et bol.com n’a aucune influence sur nos contenus, nos notes ou nos recommandations. Vous passez votre commande directement chez bol.com, qui est responsable du prix, de la livraison et du service client."]
+        "h": "Programme d’affiliation zooplus (via Awin)",
+        "p": [
+          "Scanabowl participe au programme d’affiliation de zooplus, via le réseau d’affiliation Awin. Lorsque vous cliquez sur « Rechercher sur zooplus » et achetez quelque chose, nous pouvons recevoir une commission de zooplus. Cela ne vous coûte rien de plus.",
+          "Scanabowl est un site indépendant. Il n’appartient pas à zooplus et n’y est pas affilié, et zooplus n’a aucune influence sur nos contenus, nos notes ou nos recommandations. Vous passez votre commande directement chez zooplus, qui est responsable du prix, de la livraison et du service client."
+        ]
+      },
+      {
+        "h": "bol.com",
+        "p": [
+          "Les liens vers bol.com peuvent aussi être des liens d’affiliation, via le programme partenaire de bol.com. Là aussi, cela ne vous coûte rien de plus.",
+          "Scanabowl n’appartient pas à bol.com et n’y est pas affilié, et bol.com n’a aucune influence sur nos contenus, nos notes ou nos recommandations. Vous passez votre commande directement chez bol.com, qui est responsable du prix, de la livraison et du service client."
+        ]
       },
       {
         "h": "Les notes ne sont jamais à vendre",
         "ul": [
-          "Chaque aliment est noté avec la même formule, qu’il soit vendu chez bol.com ou rapporte une commission ou non.",
+          "Chaque aliment est noté avec la même formule, qu’il soit vendu chez zooplus ou bol.com et qu’il rapporte une commission ou non.",
           "Les marques ne peuvent acheter ni une place, ni un classement, ni une meilleure note.",
           "Les listes des mieux notés sont générées automatiquement."
         ]
       },
       {
         "h": "Comment reconnaître les liens d’affiliation",
-        "p": ["Les liens vers bol.com sont signalés comme liens sponsorisés et accompagnés d’une courte mention. Les prix et la disponibilité sont affichés par bol.com ; le prix au moment de votre commande fait foi."]
+        "p": [
+          "Les liens vers zooplus et bol.com sont signalés comme liens sponsorisés et accompagnés d’une courte mention. Les prix et la disponibilité sont affichés par la boutique elle-même ; le prix au moment de votre commande fait foi.",
+          "Le bouton « Rechercher sur zooplus » ouvre une recherche sur zooplus.nl. Si zooplus ne vend pas cet aliment, vous y verrez des produits similaires."
+        ]
       },
       {
         "h": "Ce que nous faisons des revenus",
-        "p": ["Les revenus sont réinvestis dans Scanabowl : hébergement, mise à jour de la base de données et création de nouvelles fonctionnalités."]
+        "p": [
+          "Les revenus sont réinvestis dans Scanabowl : hébergement, mise à jour de la base de données et création de nouvelles fonctionnalités."
+        ]
       }
     ]
   },
@@ -771,7 +788,7 @@
     "contribute": "Participer",
     "legal": "Mentions légales",
     "vat": "TVA",
-    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement. Les liens vers bol.com sont des liens d’affiliation.",
+    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement. Les liens vers zooplus et bol.com sont des liens d’affiliation.",
     "photos": "Une partie des photos de produits provient de {source} (licence CC BY-SA 3.0)."
   },
   "brandPages": {

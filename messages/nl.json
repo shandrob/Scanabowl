@@ -363,11 +363,12 @@
   },
   "order": {
     "title": "Bestel dit voer",
-    "text": "Bekijk de actuele prijs en levering bij bol.com.",
+    "text": "Vergelijk de actuele prijs en levering bij zooplus en bol.com.",
+    "zooplusButton": "Zoek bij zooplus",
     "button": "Bekijk bij bol.com",
-    "disclosure": "Affiliate-link: als je via deze link koopt, verdienen wij mogelijk een commissie, zonder extra kosten voor jou. Dit beïnvloedt de score nooit.",
+    "disclosure": "Affiliate-links: als je via deze links koopt, verdienen wij mogelijk een commissie, zonder extra kosten voor jou. Dit beïnvloedt de score nooit.",
     "moreInfo": "Meer informatie",
-    "dutchOnly": "bol.com levert in Nederland en België."
+    "dutchOnly": "Deze links gaan naar Nederlandse webwinkels."
   },
   "pet": {
     "metaTitle": "Mijn huisdier – persoonlijke voedergids",
@@ -687,7 +688,8 @@
         "ul": [
           "**Vercel** host de website en verwerkt technische gegevens zoals IP-adressen in serverlogs.",
           "**Resend** bezorgt de e-mails die uit onze formulieren komen.",
-          "**bol.com** – als je op een affiliate-link klikt, kunnen bol.com en zijn partnerplatform eigen cookies plaatsen onder hun eigen privacybeleid."
+          "**zooplus en Awin** – als je op een link naar zooplus klikt, kunnen zooplus en het affiliatenetwerk Awin eigen cookies plaatsen onder hun eigen privacybeleid.",
+        "**bol.com** – als je op een affiliate-link klikt, kunnen bol.com en zijn partnerplatform eigen cookies plaatsen onder hun eigen privacybeleid."
         ]
       },
       {
@@ -734,29 +736,44 @@
   },
   "affiliate": {
     "metaTitle": "Affiliate-vermelding",
-    "metaDescription": "Hoe Scanabowl geld verdient met bol.com-affiliate-links – en waarom dat de scores nooit beïnvloedt.",
+    "metaDescription": "Hoe Scanabowl geld verdient met affiliate-links naar zooplus en bol.com – en waarom dat de scores nooit beïnvloedt.",
     "title": "Affiliate-vermelding",
     "intro": "Scanabowl is gratis te gebruiken. Op deze pagina leggen we uit hoe we geld verdienen.",
     "sections": [
       {
-        "h": "bol.com Partnerprogramma",
-        "p": ["Scanabowl doet mee aan het bol.com Partnerprogramma. Als je op een knop “Bekijk bij bol.com” klikt en iets koopt, ontvangen wij mogelijk een commissie van bol.com. Het kost jou niets extra.", "Scanabowl is een onafhankelijke website en is niet eigendom van of verbonden aan bol.com. bol.com heeft geen invloed op onze inhoud, scores of aanbevelingen. Bestellingen plaats je rechtstreeks bij bol.com; bol.com is verantwoordelijk voor prijs, levering en klantenservice."]
+        "h": "zooplus-partnerprogramma (via Awin)",
+        "p": [
+          "Scanabowl doet mee aan het partnerprogramma van zooplus, via het affiliatenetwerk Awin. Als je op ‘Zoek bij zooplus’ klikt en iets koopt, ontvangen wij mogelijk een commissie van zooplus. Het kost jou niets extra.",
+          "Scanabowl is een onafhankelijke website en is niet eigendom van of verbonden aan zooplus. zooplus heeft geen invloed op onze inhoud, scores of aanbevelingen. Bestellingen plaats je rechtstreeks bij zooplus; zooplus is verantwoordelijk voor prijs, levering en klantenservice."
+        ]
+      },
+      {
+        "h": "bol.com",
+        "p": [
+          "Links naar bol.com kunnen ook affiliate-links zijn, via het bol.com Partnerprogramma. Ook dan kost het jou niets extra.",
+          "Scanabowl is niet eigendom van of verbonden aan bol.com. bol.com heeft geen invloed op onze inhoud, scores of aanbevelingen. Bestellingen plaats je rechtstreeks bij bol.com; bol.com is verantwoordelijk voor prijs, levering en klantenservice."
+        ]
       },
       {
         "h": "Scores zijn nooit te koop",
         "ul": [
-          "Elk voer wordt met dezelfde formule beoordeeld, of het nu bij bol.com verkocht wordt of een commissie oplevert of niet.",
+          "Elk voer wordt met dezelfde formule beoordeeld, of het nu bij zooplus of bol.com verkocht wordt en of het een commissie oplevert of niet.",
           "Merken kunnen geen plek, rangschikking of betere score kopen.",
           "De lijsten met de hoogste scores worden automatisch gegenereerd."
         ]
       },
       {
         "h": "Zo herken je affiliate-links",
-        "p": ["Links naar bol.com zijn als gesponsorde links gemarkeerd en vergezeld van een korte melding. Prijzen en beschikbaarheid worden door bol.com getoond; de prijs op het moment van bestellen is bepalend."]
+        "p": [
+          "Links naar zooplus en bol.com zijn als gesponsorde links gemarkeerd en vergezeld van een korte melding. Prijs en beschikbaarheid zie je bij de winkel zelf; de prijs op het moment van bestellen is bepalend.",
+          "De knop ‘Zoek bij zooplus’ opent een zoekopdracht op zooplus.nl. Verkoopt zooplus dit voer niet, dan zie je daar vergelijkbare producten."
+        ]
       },
       {
         "h": "Wat we met de inkomsten doen",
-        "p": ["De inkomsten investeren we in Scanabowl: hosting, het actueel houden van de database en het bouwen van nieuwe functies."]
+        "p": [
+          "De inkomsten investeren we in Scanabowl: hosting, het actueel houden van de database en het bouwen van nieuwe functies."
+        ]
       }
     ]
   },
@@ -771,7 +788,7 @@
     "contribute": "Doe mee",
     "legal": "Juridisch",
     "vat": "BTW",
-    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend. Links naar bol.com zijn affiliate-links.",
+    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend. Links naar zooplus en bol.com zijn affiliate-links.",
     "photos": "Een deel van de productfoto's komt van {source} (licentie CC BY-SA 3.0)."
   },
   "brandPages": {

@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
   const dict = await getDictionary(lang);
   const t = createT(dict);
   return (
-    <LongPage title={t("affiliate.title")} intro={t("affiliate.intro")} updated={t("legal.updated", { date: "2026-09-21" })} sections={createRaw(dict)("affiliate.sections")}>
+    <LongPage title={t("affiliate.title")} intro={t("affiliate.intro")} updated={t("legal.updated", { date: "2026-09-26" })} sections={createRaw(dict)("affiliate.sections")}>
       {null}
     </LongPage>
   );

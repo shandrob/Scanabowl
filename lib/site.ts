@@ -9,6 +9,11 @@ export const SITE = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "scanabowl@gmail.com",
   /** bol.com partner "site id" from the Partner Platform; empty = plain (non-affiliate) links */
   bolSiteId: process.env.NEXT_PUBLIC_BOL_SITE_ID ?? "",
+  /** Awin affiliate network: publisher id of Scanabowl and the merchant id of the zooplus NL-BE programme */
+  awin: {
+    publisherId: process.env.NEXT_PUBLIC_AWIN_PUBLISHER_ID ?? "3106869",
+    zooplusMerchantId: process.env.NEXT_PUBLIC_AWIN_ZOOPLUS_MID ?? "8139",
+  },
   company: {
     kvk: process.env.NEXT_PUBLIC_KVK ?? "",
     vat: process.env.NEXT_PUBLIC_VAT ?? "",

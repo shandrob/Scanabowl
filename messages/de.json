@@ -363,11 +363,12 @@
   },
   "order": {
     "title": "Dieses Futter bestellen",
-    "text": "Aktuellen Preis und Lieferung bei bol.com ansehen.",
+    "text": "Aktuellen Preis und Lieferung bei zooplus und bol.com vergleichen.",
+    "zooplusButton": "Bei zooplus suchen",
     "button": "Bei bol.com ansehen",
-    "disclosure": "Affiliate-Link: Wenn Sie über diesen Link kaufen, erhalten wir möglicherweise eine Provision, ohne Mehrkosten für Sie. Das beeinflusst die Bewertung nie.",
+    "disclosure": "Affiliate-Links: Wenn Sie über diese Links kaufen, erhalten wir möglicherweise eine Provision, ohne Mehrkosten für Sie. Das beeinflusst die Bewertung nie.",
     "moreInfo": "Mehr Informationen",
-    "dutchOnly": "bol.com liefert in die Niederlande und nach Belgien."
+    "dutchOnly": "Diese Links führen zu niederländischen Onlineshops."
   },
   "pet": {
     "metaTitle": "Mein Tier – persönlicher Futterberater",
@@ -687,7 +688,8 @@
         "ul": [
           "**Vercel** hostet die Website und verarbeitet technische Daten wie IP-Adressen in Server-Logs.",
           "**Resend** stellt die von unseren Formularen erzeugten E-Mails zu.",
-          "**bol.com** – wenn Sie auf einen Affiliate-Link klicken, können bol.com und seine Partnerplattform eigene Cookies gemäß ihrer eigenen Datenschutzerklärung setzen."
+          "**zooplus und Awin** – wenn Sie auf einen Link zu zooplus klicken, können zooplus und das Affiliate-Netzwerk Awin eigene Cookies gemäß ihrer eigenen Datenschutzerklärung setzen.",
+        "**bol.com** – wenn Sie auf einen Affiliate-Link klicken, können bol.com und seine Partnerplattform eigene Cookies gemäß ihrer eigenen Datenschutzerklärung setzen."
         ]
       },
       {
@@ -734,29 +736,44 @@
   },
   "affiliate": {
     "metaTitle": "Affiliate-Hinweis",
-    "metaDescription": "Wie Scanabowl mit bol.com-Affiliate-Links Geld verdient – und warum das die Bewertungen nie beeinflusst.",
+    "metaDescription": "Wie Scanabowl mit Affiliate-Links zu zooplus und bol.com Geld verdient – und warum das die Bewertungen nie beeinflusst.",
     "title": "Affiliate-Hinweis",
     "intro": "Scanabowl ist kostenlos nutzbar. Diese Seite erklärt, wie wir Geld verdienen.",
     "sections": [
       {
-        "h": "bol.com-Partnerprogramm",
-        "p": ["Scanabowl nimmt am bol.com-Partnerprogramm teil. Wenn Sie auf eine Schaltfläche „Bei bol.com ansehen“ klicken und etwas kaufen, erhalten wir möglicherweise eine Provision von bol.com. Für Sie entstehen keine Mehrkosten.", "Scanabowl ist eine unabhängige Website. Sie gehört nicht zu bol.com und ist nicht mit bol.com verbunden, und bol.com hat keinen Einfluss auf unsere Inhalte, Bewertungen oder Empfehlungen. Bestellungen geben Sie direkt bei bol.com auf; bol.com ist für Preis, Lieferung und Kundenservice verantwortlich."]
+        "h": "zooplus-Partnerprogramm (über Awin)",
+        "p": [
+          "Scanabowl nimmt am Partnerprogramm von zooplus teil, über das Affiliate-Netzwerk Awin. Wenn Sie auf „Bei zooplus suchen“ klicken und etwas kaufen, erhalten wir möglicherweise eine Provision von zooplus. Für Sie entstehen keine Mehrkosten.",
+          "Scanabowl ist eine unabhängige Website. Sie gehört nicht zu zooplus und ist nicht mit zooplus verbunden, und zooplus hat keinen Einfluss auf unsere Inhalte, Bewertungen oder Empfehlungen. Bestellungen geben Sie direkt bei zooplus auf; zooplus ist für Preis, Lieferung und Kundenservice verantwortlich."
+        ]
+      },
+      {
+        "h": "bol.com",
+        "p": [
+          "Links zu bol.com können ebenfalls Affiliate-Links sein, über das bol.com-Partnerprogramm. Auch dann entstehen für Sie keine Mehrkosten.",
+          "Scanabowl gehört nicht zu bol.com und ist nicht mit bol.com verbunden, und bol.com hat keinen Einfluss auf unsere Inhalte, Bewertungen oder Empfehlungen. Bestellungen geben Sie direkt bei bol.com auf; bol.com ist für Preis, Lieferung und Kundenservice verantwortlich."
+        ]
       },
       {
         "h": "Bewertungen sind nie käuflich",
         "ul": [
-          "Jedes Futter wird mit derselben Formel bewertet, ganz gleich, ob es bei bol.com verkauft wird oder eine Provision einbringt.",
+          "Jedes Futter wird mit derselben Formel bewertet, ganz gleich, ob es bei zooplus oder bol.com verkauft wird und ob es eine Provision einbringt.",
           "Marken können keinen Platz, kein Ranking und keine bessere Bewertung kaufen.",
           "Die Listen mit den höchsten Bewertungen werden automatisch erzeugt."
         ]
       },
       {
         "h": "So erkennen Sie Affiliate-Links",
-        "p": ["Links zu bol.com sind als gesponserte Links gekennzeichnet und mit einem kurzen Hinweis versehen. Preise und Verfügbarkeit zeigt bol.com an; maßgeblich ist der Preis zum Zeitpunkt Ihrer Bestellung."]
+        "p": [
+          "Links zu zooplus und bol.com sind als gesponserte Links gekennzeichnet und mit einem kurzen Hinweis versehen. Preise und Verfügbarkeit zeigt der Shop selbst an; maßgeblich ist der Preis zum Zeitpunkt Ihrer Bestellung.",
+          "Die Schaltfläche „Bei zooplus suchen“ öffnet eine Suche auf zooplus.nl. Verkauft zooplus dieses Futter nicht, sehen Sie dort ähnliche Produkte."
+        ]
       },
       {
         "h": "Was wir mit den Einnahmen tun",
-        "p": ["Die Einnahmen investieren wir in Scanabowl: Hosting, die Aktualität der Datenbank und neue Funktionen."]
+        "p": [
+          "Die Einnahmen investieren wir in Scanabowl: Hosting, die Aktualität der Datenbank und neue Funktionen."
+        ]
       }
     ]
   },
@@ -771,7 +788,7 @@
     "contribute": "Mitmachen",
     "legal": "Rechtliches",
     "vat": "USt-IdNr.",
-    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet. Links zu bol.com sind Affiliate-Links.",
+    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet. Links zu zooplus und bol.com sind Affiliate-Links.",
     "photos": "Ein Teil der Produktfotos stammt von {source} (Lizenz CC BY-SA 3.0)."
   },
   "brandPages": {
