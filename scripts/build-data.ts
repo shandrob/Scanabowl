@@ -97,6 +97,20 @@ async function main() {
 
   // unique slugs
   const slugs = new Set<string>();
+  // one spelling per brand ("TROVET" and "Trovet" are the same brand): the most common spelling wins
+  {
+    const key = (b: string) => b.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const counts = new Map<string, Map<string, number>>();
+    for (const p of byId.values()) {
+      const m = counts.get(key(p.brand)) ?? new Map<string, number>();
+      m.set(p.brand, (m.get(p.brand) ?? 0) + 1);
+      counts.set(key(p.brand), m);
+    }
+    for (const p of byId.values()) {
+      const m = counts.get(key(p.brand));
+      if (m && m.size > 1) p.brand = [...m.entries()].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]))[0][0];
+    }
+  }
   const products = [...byId.values()].sort((a, b) => a.brand.localeCompare(b.brand) || a.name.localeCompare(b.name));
   for (const p of products) {
     let s = p.slug;

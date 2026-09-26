@@ -114,17 +114,17 @@ export interface RowContext {
 }
 
 /** Shop product groups that are never food (the shop files bowls under "kattenvoerbak" addresses). */
-const NON_FOOD_GROUP = /^(voer- ?& ?drinkbakken|voerbakken|drinkbakken|accessoires|speelgoed|verzorging|manden|halsbanden|riemen)/i;
+const NON_FOOD_GROUP = /^(voer- ?& ?drinkbakken|voerbakken|drinkbakken|accessoires|speelgoed|verzorging|manden|halsbanden|riemen|reizen)/i;
 const NON_FOOD_NAME =
   /(voerbak|drinkbak|waterbak|placemat|voermat|bewaarbak|bewaardoos|bewaarton|voerton|voerautomaat|drinkfontein|waterfontein|voerschep|slow ?feeder|anti.?schrok|likmat|snuffelmat|\bcontainer\b)/i;
 
-function isNotFood(name: string, group: string, ean: string): boolean {
+function isNotFood(name: string, group: string): boolean {
   if (NON_FOOD_GROUP.test(group.trim())) return true;
   if (NON_FOOD_NAME.test(name)) return true;
   // the shop's "page not found" title
   if (/^oeps\b/i.test(name.trim())) return true;
-  // shop landing pages from the sitemap ("Hondenvoer kopen?", "Alles voor je kat") have no barcode
-  return !ean && /(\bkopen\?\s*$|^alles voor je\b)/i.test(name.trim());
+  // shop landing pages from the sitemap ("Hondenvoer kopen?", "Alles voor je kat")
+  return /(\bkopen\?\s*$|^alles voor je\b)/i.test(name.trim());
 }
 
 function isScraped(row: Record<string, string>, ctx: RowContext): boolean {
@@ -147,7 +147,7 @@ export function rowToProduct(row: Record<string, string>, ctx: RowContext): Cata
   const url = field(row, "url");
   const ean = normalizeEan(field(row, "ean")) || eanFromUrl(url);
   const declaredType = field(row, "foodType");
-  if (isNotFood(rawName, declaredType, ean)) return null;
+  if (isNotFood(rawName, declaredType)) return null;
   const species = toSpecies(field(row, "species"), rawName);
   if (!species) return null;
 

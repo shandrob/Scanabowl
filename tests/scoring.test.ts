@@ -330,3 +330,19 @@ describe("metadata before a recipe label", () => {
     expect(r.ingredients[0].info.kind).toBe("cereal");
   });
 });
+
+describe("ingredient dictionary gaps found in the Pets Place data", () => {
+  const kind = (t: string) => parseIngredients(t).ingredients[0].info.kind;
+  it("knows game birds and other game", () => {
+    for (const t of ["Verse fazant 30%", "kwartel", "parelhoen", "wild zwijn", "haas"]) expect(kind(t)).toBe("meat");
+  });
+  it("knows compound fish names", () => {
+    expect(kind("Gedroogde oceaanvis (26%)")).toBe("fish");
+    expect(kind("zeevis")).toBe("fish");
+  });
+  it("does not mistake a tuna species for oil, but still reads German oils", () => {
+    expect(kind("Tonggol Tonijn Filet 75%")).toBe("fish");
+    expect(kind("Lachsöl")).toBe("fish_oil");
+    expect(kind("boerenkool")).not.toBe("plant_oil");
+  });
+});
