@@ -608,6 +608,13 @@
     "reportMessage": "Was stimmt nicht?",
     "reportHint": "Zum Beispiel: Die Zutatenliste auf meiner Verpackung ist anders. Bitte schreiben Sie uns, was dort steht.",
     "reviewNote": "Wir prüfen jede Nachricht manuell. Nichts, was Sie senden, wird automatisch veröffentlicht.",
+    "photos": "Fotos der Verpackung (optional)",
+    "photosHint": "Keine Lust, alles abzutippen? Fotografieren Sie die Vorderseite und die Rückseite mit der Zusammensetzung und den analytischen Bestandteilen. Dann genügt es, Marke und Namen einzugeben.",
+    "photosAdd": "Foto hinzufügen",
+    "photosRemove": "Foto entfernen",
+    "photosLimit": "Sie können höchstens {max} Fotos senden.",
+    "photosError": "Dieses Foto konnte nicht gelesen werden. Bitte versuchen Sie ein anderes.",
+    "photoPermission": "Scanabowl darf mein Foto der Vorderseite als Produktfoto auf der Website verwenden.",
     "thanksTitle": "Vielen Dank!",
     "thanksText": "Wir haben Ihre Nachricht erhalten und prüfen sie so bald wie möglich.",
     "errorTitle": "Wir konnten Ihre Nachricht nicht senden",
@@ -669,7 +676,7 @@
       },
       {
         "h": "Formulare",
-        "p": ["Wenn Sie einen Vorschlag, eine Korrektur, eine Kontaktnachricht oder eine Herstellereinreichung senden, erhalten wir die von Ihnen eingegebenen Angaben (einschließlich Ihrer E-Mail-Adresse, falls angegeben). Wir verwenden sie nur, um Ihre Einreichung zu prüfen und Ihnen zu antworten. Von Ihnen eingereichte Produktinformationen können nach unserer Prüfung auf der Seite veröffentlicht werden; personenbezogene Daten nicht."]
+        "p": ["Wenn Sie einen Vorschlag, eine Korrektur, eine Kontaktnachricht oder eine Herstellereinreichung senden, erhalten wir die von Ihnen eingegebenen Angaben (einschließlich Ihrer E-Mail-Adresse, falls angegeben). Wir verwenden sie nur, um Ihre Einreichung zu prüfen und Ihnen zu antworten. Von Ihnen eingereichte Produktinformationen können nach unserer Prüfung auf der Seite veröffentlicht werden; personenbezogene Daten nicht.", "Fotos, die Sie mitsenden, erreichen uns als Anhang per E-Mail. Wir verwenden sie, um die Produktangaben zu übernehmen. Das Foto der Vorderseite veröffentlichen wir nur dann als Produktfoto, wenn Sie zustimmen. Fotografieren Sie bitte nur die Verpackung, keine Personen."]
       },
       {
         "h": "Cookies und Tracking",

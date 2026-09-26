@@ -608,6 +608,13 @@
     "reportMessage": "What is wrong?",
     "reportHint": "For example: the ingredient list is different on my pack. Please tell us what it says.",
     "reviewNote": "We review every message manually. Nothing you send is published automatically.",
+    "photos": "Photos of the pack (optional)",
+    "photosHint": "Don't feel like typing it all? Take a photo of the front and of the back with the composition and the analytical constituents. Then filling in the brand and name is enough.",
+    "photosAdd": "Add photo",
+    "photosRemove": "Remove photo",
+    "photosLimit": "You can send up to {max} photos.",
+    "photosError": "This photo could not be read. Please try another one.",
+    "photoPermission": "Scanabowl may use my photo of the front as the product photo on the site.",
     "thanksTitle": "Thank you!",
     "thanksText": "We received your message and will review it as soon as possible.",
     "errorTitle": "We could not send your message",
@@ -669,7 +676,7 @@
       },
       {
         "h": "Forms",
-        "p": ["If you send a suggestion, correction, contact message or brand submission, we receive the information you enter (including your email address, if you give it). We use it only to review your submission and to reply to you. Product information you submit may be published on the site after we have checked it; personal details are not."]
+        "p": ["If you send a suggestion, correction, contact message or brand submission, we receive the information you enter (including your email address, if you give it). We use it only to review your submission and to reply to you. Product information you submit may be published on the site after we have checked it; personal details are not.", "Photos you attach arrive as attachments in our e-mail. We use them to copy the product information. We only publish the photo of the front as a product photo if you give permission. Please photograph only the pack, not people."]
       },
       {
         "h": "Cookies and tracking",

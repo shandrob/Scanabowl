@@ -608,6 +608,13 @@
     "reportMessage": "Wat klopt er niet?",
     "reportHint": "Bijvoorbeeld: de ingrediëntenlijst op mijn verpakking is anders. Laat weten wat er staat.",
     "reviewNote": "We bekijken elk bericht handmatig. Wat je instuurt wordt nooit automatisch gepubliceerd.",
+    "photos": "Foto's van de verpakking (optioneel)",
+    "photosHint": "Geen zin om alles over te typen? Maak een foto van de voorkant en van de achterkant met de samenstelling en de analytische bestanddelen. Merk en naam invullen is dan genoeg.",
+    "photosAdd": "Foto toevoegen",
+    "photosRemove": "Foto verwijderen",
+    "photosLimit": "Je kunt maximaal {max} foto's meesturen.",
+    "photosError": "Deze foto kon niet worden gelezen. Probeer een andere foto.",
+    "photoPermission": "Scanabowl mag mijn foto van de voorkant gebruiken als productfoto op de site.",
     "thanksTitle": "Bedankt!",
     "thanksText": "We hebben je bericht ontvangen en bekijken het zo snel mogelijk.",
     "errorTitle": "We konden je bericht niet versturen",
@@ -669,7 +676,7 @@
       },
       {
         "h": "Formulieren",
-        "p": ["Als je een voorstel, correctie, contactbericht of merkinzending verstuurt, ontvangen we de gegevens die je invult (inclusief je e-mailadres, als je die opgeeft). We gebruiken die alleen om je inzending te beoordelen en je te antwoorden. Productinformatie die je indient kan na onze controle op de site gepubliceerd worden; persoonsgegevens niet."]
+        "p": ["Als je een voorstel, correctie, contactbericht of merkinzending verstuurt, ontvangen we de gegevens die je invult (inclusief je e-mailadres, als je die opgeeft). We gebruiken die alleen om je inzending te beoordelen en je te antwoorden. Productinformatie die je indient kan na onze controle op de site gepubliceerd worden; persoonsgegevens niet.", "Foto's die je meestuurt, komen als bijlage in onze e-mail terecht. We gebruiken ze om de productgegevens over te nemen. De foto van de voorkant publiceren we alleen als productfoto als je daar toestemming voor geeft. Fotografeer alleen de verpakking, geen personen."]
       },
       {
         "h": "Cookies en tracking",

@@ -608,6 +608,13 @@
     "reportMessage": "Qu’est-ce qui ne va pas ?",
     "reportHint": "Par exemple : la liste d’ingrédients sur mon emballage est différente. Dites-nous ce qui y est écrit.",
     "reviewNote": "Nous examinons chaque message manuellement. Rien de ce que vous envoyez n’est publié automatiquement.",
+    "photos": "Photos de l’emballage (facultatif)",
+    "photosHint": "Pas envie de tout recopier ? Prenez en photo le recto et le verso avec la composition et les constituants analytiques. Il suffit alors d’indiquer la marque et le nom.",
+    "photosAdd": "Ajouter une photo",
+    "photosRemove": "Supprimer la photo",
+    "photosLimit": "Vous pouvez envoyer {max} photos au maximum.",
+    "photosError": "Cette photo n’a pas pu être lue. Essayez-en une autre.",
+    "photoPermission": "Scanabowl peut utiliser ma photo du recto comme photo du produit sur le site.",
     "thanksTitle": "Merci !",
     "thanksText": "Nous avons bien reçu votre message et l’examinerons dès que possible.",
     "errorTitle": "Nous n’avons pas pu envoyer votre message",
@@ -669,7 +676,7 @@
       },
       {
         "h": "Formulaires",
-        "p": ["Si vous envoyez une proposition, une correction, un message de contact ou une soumission de marque, nous recevons les informations que vous saisissez (y compris votre adresse e-mail, si vous la donnez). Nous ne les utilisons que pour examiner votre envoi et vous répondre. Les informations produit que vous soumettez peuvent être publiées sur le site après vérification ; les données personnelles ne le sont pas."]
+        "p": ["Si vous envoyez une proposition, une correction, un message de contact ou une soumission de marque, nous recevons les informations que vous saisissez (y compris votre adresse e-mail, si vous la donnez). Nous ne les utilisons que pour examiner votre envoi et vous répondre. Les informations produit que vous soumettez peuvent être publiées sur le site après vérification ; les données personnelles ne le sont pas.", "Les photos que vous joignez nous parviennent en pièce jointe par e-mail. Nous les utilisons pour reprendre les informations du produit. Nous ne publions la photo du recto comme photo du produit qu’avec votre accord. Photographiez uniquement l’emballage, pas de personnes."]
       },
       {
         "h": "Cookies et suivi",

@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useT } from "@/components/i18n/DictionaryProvider";
 import { Field, Honeypot, SubmitStatus, inputCls, useSubmit } from "./FormKit";
+import { PhotoField, type PhotoDraft } from "./PhotoField";
 import { ProductFields, emptyProduct, type ProductDraft } from "./ProductFields";
 
 /** Visitors suggest a missing product - or report a mistake in an existing one (?report=EAN). */
@@ -18,6 +19,8 @@ export function SuggestForm() {
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
   const [hp, setHp] = useState("");
+  const [photos, setPhotos] = useState<PhotoDraft[]>([]);
+  const [photoPermission, setPhotoPermission] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +32,8 @@ export function SuggestForm() {
       products: isReport ? [] : [product],
       reportRef: reportRef ?? undefined,
       reportName: params.get("name") ?? undefined,
+      photos: photos.map(({ name, type, data }) => ({ name, type, data })),
+      photoPermission,
     });
   };
 
@@ -49,6 +54,14 @@ export function SuggestForm() {
       ) : (
         <ProductFields idPrefix="sg" value={product} onChange={setProduct} errors={errors} />
       )}
+      <PhotoField
+        idPrefix="sg"
+        photos={photos}
+        onChange={setPhotos}
+        permission={photoPermission}
+        onPermission={setPhotoPermission}
+        error={errors.photos ? t(`forms.err.${errors.photos}`) : undefined}
+      />
       <Field id="sg-email" label={t(isReport ? "forms.emailOptional" : "forms.emailNotify")} error={errors.email ? t(`forms.err.${errors.email}`) : undefined} hint={t("forms.emailPrivacy")}>
         <input id="sg-email" type="email" className={inputCls} value={email} maxLength={120} onChange={(e) => setEmail(e.target.value)} autoComplete="email" aria-invalid={!!errors.email} />
       </Field>

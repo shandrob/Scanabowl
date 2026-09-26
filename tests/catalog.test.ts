@@ -98,3 +98,27 @@ describe("supplements", () => {
     expect(inferCategory({ name: "Glucosamine tabletten" })).toBe("supplement");
   });
 });
+
+describe("photo attachments", () => {
+  const photo = (data = "QUJD", type = "image/jpeg") => ({ name: "voorkant.HEIC", type, data });
+  const base = { kind: "product", products: [{ name: "Testvoer Kip", brand: "Test" }] };
+  it("accepts up to four photos and names them safely", () => {
+    const r = parseSubmission({ ...base, photos: [photo(), photo()], photoPermission: true });
+    expect(r.ok).toBe(true);
+    if (r.ok) {
+      expect(r.data.photos?.map((p) => p.filename)).toEqual(["1-voorkant.jpg", "2-voorkant.jpg"]);
+      expect(r.data.photoPermission).toBe(true);
+      expect(toText(r.data)).toContain("2 foto's van de verpakking bijgevoegd");
+    }
+  });
+  it("rejects too many, too large or non-image files", () => {
+    expect(parseSubmission({ ...base, photos: [photo(), photo(), photo(), photo(), photo()] }).ok).toBe(false);
+    expect(parseSubmission({ ...base, photos: [photo("A".repeat(1_000_000))] }).ok).toBe(false);
+    expect(parseSubmission({ ...base, photos: [photo("QUJD", "application/pdf")] }).ok).toBe(false);
+    expect(parseSubmission({ ...base, photos: [photo("<script>")] }).ok).toBe(false);
+  });
+  it("ignores photos on the contact form", () => {
+    const r = parseSubmission({ kind: "contact", email: "a@b.nl", message: "Hallo daar", consent: true, photos: [photo()] });
+    expect(r.ok && r.data.photos).toBeFalsy();
+  });
+});

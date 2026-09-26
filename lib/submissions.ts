@@ -33,6 +33,40 @@ export interface Submission {
   /** report submissions */
   reportRef?: string;
   reportName?: string;
+  /** photos of the pack (product suggestions and reports), sent to the owner as e-mail attachments */
+  photos?: PhotoAttachment[];
+  /** the visitor allows Scanabowl to use the front photo as the product photo */
+  photoPermission?: boolean;
+}
+
+export interface PhotoAttachment {
+  filename: string;
+  /** base64, no "data:" prefix */
+  content: string;
+}
+
+export const MAX_PHOTOS = 4;
+/** base64 characters per photo (~700 KB) and in total; keeps the request under the host's 4.5 MB limit */
+const MAX_PHOTO_CHARS = 950_000;
+const MAX_PHOTOS_TOTAL_CHARS = 3_800_000;
+const BASE64_RE = /^[A-Za-z0-9+/]+={0,2}$/;
+
+function cleanPhotos(raw: unknown): { photos: PhotoAttachment[]; ok: boolean } {
+  if (raw === undefined || raw === null) return { photos: [], ok: true };
+  if (!Array.isArray(raw) || raw.length > MAX_PHOTOS) return { photos: [], ok: false };
+  const photos: PhotoAttachment[] = [];
+  let total = 0;
+  for (const [i, item] of raw.entries()) {
+    const r = (item && typeof item === "object" ? item : {}) as Record<string, unknown>;
+    const type = typeof r.type === "string" ? r.type : "";
+    const data = typeof r.data === "string" ? r.data : "";
+    if (!/^image\/(jpeg|png|webp)$/.test(type) || !data || data.length > MAX_PHOTO_CHARS || !BASE64_RE.test(data)) return { photos: [], ok: false };
+    total += data.length;
+    const ext = type === "image/png" ? "png" : type === "image/webp" ? "webp" : "jpg";
+    const base = (typeof r.name === "string" ? r.name : "").replace(/\.[^.]*$/, "").replace(/[^A-Za-z0-9_-]+/g, "-").slice(0, 40) || "foto";
+    photos.push({ filename: `${i + 1}-${base}.${ext}`, content: data });
+  }
+  return total > MAX_PHOTOS_TOTAL_CHARS ? { photos: [], ok: false } : { photos, ok: true };
 }
 
 const clip = (v: unknown, max: number) => (typeof v === "string" ? stripControl(v).trim().slice(0, max) : "");
@@ -100,6 +134,14 @@ export function parseSubmission(body: unknown): { ok: true; data: Submission } |
     else if (products.some((p) => !p.name || !p.ingredients)) errors.push({ field: "ingredients", code: "required" });
     if (b.authorised !== true) errors.push({ field: "authorised", code: "required" });
     if (b.consent !== true) errors.push({ field: "consent", code: "required" });
+  }
+  if (kind === "product" || kind === "report") {
+    const { photos, ok } = cleanPhotos(b.photos);
+    if (!ok) errors.push({ field: "photos", code: "invalid" });
+    if (photos.length) {
+      data.photos = photos;
+      data.photoPermission = b.photoPermission === true;
+    }
   }
   if (kind === "report") {
     data.reportRef = clip(b.reportRef, 60);
@@ -169,6 +211,16 @@ export function toText(s: Submission): string {
   s.products.forEach((p, i) => {
     L.push("", `== PRODUCT ${i + 1} ==`, `Naam: ${p.name}`, `Merk: ${p.brand}`, `Dier: ${p.species}  Type: ${p.foodType}  Levensfase: ${p.lifeStage}`, `EAN: ${p.ean || "-"}  Verpakking: ${p.pack || "-"}`, `Link: ${p.url || "-"}`, "", "Ingrediënten:", p.ingredients || "-", "", "Analytische bestanddelen:", p.analysis || "-");
   });
+  if (s.photos?.length) {
+    L.push(
+      "",
+      `== FOTO'S ==`,
+      `${s.photos.length} foto${s.photos.length === 1 ? "" : "'s"} van de verpakking bijgevoegd.`,
+      s.photoPermission
+        ? "Toestemming: de voorkantfoto mag als productfoto op Scanabowl (opslaan als database/images/<EAN>.jpg)."
+        : "Geen toestemming om de foto's op de site te gebruiken - alleen om de gegevens over te nemen.",
+    );
+  }
   if (s.products.length) L.push("", "== REGELS VOOR DE DATABASE (plak in database/manual/*.csv) ==", toCsvRows(s));
   return L.join("\n");
 }

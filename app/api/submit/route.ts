@@ -60,6 +60,7 @@ export async function POST(req: Request) {
         subject: subject(s),
         text: toText(s),
         html: toHtml(s),
+        ...(s.photos?.length ? { attachments: s.photos.map((p) => ({ filename: p.filename, content: p.content })) } : {}),
       }),
     });
     if (!res.ok) {
