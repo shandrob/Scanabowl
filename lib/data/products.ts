@@ -60,6 +60,48 @@ export async function typeRank(p: ProductDetail): Promise<{ rank: number; total:
   return total >= 10 ? { rank: higher + 1, total } : null;
 }
 
+export type BenchKey = "protein" | "fat" | "carbs";
+export interface Benchmark {
+  /** share of foods of the same kind with a lower value, 0-100 */
+  below: number;
+  median: number;
+  /** 10th and 90th percentile: the usual range for this kind of food */
+  p10: number;
+  p90: number;
+}
+
+const benchCache = new Map<string, Record<BenchKey, number[]>>();
+
+/**
+ * How this food's protein, fat (both % of dry matter) and carbohydrates (% of energy) compare with complete foods of
+ * the same species and type - "more protein than 80% of dry cat foods".
+ */
+export async function benchmarks(p: ProductDetail): Promise<{ count: number; values: Record<BenchKey, Benchmark> } | null> {
+  if (!p.nutrition || p.category !== "complete") return null;
+  const key = `${p.species}|${p.foodType}`;
+  let sorted = benchCache.get(key);
+  if (!sorted) {
+    const peers = [...(await table(p.species)).values()].filter((x) => x.category === "complete" && x.foodType === p.foodType && x.nutrition);
+    const col = (f: (x: ProductDetail) => number) => peers.map(f).sort((a, b) => a - b);
+    sorted = { protein: col((x) => x.nutrition!.dm.protein), fat: col((x) => x.nutrition!.dm.fat), carbs: col((x) => x.nutrition!.energyShare.carbs) };
+    benchCache.set(key, sorted);
+  }
+  const n = sorted.protein.length;
+  if (n < 20) return null;
+  const at = (arr: number[], f: number) => arr[Math.min(arr.length - 1, Math.floor(f * (arr.length - 1)))];
+  const bench = (arr: number[], v: number): Benchmark => ({
+    below: Math.round((arr.filter((x) => x < v).length / arr.length) * 100),
+    median: Math.round(at(arr, 0.5) * 10) / 10,
+    p10: Math.round(at(arr, 0.1) * 10) / 10,
+    p90: Math.round(at(arr, 0.9) * 10) / 10,
+  });
+  const nu = p.nutrition;
+  return {
+    count: n,
+    values: { protein: bench(sorted.protein, nu.dm.protein), fat: bench(sorted.fat, nu.dm.fat), carbs: bench(sorted.carbs, nu.energyShare.carbs) },
+  };
+}
+
 export async function productCounts(): Promise<{ products: number; brands: number }> {
   const [dog, cat] = await Promise.all([table("dog"), table("cat")]);
   const brands = new Set<string>();

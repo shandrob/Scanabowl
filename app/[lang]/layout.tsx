@@ -3,6 +3,7 @@ import { Fraunces, IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
+import { CompareTray } from "@/components/compare/CompareTray";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -60,6 +61,7 @@ export default async function RootLayout({ children, params }: { children: React
           <Header />
           <main id="main">{children}</main>
           <Footer lang={lang} t={t} />
+          <CompareTray />
         </LocaleProvider>
         <SiteAnalytics />
       </body>

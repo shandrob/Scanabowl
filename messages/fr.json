@@ -179,6 +179,12 @@
     ]
   },
   "finder": {
+    "without": "Sans",
+    "withoutHint": "Masque aussi les aliments aux termes vagues (comme « viandes et sous-produits animaux ») qui peuvent en contenir.",
+    "singleProtein": "Une seule source de protéines animales",
+    "minProtein": "Protéines min. (matière sèche) : {value} %",
+    "maxCarbs": "Glucides max. : {value} % de l'énergie",
+    "maxCarbsAny": "Glucides max. : aucune limite",
     "allTypes": "Tous les types",
     "otherSpeciesCat": "Nous avons trouvé {count} aliments pour chats.",
     "otherSpeciesDog": "Nous avons trouvé {count} aliments pour chiens.",
@@ -219,6 +225,11 @@
     "error": "La liste des aliments n’a pas pu être chargée. Vérifiez votre connexion et rechargez la page."
   },
   "product": {
+    "legendVague": "Nommé de façon vague : on ne voit pas exactement ce qu'il contient",
+    "legendUnneeded": "Additif dont un animal n'a pas besoin (sucre, colorant ou conservateur de synthèse)",
+    "splitTitle": "Une même matière première sous plusieurs formes.",
+    "splitText": "{forms} proviennent de la même matière première ({count} formes), ensemble environ {pct} % de la recette. Les fabricants peuvent la déclarer ainsi répartie ; ce n'est pas une erreur, mais additionnez ces formes en lisant la liste.",
+    "splitTextFirst": "{forms} proviennent de la même matière première ({count} formes), ensemble environ {pct} % de la recette – peut-être plus que le premier ingrédient ({first}). Les fabricants peuvent la déclarer ainsi répartie ; ce n'est pas une erreur, mais l'ordre de l'étiquette devient moins parlant.",
     "rankInType": "N° {rank} sur {total} · {type} · {species}",
     "metaTitle": "{name} – note {score}/100",
     "metaDescription": "{name} de {brand} : note indépendante Scanabowl {score}/100 pour aliment {species}, avec analyse des ingrédients, valeurs nutritionnelles et contrôle des allergies.",
@@ -260,6 +271,17 @@
     "disclaimer": "La note décrit l’étiquette et n’est pas un avis vétérinaire. Introduisez toujours un nouvel aliment progressivement et demandez conseil à votre vétérinaire si votre animal a un problème de santé."
   },
   "analysis": {
+    "energyTitle": "D'où vient l'énergie",
+    "energyProtein": "Protéines",
+    "energyFat": "Matières grasses",
+    "energyCarbs": "Glucides (calculés)",
+    "unitDm": "de la matière sèche",
+    "unitEnergy": "de l'énergie",
+    "benchTitle": "Comparé à {count} autres aliments · {type} · {species}",
+    "benchHigher": "Plus élevé que {pct} % de ces aliments",
+    "benchLower": "Plus bas que {pct} % de ces aliments",
+    "benchAria": "{value} %, le milieu est à {median} %, l'habituel va de {low} à {high} %",
+    "benchNote": "La bande colorée est la plage habituelle (les 80 % du milieu de ces aliments), le trait marque le milieu. Plus n'est pas toujours mieux : cela montre seulement où se situe cet aliment.",
     "nutrient": "Nutriment",
     "asFed": "Tel que distribué",
     "dryMatter": "Matière sèche",
@@ -822,6 +844,10 @@
     "onFoodPage": "Comparer avec le classement"
   },
   "compare": {
+    "tray": "{species} : comparer ({count}/{max})",
+    "trayClear": "Vider la comparaison",
+    "addCard": "Ajouter {name} à la comparaison",
+    "removeCard": "Retirer {name} de la comparaison",
     "metaTitle": "Comparer la nourriture pour chien et chat",
     "metaDescription": "Comparez deux ou trois aliments côte à côte : score, protéines, matières grasses, calories, portion journalière et coût par jour pour votre chien ou votre chat.",
     "title": "Comparer des aliments",

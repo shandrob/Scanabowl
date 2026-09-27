@@ -179,6 +179,12 @@
     ]
   },
   "finder": {
+    "without": "Zonder",
+    "withoutHint": "Verbergt ook voer met vage omschrijvingen (zoals “vlees en dierlijke bijproducten”) waar het in kan zitten.",
+    "singleProtein": "Eén dierlijke eiwitbron",
+    "minProtein": "Min. eiwit (droge stof): {value}%",
+    "maxCarbs": "Max. koolhydraten: {value}% van de energie",
+    "maxCarbsAny": "Max. koolhydraten: geen grens",
     "allTypes": "Alle soorten",
     "otherSpeciesCat": "Bij de katten vonden we wel {count} voeders.",
     "otherSpeciesDog": "Bij de honden vonden we wel {count} voeders.",
@@ -219,6 +225,11 @@
     "error": "De voerlijst kon niet worden geladen. Controleer je verbinding en laad de pagina opnieuw."
   },
   "product": {
+    "legendVague": "Vaag omschreven: je ziet niet precies wat erin zit",
+    "legendUnneeded": "Toevoeging die een dier niet nodig heeft (suiker, kleurstof of synthetisch conserveermiddel)",
+    "splitTitle": "Eén grondstof in meerdere vormen.",
+    "splitText": "{forms} komen van dezelfde grondstof ({count} vormen), samen naar schatting {pct}% van het recept. Fabrikanten mogen een grondstof zo verdeeld vermelden; het is geen fout, maar tel ze bij elkaar op als je de lijst leest.",
+    "splitTextFirst": "{forms} komen van dezelfde grondstof ({count} vormen), samen naar schatting {pct}% van het recept – mogelijk meer dan het eerste ingrediënt ({first}). Fabrikanten mogen een grondstof zo verdeeld vermelden; het is geen fout, maar het maakt de volgorde op het etiket minder zeggend.",
     "rankInType": "Nr. {rank} van {total} · {type} · {species}",
     "metaTitle": "{name} – score {score}/100",
     "metaDescription": "{name} van {brand}: onafhankelijke Scanabowl-score {score}/100 voor {species}voer, met ingrediëntenanalyse, voedingswaarden en allergiecheck.",
@@ -260,6 +271,17 @@
     "disclaimer": "De score beschrijft het etiket en is geen diergeneeskundig advies. Bouw nieuw voer altijd geleidelijk op en vraag je dierenarts om advies als je dier een gezondheidsprobleem heeft."
   },
   "analysis": {
+    "energyTitle": "Waar de energie vandaan komt",
+    "energyProtein": "Eiwit",
+    "energyFat": "Vet",
+    "energyCarbs": "Koolhydraten (berekend)",
+    "unitDm": "van de droge stof",
+    "unitEnergy": "van de energie",
+    "benchTitle": "Vergeleken met {count} andere voeders · {type} · {species}",
+    "benchHigher": "Hoger dan {pct}% van deze voeders",
+    "benchLower": "Lager dan {pct}% van deze voeders",
+    "benchAria": "{value}%, het midden is {median}%, gebruikelijk is {low} tot {high}%",
+    "benchNote": "Het gekleurde vlak is het gebruikelijke bereik (de middelste 80% van deze voeders), het streepje het midden. Meer is niet altijd beter: dit laat alleen zien waar dit voer staat.",
     "nutrient": "Voedingsstof",
     "asFed": "Zoals gevoerd",
     "dryMatter": "Droge stof",
@@ -822,6 +844,10 @@
     "onFoodPage": "Vergelijk met de toplijst"
   },
   "compare": {
+    "tray": "{species}: vergelijk ({count}/{max})",
+    "trayClear": "Vergelijking wissen",
+    "addCard": "Voeg {name} toe aan de vergelijking",
+    "removeCard": "Haal {name} uit de vergelijking",
     "metaTitle": "Hondenvoer en kattenvoer vergelijken",
     "metaDescription": "Zet twee of drie voeders naast elkaar: score, eiwit, vet, calorieën, portie per dag en wat het per dag kost voor jouw hond of kat.",
     "title": "Voer vergelijken",

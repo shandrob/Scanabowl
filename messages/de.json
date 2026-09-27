@@ -179,6 +179,12 @@
     ]
   },
   "finder": {
+    "without": "Ohne",
+    "withoutHint": "Blendet auch Futter mit vagen Angaben (wie „Fleisch und tierische Nebenerzeugnisse“) aus, in denen es enthalten sein kann.",
+    "singleProtein": "Eine tierische Eiweißquelle",
+    "minProtein": "Min. Eiweiß (Trockenmasse): {value} %",
+    "maxCarbs": "Max. Kohlenhydrate: {value} % der Energie",
+    "maxCarbsAny": "Max. Kohlenhydrate: keine Grenze",
     "allTypes": "Alle Sorten",
     "otherSpeciesCat": "Bei den Katzen haben wir {count} Futter gefunden.",
     "otherSpeciesDog": "Bei den Hunden haben wir {count} Futter gefunden.",
@@ -219,6 +225,11 @@
     "error": "Die Futterliste konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und laden Sie die Seite neu."
   },
   "product": {
+    "legendVague": "Vage angegeben: Sie sehen nicht genau, was drin ist",
+    "legendUnneeded": "Zusatz, den ein Tier nicht braucht (Zucker, Farbstoff oder synthetisches Konservierungsmittel)",
+    "splitTitle": "Ein Rohstoff in mehreren Formen.",
+    "splitText": "{forms} stammen vom selben Rohstoff ({count} Formen), zusammen schätzungsweise {pct} % der Rezeptur. Hersteller dürfen einen Rohstoff so aufgeteilt angeben; das ist kein Fehler, aber zählen Sie die Formen beim Lesen zusammen.",
+    "splitTextFirst": "{forms} stammen vom selben Rohstoff ({count} Formen), zusammen schätzungsweise {pct} % der Rezeptur – möglicherweise mehr als die erste Zutat ({first}). Hersteller dürfen einen Rohstoff so aufgeteilt angeben; das ist kein Fehler, macht die Reihenfolge auf dem Etikett aber weniger aussagekräftig.",
     "rankInType": "Platz {rank} von {total} · {type} · {species}",
     "metaTitle": "{name} – Bewertung {score}/100",
     "metaDescription": "{name} von {brand}: unabhängige Scanabowl-Bewertung {score}/100 für {species}futter, mit Zutatenanalyse, Nährwerten und Allergiecheck.",
@@ -260,6 +271,17 @@
     "disclaimer": "Die Bewertung beschreibt das Etikett und ist keine tierärztliche Beratung. Stellen Sie neues Futter immer schrittweise um und fragen Sie Ihren Tierarzt, wenn Ihr Tier gesundheitliche Probleme hat."
   },
   "analysis": {
+    "energyTitle": "Woher die Energie kommt",
+    "energyProtein": "Eiweiß",
+    "energyFat": "Fett",
+    "energyCarbs": "Kohlenhydrate (berechnet)",
+    "unitDm": "der Trockenmasse",
+    "unitEnergy": "der Energie",
+    "benchTitle": "Verglichen mit {count} anderen Futtern · {type} · {species}",
+    "benchHigher": "Höher als bei {pct} % dieser Futter",
+    "benchLower": "Niedriger als bei {pct} % dieser Futter",
+    "benchAria": "{value} %, die Mitte liegt bei {median} %, üblich sind {low} bis {high} %",
+    "benchNote": "Die farbige Fläche ist der übliche Bereich (die mittleren 80 % dieser Futter), der Strich die Mitte. Mehr ist nicht immer besser: Das zeigt nur, wo dieses Futter steht.",
     "nutrient": "Nährstoff",
     "asFed": "Wie gefüttert",
     "dryMatter": "Trockenmasse",
@@ -822,6 +844,10 @@
     "onFoodPage": "Mit der Bestenliste vergleichen"
   },
   "compare": {
+    "tray": "{species}: vergleichen ({count}/{max})",
+    "trayClear": "Vergleich leeren",
+    "addCard": "{name} zum Vergleich hinzufügen",
+    "removeCard": "{name} aus dem Vergleich entfernen",
     "metaTitle": "Hunde- und Katzenfutter vergleichen",
     "metaDescription": "Stellen Sie zwei oder drei Futter nebeneinander: Bewertung, Eiweiß, Fett, Kalorien, Tagesportion und was es pro Tag für Ihren Hund oder Ihre Katze kostet.",
     "title": "Futter vergleichen",

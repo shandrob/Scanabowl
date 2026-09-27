@@ -5,6 +5,7 @@ import { CompareButton } from "@/components/compare/CompareButton";
 import { Alternatives } from "@/components/product/Alternatives";
 import { AnalysisTable } from "@/components/product/AnalysisTable";
 import { IngredientsBlock } from "@/components/product/IngredientsBlock";
+import { NutritionVisual } from "@/components/product/NutritionVisual";
 import { OrderCard } from "@/components/product/OrderCard";
 import { PersonalPanel } from "@/components/product/PersonalPanel";
 import { ScorePanel } from "@/components/product/ScorePanel";
@@ -12,7 +13,7 @@ import { ProductImage } from "@/components/ui/ProductImage";
 import { detailToIndex } from "@/lib/data/index-entry";
 import type { ImageCredit } from "@/lib/data/types";
 import { brandPageSlug } from "@/lib/data/brands";
-import { alternativesFor, getProduct, typeRank } from "@/lib/data/products";
+import { alternativesFor, benchmarks, getProduct, typeRank } from "@/lib/data/products";
 import { guidesFor } from "@/lib/guides/defs";
 import { GUIDE_TEXT } from "@/lib/guides/content";
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
@@ -65,7 +66,7 @@ export default async function ProductPage({ params }: Props) {
   const p = await getProduct(slug);
   if (!p) notFound();
   const t = createT(await getDictionary(lang));
-  const [alternatives, brandSlug, rank] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand), typeRank(p)]);
+  const [alternatives, brandSlug, rank, bench] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand), typeRank(p), benchmarks(p)]);
   const entry = detailToIndex(p);
   const guides = guidesFor(p);
 
@@ -160,7 +161,8 @@ export default async function ProductPage({ params }: Props) {
 
           <section aria-labelledby="an-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
             <h2 id="an-h" className="font-display text-xl font-semibold text-brand-deep">{t("product.analysisTitle")}</h2>
-            <div className="mt-4"><AnalysisTable p={p} t={t} /></div>
+            {p.nutrition && <div className="mt-4"><NutritionVisual p={p} bench={bench} lang={lang} t={t} /></div>}
+            <div className="mt-6"><AnalysisTable p={p} t={t} /></div>
           </section>
         </div>
 

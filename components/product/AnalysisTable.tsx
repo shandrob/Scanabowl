@@ -76,7 +76,6 @@ export function AnalysisTable({ p, t }: { p: ProductDetail; t: TFunction }) {
             {fatOk ? <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-grade-a" /> : <IconAlert className="mt-0.5 h-4 w-4 shrink-0 text-grade-e" />}
             <span>{t("analysis.fatPer1000", { value: f1(n.fatPer1000kcal), min: ref.fatPer1000 })}</span>
           </li>
-          <li className="text-ink-soft">{t("analysis.energyShare", { p: Math.round(n.energyShare.protein), f: Math.round(n.energyShare.fat), c: Math.round(n.energyShare.carbs) })}</li>
         </ul>
         <p className="mt-2 text-xs text-ink-faint">{t("analysis.fediafNote")}</p>
       </div>

@@ -179,6 +179,12 @@
     ]
   },
   "finder": {
+    "without": "Without",
+    "withoutHint": "Also hides food with vague terms (such as “meat and animal derivatives”) that may contain it.",
+    "singleProtein": "One animal protein source",
+    "minProtein": "Min. protein (dry matter): {value}%",
+    "maxCarbs": "Max. carbohydrates: {value}% of energy",
+    "maxCarbsAny": "Max. carbohydrates: no limit",
     "allTypes": "All types",
     "otherSpeciesCat": "We did find {count} foods for cats.",
     "otherSpeciesDog": "We did find {count} foods for dogs.",
@@ -219,6 +225,11 @@
     "error": "The food list could not be loaded. Please check your connection and reload the page."
   },
   "product": {
+    "legendVague": "Vaguely named: you can't see exactly what is in it",
+    "legendUnneeded": "Additive a pet does not need (sugar, colourant or synthetic preservative)",
+    "splitTitle": "One raw material in several forms.",
+    "splitText": "{forms} come from the same raw material ({count} forms), together an estimated {pct}% of the recipe. Manufacturers may list a raw material split up like this; it is not a mistake, but add them up when you read the list.",
+    "splitTextFirst": "{forms} come from the same raw material ({count} forms), together an estimated {pct}% of the recipe – possibly more than the first ingredient ({first}). Manufacturers may list a raw material split up like this; it is not a mistake, but it makes the order on the label less telling.",
     "rankInType": "No. {rank} of {total} · {type} · {species}",
     "metaTitle": "{name} – score {score}/100",
     "metaDescription": "{name} by {brand}: independent Scanabowl score {score}/100 for {species} food, with ingredient analysis, nutrients and allergy check.",
@@ -260,6 +271,17 @@
     "disclaimer": "The score describes the label and is not veterinary advice. Always introduce a new food gradually and ask your vet if your pet has a health condition."
   },
   "analysis": {
+    "energyTitle": "Where the energy comes from",
+    "energyProtein": "Protein",
+    "energyFat": "Fat",
+    "energyCarbs": "Carbohydrates (calculated)",
+    "unitDm": "of dry matter",
+    "unitEnergy": "of energy",
+    "benchTitle": "Compared with {count} other foods · {type} · {species}",
+    "benchHigher": "Higher than {pct}% of these foods",
+    "benchLower": "Lower than {pct}% of these foods",
+    "benchAria": "{value}%, the middle is {median}%, usual is {low} to {high}%",
+    "benchNote": "The coloured band is the usual range (the middle 80% of these foods), the line is the middle. More is not always better: this only shows where this food stands.",
     "nutrient": "Nutrient",
     "asFed": "As fed",
     "dryMatter": "Dry matter",
@@ -822,6 +844,10 @@
     "onFoodPage": "Compare with the top list"
   },
   "compare": {
+    "tray": "{species}: compare ({count}/{max})",
+    "trayClear": "Clear comparison",
+    "addCard": "Add {name} to the comparison",
+    "removeCard": "Remove {name} from the comparison",
     "metaTitle": "Compare dog food and cat food",
     "metaDescription": "Put two or three foods side by side: score, protein, fat, calories, daily portion and what it costs per day for your dog or cat.",
     "title": "Compare foods",

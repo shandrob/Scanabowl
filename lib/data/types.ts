@@ -108,6 +108,8 @@ export interface IndexEntry {
   pl?: [number, number, number];
   /** share of the protein that comes from animal ingredients, 0-100 */
   an?: number;
+  /** share of the energy from carbohydrates (estimated), 0-100 */
+  cb?: number;
 }
 
 export interface Meta {
