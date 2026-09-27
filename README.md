@@ -211,7 +211,7 @@ In short: **35 points nutrient profile** (compared with the FEDIAF 2021 nutritio
 dry-matter and per-1,000-kcal basis), **50 points ingredient quality** (where the protein comes from,
 animal share of the dry matter, named vs. vague sources), **15 points clean formulation** (deductions for
 sugar, colourants, synthetic preservatives, filler). Toxic ingredients cap the score at 25.
-Dogs and cats are scored differently (e.g. moisture and carbohydrates matter for cats).
+Dogs and cats are scored differently (e.g. carbohydrates matter more for cats). Dry and wet cat food are each measured against their own kind: kibble is compared with kibble, wet food with wet food.
 
 For developers / future changes see [`docs/SCORING.md`](docs/SCORING.md). Every rule has a unit test
 (`npm test`); if you change a weight, the report script shows how the whole database shifts:

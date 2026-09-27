@@ -28,4 +28,4 @@ Research (Hewson-Hughes et al., 2011, *Journal of Experimental Biology*) showed 
 
 Has your cat ever had urinary crystals, bladder stones or kidney problems? Then discuss with your vet which food is right. In that case a therapeutic diet is sometimes needed.
 
-On Scanabowl the moisture content counts towards the score for cats. You can read how under [How we score](/en/how-we-score), and in your [cat's profile](/en/my-pet) you can indicate whether your cat has urinary problems.
+On Scanabowl we compare wet food with wet food and dry food with dry food, so a kibble does not lose points for being dry. You can read how under [How we score](/en/how-we-score). If you indicate in your [cat's profile](/en/my-pet) that your cat has urinary problems, wet food does get a bonus for your cat.

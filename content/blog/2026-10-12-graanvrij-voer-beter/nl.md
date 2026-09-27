@@ -32,7 +32,7 @@ Wat betekent dat voor jou? Er is geen reden tot paniek, maar ook geen reden om g
 
 ## En bij katten?
 
-Katten zijn echte vleeseters en hebben weinig koolhydraten nodig. Maar ook voor katten geldt: graanvrij betekent niet automatisch weinig koolhydraten. Een natvoer met veel vlees en weinig vulmiddel scoort voor een kat meestal beter dan een graanvrije brok vol aardappel. Waar je bij katten vooral op let, lees je in [waarom natvoer voor katten meer is dan een lekkernij](/nl/blog/2026-09-28-natvoer-kat-water).
+Katten zijn echte vleeseters en hebben weinig koolhydraten nodig. Maar ook voor katten geldt: graanvrij betekent niet automatisch weinig koolhydraten. Een voer met veel vlees en weinig vulmiddel is voor een kat meestal een betere keuze dan een graanvrije brok vol aardappel. Waar je bij katten vooral op let, lees je in [waarom natvoer voor katten meer is dan een lekkernij](/nl/blog/2026-09-28-natvoer-kat-water).
 
 ## Waar let je wél op?
 

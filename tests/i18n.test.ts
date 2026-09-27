@@ -85,6 +85,7 @@ describe("dictionaries", () => {
     for (const m of codes.matchAll(/deduct\([^,]+,\s*"([a-z_]+)"/g)) reasonCodes.add(m[1]);
     const flagCodes = new Set([...codes.matchAll(/\{\s*code:\s*"([a-z_]+)",\s*re:/g)].map((m) => m[1]));
     flagCodes.add("values_estimated");
+    flagCodes.add("dry_food_tip");
     for (const c of reasonCodes) need.push(flagCodes.has(c) ? `flags.${c}` : `reasons.${c}`);
     const pers = fs.readFileSync(path.join(ROOT, "lib/scoring/personalize.ts"), "utf8");
     for (const m of pers.matchAll(/add\([^,]+,\s*"([a-z_]+)"/g)) need.push(`personal.notes.${m[1]}`);

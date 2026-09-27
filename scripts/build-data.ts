@@ -214,7 +214,7 @@ async function main() {
   }
 
   // ---------------------------------------------------------------- owner photo
-  // content/about/photo.jpg (or .png/.webp, any size) -> public/about-photo.webp for the About page
+  // content/about/photo.jpg (or .png/.webp, any size) -> public/about-photo.webp for the About page (portrait, 4:5)
   {
     const aboutDir = path.join(ROOT, "content", "about");
     const src = fs.existsSync(aboutDir) ? fs.readdirSync(aboutDir).find((f) => /^photo\.(jpe?g|png|webp)$/i.test(f)) : undefined;
@@ -223,7 +223,7 @@ async function main() {
       const from = path.join(aboutDir, src);
       if (!fs.existsSync(dest) || fs.statSync(dest).mtimeMs < fs.statSync(from).mtimeMs) {
         try {
-          await sharp(from).rotate().resize({ width: 600, height: 600, fit: "cover", position: "attention" }).webp({ quality: 82 }).toFile(dest);
+          await sharp(from).rotate().resize({ width: 480, height: 600, fit: "cover", position: "top" }).webp({ quality: 82 }).toFile(dest);
         } catch (e) {
           report.push(`ABOUT PHOTO ${src}: ${(e as Error).message}`);
         }

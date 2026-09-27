@@ -28,4 +28,4 @@ Onderzoek (Hewson-Hughes et al., 2011, *Journal of Experimental Biology*) liet z
 
 Heeft je kat ooit blaasgruis, blaasstenen of nierproblemen gehad? Bespreek dan met je dierenarts welk voer past. In dat geval is een therapeutisch dieet soms nodig.
 
-Op Scanabowl telt het vochtgehalte voor katten mee in de score. Je ziet het terug onder [Zo scoren wij](/nl/how-we-score), en in het [profiel van je kat](/nl/my-pet) kun je aangeven of je kat urineproblemen heeft.
+Op Scanabowl vergelijken we natvoer met natvoer en droogvoer met droogvoer, dus een brok verliest geen punten omdat hij droog is. Hoe dat werkt, lees je onder [Zo scoren wij](/nl/how-we-score). Geef je in het [profiel van je kat](/nl/my-pet) aan dat je kat urineproblemen heeft, dan krijgt natvoer voor jouw kat wel een pluspunt.

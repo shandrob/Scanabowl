@@ -1,6 +1,6 @@
 ---
 title: Qui se cache derrière Scanabowl ?
-photoAlt: La personne derrière Scanabowl
+photoAlt: La personne derrière Scanabowl avec un chat blanc à poil long
 ---
 
 Scanabowl est né aux Pays-Bas d'une question toute personnelle : qu'y a-t-il vraiment dans la nourriture de mon propre chat ? J'ai vite découvert à quel point il est difficile de le savoir. Le devant de l'emballage promet beaucoup : « naturel », « premium », « riche en poulet ». Ce qu'il contient vraiment est écrit en petits caractères au dos, difficile à lire et encore plus difficile à comparer.

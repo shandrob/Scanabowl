@@ -179,6 +179,7 @@
     ]
   },
   "finder": {
+    "allTypes": "Tous les types",
     "otherSpeciesCat": "Nous avons trouvé {count} aliments pour chats.",
     "otherSpeciesDog": "Nous avons trouvé {count} aliments pour chiens.",
     "switchToCat": "Voir la nourriture pour chats",
@@ -218,6 +219,7 @@
     "error": "La liste des aliments n’a pas pu être chargée. Vérifiez votre connexion et rechargez la page."
   },
   "product": {
+    "rankInType": "N° {rank} sur {total} · {type} · {species}",
     "metaTitle": "{name} – note {score}/100",
     "metaDescription": "{name} de {brand} : note indépendante Scanabowl {score}/100 pour aliment {species}, avec analyse des ingrédients, valeurs nutritionnelles et contrôle des allergies.",
     "metaDescriptionNoScore": "{name} de {brand} : ingrédients et valeurs nutritionnelles d’un aliment {species}.",
@@ -286,6 +288,7 @@
     "named_sources": "Les ingrédients animaux sont nommés par espèce plutôt que sous la mention vague « sous-produits animaux ».",
     "protein_level_good": "Les protéines représentent {pct} % de la matière sèche, largement au-dessus du minimum FEDIAF.",
     "low_carb": "Seulement environ {pct} % de l’énergie provient des glucides – proche de ce pour quoi le corps d’un chat est conçu.",
+    "low_carb_dry": "Peu de glucides pour une croquette : environ {pct} % de l’énergie.",
     "high_moisture": "{pct} % d’humidité favorisent l’hydratation et la santé urinaire.",
     "omega3": "Contient de l’huile de poisson ou d’algues comme source d’EPA/DHA (oméga-3).",
     "prebiotic": "Contient des fibres prébiotiques (p. ex. chicorée, inuline, FOS/MOS) qui nourrissent les bactéries intestinales.",
@@ -324,7 +327,8 @@
     "chocolate": "Contient du cacao ou du chocolat (théobromine), toxique pour les animaux de compagnie.",
     "macadamia": "Contient des noix de macadamia, toxiques pour les chiens.",
     "propylene_glycol": "Contient du propylène glycol, interdit dans l’alimentation pour chats car il endommage les globules rouges.",
-    "values_estimated": "Certaines valeurs (humidité, cendres ou cellulose) manquaient sur l’étiquette et ont été estimées."
+    "values_estimated": "Certaines valeurs (humidité, cendres ou cellulose) manquaient sur l’étiquette et ont été estimées.",
+    "dry_food_tip": "Les croquettes contiennent peu d’eau et les chats boivent naturellement peu. Laissez toujours de l’eau fraîche ; ajouter un peu de pâtée est aussi une bonne idée. Nous comparons les croquettes à d’autres croquettes : cela ne coûte donc aucun point."
   },
   "personal": {
     "ctaTitle": "Cet aliment convient-il à votre animal ?",
@@ -471,7 +475,7 @@
     "intro": "Chaque aliment reçoit une note de 0 à 100. Elle est calculée par une formule fixe à partir de la liste d’ingrédients et des constituants analytiques de l’emballage, selon des recommandations de nutrition vétérinaire publiées. Cette page explique chaque étape pour que vous puissiez en juger vous-même.",
     "glance": "La note en un coup d’œil",
     "pillar": {
-      "nutrition": "Les chiffres de l’emballage correspondent-ils à ce dont un chien ou un chat a besoin ? Protéines, matières grasses, glucides, fibres, minéraux et – pour les chats – humidité, comparés à la FEDIAF.",
+      "nutrition": "Les chiffres de l’emballage correspondent-ils à ce dont un chien ou un chat a besoin ? Protéines, matières grasses, glucides, fibres et minéraux, comparés à la FEDIAF – croquettes avec croquettes, pâtée avec pâtée.",
       "ingredients": "D’où viennent les protéines, quelle part de la recette est animale, et est-ce déclaré clairement ?",
       "formulation": "Des points sont retirés pour le sucre ajouté, les colorants artificiels, les conservateurs de synthèse et les charges bon marché."
     },
@@ -490,8 +494,8 @@
         "ul": [
           "**Protéines** – le minimum FEDIAF pour les chiens adultes est de 18 à 21 g pour 100 g de matière sèche (45 à 52 g pour 1 000 kcal), pour les chats adultes de 25 à 33 g (62,5 à 83 g pour 1 000 kcal). Les animaux en croissance ont besoin de plus. Les points augmentent au-dessus du minimum puis se stabilisent : plus de protéines n’est pas automatiquement mieux pour un chien en bonne santé.",
           "**Matières grasses** – minimum FEDIAF de 5,5 g pour 100 g de matière sèche pour les chiens adultes (8,5 g pour les chiots) et 9 g pour les chats. Une teneur très élevée est pénalisée, car elle favorise la prise de poids et peut déclencher une pancréatite.",
-          "**Glucides (chats : 10 points, chiens : 4 points)** – estimés d’après ce qui reste après protéines, graisses, cellulose, cendres et humidité. Les chats sont des carnivores stricts : quand ils peuvent choisir, ils composent un régime avec environ 52 % de l’énergie issue des protéines, 36 % des graisses et seulement 12 % des glucides (Hewson-Hughes et al., 2011). Les chiens sont plus flexibles ; les glucides comptent donc beaucoup moins pour eux.",
-          "**Humidité (chats uniquement, 7,5 points)** – les chats ont une faible sensation de soif. Les chats qui mangent un aliment riche en humidité absorbent davantage d’eau au total et produisent une urine plus diluée, avec une moindre saturation des minéraux formant les cristaux urinaires (Buckley et al., 2011).",
+          "**Glucides (chats : 10 points, chiens : 4 points)** – estimés d’après ce qui reste après protéines, graisses, cellulose, cendres et humidité. Les chats sont des carnivores stricts : quand ils peuvent choisir, ils composent un régime avec environ 52 % de l’énergie issue des protéines, 36 % des graisses et seulement 12 % des glucides (Hewson-Hughes et al., 2011). Les chiens sont plus flexibles ; les glucides comptent donc beaucoup moins pour eux. **Nous comparons les croquettes pour chats avec d’autres croquettes :** les croquettes sont formées avec de l’amidon et contiennent donc toujours plus de glucides que la pâtée. Une croquette pauvre en glucides obtient un meilleur score qu’une croquette riche en amidon, mais aucune croquette ne perd de points simplement parce qu’elle est sèche.",
+          "**Humidité (chats)** – les chats ont une faible sensation de soif. Les chats qui mangent un aliment riche en humidité absorbent davantage d’eau au total et produisent une urine plus diluée, avec une moindre saturation des minéraux formant les cristaux urinaires (Buckley et al., 2011). L’humidité ne compte pas dans le score, afin que croquettes et pâtées soient chacune comparées à leur propre catégorie. Pour les croquettes, nous affichons un conseil sur l’hydratation, et dans le profil de l’animal la pâtée obtient un bonus pour les chats ayant des problèmes urinaires.",
           "**Cellulose et cendres** – trop de l’un ou de l’autre abaisse la note (une forte charge minérale compte surtout pour les voies urinaires des chats).",
           "**Chiens : rapport calcium:phosphore et exhaustivité de l’étiquette** – quand le calcium et le phosphore sont indiqués, le rapport doit se situer entre 1:1 et 2:1 (FEDIAF). Les aliments qui impriment une analyse complète sont mieux notés que ceux qui omettent des valeurs."
         ]
@@ -523,7 +527,7 @@
       },
       {
         "h": "Chiens et chats sont notés différemment",
-        "p": ["Les chats sont des carnivores stricts aux besoins spécifiques (taurine, acide arachidonique, vitamine A préformée, besoin en protéines plus élevé), alors que les chiens sont plus flexibles. C’est pourquoi les pondérations pour les glucides, l’humidité et les protéines animales diffèrent selon l’espèce. Nous ne donnons aucun point pour « sans céréales » en tant que tel : les céréales ne sont pas nocives pour la plupart des animaux, et « sans céréales » n’est pas un label de qualité. Vous pouvez néanmoins filtrer dessus, par exemple en cas d’allergie au blé."]
+        "p": ["Les chats sont des carnivores stricts aux besoins spécifiques (taurine, acide arachidonique, vitamine A préformée, besoin en protéines plus élevé), alors que les chiens sont plus flexibles. C’est pourquoi les pondérations pour les glucides et les protéines animales diffèrent selon l’espèce. Nous ne donnons aucun point pour « sans céréales » en tant que tel : les céréales ne sont pas nocives pour la plupart des animaux, et « sans céréales » n’est pas un label de qualité. Vous pouvez néanmoins filtrer dessus, par exemple en cas d’allergie au blé."]
       },
       {
         "h": "Ce qui n’est pas noté",
@@ -554,7 +558,7 @@
       "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
     ],
     "versionTitle": "Version",
-    "version": "Méthode de notation version 1.0 (septembre 2026). Quand nous améliorons la méthode, toutes les notes sont recalculées et cette page est mise à jour.",
+    "version": "Méthode de notation version 1.1 (septembre 2026) : les croquettes et les pâtées pour chats sont chacune comparées à leur propre catégorie. Quand nous améliorons la méthode, toutes les notes sont recalculées et cette page est mise à jour.",
     "feedback": "Un retour sur la méthode ? Dites-le-nous."
   },
   "suggest": {

@@ -5,7 +5,7 @@ import { ScoreRing } from "@/components/ui/ScoreRing";
 import type { ProductDetail } from "@/lib/data/types";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import type { TFunction } from "@/lib/i18n/t";
-import { gradeLabel, scoreAria } from "@/lib/labels";
+import { foodTypeLabel, gradeLabel, scoreAria, speciesLabel } from "@/lib/labels";
 import type { Reason } from "@/lib/scoring/types";
 
 function reasonText(t: TFunction, r: Reason, prefix = "reasons"): string {
@@ -32,7 +32,7 @@ function Bar({ label, points, max, color }: { label: string; points: number; max
   );
 }
 
-export function ScorePanel({ p, t, lang }: { p: ProductDetail; t: TFunction; lang: Locale }) {
+export function ScorePanel({ p, t, lang, rank }: { p: ProductDetail; t: TFunction; lang: Locale; rank?: { rank: number; total: number } | null }) {
   if (p.score === null || !p.grade || !p.pillars) {
     return (
       <section aria-labelledby="score-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card">
@@ -47,6 +47,8 @@ export function ScorePanel({ p, t, lang }: { p: ProductDetail; t: TFunction; lan
   const g = GRADE_STYLE[p.grade];
   const hazards = p.flags.filter((f) => f.severity === "hazard");
   const concerns = p.flags.filter((f) => f.severity === "concern");
+  // advice that does not change the score (e.g. "give a dry-fed cat enough to drink")
+  const tips = p.flags.filter((f) => f.severity === "info" && f.code !== "values_estimated");
   return (
     <section aria-labelledby="score-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
@@ -55,6 +57,14 @@ export function ScorePanel({ p, t, lang }: { p: ProductDetail; t: TFunction; lan
           <h2 id="score-h" className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-faint">{t("product.scoreTitle")}</h2>
           <p className={`mt-1 font-display text-3xl font-semibold ${g.text}`}>{gradeLabel(t, p.grade)}</p>
           <p className="mt-1 text-sm text-ink-soft">{t(`grade.desc.${p.grade}`)}</p>
+          {rank && (
+            // dry food is ranked among dry food, wet among wet: the list a buyer actually chooses from
+            <p className="mt-2 text-sm font-semibold text-brand-deep">
+              <Link href={`${localePath(lang, "/foods")}?species=${p.species}&type=${p.foodType}`} prefetch={false} className="hover:underline">
+                {t("product.rankInType", { rank: rank.rank, total: rank.total.toLocaleString(lang), type: foodTypeLabel(t, p.foodType), species: speciesLabel(t, p.species, true) })}
+              </Link>
+            </p>
+          )}
           <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-ink-faint">
             <IconInfo className="h-3.5 w-3.5" />
             {t(`confidence.${p.confidence}`)} ·{" "}
@@ -78,6 +88,13 @@ export function ScorePanel({ p, t, lang }: { p: ProductDetail; t: TFunction; lan
           <ul className="list-disc pl-5 text-sm text-ink">{concerns.map((f) => <li key={f.code}>{t(`flags.${f.code}`)}</li>)}</ul>
         </div>
       )}
+
+      {tips.map((f) => (
+        <p key={f.code} className="mt-4 flex gap-3 rounded-xl border border-brand/20 bg-brand-tint p-4 text-sm text-ink">
+          <IconInfo className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+          <span>{t(`flags.${f.code}`)}</span>
+        </p>
+      ))}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Bar label={t("score.pillars.nutrition")} points={p.pillars.nutrition.points} max={p.pillars.nutrition.max} color="#0b7a57" />

@@ -1,6 +1,6 @@
 ---
 title: Wie zit er achter Scanabowl?
-photoAlt: De persoon achter Scanabowl
+photoAlt: De persoon achter Scanabowl met een witte langharige kat
 ---
 
 Scanabowl is gemaakt door een kattenbezitter uit Nederland. Ik wilde weten wat er écht in het voer van mijn eigen kat zit, en merkte hoe lastig dat is. De voorkant van de verpakking belooft van alles: “natuurlijk”, “premium”, “rijk aan kip”. Wat er werkelijk in zit, staat in kleine letters op de achterkant. Die zijn moeilijk te lezen en nog moeilijker te vergelijken.

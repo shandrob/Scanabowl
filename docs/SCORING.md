@@ -21,7 +21,7 @@ lib/scoring/personalize.ts personal adjustment (-20…+8) per pet; lib/pets/ener
 
 | Pillar | Pts | Components |
 | --- | --- | --- |
-| Nutrient profile | 35 | **Cat:** protein 12, fat 2.5, carbs 10, fibre+ash 3, moisture 7.5 · **Dog:** protein 12, fat 6, carbs 4, fibre+ash 4, Ca:P + label completeness 9 |
+| Nutrient profile | 35 | **Cat:** protein 12, fat 2.5, carbs 10, fibre+ash 3, scaled to 35 (no moisture points since v1.1; dry food has its own carb scale) · **Dog:** protein 12, fat 6, carbs 4, fibre+ash 4, Ca:P + label completeness 9 |
 | Ingredient quality | 50 | protein origin 12 + animal share of dry matter 12, lead ingredients 10, named sources 10, extras 6 |
 | Clean formulation | 15 | start 15; deductions: sugar, colourants, synthetic preservatives, plant-protein isolates, cereal filler (cats), legume/potato load (dogs) |
 
@@ -63,6 +63,13 @@ preceding ingredient; trailing minerals/vitamins get a fixed 0.4%. Each ingredie
 Calibration used for v1.0 (3,054 foods): dog dry median 74, dog wet 82, cat dry 54, cat wet 67;
 mass-market brands 40s–60s, meat-dense premium foods 80s–90s. Wet cat food outscores dry cat food by ~13 points
 on average (moisture, carbohydrates), by design (Buckley 2011; Hewson-Hughes 2011).
+
+**v1.1 (2026-09-27, owner decision): dry and wet cat food are each measured against their own kind.** Moisture no
+longer scores (it only differed between types, not within them); dry cat food gets a carbohydrate scale on which the
+typical kibble (~32% of energy) scores like the typical wet food (~10%). Within each type the order is unchanged:
+a low-carb kibble still beats a starchy one. Result: cat dry median 55 -> 64 (wet 70), best dry 87 -> 96 (best wet 96);
+wet scores moved -6..+2. Dogs unchanged. Moisture advice now shows as an info tip (`dry_food_tip`), and the pet
+profile still favours wet food for cats with urinary problems.
 
 ## Adding ingredients / languages to recognition
 

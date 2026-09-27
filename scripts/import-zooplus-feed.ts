@@ -14,7 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import { writeCsv } from "../lib/catalog/csv";
-import { feedItem, parseFeed, type FeedItem } from "../lib/catalog/awin-feed";
+import { feedItem, isFeedList, parseFeed, type FeedItem } from "../lib/catalog/awin-feed";
 
 const ROOT = path.resolve(__dirname, "..");
 const FEEDS = path.join(ROOT, "database", "feeds");
@@ -55,6 +55,16 @@ async function main() {
   let rows = 0;
   for (const file of files) {
     const parsed = parseFeed(readFeedFile(file));
+    if (isFeedList(parsed)) {
+      const zooplus = parsed.filter((r) => /zooplus/i.test(r["advertiser name"] ?? ""));
+      console.log(
+        `${path.basename(file)} is Awin's list of all shops' product files, not a product file. ` +
+          (zooplus.length
+            ? `zooplus is in it (status: ${zooplus.map((r) => r["membership status"]).join(", ")}): download the file from the link in its row and put that file here.`
+            : "zooplus is not in it yet: zooplus has to accept you in Awin first."),
+      );
+      continue;
+    }
     rows += parsed.length;
     for (const row of parsed) {
       const item = feedItem(row);
@@ -65,6 +75,10 @@ async function main() {
     }
   }
 
+  if (!items.size) {
+    console.log("No dog or cat food found in the files, so nothing was changed.");
+    return;
+  }
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const list = [...items.values()].sort((a, b) => a.brand.localeCompare(b.brand) || a.name.localeCompare(b.name));
   writeCsv(

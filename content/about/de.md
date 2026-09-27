@@ -1,6 +1,6 @@
 ---
 title: Wer steckt hinter Scanabowl?
-photoAlt: Die Person hinter Scanabowl
+photoAlt: Die Person hinter Scanabowl mit einer weißen Langhaarkatze
 ---
 
 Scanabowl ist in den Niederlanden entstanden, aus einer ganz persönlichen Frage: Was steckt eigentlich im Futter meiner eigenen Katze? Ich habe schnell gemerkt, wie schwierig es ist, das herauszufinden. Die Vorderseite der Packung verspricht alles Mögliche: „natürlich“, „Premium“, „reich an Huhn“. Was tatsächlich drin ist, steht klein gedruckt auf der Rückseite. Das ist schwer zu lesen und noch schwerer zu vergleichen.

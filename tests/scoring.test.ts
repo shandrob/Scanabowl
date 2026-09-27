@@ -362,3 +362,33 @@ describe("ingredient dictionary gaps found in the Pets Place data", () => {
     expect(kind("boerenkool")).not.toBe("plant_oil");
   });
 });
+
+describe("dry and wet cat food are each measured against their own kind (method 1.1)", () => {
+  const kibble = (analysis: string) => ({
+    species: "cat" as const,
+    foodType: "dry" as const,
+    lifeStage: "adult" as const,
+    category: "complete" as const,
+    ingredients: "kip 40%, gedroogde kip 25%, kippenvet 10%, zalm 5%, erwten, zalmolie 2%, mineralen, taurine",
+    analysis,
+  });
+
+  it("gives a meat-rich kibble a top grade, as good as a comparable wet food", () => {
+    const dry = scoreProduct(kibble("Eiwit: 40%, Vetgehalte: 20%, Ruwe as: 8%, Ruwe celstof: 2.5%, Vocht: 9%"));
+    const wet = scoreProduct({ ...wetCatMeat, ingredients: "kip 60%, kippenlever 10%, kippenvet 3%, zalm 5%, erwten, zalmolie 1%, mineralen, taurine" });
+    expect(dry.grade).toBe("A");
+    expect(Math.abs(dry.score! - wet.score!)).toBeLessThanOrEqual(6);
+  });
+
+  it("still ranks a low-carb kibble above a starchy one", () => {
+    const lowCarb = scoreProduct(kibble("Eiwit: 42%, Vetgehalte: 20%, Ruwe as: 8%, Ruwe celstof: 2.5%, Vocht: 9%"));
+    const starchy = scoreProduct(kibble("Eiwit: 28%, Vetgehalte: 11%, Ruwe as: 7%, Ruwe celstof: 3%, Vocht: 9%"));
+    expect(lowCarb.score!).toBeGreaterThan(starchy.score!);
+  });
+
+  it("shows drinking advice for kibble instead of a minus", () => {
+    const r = scoreProduct(kibble("Eiwit: 40%, Vetgehalte: 20%, Ruwe as: 8%, Ruwe celstof: 2.5%, Vocht: 9%"));
+    expect(r.flags.some((f) => f.code === "dry_food_tip" && f.severity === "info")).toBe(true);
+    expect(r.negatives.some((n) => n.code === "dry_food_cat")).toBe(false);
+  });
+});

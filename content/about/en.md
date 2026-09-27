@@ -1,6 +1,6 @@
 ---
 title: Who is behind Scanabowl?
-photoAlt: The person behind Scanabowl
+photoAlt: The person behind Scanabowl holding a white long-haired cat
 ---
 
 Scanabowl was made by a cat owner from the Netherlands. I wanted to know what is really in my own cat's food, and found out how hard that is. The front of the pack promises everything: “natural”, “premium”, “rich in chicken”. What is actually inside is in small print on the back, which is hard to read and even harder to compare.

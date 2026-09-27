@@ -179,6 +179,7 @@
     ]
   },
   "finder": {
+    "allTypes": "Alle Sorten",
     "otherSpeciesCat": "Bei den Katzen haben wir {count} Futter gefunden.",
     "otherSpeciesDog": "Bei den Hunden haben wir {count} Futter gefunden.",
     "switchToCat": "Katzenfutter zeigen",
@@ -218,6 +219,7 @@
     "error": "Die Futterliste konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und laden Sie die Seite neu."
   },
   "product": {
+    "rankInType": "Platz {rank} von {total} · {type} · {species}",
     "metaTitle": "{name} – Bewertung {score}/100",
     "metaDescription": "{name} von {brand}: unabhängige Scanabowl-Bewertung {score}/100 für {species}futter, mit Zutatenanalyse, Nährwerten und Allergiecheck.",
     "metaDescriptionNoScore": "{name} von {brand}: Zutaten und Nährwerte von {species}futter.",
@@ -286,6 +288,7 @@
     "named_sources": "Tierische Zutaten werden nach Tierart benannt statt als vage „tierische Nebenerzeugnisse“.",
     "protein_level_good": "Protein macht {pct} % der Trockenmasse aus, deutlich über dem FEDIAF-Minimum.",
     "low_carb": "Nur etwa {pct} % der Energie stammen aus Kohlenhydraten – nah an dem, wofür der Körper einer Katze gebaut ist.",
+    "low_carb_dry": "Wenig Kohlenhydrate für ein Trockenfutter: etwa {pct} % der Energie.",
     "high_moisture": "{pct} % Feuchtigkeit unterstützen die Flüssigkeitsaufnahme und die Gesundheit der Harnwege.",
     "omega3": "Enthält Fisch- oder Algenöl als Quelle für EPA/DHA (Omega-3).",
     "prebiotic": "Enthält präbiotische Ballaststoffe (z. B. Chicorée, Inulin, FOS/MOS), die Darmbakterien füttern.",
@@ -324,7 +327,8 @@
     "chocolate": "Enthält Kakao oder Schokolade (Theobromin), das für Haustiere giftig ist.",
     "macadamia": "Enthält Macadamianüsse, die für Hunde giftig sind.",
     "propylene_glycol": "Enthält Propylenglykol, das in Katzenfutter nicht erlaubt ist, weil es rote Blutkörperchen schädigt.",
-    "values_estimated": "Einige Werte (Feuchtigkeit, Asche oder Rohfaser) fehlten auf dem Etikett und wurden geschätzt."
+    "values_estimated": "Einige Werte (Feuchtigkeit, Asche oder Rohfaser) fehlten auf dem Etikett und wurden geschätzt.",
+    "dry_food_tip": "Trockenfutter enthält wenig Wasser, und Katzen trinken von Natur aus wenig. Stellen Sie immer frisches Wasser bereit; etwas Nassfutter dazu ist ebenfalls eine gute Idee. Wir vergleichen Trockenfutter mit anderem Trockenfutter, das kostet also keine Punkte."
   },
   "personal": {
     "ctaTitle": "Passt dieses Futter zu Ihrem Tier?",
@@ -471,7 +475,7 @@
     "intro": "Jedes Futter erhält eine Bewertung von 0 bis 100. Sie wird mit einer festen Formel aus der Zutatenliste und den Analysewerten auf der Verpackung berechnet, nach veröffentlichten tierärztlichen Ernährungsrichtlinien. Diese Seite erklärt jeden Schritt, damit Sie es selbst beurteilen können.",
     "glance": "Die Bewertung auf einen Blick",
     "pillar": {
-      "nutrition": "Passen die Zahlen auf der Verpackung zu dem, was ein Hund oder eine Katze braucht? Protein, Fett, Kohlenhydrate, Rohfaser, Mineralstoffe und – bei Katzen – Feuchtigkeit, verglichen mit FEDIAF.",
+      "nutrition": "Passen die Zahlen auf der Verpackung zu dem, was ein Hund oder eine Katze braucht? Protein, Fett, Kohlenhydrate, Rohfaser und Mineralstoffe, verglichen mit FEDIAF – Trockenfutter mit Trockenfutter, Nassfutter mit Nassfutter.",
       "ingredients": "Woher stammt das Protein, wie viel der Rezeptur ist tierisch, und wird das klar deklariert?",
       "formulation": "Punkte werden abgezogen für zugesetzten Zucker, künstliche Farbstoffe, synthetische Konservierungsstoffe und billige Füllstoffe."
     },
@@ -490,8 +494,8 @@
         "ul": [
           "**Protein** – das FEDIAF-Minimum für erwachsene Hunde beträgt 18–21 g pro 100 g Trockenmasse (45–52 g pro 1.000 kcal), für erwachsene Katzen 25–33 g (62,5–83 g pro 1.000 kcal). Wachsende Tiere brauchen mehr. Die Punkte steigen über dem Minimum und flachen dann ab: Mehr Protein ist für einen gesunden Hund nicht automatisch besser.",
           "**Fett** – FEDIAF-Minimum 5,5 g pro 100 g Trockenmasse für erwachsene Hunde (8,5 g für Welpen) und 9 g für Katzen. Sehr viel Fett wird abgewertet, da es Gewichtszunahme fördert und eine Bauchspeicheldrüsenentzündung auslösen kann.",
-          "**Kohlenhydrate (Katzen: 10 Punkte, Hunde: 4 Punkte)** – geschätzt aus dem, was nach Protein, Fett, Rohfaser, Asche und Feuchtigkeit übrig bleibt. Katzen sind Fleischfresser: Wenn sie wählen können, stellen sie sich eine Ration mit etwa 52 % der Energie aus Protein, 36 % aus Fett und nur 12 % aus Kohlenhydraten zusammen (Hewson-Hughes et al., 2011). Hunde sind flexibler, daher zählen Kohlenhydrate bei ihnen viel weniger.",
-          "**Feuchtigkeit (nur Katzen, 7,5 Punkte)** – Katzen haben einen schwachen Durstreiz. Katzen, die ein feuchtigkeitsreiches Futter fressen, nehmen insgesamt mehr Wasser auf und scheiden verdünnteren Urin aus, mit geringerer Sättigung der Mineralstoffe, die Harnkristalle bilden (Buckley et al., 2011).",
+          "**Kohlenhydrate (Katzen: 10 Punkte, Hunde: 4 Punkte)** – geschätzt aus dem, was nach Protein, Fett, Rohfaser, Asche und Feuchtigkeit übrig bleibt. Katzen sind Fleischfresser: Wenn sie wählen können, stellen sie sich eine Ration mit etwa 52 % der Energie aus Protein, 36 % aus Fett und nur 12 % aus Kohlenhydraten zusammen (Hewson-Hughes et al., 2011). Hunde sind flexibler, daher zählen Kohlenhydrate bei ihnen viel weniger. **Katzen-Trockenfutter vergleichen wir mit anderem Trockenfutter:** Trockenfutter wird mit Stärke geformt und enthält deshalb immer mehr Kohlenhydrate als Nassfutter. Ein kohlenhydratarmes Trockenfutter schneidet besser ab als ein stärkereiches, aber kein Trockenfutter verliert Punkte, nur weil es trocken ist.",
+          "**Feuchtigkeit (Katzen)** – Katzen haben einen schwachen Durstreiz. Katzen, die ein feuchtigkeitsreiches Futter fressen, nehmen insgesamt mehr Wasser auf und scheiden verdünnteren Urin aus, mit geringerer Sättigung der Mineralstoffe, die Harnkristalle bilden (Buckley et al., 2011). Feuchtigkeit zählt nicht zur Bewertung, damit Trocken- und Nassfutter jeweils mit ihrer eigenen Art verglichen werden. Bei Trockenfutter zeigen wir einen Tipp zum Trinken, und im Tierprofil bekommt Nassfutter bei Katzen mit Harnwegsproblemen einen Pluspunkt.",
           "**Rohfaser und Asche** – zu viel von beidem senkt die Bewertung (eine hohe Mineralstoffbelastung ist besonders für die Harnwege von Katzen wichtig).",
           "**Hunde: Calcium-Phosphor-Verhältnis und Vollständigkeit des Etiketts** – wenn Calcium und Phosphor angegeben sind, sollte das Verhältnis zwischen 1:1 und 2:1 liegen (FEDIAF). Futter mit vollständiger Analyse schneidet besser ab als Futter, das Werte weglässt."
         ]
@@ -523,7 +527,7 @@
       },
       {
         "h": "Hunde und Katzen werden unterschiedlich bewertet",
-        "p": ["Katzen sind strikte Fleischfresser mit besonderen Bedürfnissen (Taurin, Arachidonsäure, vorgeformtes Vitamin A, höherer Proteinbedarf), Hunde sind flexibler. Deshalb unterscheiden sich die Gewichtungen für Kohlenhydrate, Feuchtigkeit und tierisches Protein je nach Tierart. Für „getreidefrei“ als solches vergeben wir keine Punkte: Getreide ist für die meisten Tiere nicht schädlich, und getreidefrei ist kein Qualitätsmerkmal. Sie können aber danach filtern, zum Beispiel bei einer Weizenallergie."]
+        "p": ["Katzen sind strikte Fleischfresser mit besonderen Bedürfnissen (Taurin, Arachidonsäure, vorgeformtes Vitamin A, höherer Proteinbedarf), Hunde sind flexibler. Deshalb unterscheiden sich die Gewichtungen für Kohlenhydrate und tierisches Protein je nach Tierart. Für „getreidefrei“ als solches vergeben wir keine Punkte: Getreide ist für die meisten Tiere nicht schädlich, und getreidefrei ist kein Qualitätsmerkmal. Sie können aber danach filtern, zum Beispiel bei einer Weizenallergie."]
       },
       {
         "h": "Was nicht bewertet wird",
@@ -554,7 +558,7 @@
       "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
     ],
     "versionTitle": "Version",
-    "version": "Bewertungsmethode Version 1.0 (September 2026). Wenn wir die Methode verbessern, werden alle Bewertungen neu berechnet und diese Seite aktualisiert.",
+    "version": "Bewertungsmethode Version 1.1 (September 2026): Trocken- und Nassfutter für Katzen werden jeweils mit ihrer eigenen Art verglichen. Wenn wir die Methode verbessern, werden alle Bewertungen neu berechnet und diese Seite aktualisiert.",
     "feedback": "Haben Sie Feedback zur Methode? Sagen Sie es uns."
   },
   "suggest": {

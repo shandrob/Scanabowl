@@ -41,12 +41,12 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       </header>
 
       {story && (
-        <section aria-labelledby="story-h" className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 rounded-3xl border border-line bg-paper p-6 shadow-card sm:p-10 md:grid-cols-[220px_minmax(0,1fr)]">
+        <section aria-labelledby="story-h" className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 rounded-3xl border border-line bg-paper p-6 shadow-card sm:p-10 md:grid-cols-[240px_minmax(0,1fr)]">
           {story.photo ? (
-            <Image src={story.photo} alt={story.photoAlt} width={440} height={440} unoptimized className="h-auto w-full max-w-[220px] rounded-2xl border border-line object-cover" />
+            <Image src={story.photo} alt={story.photoAlt} width={480} height={600} unoptimized priority className="h-auto w-full max-w-[240px] rounded-2xl border border-line object-cover shadow-card" />
           ) : (
             <div className="hidden md:block">
-              <Image src="/logo.png" alt="" width={220} height={220} className="rounded-2xl shadow-card" />
+              <Image src="/logo.png" alt="" width={240} height={240} className="rounded-2xl shadow-card" />
             </div>
           )}
           <div>

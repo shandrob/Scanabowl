@@ -253,6 +253,23 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
         </div>
       </div>
 
+      {/* dry and wet food are separate choices: people who feed kibble compare kibble */}
+      <div role="group" aria-label={t("finder.type")} className="mt-4 flex flex-wrap gap-2">
+        {(["all", "dry", "wet", "frozen"] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            aria-pressed={type === v}
+            onClick={() => setType(v)}
+            className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+              type === v ? "border-brand bg-brand text-white" : "border-line bg-paper text-ink-soft hover:border-brand-mid hover:text-brand-deep"
+            }`}
+          >
+            {v === "all" ? t("finder.allTypes") : foodTypeLabel(t, v)}
+          </button>
+        ))}
+      </div>
+
       {/* pet banner */}
       {active && active.species === species && (
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-brand/20 bg-brand-tint px-4 py-3 text-sm">

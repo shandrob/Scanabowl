@@ -12,7 +12,7 @@ import { ProductImage } from "@/components/ui/ProductImage";
 import { detailToIndex } from "@/lib/data/index-entry";
 import type { ImageCredit } from "@/lib/data/types";
 import { brandPageSlug } from "@/lib/data/brands";
-import { alternativesFor, getProduct } from "@/lib/data/products";
+import { alternativesFor, getProduct, typeRank } from "@/lib/data/products";
 import { guidesFor } from "@/lib/guides/defs";
 import { GUIDE_TEXT } from "@/lib/guides/content";
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: Props) {
   const p = await getProduct(slug);
   if (!p) notFound();
   const t = createT(await getDictionary(lang));
-  const [alternatives, brandSlug] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand)]);
+  const [alternatives, brandSlug, rank] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand), typeRank(p)]);
   const entry = detailToIndex(p);
   const guides = guidesFor(p);
 
@@ -151,7 +151,7 @@ export default async function ProductPage({ params }: Props) {
       <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-8">
           {p.score !== null && <PersonalPanel entry={entry} species={p.species} ingredientsText={p.ingredientsText} price={p.price} />}
-          <ScorePanel p={p} t={t} lang={lang} />
+          <ScorePanel p={p} t={t} lang={lang} rank={rank} />
 
           <section aria-labelledby="ingr-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
             <h2 id="ingr-h" className="font-display text-xl font-semibold text-brand-deep">{t("product.ingredientsTitle")}</h2>

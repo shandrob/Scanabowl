@@ -179,6 +179,7 @@
     ]
   },
   "finder": {
+    "allTypes": "All types",
     "otherSpeciesCat": "We did find {count} foods for cats.",
     "otherSpeciesDog": "We did find {count} foods for dogs.",
     "switchToCat": "Show cat food",
@@ -218,6 +219,7 @@
     "error": "The food list could not be loaded. Please check your connection and reload the page."
   },
   "product": {
+    "rankInType": "No. {rank} of {total} · {type} · {species}",
     "metaTitle": "{name} – score {score}/100",
     "metaDescription": "{name} by {brand}: independent Scanabowl score {score}/100 for {species} food, with ingredient analysis, nutrients and allergy check.",
     "metaDescriptionNoScore": "{name} by {brand}: ingredients and nutrients for {species} food.",
@@ -286,6 +288,7 @@
     "named_sources": "Animal ingredients are named by species instead of vague “animal derivatives”.",
     "protein_level_good": "Protein is {pct}% of dry matter, comfortably above the FEDIAF minimum.",
     "low_carb": "Only about {pct}% of the energy comes from carbohydrates – close to what a cat’s body is built for.",
+    "low_carb_dry": "Low in carbohydrates for a dry food: about {pct}% of the energy.",
     "high_moisture": "{pct}% moisture supports hydration and urinary health.",
     "omega3": "Contains fish or algae oil as a source of EPA/DHA (omega-3).",
     "prebiotic": "Contains prebiotic fibres (e.g. chicory, inulin, FOS/MOS) that feed gut bacteria.",
@@ -324,7 +327,8 @@
     "chocolate": "Contains cocoa or chocolate (theobromine), which is toxic to pets.",
     "macadamia": "Contains macadamia nuts, which are toxic to dogs.",
     "propylene_glycol": "Contains propylene glycol, which is not allowed in cat food because it damages red blood cells.",
-    "values_estimated": "Some values (moisture, ash or fibre) were missing on the label and were estimated."
+    "values_estimated": "Some values (moisture, ash or fibre) were missing on the label and were estimated.",
+    "dry_food_tip": "Dry food contains little water and cats naturally drink little. Always provide fresh water; adding some wet food is a good idea too. We compare dry food with other dry food, so this costs no points."
   },
   "personal": {
     "ctaTitle": "Does this food suit your pet?",
@@ -471,7 +475,7 @@
     "intro": "Every food gets a score from 0 to 100. It is calculated by a fixed formula from the ingredient list and analytical constituents on the pack, using published veterinary nutrition guidelines. This page explains every step so you can judge it yourself.",
     "glance": "The score at a glance",
     "pillar": {
-      "nutrition": "Do the numbers on the pack match what a dog or cat needs? Protein, fat, carbohydrates, fibre, minerals and – for cats – moisture, compared with FEDIAF.",
+      "nutrition": "Do the numbers on the pack match what a dog or cat needs? Protein, fat, carbohydrates, fibre and minerals, compared with FEDIAF – dry food with dry food, wet food with wet food.",
       "ingredients": "Where does the protein come from, how much of the recipe is animal-based, and is it declared clearly?",
       "formulation": "Points are taken off for added sugar, artificial colourants, synthetic preservatives and cheap filler."
     },
@@ -490,8 +494,8 @@
         "ul": [
           "**Protein** – the FEDIAF minimum for adult dogs is 18–21 g per 100 g dry matter (45–52 g per 1,000 kcal), for adult cats 25–33 g (62.5–83 g per 1,000 kcal). Growing animals need more. Points rise above the minimum and then level off: more protein is not automatically better for a healthy dog.",
           "**Fat** – FEDIAF minimum 5.5 g per 100 g dry matter for adult dogs (8.5 g for puppies) and 9 g for cats. Very high fat is penalised, as it promotes weight gain and can trigger pancreatitis.",
-          "**Carbohydrates (cats: 10 points, dogs: 4 points)** – estimated from what remains after protein, fat, fibre, ash and moisture. Cats are obligate carnivores: when they can choose, they select a diet with roughly 52% of energy from protein, 36% from fat and only 12% from carbohydrates (Hewson-Hughes et al., 2011). Dogs are more flexible, so carbohydrates count far less for them.",
-          "**Moisture (cats only, 7.5 points)** – cats have a weak thirst drive. Cats eating a high-moisture food take in more water in total and produce more dilute urine, with lower saturation of the minerals that form urinary crystals (Buckley et al., 2011).",
+          "**Carbohydrates (cats: 10 points, dogs: 4 points)** – estimated from what remains after protein, fat, fibre, ash and moisture. Cats are obligate carnivores: when they can choose, they select a diet with roughly 52% of energy from protein, 36% from fat and only 12% from carbohydrates (Hewson-Hughes et al., 2011). Dogs are more flexible, so carbohydrates count far less for them. **We compare dry cat food with other dry food:** kibble is shaped with starch and therefore always contains more carbohydrates than wet food. A low-carb kibble scores higher than a starchy one, but no kibble loses points just for being dry.",
+          "**Moisture (cats)** – cats have a weak thirst drive. Cats eating a high-moisture food take in more water in total and produce more dilute urine, with lower saturation of the minerals that form urinary crystals (Buckley et al., 2011). Moisture does not count in the score, so dry and wet food are each compared with their own kind. For dry food we show a tip about drinking, and in the pet profile wet food earns a bonus for cats with urinary problems.",
           "**Fibre and ash** – too much of either lowers the score (a high mineral load matters especially for the urinary tract of cats).",
           "**Dogs: calcium:phosphorus ratio and label completeness** – when calcium and phosphorus are printed, the ratio should lie between 1:1 and 2:1 (FEDIAF). Foods that print a complete analysis score better than foods that leave values out."
         ]
@@ -523,7 +527,7 @@
       },
       {
         "h": "Dogs and cats are scored differently",
-        "p": ["Cats are obligate carnivores with specific needs (taurine, arachidonic acid, preformed vitamin A, a higher protein requirement), while dogs are more flexible. That is why the weights for carbohydrates, moisture and animal protein differ per species. We give no points for “grain-free” as such: grains are not harmful for most pets, and grain-free is not a quality mark. We do let you filter on it, for example for wheat allergies."]
+        "p": ["Cats are obligate carnivores with specific needs (taurine, arachidonic acid, preformed vitamin A, a higher protein requirement), while dogs are more flexible. That is why the weights for carbohydrates and animal protein differ per species. We give no points for “grain-free” as such: grains are not harmful for most pets, and grain-free is not a quality mark. We do let you filter on it, for example for wheat allergies."]
       },
       {
         "h": "What is not scored",
@@ -554,7 +558,7 @@
       "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
     ],
     "versionTitle": "Version",
-    "version": "Scoring method version 1.0 (September 2026). When we improve the method, all scores are recalculated and this page is updated.",
+    "version": "Scoring method version 1.1 (September 2026): dry and wet cat food are each compared with their own kind. When we improve the method, all scores are recalculated and this page is updated.",
     "feedback": "Do you have feedback on the method? Let us know."
   },
   "suggest": {

@@ -57,3 +57,26 @@ describe("zooplus buy button", () => {
     expect(zooplusLink({ brand: "Kitekat", name: "Kitekat Kip", zooplusUrl: "http://www.zooplus.nl/shop/1" }, "x").exact).toBe(false);
   });
 });
+
+describe("zooplus product file in Google Shopping layout", () => {
+  it("is read too", () => {
+    const rows = parseFeed(
+      [
+        "id,title,description,link,image_link,price,brand,gtin,product_type",
+        `"123","Almo Nature HFC Tonijn 70 g","Samenstelling: tonijn 55%, visbouillon 44%, rijst 1%. Analytische bestanddelen: ruw eiwit 16%, ruw vet 0,5%, ruwe as 2%, ruwe celstof 0,1%, vocht 82%.","https://www.zooplus.nl/shop/katten/kattenvoer_blik/almo/123","https://media.zooplus.com/123.jpg","2.49 EUR","Almo Nature","8001154121015","Kat > Kattenvoer > Natvoer"`,
+      ].join("\n"),
+    );
+    const item = feedItem(rows[0])!;
+    expect(item.species).toBe("Kat");
+    expect(item.price).toBe(2.49);
+    expect(item.url).toBe("https://www.zooplus.nl/shop/katten/kattenvoer_blik/almo/123");
+    expect(item.ingredients).toBe("tonijn 55%, visbouillon 44%, rijst 1%");
+  });
+
+  it("recognises Awin's list of feeds, which is not a product file", async () => {
+    const { isFeedList } = await import("../lib/catalog/awin-feed");
+    const list = parseFeed('Advertiser ID,Advertiser Name,Membership Status,Feed ID,URL\n"1","Some Shop","Not Joined","F1","https://example.invalid/feed.csv.gz"');
+    expect(isFeedList(list)).toBe(true);
+    expect(isFeedList(parseFeed("title,gtin\nx,1234567890128"))).toBe(false);
+  });
+});

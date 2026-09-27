@@ -44,6 +44,22 @@ export async function topProducts(species: Species, count: number): Promise<Prod
     .slice(0, count);
 }
 
+/**
+ * Rank of a food among foods of its own kind (same species, same type: dry with dry, wet with wet).
+ * Equal scores share a rank.
+ */
+export async function typeRank(p: ProductDetail): Promise<{ rank: number; total: number } | null> {
+  if (p.score === null || p.category !== "complete") return null;
+  let higher = 0;
+  let total = 0;
+  for (const x of (await table(p.species)).values()) {
+    if (x.category !== "complete" || x.score === null || x.foodType !== p.foodType) continue;
+    total++;
+    if (x.score > p.score) higher++;
+  }
+  return total >= 10 ? { rank: higher + 1, total } : null;
+}
+
 export async function productCounts(): Promise<{ products: number; brands: number }> {
   const [dog, cat] = await Promise.all([table("dog"), table("cat")]);
   const brands = new Set<string>();

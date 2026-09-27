@@ -231,18 +231,30 @@ export function scoreProduct(input: ProductInput): ScoreResult {
     const shift = stage === "young" ? (cat ? 3 : 4) : 0;
     const carbs = n.energyShare.carbs;
     if (cat) {
+      // Dry and wet cat food are each measured against their own kind (method version 1.1). Kibble always has
+      // little water and is shaped with starch, so moisture is no longer scored and the carbohydrate scale of dry
+      // food is set so that a typical kibble scores like a typical wet food: a low-carb kibble still beats a
+      // starchy one, but no kibble loses points just for being dry.
+      const dry = input.foodType === "dry";
       const pf = lin(n.dm.protein - shift, [[20, 0], [25, 0.25], [33, 0.58], [40, 0.83], [48, 1], [70, 1]]);
       const ff = lin(n.dm.fat, [[7, 0], [9, 0.3], [14, 0.8], [20, 1], [38, 1], [48, 0.6], [58, 0.2]]);
-      const cf = lin(carbs, [[0, 1], [10, 1], [20, 0.82], [30, 0.55], [40, 0.27], [50, 0.09], [60, 0]]);
+      const cf = dry
+        ? lin(carbs, [[0, 1], [32, 1], [37, 0.87], [43, 0.71], [50, 0.5], [60, 0.2], [70, 0]])
+        : lin(carbs, [[0, 1], [10, 1], [20, 0.82], [30, 0.55], [40, 0.27], [50, 0.09], [60, 0]]);
       const fa = lin(n.dm.fibre, [[0, 1], [6, 1], [10, 0.5], [14, 0]]) * 1.5 + lin(n.dm.ash, [[0, 1], [10, 1], [13, 0.5], [16, 0]]) * 1.5;
-      const hy = lin(n.asFed.moisture, [[8, 0], [20, 0.1], [50, 0.5], [70, 0.85], [76, 1]]);
-      a = 12 * pf + 2.5 * ff + 10 * cf + fa + 7.5 * hy;
+      a = (12 * pf + 2.5 * ff + 10 * cf + fa) * (35 / 27.5);
       if (pf >= 0.85) positives.push({ code: "protein_level_good", params: { pct: round(n.dm.protein) }, w: 12 * pf });
       if (pf < 0.5) negatives.push({ code: "protein_low", params: { pct: round(n.dm.protein) }, w: 12 * (1 - pf) });
-      if (carbs <= 15) positives.push({ code: "low_carb", params: { pct: round(carbs) }, w: 10 * cf });
-      if (carbs >= 30) negatives.push({ code: "carbs_high", params: { pct: round(carbs) }, w: 10 * (1 - cf) });
-      if (n.asFed.moisture >= 65) positives.push({ code: "high_moisture", params: { pct: round(n.asFed.moisture) }, w: 7.5 * hy });
-      if (n.asFed.moisture < 20) negatives.push({ code: "dry_food_cat", params: { pct: round(n.asFed.moisture) }, w: 7.5 * (1 - hy) });
+      if (dry) {
+        if (carbs <= 25) positives.push({ code: "low_carb_dry", params: { pct: round(carbs) }, w: 10 * cf });
+        if (carbs >= 43) negatives.push({ code: "carbs_high", params: { pct: round(carbs) }, w: 10 * (1 - cf) });
+        // not a minus: a tip, shown next to the score
+        if (n.asFed.moisture < 20) flags.push({ code: "dry_food_tip", severity: "info" });
+      } else {
+        if (carbs <= 15) positives.push({ code: "low_carb", params: { pct: round(carbs) }, w: 10 * cf });
+        if (carbs >= 30) negatives.push({ code: "carbs_high", params: { pct: round(carbs) }, w: 10 * (1 - cf) });
+        if (n.asFed.moisture >= 65) positives.push({ code: "high_moisture", params: { pct: round(n.asFed.moisture) }, w: 2 });
+      }
       if (n.dm.fibre > 10) negatives.push({ code: "fibre_high", params: { pct: round(n.dm.fibre) }, w: 2 });
       if (n.dm.ash > 12) negatives.push({ code: "ash_high", params: { pct: round(n.dm.ash) }, w: 2 });
       if (n.dm.fat < 9) negatives.push({ code: "fat_low", params: { pct: round(n.dm.fat) }, w: 3 });

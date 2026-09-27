@@ -46,7 +46,7 @@ const nl: Texts = {
     intro: "Natvoer bestaat voor het grootste deel uit water, en dat past bij een dier dat van nature weinig drinkt. Dit zijn de volledige natvoeders voor volwassen katten met de hoogste score.",
     tips: [
       "**Controleer of het volledig voer is.** Veel zakjes en blikjes zijn *aanvullend* voer (een snack of topping) en niet geschikt als enige voeding. In deze lijst staan alleen volledige voeders.",
-      "**Vocht telt mee.** Katten die voer met veel vocht eten, krijgen in totaal meer water binnen en maken meer verdunde urine (Buckley et al., 2011). Dat is gunstig voor de urinewegen.",
+      "**Vocht helpt.** Katten die voer met veel vocht eten, krijgen in totaal meer water binnen en maken meer verdunde urine (Buckley et al., 2011). Dat is gunstig voor de urinewegen.",
       "**Vergelijk op droge stof.** Natvoer met 10% eiwit en 80% vocht bevat op droge stof 50% eiwit. Dat rekenen wij voor elk voer voor je uit.",
       "**Reken met calorieën.** Natvoer bevat per gram veel minder energie dan droogvoer. Met een [huisdierprofiel](/{lang}/my-pet) zie je per voer hoeveel gram per dag past.",
     ],
@@ -58,7 +58,7 @@ const nl: Texts = {
     card: "Brokken voor volwassen katten.",
     intro: "Droogvoer is handig en lang houdbaar, maar bevat weinig vocht en veel energie per gram. Dit zijn de volledige droogvoeders voor volwassen katten met de hoogste score.",
     tips: [
-      "**Waarom droogvoer lager uitkomt dan natvoer.** Katten drinken weinig, daarom krijgt voer met weinig vocht in onze score een kleine aftrek. Een goed droogvoer blijft een prima keuze, zeker naast natvoer.",
+      "**Vergeleken met ander droogvoer.** Brokken bevatten altijd weinig vocht en wat zetmeel. Daarom vergelijken we droogvoer alleen met ander droogvoer, niet met natvoer. Zorg wel dat je kat genoeg drinkt, of combineer met natvoer.",
       "**Veel dierlijk eiwit, weinig koolhydraten.** Katten zijn strikte vleeseters. Kijk of dierlijke ingrediënten bovenaan de lijst staan, en niet granen of plantaardige eiwitconcentraten.",
       "**Weeg de portie af.** Een handvol brokken is al snel te veel. Een keukenweegschaal en de portie uit je [huisdierprofiel](/{lang}/my-pet) helpen tegen overgewicht.",
       "**Zet altijd vers water neer**, het liefst op een paar plekken en niet vlak naast de voerbak.",
@@ -259,7 +259,7 @@ const en: Texts = {
     card: "Kibble for adult cats.",
     intro: "Dry food is convenient and keeps well, but contains little water and a lot of energy per gram. These are the complete dry foods for adult cats with the highest score.",
     tips: [
-      "**Why dry food ranks below wet food.** Cats drink little, so food with little moisture gets a small deduction in our score. A good dry food is still a fine choice, especially alongside wet food.",
+      "**Compared with other dry food.** Kibble always contains little water and some starch, so we compare dry food only with other dry food, not with wet food. Do make sure your cat drinks enough, or combine with wet food.",
       "**Plenty of animal protein, few carbohydrates.** Cats are obligate carnivores. Check that animal ingredients lead the list, not cereals or plant protein concentrates.",
       "**Weigh the portion.** A handful of kibble is easily too much. A kitchen scale and the portion from your [pet profile](/{lang}/my-pet) help prevent weight gain.",
       "**Always provide fresh water**, ideally in a few places and not right next to the food bowl.",
@@ -460,7 +460,7 @@ const de: Texts = {
     card: "Trockenfutter für erwachsene Katzen.",
     intro: "Trockenfutter ist praktisch und lange haltbar, enthält aber wenig Wasser und viel Energie pro Gramm. Das sind die Trocken-Alleinfutter für erwachsene Katzen mit der höchsten Bewertung.",
     tips: [
-      "**Warum Trockenfutter unter Nassfutter liegt.** Katzen trinken wenig, deshalb gibt es für Futter mit wenig Feuchtigkeit in unserer Bewertung einen kleinen Abzug. Ein gutes Trockenfutter bleibt eine gute Wahl, besonders zusammen mit Nassfutter.",
+      "**Verglichen mit anderem Trockenfutter.** Trockenfutter enthält immer wenig Wasser und etwas Stärke. Deshalb vergleichen wir es nur mit anderem Trockenfutter, nicht mit Nassfutter. Achten Sie darauf, dass Ihre Katze genug trinkt, oder kombinieren Sie es mit Nassfutter.",
       "**Viel tierisches Eiweiß, wenig Kohlenhydrate.** Katzen sind strikte Fleischfresser. Achten Sie darauf, dass tierische Zutaten oben stehen und nicht Getreide oder pflanzliche Eiweißkonzentrate.",
       "**Wiegen Sie die Portion ab.** Eine Handvoll ist schnell zu viel. Eine Küchenwaage und die Portion aus Ihrem [Tierprofil](/{lang}/my-pet) helfen gegen Übergewicht.",
       "**Stellen Sie immer frisches Wasser bereit**, am besten an mehreren Stellen und nicht direkt neben dem Futternapf.",
@@ -661,7 +661,7 @@ const fr: Texts = {
     card: "Croquettes pour chats adultes.",
     intro: "Les croquettes sont pratiques et se conservent longtemps, mais contiennent peu d'eau et beaucoup d'énergie par gramme. Voici les aliments secs complets pour chats adultes ayant le meilleur score.",
     tips: [
-      "**Pourquoi les croquettes sont classées sous les pâtées.** Les chats boivent peu : un aliment pauvre en eau reçoit donc une petite déduction dans notre score. De bonnes croquettes restent un bon choix, surtout avec de la nourriture humide.",
+      "**Comparées à d'autres croquettes.** Les croquettes contiennent toujours peu d'eau et un peu d'amidon : nous les comparons donc uniquement à d'autres croquettes, pas à la pâtée. Veillez à ce que votre chat boive assez, ou combinez avec de la pâtée.",
       "**Beaucoup de protéines animales, peu de glucides.** Les chats sont des carnivores stricts. Vérifiez que les ingrédients animaux sont en tête de liste, pas les céréales ou les concentrés de protéines végétales.",
       "**Pesez la portion.** Une poignée de croquettes, c'est vite trop. Une balance de cuisine et la portion de votre [profil d'animal](/{lang}/my-pet) aident à éviter le surpoids.",
       "**Laissez toujours de l'eau fraîche**, idéalement à plusieurs endroits et pas juste à côté de la gamelle.",

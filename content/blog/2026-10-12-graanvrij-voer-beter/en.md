@@ -32,7 +32,7 @@ What does that mean for you? There is no reason to panic, but no reason to see g
 
 ## And cats?
 
-Cats are true carnivores and need few carbohydrates. But for cats too, grain-free does not automatically mean low in carbohydrates. A wet food with plenty of meat and little filler usually scores better for a cat than a grain-free kibble full of potato. What matters most for cats, you can read in [why wet food is more than a treat for cats](/en/blog/2026-09-28-natvoer-kat-water).
+Cats are true carnivores and need few carbohydrates. But for cats too, grain-free does not automatically mean low in carbohydrates. A food with plenty of meat and little filler is usually a better choice for a cat than a grain-free kibble full of potato. What matters most for cats, you can read in [why wet food is more than a treat for cats](/en/blog/2026-09-28-natvoer-kat-water).
 
 ## What should you look for?
 

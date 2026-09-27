@@ -8,6 +8,8 @@ import { normalizeEan } from "./clean";
  * needed: product_name, brand_name, ean (or product_GTIN), merchant_deep_link (or aw_deep_link),
  * merchant_image_url (or aw_image_url), search_price, merchant_category / merchant_product_category_path and
  * description. Anything else is ignored, so a feed with more columns works too.
+ * Awin also offers feeds in Google Shopping layout (title, link, image_link, gtin, price, brand, product_type);
+ * those column names are read as well.
  */
 export interface FeedItem {
   ean: string;
@@ -27,6 +29,12 @@ export interface FeedItem {
 export function detectDelimiter(headerLine: string): string {
   const counts = [",", ";", "|", "\t"].map((d) => [d, headerLine.split(d).length - 1] as const);
   return counts.sort((a, b) => b[1] - a[1])[0][0];
+}
+
+/** Awin's overview of all shops' feeds (one row per shop, with download links) - not a product file. */
+export function isFeedList(rows: Record<string, string>[]): boolean {
+  const first = rows[0] ?? {};
+  return "advertiser id" in first && "feed id" in first;
 }
 
 export function parseFeed(text: string): Record<string, string>[] {
@@ -110,22 +118,22 @@ export function feedItem(row: Record<string, string>): FeedItem | null {
   const ean = normalizeEan(pick(row, "ean", "product_gtin", "gtin", "upc"));
   const name = pick(row, "product_name", "name", "title");
   if (!ean || !name) return null;
-  const category = pick(row, "merchant_product_category_path", "merchant_category", "category_name", "product_type");
+  const category = pick(row, "merchant_product_category_path", "merchant_category", "category_name", "product_type", "google_product_category");
   const words = `${category} ${name}`;
   if (NOT_FOOD.test(category) || !FOOD.test(words)) return null;
   const species = feedSpecies(`${category} ${name}`);
   if (!species) return null;
   const description = [pick(row, "description"), pick(row, "product_short_description"), pick(row, "specifications")].filter(Boolean).join(". ");
   const { ingredients, analysis } = labelFromDescription(description);
-  const priceText = pick(row, "search_price", "store_price", "display_price").replace(/[^\d.,]/g, "").replace(",", ".");
+  const priceText = pick(row, "search_price", "store_price", "display_price", "sale_price", "price").replace(/[^\d.,]/g, "").replace(",", ".");
   const price = Number.parseFloat(priceText);
   return {
     ean,
     name,
     brand: pick(row, "brand_name", "brand"),
     species,
-    url: pick(row, "merchant_deep_link", "aw_deep_link", "deep_link"),
-    image: pick(row, "merchant_image_url", "large_image", "aw_image_url"),
+    url: pick(row, "merchant_deep_link", "aw_deep_link", "deep_link", "link"),
+    image: pick(row, "merchant_image_url", "large_image", "aw_image_url", "image_link"),
     ...(Number.isFinite(price) && price > 0 && price < 1000 ? { price: Math.round(price * 100) / 100 } : {}),
     category,
     ingredients,

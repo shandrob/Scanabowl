@@ -179,6 +179,7 @@
     ]
   },
   "finder": {
+    "allTypes": "Alle soorten",
     "otherSpeciesCat": "Bij de katten vonden we wel {count} voeders.",
     "otherSpeciesDog": "Bij de honden vonden we wel {count} voeders.",
     "switchToCat": "Toon kattenvoer",
@@ -218,6 +219,7 @@
     "error": "De voerlijst kon niet worden geladen. Controleer je verbinding en laad de pagina opnieuw."
   },
   "product": {
+    "rankInType": "Nr. {rank} van {total} · {type} · {species}",
     "metaTitle": "{name} – score {score}/100",
     "metaDescription": "{name} van {brand}: onafhankelijke Scanabowl-score {score}/100 voor {species}voer, met ingrediëntenanalyse, voedingswaarden en allergiecheck.",
     "metaDescriptionNoScore": "{name} van {brand}: ingrediënten en voedingswaarden van {species}voer.",
@@ -286,6 +288,7 @@
     "named_sources": "Dierlijke ingrediënten worden per diersoort genoemd in plaats van vage “dierlijke bijproducten”.",
     "protein_level_good": "Eiwit is {pct}% van de droge stof, ruim boven het FEDIAF-minimum.",
     "low_carb": "Slechts ongeveer {pct}% van de energie komt uit koolhydraten – dicht bij waar het lichaam van een kat op is gebouwd.",
+    "low_carb_dry": "Weinig koolhydraten voor droogvoer: ongeveer {pct}% van de energie.",
     "high_moisture": "{pct}% vocht ondersteunt de vochtinname en de gezondheid van de urinewegen.",
     "omega3": "Bevat vis- of algenolie als bron van EPA/DHA (omega-3).",
     "prebiotic": "Bevat prebiotische vezels (bijv. cichorei, inuline, FOS/MOS) die darmbacteriën voeden.",
@@ -324,7 +327,8 @@
     "chocolate": "Bevat cacao of chocolade (theobromine), dat giftig is voor huisdieren.",
     "macadamia": "Bevat macadamianoten, die giftig zijn voor honden.",
     "propylene_glycol": "Bevat propyleenglycol, dat niet is toegestaan in kattenvoer omdat het de rode bloedcellen beschadigt.",
-    "values_estimated": "Sommige waarden (vocht, as of celstof) ontbraken op het etiket en zijn geschat."
+    "values_estimated": "Sommige waarden (vocht, as of celstof) ontbraken op het etiket en zijn geschat.",
+    "dry_food_tip": "Droogvoer bevat weinig vocht en katten drinken van nature weinig. Zet altijd vers water neer; een deel natvoer erbij is ook een goed idee. We vergelijken droogvoer met ander droogvoer, dus dit kost geen punten."
   },
   "personal": {
     "ctaTitle": "Past dit voer bij jouw huisdier?",
@@ -471,7 +475,7 @@
     "intro": "Elk voer krijgt een score van 0 tot 100. Die wordt met een vaste formule berekend uit de ingrediëntenlijst en de analytische bestanddelen op de verpakking, met gepubliceerde richtlijnen uit de diervoeding. Deze pagina legt elke stap uit, zodat je het zelf kunt beoordelen.",
     "glance": "De score in een oogopslag",
     "pillar": {
-      "nutrition": "Komen de cijfers op de verpakking overeen met wat een hond of kat nodig heeft? Eiwit, vet, koolhydraten, vezels, mineralen en – bij katten – vocht, vergeleken met FEDIAF.",
+      "nutrition": "Komen de cijfers op de verpakking overeen met wat een hond of kat nodig heeft? Eiwit, vet, koolhydraten, vezels en mineralen, vergeleken met FEDIAF – droogvoer met droogvoer, natvoer met natvoer.",
       "ingredients": "Waar komt het eiwit vandaan, hoeveel van de receptuur is dierlijk, en wordt dat duidelijk vermeld?",
       "formulation": "Er gaan punten af voor toegevoegde suiker, kunstmatige kleurstoffen, synthetische conserveermiddelen en goedkope vulstoffen."
     },
@@ -490,8 +494,8 @@
         "ul": [
           "**Eiwit** – het FEDIAF-minimum voor volwassen honden is 18–21 g per 100 g droge stof (45–52 g per 1.000 kcal), voor volwassen katten 25–33 g (62,5–83 g per 1.000 kcal). Groeiende dieren hebben meer nodig. Punten stijgen boven het minimum en vlakken dan af: meer eiwit is voor een gezonde hond niet automatisch beter.",
           "**Vet** – FEDIAF-minimum 5,5 g per 100 g droge stof voor volwassen honden (8,5 g voor pups) en 9 g voor katten. Zeer veel vet wordt afgestraft, omdat het gewichtstoename bevordert en alvleesklierontsteking kan uitlokken.",
-          "**Koolhydraten (katten: 10 punten, honden: 4 punten)** – geschat uit wat overblijft na eiwit, vet, celstof, as en vocht. Katten zijn strikte vleeseters: als ze kunnen kiezen, stellen ze een menu samen met ongeveer 52% van de energie uit eiwit, 36% uit vet en slechts 12% uit koolhydraten (Hewson-Hughes et al., 2011). Honden zijn flexibeler, daarom tellen koolhydraten voor hen veel minder mee.",
-          "**Vocht (alleen katten, 7,5 punten)** – katten hebben een zwakke dorstprikkel. Katten die voer met veel vocht eten, nemen in totaal meer water op en produceren verdunnere urine, met een lagere verzadiging van de mineralen die urinekristallen vormen (Buckley et al., 2011).",
+          "**Koolhydraten (katten: 10 punten, honden: 4 punten)** – geschat uit wat overblijft na eiwit, vet, celstof, as en vocht. Katten zijn strikte vleeseters: als ze kunnen kiezen, stellen ze een menu samen met ongeveer 52% van de energie uit eiwit, 36% uit vet en slechts 12% uit koolhydraten (Hewson-Hughes et al., 2011). Honden zijn flexibeler, daarom tellen koolhydraten voor hen veel minder mee. **Droogvoer voor katten vergelijken we met ander droogvoer:** brokken worden met zetmeel gevormd en bevatten daardoor altijd meer koolhydraten dan natvoer. Een brok met weinig koolhydraten scoort hoger dan een zetmeelrijke brok, maar geen brok verliest punten alleen omdat het droogvoer is.",
+          "**Vocht (katten)** – katten hebben een zwakke dorstprikkel. Katten die voer met veel vocht eten, nemen in totaal meer water op en produceren verdunnere urine, met een lagere verzadiging van de mineralen die urinekristallen vormen (Buckley et al., 2011). Vocht telt niet mee in de score, zodat droogvoer en natvoer elk met hun eigen soort worden vergeleken. Bij droogvoer tonen we een tip over drinken, en in het huisdierprofiel krijgt natvoer een pluspunt voor katten met urineproblemen.",
           "**Celstof en as** – te veel van beide verlaagt de score (een hoge mineralenbelasting is vooral belangrijk voor de urinewegen van katten).",
           "**Honden: calcium:fosfor-verhouding en volledigheid van het etiket** – als calcium en fosfor vermeld zijn, hoort de verhouding tussen 1:1 en 2:1 te liggen (FEDIAF). Voer dat een volledige analyse vermeldt scoort beter dan voer dat waarden weglaat."
         ]
@@ -523,7 +527,7 @@
       },
       {
         "h": "Honden en katten worden verschillend beoordeeld",
-        "p": ["Katten zijn strikte vleeseters met specifieke behoeften (taurine, arachidonzuur, voorgevormd vitamine A, een hogere eiwitbehoefte), terwijl honden flexibeler zijn. Daarom verschillen de gewichten voor koolhydraten, vocht en dierlijk eiwit per diersoort. We geven geen punten voor “graanvrij” als zodanig: granen zijn voor de meeste dieren niet schadelijk en graanvrij is geen kwaliteitskeurmerk. We laten je er wel op filteren, bijvoorbeeld bij een tarweallergie."]
+        "p": ["Katten zijn strikte vleeseters met specifieke behoeften (taurine, arachidonzuur, voorgevormd vitamine A, een hogere eiwitbehoefte), terwijl honden flexibeler zijn. Daarom verschillen de gewichten voor koolhydraten en dierlijk eiwit per diersoort. We geven geen punten voor “graanvrij” als zodanig: granen zijn voor de meeste dieren niet schadelijk en graanvrij is geen kwaliteitskeurmerk. We laten je er wel op filteren, bijvoorbeeld bij een tarweallergie."]
       },
       {
         "h": "Wat geen score krijgt",
@@ -554,7 +558,7 @@
       "US FDA. *Investigation into potential link between certain diets and canine dilated cardiomyopathy*. [fda.gov](https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy)"
     ],
     "versionTitle": "Versie",
-    "version": "Scoremethode versie 1.0 (september 2026). Als we de methode verbeteren, worden alle scores opnieuw berekend en wordt deze pagina bijgewerkt.",
+    "version": "Scoremethode versie 1.1 (september 2026): droogvoer en natvoer voor katten worden elk met hun eigen soort vergeleken. Als we de methode verbeteren, worden alle scores opnieuw berekend en wordt deze pagina bijgewerkt.",
     "feedback": "Heb je feedback op de methode? Laat het ons weten."
   },
   "suggest": {
