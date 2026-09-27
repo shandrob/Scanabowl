@@ -32,6 +32,8 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
           </div>
           {col(t("footer.explore"), [
             ["/foods", t("nav.foods")],
+            ["/best", t("nav.best")],
+            ["/compare", t("nav.compare")],
             ["/foods/brand", t("nav.allBrands")],
             ["/my-pet", t("nav.myPet")],
             ["/blog", t("nav.blog")],

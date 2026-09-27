@@ -15,10 +15,12 @@
     "check": "npm run typecheck && npm run test && npm run lint",
     "data:build": "tsx scripts/build-data.ts",
     "data:import-legacy": "tsx scripts/import-legacy.ts",
+    "data:zooplus": "tsx scripts/import-zooplus-feed.ts",
     "new-post": "tsx scripts/new-post.ts",
     "deploy": "vercel --prod"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "barcode-detector": "^3.2.2",
     "csv-parse": "^7.0.2",
     "csv-stringify": "^6.8.3",

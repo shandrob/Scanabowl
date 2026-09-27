@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useMemo } from "react";
 import type { Locale } from "@/lib/i18n/config";
-import { createRaw, createT, type Messages, type TFunction } from "@/lib/i18n/t";
+import { createRaw, createT, fillLinkLanguage, type Messages, type TFunction } from "@/lib/i18n/t";
 
 interface Ctx {
   lang: Locale;
@@ -13,7 +13,10 @@ interface Ctx {
 const I18nContext = createContext<Ctx | null>(null);
 
 export function DictionaryProvider({ lang, dict, children }: { lang: Locale; dict: Messages; children: React.ReactNode }) {
-  const value = useMemo<Ctx>(() => ({ lang, t: createT(dict), raw: createRaw(dict) }), [lang, dict]);
+  const value = useMemo<Ctx>(() => {
+    const filled = fillLinkLanguage(dict, lang);
+    return { lang, t: createT(filled), raw: createRaw(filled) };
+  }, [lang, dict]);
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
 

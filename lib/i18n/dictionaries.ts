@@ -1,6 +1,6 @@
 import "server-only";
 import type { Locale } from "./config";
-import type { Messages } from "./t";
+import { fillLinkLanguage, type Messages } from "./t";
 
 const loaders: Record<Locale, () => Promise<Messages>> = {
   nl: () => import("../../messages/nl.json").then((m) => m.default as unknown as Messages),
@@ -9,6 +9,13 @@ const loaders: Record<Locale, () => Promise<Messages>> = {
   fr: () => import("../../messages/fr.json").then((m) => m.default as unknown as Messages),
 };
 
+const cache = new Map<Locale, Promise<Messages>>();
+
 export async function getDictionary(lang: Locale): Promise<Messages> {
-  return loaders[lang]();
+  let d = cache.get(lang);
+  if (!d) {
+    d = loaders[lang]().then((m) => fillLinkLanguage(m, lang));
+    cache.set(lang, d);
+  }
+  return d;
 }

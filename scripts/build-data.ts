@@ -13,6 +13,7 @@
  *
  * This runs automatically before every `npm run build`, i.e. on every deploy.
  */
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
@@ -66,6 +67,23 @@ async function main() {
       if (ean) overrides.set(ean, r);
     }
   }
+  // database/zooplus/*.csv: the zooplus product file from Awin (npm run data:zooplus). Every food gets its exact
+  // zooplus link by barcode; foods we did not have yet are added only when zooplus shows their ingredient list.
+  const zooplus = new Map<string, { url: string; price?: string }>();
+  const zooplusNoLabel = new Set<string>();
+  for (const file of csvFiles(path.join(DB, "zooplus"))) {
+    for (const row of readCsv(file)) {
+      const ean = normalizeEan(field(row, "ean"));
+      const url = (row.zooplus_url ?? "").trim();
+      if (ean && url) zooplus.set(ean, { url, price: field(row, "price") || undefined });
+      if (!field(row, "ingredients")) {
+        if (ean) zooplusNoLabel.add(ean);
+        continue;
+      }
+      // photos come from database/images (npm run data:zooplus -- --images), never hot-linked from the shop
+      raw.push({ row: { ...row, afbeelding: "" }, source: "scraped", file: path.relative(DB, file) });
+    }
+  }
   const brandList = knownBrands(raw.map(({ row }) => ({ name: field(row, "name"), brand: field(row, "brand") })));
 
   // ---------------------------------------------------------------- clean + merge
@@ -112,6 +130,17 @@ async function main() {
     }
   }
   const products = [...byId.values()].sort((a, b) => a.brand.localeCompare(b.brand) || a.name.localeCompare(b.name));
+  let zooplusLinked = 0;
+  for (const p of products) {
+    const z = p.ean ? zooplus.get(p.ean) : undefined;
+    if (!z) continue;
+    p.zooplusUrl = z.url;
+    if (!p.price && z.price) {
+      const n = Number.parseFloat(z.price.replace(",", "."));
+      if (Number.isFinite(n) && n > 0 && n < 1000) p.price = n;
+    }
+    zooplusLinked++;
+  }
   for (const p of products) {
     let s = p.slug;
     let n = 2;
@@ -184,6 +213,24 @@ async function main() {
     }
   }
 
+  // ---------------------------------------------------------------- owner photo
+  // content/about/photo.jpg (or .png/.webp, any size) -> public/about-photo.webp for the About page
+  {
+    const aboutDir = path.join(ROOT, "content", "about");
+    const src = fs.existsSync(aboutDir) ? fs.readdirSync(aboutDir).find((f) => /^photo\.(jpe?g|png|webp)$/i.test(f)) : undefined;
+    const dest = path.join(PUB, "about-photo.webp");
+    if (src) {
+      const from = path.join(aboutDir, src);
+      if (!fs.existsSync(dest) || fs.statSync(dest).mtimeMs < fs.statSync(from).mtimeMs) {
+        try {
+          await sharp(from).rotate().resize({ width: 600, height: 600, fit: "cover", position: "attention" }).webp({ quality: 82 }).toFile(dest);
+        } catch (e) {
+          report.push(`ABOUT PHOTO ${src}: ${(e as Error).message}`);
+        }
+      }
+    } else if (fs.existsSync(dest)) fs.unlinkSync(dest);
+  }
+
   // ---------------------------------------------------------------- score
   const details: Record<Species, ProductDetail[]> = { dog: [], cat: [] };
   const index: Record<Species, IndexEntry[]> = { dog: [], cat: [] };
@@ -222,6 +269,7 @@ async function main() {
       pack: p.pack,
       ...(p.price ? { price: p.price } : {}),
       ...(p.bolUrl ? { bolUrl: p.bolUrl } : {}),
+      ...(p.zooplusUrl ? { zooplusUrl: p.zooplusUrl } : {}),
       ...(p.image ? { image: p.image } : {}),
       ...(p.image && p.imageCredit ? { imageCredit: p.imageCredit } : {}),
       source: p.source,
@@ -266,6 +314,10 @@ async function main() {
     writeJson(path.join(OUT, `products.${sp}.json`), details[sp]);
     writeJson(path.join(PUB, "data", `index.${sp}.json`), index[sp]);
   }
+  // Browsers keep the food index for a long time: its address carries a version that changes with the content,
+  // so a visitor never keeps searching an old list after a data update.
+  const indexVersion = createHash("sha1").update(JSON.stringify(index)).digest("hex").slice(0, 10);
+  writeJson(path.join(OUT, "index-version.json"), { v: indexVersion });
   writeJson(path.join(OUT, "slugs.json"), slugMap);
   const eanMap: Record<string, string> = {};
   for (const p of products) if (p.ean) eanMap[p.ean] = p.slug;
@@ -287,6 +339,7 @@ async function main() {
     `Scanabowl data build - ${meta.generatedAt}`,
     `Products: ${products.length} (dogs ${meta.counts.dog}, cats ${meta.counts.cat}); scored: ${meta.counts.scoredDog + meta.counts.scoredCat}`,
     `Rows read: ${raw.length}; unusable rows skipped: ${unusable}; images converted this run: ${imagesDone}; blog images: ${blogImages}; products with a photo: ${products.filter((p) => p.image).length}`,
+    ...(zooplus.size ? [`zooplus product file: ${zooplus.size} foods, ${zooplusLinked} linked to a food on the site; ${[...zooplusNoLabel].filter((e) => !eanMap[e]).length} new foods not added because zooplus shows no ingredient list`] : []),
     "",
     `== TOXIC INGREDIENTS FOUND (${problems.hazards.length}) - please double-check the ingredient text`,
     ...problems.hazards.slice(0, 60),

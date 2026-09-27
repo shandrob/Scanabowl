@@ -15,6 +15,7 @@ function rememberLanguage(l: string) {
 
 const NAV = [
   { href: "/foods", key: "nav.foods" },
+  { href: "/best", key: "nav.best" },
   { href: "/my-pet", key: "nav.myPet" },
   { href: "/blog", key: "nav.blog" },
   { href: "/how-we-score", key: "nav.howWeScore" },
@@ -55,13 +56,13 @@ export function Header() {
           <span className="font-display text-xl font-semibold tracking-tight text-brand-deep">Scanabowl</span>
         </Link>
 
-        <nav aria-label={t("nav.main")} className="ml-6 hidden items-center gap-1 md:flex">
+        <nav aria-label={t("nav.main")} className="ml-6 hidden items-center gap-1 lg:flex">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={localePath(lang, n.href)}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className={`rounded-lg px-3 py-2 text-[0.95rem] font-medium transition-colors hover:bg-brand-soft/60 hover:text-brand-deep ${
+              className={`whitespace-nowrap rounded-lg px-3 py-2 text-[0.95rem] font-medium transition-colors hover:bg-brand-soft/60 hover:text-brand-deep ${
                 isActive(n.href) ? "bg-brand-soft/70 text-brand-deep" : "text-ink-soft"
               }`}
             >
@@ -73,7 +74,7 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2">
           <Link
             href={localePath(lang, "/my-pet")}
-            className="hidden items-center gap-2 rounded-full border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink shadow-sm transition hover:border-brand-mid sm:inline-flex"
+            className="hidden items-center whitespace-nowrap gap-2 rounded-full border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink shadow-sm transition hover:border-brand-mid sm:inline-flex"
           >
             <IconPaw className="h-4 w-4 text-brand-mid" />
             {active ? <span className="max-w-[9ch] truncate">{active.name}</span> : <span>{t("nav.addPet")}</span>}
@@ -115,7 +116,7 @@ export function Header() {
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-paper md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-paper lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? t("nav.close") : t("nav.menu")}
@@ -127,7 +128,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label={t("nav.main")} className="border-t border-line bg-cream px-4 pb-4 pt-2 md:hidden">
+        <nav id="mobile-nav" aria-label={t("nav.main")} className="border-t border-line bg-cream px-4 pb-4 pt-2 lg:hidden">
           <ul className="grid gap-1">
             {NAV.map((n) => (
               <li key={n.href}>

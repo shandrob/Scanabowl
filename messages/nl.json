@@ -4,6 +4,8 @@
     "description": "Zoek elk hondenvoer of kattenvoer op en zie een onafhankelijke score op basis van ingrediënten en voedingswaarden. Persoonlijk voor jouw huisdier, met allergieën uitgefilterd."
   },
   "nav": {
+    "best": "Beste keuzes",
+    "compare": "Vergelijken",
     "allBrands": "Alle merken",
     "main": "Hoofdmenu",
     "home": "Home",
@@ -109,6 +111,9 @@
     "unsupported": "Scannen is niet beschikbaar op dit apparaat of in deze browser. Typ in plaats daarvan het nummer onder de barcode."
   },
   "home": {
+    "guidesTitle": "Het beste voer voor…",
+    "guidesText": "Toplijsten per situatie, automatisch gerangschikt op score. Geen enkel merk kan een plek kopen.",
+    "guidesAll": "Alle toplijsten",
     "badge": "Onafhankelijk · Wetenschappelijk · Gratis",
     "title": "Is het voer van jouw huisdier echt zo goed als op de verpakking staat?",
     "subtitle": "Zoek elk hondenvoer of kattenvoer op en krijg een onafhankelijke score van 0 tot 100 – berekend uit de ingrediënten en voedingswaarden op het etiket, met richtlijnen uit de diervoeding.",
@@ -157,7 +162,7 @@
       },
       {
         "q": "Betalen merken voor een betere score?",
-        "a": "Nee. Scores worden voor elk voer met dezelfde formule berekend. We verdienen een kleine commissie als je via onze bol.com-links bestelt, zonder extra kosten voor jou – zie de [affiliate-vermelding](/{lang}/affiliate)."
+        "a": "Nee. Scores worden voor elk voer met dezelfde formule berekend. We verdienen een kleine commissie als je via onze links naar zooplus of bol.com bestelt, zonder extra kosten voor jou – zie de [affiliate-vermelding](/{lang}/affiliate)."
       },
       {
         "q": "Waarom heeft een dieetvoer van de dierenarts geen score?",
@@ -174,6 +179,12 @@
     ]
   },
   "finder": {
+    "otherSpeciesCat": "Bij de katten vonden we wel {count} voeders.",
+    "otherSpeciesDog": "Bij de honden vonden we wel {count} voeders.",
+    "switchToCat": "Toon kattenvoer",
+    "switchToDog": "Toon hondenvoer",
+    "hiddenByFilters": "{count} voeders passen bij je zoekopdracht, maar vallen buiten je filters (bijvoorbeeld voeders zonder score).",
+    "showHidden": "Toon ze",
     "metaTitle": "Hondenvoer en kattenvoer zoeken – onafhankelijke scores",
     "metaDescription": "Bekijk en vergelijk hondenvoer en kattenvoer op score, type en levensfase. Filter op merk en allergie, gesorteerd op een onafhankelijke score van 0–100.",
     "title": "Vind het juiste voer",
@@ -362,6 +373,7 @@
     "portionNote": "Dit is een startpunt: weeg je dier regelmatig en pas aan om een gezonde lichaamsconditie te houden. Volg het advies van je dierenarts."
   },
   "order": {
+    "zooplusExact": "Bekijk bij zooplus",
     "title": "Bestel dit voer",
     "text": "Vergelijk de actuele prijs en levering bij zooplus en bol.com.",
     "zooplusButton": "Zoek bij zooplus",
@@ -527,7 +539,7 @@
       },
       {
         "h": "Gegevens, onafhankelijkheid en fouten",
-        "p": ["Productgegevens komen uit openbare productinformatie en van fabrikanten die hun producten indienen. We controleren inzendingen altijd voordat ze gepubliceerd worden, en dezelfde formule geldt voor elk voer – geen enkel merk kan zijn score beïnvloeden. We verdienen een commissie op bestellingen via onze bol.com-links; dat staat uitgelegd in de [affiliate-vermelding](/{lang}/affiliate).", "Een fout gezien? Gebruik de link “Meld een correctie” op de productpagina. We herstellen fouten snel."]
+        "p": ["Productgegevens komen uit openbare productinformatie en van fabrikanten die hun producten indienen. We controleren inzendingen altijd voordat ze gepubliceerd worden, en dezelfde formule geldt voor elk voer – geen enkel merk kan zijn score beïnvloeden. We verdienen een commissie op bestellingen via onze links naar zooplus of bol.com; dat staat uitgelegd in de [affiliate-vermelding](/{lang}/affiliate).", "Een fout gezien? Gebruik de link “Meld een correctie” op de productpagina. We herstellen fouten snel."]
       }
     ],
     "refsTitle": "Wetenschappelijke bronnen",
@@ -638,10 +650,6 @@
     "intro": "Scanabowl helpt dierenbezitters te begrijpen wat er echt in de voerbak van hun hond of kat zit.",
     "sections": [
       {
-        "h": "Waarom we bestaan",
-        "p": ["Verpakkingen van dierenvoer staan vol beloftes – “natuurlijk”, “premium”, “compleet” – maar de echte informatie staat in kleine letters. Scanabowl vertaalt de ingrediëntenlijst en voedingsanalyse naar een duidelijke score, met uitleg bij elk punt."]
-      },
-      {
         "h": "Wat ons anders maakt",
         "ul": [
           "**Wetenschappelijk onderbouwd** – onze beoordeling volgt gepubliceerde FEDIAF- en NRC-richtlijnen en peer-reviewed onderzoek, en we noemen onze bronnen.",
@@ -652,7 +660,7 @@
       },
       {
         "h": "Hoe we gefinancierd worden",
-        "p": ["Scanabowl is gratis te gebruiken. Als je voer bestelt via onze bol.com-links, verdienen we mogelijk een kleine commissie, zonder extra kosten voor jou. Die inkomsten investeren we in de website. Lees meer in de [affiliate-vermelding](/{lang}/affiliate)."]
+        "p": ["Scanabowl is gratis te gebruiken. Als je voer bestelt via onze links naar zooplus of bol.com, verdienen we mogelijk een kleine commissie, zonder extra kosten voor jou. Die inkomsten investeren we in de website. Lees meer in de [affiliate-vermelding](/{lang}/affiliate)."]
       },
       {
         "h": "Doe mee",
@@ -681,12 +689,12 @@
       },
       {
         "h": "Cookies en tracking",
-        "p": ["We gebruiken geen advertentie- of trackingcookies. We slaan één klein functioneel cookie op (je gekozen taal, een jaar lang) en local-storage-items voor je huisdierprofiel. Omdat deze strikt functioneel zijn, is geen cookiebanner nodig. Als we ooit analytics toevoegen, gebruiken we een privacyvriendelijke tool en werken we deze pagina bij."]
+        "p": ["We gebruiken geen advertentie- of trackingcookies. We slaan één klein functioneel cookie op (je gekozen taal, een jaar lang) en local-storage-items voor je huisdierprofiel en je vergelijkingslijst. Omdat deze strikt functioneel zijn, is geen cookiebanner nodig.", "Om te zien welke pagina's bezocht worden en welk voer mensen zoeken maar niet vinden, gebruiken we **Vercel Web Analytics**. Dat werkt zonder cookies en koppelt niets aan jou als persoon: bezoekers worden alleen geteld met een anonieme code die na 24 uur wordt weggegooid. We zien totalen, zoals het aantal bezoeken per pagina, het land en de regio, de browser en het soort apparaat. Zoekopdrachten slaan we niet op, behalve zoekwoorden en barcodes die niets opleverden: zo weten we welk voer we moeten toevoegen."]
       },
       {
         "h": "Dienstverleners",
         "ul": [
-          "**Vercel** host de website en verwerkt technische gegevens zoals IP-adressen in serverlogs.",
+          "**Vercel** host de website en verwerkt technische gegevens zoals IP-adressen in serverlogs. Vercel Web Analytics telt bezoeken zonder cookies (zie hierboven).",
           "**Resend** bezorgt de e-mails die uit onze formulieren komen.",
           "**zooplus en Awin** – als je op een link naar zooplus klikt, kunnen zooplus en het affiliatenetwerk Awin eigen cookies plaatsen onder hun eigen privacybeleid.",
         "**bol.com** – als je op een affiliate-link klikt, kunnen bol.com en zijn partnerplatform eigen cookies plaatsen onder hun eigen privacybeleid."
@@ -718,7 +726,7 @@
       },
       {
         "h": "Links naar derden en winkels",
-        "p": ["Links naar bol.com en andere sites staan er voor het gemak. Prijzen, voorraad en levering worden door de winkel bepaald. Elke aankoop is een overeenkomst tussen jou en de winkel; Scanabowl is daarbij geen partij."]
+        "p": ["Links naar zooplus, bol.com en andere sites staan er voor het gemak. Prijzen, voorraad en levering worden door de winkel bepaald. Elke aankoop is een overeenkomst tussen jou en de winkel; Scanabowl is daarbij geen partij."]
       },
       {
         "h": "Ingezonden informatie",
@@ -776,6 +784,73 @@
         ]
       }
     ]
+  },
+  "guides": {
+    "indexMetaTitle": "Beste hondenvoer en kattenvoer {year}: onafhankelijke toplijsten",
+    "indexMetaDescription": "Het beste kittenvoer, puppyvoer, natvoer, seniorvoer en meer: toplijsten die automatisch gerangschikt zijn op een onafhankelijke score. Geen betaalde plekken.",
+    "indexTitle": "Het beste voer voor jouw hond of kat",
+    "indexIntro": "Toplijsten per situatie, van kitten tot senior en van natvoer tot voer met één eiwitbron. Elke lijst wordt automatisch samengesteld uit de voeders in onze database, op volgorde van hun Scanabowl-score.",
+    "indexNote": "De lijsten worden bij elke update van de database opnieuw berekend. Geen enkel merk kan een plek kopen. We verdienen mogelijk een commissie als je via een link bestelt, maar dat heeft nooit invloed op de volgorde.",
+    "forCats": "Voor katten",
+    "forDogs": "Voor honden",
+    "topPick": "Nu op 1:",
+    "openList": "Bekijk de top {count}",
+    "kicker": "Toplijst {year}",
+    "compared": "{count} voeders van {brands} merken vergeleken.",
+    "listTitle": "De top {count}",
+    "rank": "Nummer {n}",
+    "factProtein": "Eiwit {value}% (droge stof)",
+    "factFat": "vet {value}%",
+    "factKcal": "{value} kcal per 100 g",
+    "factMoisture": "vocht {value}%",
+    "factCalcium": "calcium {value}% (droge stof)",
+    "factCalciumUnknown": "calcium niet vermeld op het etiket",
+    "factAnimal": "{pct}% van het eiwit dierlijk",
+    "view": "Bekijk score en ingrediënten",
+    "lookFor": "Waar let je op?",
+    "howRanked": "Zo is deze lijst gemaakt",
+    "howRankedText": "Automatisch, zonder handwerk: alle volledige voeders die bij dit onderwerp passen, op volgorde van hun Scanabowl-score. Per recept tonen we één verpakkingsgrootte en per merk hooguit {perBrand} voeders, zodat je echt iets te kiezen hebt. Dieetvoer van de dierenarts, snacks, aanvullend voer en voeders met te weinig etiketgegevens staan er niet in. Geen enkel merk kan een plek kopen. De score beschrijft het etiket en is geen diergeneeskundig advies. [Zo berekenen we de score](/{lang}/how-we-score).",
+    "seeAll": "Alle voeders in de voerzoeker",
+    "compareTop": "Vergelijk de top 3",
+    "readMore": "Lees meer op de blog",
+    "otherGuides": "Meer toplijsten",
+    "empty": "Er zijn nog te weinig voeders met een score voor deze lijst.",
+    "onFoodPage": "Vergelijk met de toplijst"
+  },
+  "compare": {
+    "metaTitle": "Hondenvoer en kattenvoer vergelijken",
+    "metaDescription": "Zet twee of drie voeders naast elkaar: score, eiwit, vet, calorieën, portie per dag en wat het per dag kost voor jouw hond of kat.",
+    "title": "Voer vergelijken",
+    "intro": "Zet tot drie voeders naast elkaar. Je ziet de score en de voedingswaarden, hoeveel gram je dier per dag nodig heeft en – als je de prijs invult – wat dat per dag kost.",
+    "add": "Voeg een voer toe",
+    "full": "Je vergelijkt al {max} voeders. Verwijder er een om een ander toe te voegen.",
+    "noResults": "Niets gevonden. Probeer een andere naam, of kies hierboven de andere diersoort.",
+    "emptyTitle": "Nog niets om te vergelijken",
+    "emptyText": "Zoek hierboven een voer, of gebruik de knop “Vergelijken” op de pagina van een voer.",
+    "food": "Voer",
+    "remove": "Verwijder {name} uit de vergelijking",
+    "best": "beste",
+    "protein": "Eiwit (droge stof)",
+    "animal": "Dierlijk deel van het eiwit",
+    "fat": "Vet (droge stof)",
+    "kcal": "Energie per 100 g",
+    "contains": "Bevat (allergenen)",
+    "forPet": "Voor {name}",
+    "petNo": "Niet geschikt (allergie)",
+    "petMatch": "Match {score}",
+    "grams": "Portie per dag",
+    "price": "Prijs die jij betaalt",
+    "priceFor": "Prijs voor {name}",
+    "perPack": "voor {pack}",
+    "perKg": "per kilo",
+    "perDay": "Kost per dag",
+    "weight": "Gewicht van je dier (kg):",
+    "dailyStandard": "Gerekend met {kcal} kcal per dag voor een gemiddeld volwassen dier van dit gewicht.",
+    "dailyForPet": "Porties voor {name}: {kcal} kcal per dag, uit je huisdierprofiel.",
+    "note": "Portie en kosten zijn een schatting op basis van de energie op het etiket en de FEDIAF-formules; vul een prijs in om de kosten per dag te zien. Groen betekent: het beste van deze voeders op die regel. De score beschrijft het etiket en is geen diergeneeskundig advies.",
+    "addThis": "Vergelijken",
+    "added": "In je vergelijking",
+    "open": "Bekijk vergelijking ({count}/{max})"
   },
   "errors": {
     "notFoundTitle": "Pagina niet gevonden",

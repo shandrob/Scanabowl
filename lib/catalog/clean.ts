@@ -59,6 +59,19 @@ export function toLifeStage(declared: string | undefined, name = ""): LifeStage 
   return "adult";
 }
 
+/**
+ * The life stage the product name itself states ("Adult", "Kitten", "Senior 7+", "Cat & Kitten"), or undefined.
+ * Shops tag products loosely (Pets Place files "Applaws Cat Adult" under "Senior"), so a stage in the name wins.
+ */
+export function stageInName(name: string): LifeStage | undefined {
+  const n = normalize(name);
+  if (/(alle leeftijden|alle levensfasen|all life|all ages|toutes|alle lebens|\b(?:cat|dog|kat|hond) ?(?:&|and|en|\+) ?(?:kitten|puppy)\b)/.test(n)) return "all";
+  if (/(kitten|puppy|pup(?![a-z])|junior|growth|groei|starter|baby|welpe|chiot|chaton)/.test(n)) return "young";
+  if (/(senior|mature|ageing|aging|\b(7|8|10|11|12|15)\+|vitalité 12|oud(?![a-z]))/.test(n)) return "senior";
+  if (/\b(adult|adulte|volwassen|erwachsen|maintenance)\b/.test(n)) return "adult";
+  return undefined;
+}
+
 // ------------------------------------------------------------------ category
 
 const VET_NAME_RE =

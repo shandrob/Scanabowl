@@ -3,6 +3,15 @@ export type Messages = { [key: string]: string | Messages | Array<string | Messa
 
 export type TParams = Record<string, string | number>;
 
+/**
+ * Texts write internal links as "[label](/{lang}/affiliate)". Fill in the language once, when a dictionary is
+ * loaded, so no page can forget it (a forgotten one sent visitors to "/{lang}/affiliate", which does not exist).
+ * Only "/{lang}" is touched: a bare "{lang}" is a normal placeholder with its own value.
+ */
+export function fillLinkLanguage(dict: Messages, lang: string): Messages {
+  return JSON.parse(JSON.stringify(dict).replaceAll("/{lang}", `/${lang}`)) as Messages;
+}
+
 export function interpolate(template: string, params?: TParams): string {
   if (!params) return template;
   return template.replace(/\{(\w+)\}/g, (_, k: string) => (k in params ? String(params[k]) : `{${k}}`));

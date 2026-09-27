@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { BarcodeScanner } from "./BarcodeScanner";
 import { IconBarcode, IconSearch } from "@/components/ui/Icons";
+import { reportNoResults } from "@/lib/analytics";
 import { localePath } from "@/lib/i18n/config";
 
 /**
@@ -47,6 +48,7 @@ export function SearchBox({
           return;
         }
         setMissing(ean);
+        if (res.status === 404) reportNoResults(lang, ean, "barcode");
       } catch {
         setMissing(ean);
       } finally {

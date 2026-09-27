@@ -61,7 +61,7 @@ function SpeciesSection({ id, title, summary, species, brand, lang, t }: { id: s
           <GradeBar grades={summary.grades} t={t} />
         </div>
       )}
-      <ul className="mt-6 grid gap-4 md:grid-cols-2">
+      <ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
         {summary.top.map((e) => (
           <li key={e.i}>
             <ProductCard entry={e} species={species} lang={lang} t={t} />

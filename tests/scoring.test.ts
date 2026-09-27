@@ -39,6 +39,22 @@ describe("parseAnalysis", () => {
   it("rejects garbage that adds up to more than 100 %", () => {
     expect(parseAnalysis("Eiwit 60%, vet 40%, as 30%, vocht 20%")).toEqual({});
   });
+  it("reads 'vochtigheid' as moisture", () => {
+    expect(parseAnalysis("ruw eiwit 13,1% ruw vet 9,2% ruwe as 2,2% ruwe celstof 0,5% vochtigheid 67,5%").moisture).toBe(67.5);
+  });
+});
+
+describe("dry food filed as wet food", () => {
+  it("is recognised from the analysis when the label gives no moisture", () => {
+    // a 400 g bag of kibble that a shop listed under "Natvoer"
+    const n = computeNutrition("cat", "wet", { protein: 38, fat: 20, ash: 10.5, fibre: 2.1 })!;
+    expect(n.asFed.moisture).toBe(9);
+    expect(n.dm.protein).toBeLessThan(45);
+  });
+  it("leaves real wet food alone", () => {
+    const n = computeNutrition("dog", "wet", { protein: 12, fat: 10, ash: 2.5, fibre: 0.5 })!;
+    expect(n.asFed.moisture).toBe(78);
+  });
 });
 
 describe("ingredient parsing", () => {

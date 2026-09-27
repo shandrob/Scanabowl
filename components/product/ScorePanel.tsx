@@ -85,7 +85,7 @@ export function ScorePanel({ p, t, lang }: { p: ProductDetail; t: TFunction; lan
         <Bar label={t("score.pillars.formulation")} points={p.pillars.formulation.points} max={p.pillars.formulation.max} color="#4d7c0f" />
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2">
         <div>
           <h3 className="font-display text-lg font-semibold text-brand-deep">{t("product.goodTitle")}</h3>
           {p.positives.length ? (

@@ -15,6 +15,7 @@ import {
   normalizeEan,
   simpleHash,
   slugify,
+  stageInName,
   toLifeStage,
   toSpecies,
 } from "./clean";
@@ -37,6 +38,8 @@ export interface CatalogProduct {
   pack: string;
   price?: number;
   bolUrl?: string;
+  /** exact product page at zooplus, from the Awin product file */
+  zooplusUrl?: string;
   image?: string;
   imageCredit?: { source: string; license: string; url?: string };
   source: Source;
@@ -174,11 +177,19 @@ export function rowToProduct(row: Record<string, string>, ctx: RowContext): Cata
     declaredCategory: isScraped(row, ctx) && /^volledig$/i.test(field(row, "category")) ? "" : field(row, "category"),
     text: `${ingredients} ${analysis}`,
   });
-  const foodType =
+  let foodType =
     (ctx.trustDeclared ? mapFoodType(declaredType) : undefined) ??
     inferFoodType({ name: rawName, declared: declaredType, moisture, pack });
+  // Shops file small bags of kibble under "wet food". Without a moisture value the analysis decides: wet and
+  // frozen food are 65-85% water, so their protein, fat, ash and fibre never add up to 38% or more.
+  if (moisture === undefined && (foodType === "wet" || foodType === "frozen")) {
+    const a = parseAnalysis(analysis);
+    if ((a.protein ?? 0) + (a.fat ?? 0) + (a.ash ?? 0) + (a.fibre ?? 0) >= 38) foodType = "dry";
+  }
   const lifeStage =
-    (ctx.trustDeclared ? mapLifeStage(field(row, "lifeStage")) : undefined) ?? toLifeStage(field(row, "lifeStage"), rawName);
+    (isScraped(row, ctx) ? stageInName(rawName) : undefined) ??
+    (ctx.trustDeclared ? mapLifeStage(field(row, "lifeStage")) : undefined) ??
+    toLifeStage(field(row, "lifeStage"), rawName);
 
   const id = ean || `p-${simpleHash(`${brand}|${name}|${pack}`)}`;
   const slug = `${slugify(name.startsWith(brand) ? name : `${brand} ${name}`)}-${id}`.replace(/-+/g, "-");

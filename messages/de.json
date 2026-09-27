@@ -4,6 +4,8 @@
     "description": "Suchen Sie jedes Hunde- oder Katzenfutter und sehen Sie eine unabhängige Bewertung auf Basis von Zutaten und Nährwerten. Persönlich für Ihr Tier, Allergene werden herausgefiltert."
   },
   "nav": {
+    "best": "Bestenlisten",
+    "compare": "Vergleichen",
     "allBrands": "Alle Marken",
     "main": "Hauptnavigation",
     "home": "Startseite",
@@ -109,6 +111,9 @@
     "unsupported": "Scannen ist auf diesem Gerät oder in diesem Browser nicht möglich. Bitte tippen Sie stattdessen die Nummer unter dem Barcode ein."
   },
   "home": {
+    "guidesTitle": "Das beste Futter für …",
+    "guidesText": "Bestenlisten für jede Situation, automatisch nach Bewertung gereiht. Keine Marke kann sich einen Platz kaufen.",
+    "guidesAll": "Alle Bestenlisten",
     "badge": "Unabhängig · Wissenschaftlich · Kostenlos",
     "title": "Ist das Futter Ihres Tieres wirklich so gut, wie die Verpackung verspricht?",
     "subtitle": "Suchen Sie jedes Hunde- oder Katzenfutter und erhalten Sie eine unabhängige Bewertung von 0 bis 100 – berechnet aus Zutaten und Nährwerten auf dem Etikett, nach tierärztlichen Ernährungsrichtlinien.",
@@ -157,7 +162,7 @@
       },
       {
         "q": "Zahlen Marken für eine bessere Bewertung?",
-        "a": "Nein. Die Bewertung wird für jedes Futter mit derselben Formel berechnet. Wir erhalten eine kleine Provision, wenn Sie über unsere bol.com-Links bestellen, ohne Mehrkosten für Sie – siehe [Affiliate-Hinweis](/{lang}/affiliate)."
+        "a": "Nein. Die Bewertung wird für jedes Futter mit derselben Formel berechnet. Wir erhalten eine kleine Provision, wenn Sie über unsere Links zu zooplus oder bol.com bestellen, ohne Mehrkosten für Sie – siehe [Affiliate-Hinweis](/{lang}/affiliate)."
       },
       {
         "q": "Warum hat ein Diätfutter vom Tierarzt keine Bewertung?",
@@ -174,6 +179,12 @@
     ]
   },
   "finder": {
+    "otherSpeciesCat": "Bei den Katzen haben wir {count} Futter gefunden.",
+    "otherSpeciesDog": "Bei den Hunden haben wir {count} Futter gefunden.",
+    "switchToCat": "Katzenfutter zeigen",
+    "switchToDog": "Hundefutter zeigen",
+    "hiddenByFilters": "{count} Futter passen zu Ihrer Suche, liegen aber außerhalb Ihrer Filter (zum Beispiel Futter ohne Bewertung).",
+    "showHidden": "Anzeigen",
     "metaTitle": "Hunde- und Katzenfutter finden – unabhängige Bewertungen",
     "metaDescription": "Hunde- und Katzenfutter nach Bewertung, Art und Lebensphase durchsuchen und vergleichen. Nach Marke und Allergie filtern, sortiert nach einer unabhängigen Bewertung von 0–100.",
     "title": "Das richtige Futter finden",
@@ -362,6 +373,7 @@
     "portionNote": "Dies ist ein Ausgangspunkt: Wiegen Sie Ihr Tier regelmäßig und passen Sie die Menge an, um eine gesunde Körperkondition zu halten. Folgen Sie dem Rat Ihres Tierarztes."
   },
   "order": {
+    "zooplusExact": "Bei zooplus ansehen",
     "title": "Dieses Futter bestellen",
     "text": "Aktuellen Preis und Lieferung bei zooplus und bol.com vergleichen.",
     "zooplusButton": "Bei zooplus suchen",
@@ -527,7 +539,7 @@
       },
       {
         "h": "Daten, Unabhängigkeit und Fehler",
-        "p": ["Produktdaten stammen aus öffentlichen Produktinformationen und von Herstellern, die ihre Produkte einreichen. Wir prüfen Einreichungen immer, bevor sie veröffentlicht werden, und dieselbe Formel gilt für jedes Futter – keine Marke kann ihre Bewertung beeinflussen. Wir erhalten eine Provision für Bestellungen über unsere bol.com-Links; das wird im [Affiliate-Hinweis](/{lang}/affiliate) erklärt.", "Fehler entdeckt? Nutzen Sie den Link „Korrektur melden“ auf der Produktseite. Wir beheben Fehler schnell."]
+        "p": ["Produktdaten stammen aus öffentlichen Produktinformationen und von Herstellern, die ihre Produkte einreichen. Wir prüfen Einreichungen immer, bevor sie veröffentlicht werden, und dieselbe Formel gilt für jedes Futter – keine Marke kann ihre Bewertung beeinflussen. Wir erhalten eine Provision für Bestellungen über unsere Links zu zooplus oder bol.com; das wird im [Affiliate-Hinweis](/{lang}/affiliate) erklärt.", "Fehler entdeckt? Nutzen Sie den Link „Korrektur melden“ auf der Produktseite. Wir beheben Fehler schnell."]
       }
     ],
     "refsTitle": "Wissenschaftliche Quellen",
@@ -638,10 +650,6 @@
     "intro": "Scanabowl hilft Tierhaltern zu verstehen, was wirklich im Napf ihres Hundes oder ihrer Katze steckt.",
     "sections": [
       {
-        "h": "Warum es uns gibt",
-        "p": ["Tierfutterverpackungen sind voller Versprechen – „natürlich“, „Premium“, „vollständig“ –, aber die eigentlichen Informationen stehen im Kleingedruckten. Scanabowl übersetzt Zutatenliste und Nährstoffanalyse in eine klare Bewertung, mit einer Erklärung für jeden Punkt."]
-      },
-      {
         "h": "Was uns unterscheidet",
         "ul": [
           "**Wissenschaftlich fundiert** – unsere Bewertung folgt veröffentlichten FEDIAF- und NRC-Richtlinien sowie begutachteter Forschung, und wir nennen unsere Quellen.",
@@ -652,7 +660,7 @@
       },
       {
         "h": "Wie wir finanziert werden",
-        "p": ["Scanabowl ist kostenlos nutzbar. Wenn Sie ein Futter über unsere bol.com-Links bestellen, erhalten wir möglicherweise eine kleine Provision, ohne Mehrkosten für Sie. Diese Einnahmen investieren wir in die Website. Mehr dazu im [Affiliate-Hinweis](/{lang}/affiliate)."]
+        "p": ["Scanabowl ist kostenlos nutzbar. Wenn Sie ein Futter über unsere Links zu zooplus oder bol.com bestellen, erhalten wir möglicherweise eine kleine Provision, ohne Mehrkosten für Sie. Diese Einnahmen investieren wir in die Website. Mehr dazu im [Affiliate-Hinweis](/{lang}/affiliate)."]
       },
       {
         "h": "Machen Sie mit",
@@ -681,12 +689,12 @@
       },
       {
         "h": "Cookies und Tracking",
-        "p": ["Wir verwenden keine Werbe- oder Tracking-Cookies. Wir speichern ein kleines funktionales Cookie (Ihre gewählte Sprache, ein Jahr lang) und Local-Storage-Einträge für Ihr Tierprofil. Da diese rein funktional sind, ist kein Cookie-Banner nötig. Sollten wir jemals Analysen hinzufügen, verwenden wir ein datenschutzfreundliches Tool und aktualisieren diese Seite."]
+        "p": ["Wir verwenden keine Werbe- oder Tracking-Cookies. Wir speichern ein kleines funktionales Cookie (Ihre gewählte Sprache, ein Jahr lang) sowie Local-Storage-Einträge für Ihr Tierprofil und Ihre Vergleichsliste. Da diese rein funktional sind, ist kein Cookie-Banner nötig.", "Um zu sehen, welche Seiten besucht werden und welches Futter gesucht, aber nicht gefunden wird, nutzen wir **Vercel Web Analytics**. Es arbeitet ohne Cookies und verknüpft nichts mit Ihrer Person: Besucher werden nur mit einem anonymen Code gezählt, der nach 24 Stunden verworfen wird. Wir sehen Summen, etwa Besuche pro Seite, Land und Region, Browser und Gerätetyp. Suchanfragen speichern wir nicht, außer Suchbegriffen und Barcodes ohne Treffer: So wissen wir, welches Futter wir ergänzen sollten."]
       },
       {
         "h": "Dienstleister",
         "ul": [
-          "**Vercel** hostet die Website und verarbeitet technische Daten wie IP-Adressen in Server-Logs.",
+          "**Vercel** hostet die Website und verarbeitet technische Daten wie IP-Adressen in Server-Logs. Vercel Web Analytics zählt Besuche ohne Cookies (siehe oben).",
           "**Resend** stellt die von unseren Formularen erzeugten E-Mails zu.",
           "**zooplus und Awin** – wenn Sie auf einen Link zu zooplus klicken, können zooplus und das Affiliate-Netzwerk Awin eigene Cookies gemäß ihrer eigenen Datenschutzerklärung setzen.",
         "**bol.com** – wenn Sie auf einen Affiliate-Link klicken, können bol.com und seine Partnerplattform eigene Cookies gemäß ihrer eigenen Datenschutzerklärung setzen."
@@ -718,7 +726,7 @@
       },
       {
         "h": "Links zu Dritten und Shops",
-        "p": ["Links zu bol.com und anderen Seiten dienen der Bequemlichkeit. Preise, Bestand und Lieferung bestimmt der Shop. Jeder Kauf ist ein Vertrag zwischen Ihnen und dem Shop; Scanabowl ist daran nicht beteiligt."]
+        "p": ["Links zu zooplus, bol.com und anderen Seiten dienen der Bequemlichkeit. Preise, Bestand und Lieferung bestimmt der Shop. Jeder Kauf ist ein Vertrag zwischen Ihnen und dem Shop; Scanabowl ist daran nicht beteiligt."]
       },
       {
         "h": "Eingereichte Informationen",
@@ -776,6 +784,73 @@
         ]
       }
     ]
+  },
+  "guides": {
+    "indexMetaTitle": "Bestes Hunde- und Katzenfutter {year}: unabhängige Bestenlisten",
+    "indexMetaDescription": "Das beste Kittenfutter, Welpenfutter, Nassfutter, Seniorfutter und mehr: Bestenlisten, automatisch nach einer unabhängigen Bewertung gereiht. Keine bezahlten Plätze.",
+    "indexTitle": "Das beste Futter für Ihren Hund oder Ihre Katze",
+    "indexIntro": "Bestenlisten für jede Situation, vom Kitten bis zum Senior und vom Nassfutter bis zum Futter mit einer Eiweißquelle. Jede Liste wird automatisch aus den Futtern in unserer Datenbank erstellt, sortiert nach ihrer Scanabowl-Bewertung.",
+    "indexNote": "Die Listen werden bei jeder Aktualisierung der Datenbank neu berechnet. Keine Marke kann sich einen Platz kaufen. Wir erhalten möglicherweise eine Provision, wenn Sie über einen Link bestellen, aber das hat nie Einfluss auf die Reihenfolge.",
+    "forCats": "Für Katzen",
+    "forDogs": "Für Hunde",
+    "topPick": "Aktuell auf Platz 1:",
+    "openList": "Die Top {count} ansehen",
+    "kicker": "Bestenliste {year}",
+    "compared": "{count} Futter von {brands} Marken verglichen.",
+    "listTitle": "Die Top {count}",
+    "rank": "Platz {n}",
+    "factProtein": "Eiweiß {value} % (Trockenmasse)",
+    "factFat": "Fett {value} %",
+    "factKcal": "{value} kcal pro 100 g",
+    "factMoisture": "Feuchtigkeit {value} %",
+    "factCalcium": "Kalzium {value} % (Trockenmasse)",
+    "factCalciumUnknown": "Kalzium nicht auf dem Etikett angegeben",
+    "factAnimal": "{pct} % des Eiweißes tierisch",
+    "view": "Bewertung und Zutaten ansehen",
+    "lookFor": "Worauf sollten Sie achten?",
+    "howRanked": "So entsteht diese Liste",
+    "howRankedText": "Automatisch, ohne Handauswahl: alle Alleinfutter, die zu diesem Thema passen, sortiert nach ihrer Scanabowl-Bewertung. Pro Rezeptur zeigen wir eine Packungsgröße und pro Marke höchstens {perBrand} Futter, damit Sie wirklich die Wahl haben. Tierarzt-Diäten, Snacks, Ergänzungsfutter und Futter mit zu wenigen Etikettangaben sind nicht dabei. Keine Marke kann sich einen Platz kaufen. Die Bewertung beschreibt das Etikett und ist keine tierärztliche Beratung. [So berechnen wir die Bewertung](/{lang}/how-we-score).",
+    "seeAll": "Alle Futter in der Futtersuche",
+    "compareTop": "Die Top 3 vergleichen",
+    "readMore": "Mehr dazu im Blog",
+    "otherGuides": "Weitere Bestenlisten",
+    "empty": "Für diese Liste gibt es noch zu wenige bewertete Futter.",
+    "onFoodPage": "Mit der Bestenliste vergleichen"
+  },
+  "compare": {
+    "metaTitle": "Hunde- und Katzenfutter vergleichen",
+    "metaDescription": "Stellen Sie zwei oder drei Futter nebeneinander: Bewertung, Eiweiß, Fett, Kalorien, Tagesportion und was es pro Tag für Ihren Hund oder Ihre Katze kostet.",
+    "title": "Futter vergleichen",
+    "intro": "Stellen Sie bis zu drei Futter nebeneinander. Sie sehen Bewertung und Nährwerte, wie viel Gramm Ihr Tier pro Tag braucht und – wenn Sie den Preis eingeben – was das pro Tag kostet.",
+    "add": "Futter hinzufügen",
+    "full": "Sie vergleichen bereits {max} Futter. Entfernen Sie eines, um ein anderes hinzuzufügen.",
+    "noResults": "Nichts gefunden. Versuchen Sie einen anderen Namen oder wählen Sie oben die andere Tierart.",
+    "emptyTitle": "Noch nichts zu vergleichen",
+    "emptyText": "Suchen Sie oben ein Futter oder nutzen Sie die Schaltfläche „Vergleichen“ auf der Seite eines Futters.",
+    "food": "Futter",
+    "remove": "{name} aus dem Vergleich entfernen",
+    "best": "bester Wert",
+    "protein": "Eiweiß (Trockenmasse)",
+    "animal": "Tierischer Anteil am Eiweiß",
+    "fat": "Fett (Trockenmasse)",
+    "kcal": "Energie pro 100 g",
+    "contains": "Enthält (Allergene)",
+    "forPet": "Für {name}",
+    "petNo": "Nicht geeignet (Allergie)",
+    "petMatch": "Passend: {score}",
+    "grams": "Portion pro Tag",
+    "price": "Ihr Preis",
+    "priceFor": "Preis für {name}",
+    "perPack": "für {pack}",
+    "perKg": "pro Kilo",
+    "perDay": "Kosten pro Tag",
+    "weight": "Gewicht Ihres Tieres (kg):",
+    "dailyStandard": "Berechnet mit {kcal} kcal pro Tag für ein durchschnittliches erwachsenes Tier dieses Gewichts.",
+    "dailyForPet": "Portionen für {name}: {kcal} kcal pro Tag, aus Ihrem Tierprofil.",
+    "note": "Portion und Kosten sind Schätzungen auf Basis der Energie auf dem Etikett und der FEDIAF-Formeln; geben Sie einen Preis ein, um die Kosten pro Tag zu sehen. Grün bedeutet: der beste Wert dieser Futter in dieser Zeile. Die Bewertung beschreibt das Etikett und ist keine tierärztliche Beratung.",
+    "addThis": "Vergleichen",
+    "added": "Im Vergleich",
+    "open": "Vergleich ansehen ({count}/{max})"
   },
   "errors": {
     "notFoundTitle": "Seite nicht gefunden",

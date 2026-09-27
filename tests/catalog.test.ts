@@ -149,3 +149,14 @@ describe("shop metadata instead of an ingredient list", () => {
     expect(rowToProduct({ naam: "Oeps, niet gevonden...", doeldier: "Kat", ingredienten: "Kip, rijst" }, ctx)).toBeNull();
   });
 });
+
+describe("food type from the analysis", () => {
+  it("files a bag of kibble that a shop listed as wet food under dry food", () => {
+    const row = { naam: "Applaws Cat Adult - Kip 400 g", merk: "Applaws", doeldier: "Kat", voertype: "Natvoer", verpakking: "400 g", ingredienten: "Kip 75%, eiwit, vis, vitaminen", analyse: "Ruw eiwit 38%, Ruw vet 20%, Ruwe celstof 2,1%, Ruwe as 10,5%", bron: "scraped" };
+    expect(rowToProduct(row, { knownBrands: ["Applaws"], defaultSource: "scraped", trustDeclared: true })?.foodType).toBe("dry");
+  });
+  it("keeps real wet food wet", () => {
+    const row = { naam: "Sjef's Cuisine Worst - Kip 350 g", merk: "Sjef's Cuisine", doeldier: "Hond", voertype: "Natvoer", verpakking: "350 g", ingredienten: "Kip 60%, rijst, groenten", analyse: "Ruw eiwit 12%, Ruw vet 10%, Ruwe as 2,5%, Ruwe celstof 0,5%", bron: "scraped" };
+    expect(rowToProduct(row, { knownBrands: ["Sjef's Cuisine"], defaultSource: "scraped", trustDeclared: true })?.foodType).toBe("wet");
+  });
+});

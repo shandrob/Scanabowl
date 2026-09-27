@@ -26,7 +26,7 @@ const LABELS = {
   fat: String.raw`ruwe? ?vet(?:gehalte)?|vet(?:gehalte)?|crude fat|fat content|fat|rohfett|fett|matieres? grasses?(?: brutes?)?`,
   fibre: String.raw`ruwe? ?celstof|celstof|ruwe? ?vezels?|vezels?|crude fib(?:er|re)|fib(?:er|re)|rohfaser|cellulose brute`,
   ash: String.raw`ruwe? ?as|as(?=[: ]+\d)|crude ash|ash|rohasche|cendres brutes`,
-  moisture: String.raw`vocht(?:gehalte)?|moisture|water|feuchtigkeit|humidite`,
+  moisture: String.raw`vocht(?:igheid|gehalte)?|moisture|water|feuchtigkeit|humidite`,
   calcium: String.raw`calcium|kalzium`,
   phosphorus: String.raw`fosfor|phosphor(?:us)?|phosphore`,
   sodium: String.raw`natrium|sodium`,

@@ -9,6 +9,8 @@ import { IconArrow, IconBarcode, IconPaw, IconSearch, IconShield } from "@/compo
 import { listPosts } from "@/lib/blog";
 import { detailToIndex } from "@/lib/data/index-entry";
 import { productCounts, topProducts } from "@/lib/data/products";
+import { GUIDE_TEXT } from "@/lib/guides/content";
+import { GUIDES } from "@/lib/guides/defs";
 import { LOCALE_TAGS, alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createRaw, createT } from "@/lib/i18n/t";
@@ -129,7 +131,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
             <Link href={localePath(lang, "/how-we-score")} className="inline-flex items-center gap-1.5 font-semibold text-brand hover:underline">{t("home.howScore")} <IconArrow className="h-4 w-4" /></Link>
           </div>
-          <div className="mt-8 grid gap-8 lg:grid-cols-2">
+          <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-2">
             {([["dog", dogs], ["cat", cats]] as const).map(([sp, list]) => (
               <div key={sp}>
                 <h3 className="mb-3 font-display text-xl font-semibold text-ink">{t(sp === "dog" ? "home.topDogs" : "home.topCats")}</h3>
@@ -144,6 +146,33 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* best food for ... */}
+      <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-6" aria-labelledby="guides-h">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 id="guides-h" className="font-display text-3xl font-semibold text-brand-deep">{t("home.guidesTitle")}</h2>
+            <p className="mt-2 max-w-2xl text-ink-soft">{t("home.guidesText")}</p>
+          </div>
+          <Link href={localePath(lang, "/best")} className="inline-flex items-center gap-1.5 font-semibold text-brand hover:underline">{t("home.guidesAll")} <IconArrow className="h-4 w-4" /></Link>
+        </div>
+        <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2">
+          {(["cat", "dog"] as const).map((sp) => (
+            <div key={sp}>
+              <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-faint">{t(sp === "cat" ? "guides.forCats" : "guides.forDogs")}</h3>
+              <ul className="flex flex-wrap gap-2">
+                {GUIDES.filter((g) => g.species === sp).map((g) => (
+                  <li key={g.slug}>
+                    <Link href={localePath(lang, `/best/${g.slug}`)} className="inline-block rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-ink shadow-sm transition hover:border-brand-mid hover:text-brand-deep">
+                      {GUIDE_TEXT[lang][g.slug]?.h1}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -6,6 +6,8 @@ All foods live in CSV files in this folder. Excel opens them (both `;` and `,` d
 database/
   scraped/     products collected by the scraper (do not need hand-editing; you can, though)
   manual/      products you add or approve - these WIN over scraped rows with the same EAN
+  zooplus/     the zooplus product file, made small by `npm run data:zooplus` (exact zooplus links, prices, new foods)
+  feeds/       put the raw zooplus file from Awin here (not uploaded to GitHub: large, and changes daily)
   overrides.csv   optional fixes by EAN that survive re-scraping
   images/      optional photos named <EAN>.jpg / .png / .webp
   build-report.txt   written by `npm run data:build`: what to fix
@@ -29,6 +31,7 @@ Files whose name starts with `_` or `~` are ignored (so `manual/_template.csv` i
 | `verpakking` | pack size, e.g. `12x85 g`, `2 kg` |
 | `prijs` | optional price in euro of that pack (enables "cost per day" for pet owners) |
 | `bol_url` | optional exact bol.com product link (otherwise a bol.com search by EAN is used) |
+| `zooplus_url` | only in `zooplus/`: the exact zooplus product page (otherwise the button opens a zooplus search) |
 | `afbeelding` | not needed – photos are matched by EAN from `images/` |
 | `bron` | `scraped`, `manual`, `brand` (supplied by the manufacturer) or `user` |
 | `url`, `opmerking` | source link and your own notes |
@@ -39,6 +42,7 @@ Files whose name starts with `_` or `~` are ignored (so `manual/_template.csv` i
 * **Fix one wrong ingredient list without touching scraped data:** add a row to `overrides.csv` with the EAN and only the columns to change.
 * **Remove a food:** delete its row (scraped foods reappear if you scrape again – put `categorie` = `Snack` in `overrides.csv` to hide it from the finder permanently, or just leave it).
 * **Add a photo:** save it as `images/<EAN>.jpg` (any size), run `npm run data:build`.
+* **Update the zooplus links:** put the new file from Awin in `feeds/`, run `npm run data:zooplus`, publish. See section 6b of the main README.
 
-The data is cleaned automatically on every build: EAN repair, brand detection from the name, dry/wet detection from moisture and name,
+The data is cleaned automatically on every build: EAN repair, brand detection from the name, dry/wet detection from moisture, name and analysis (a label without moisture but with 38% or more protein + fat + ash + fibre is dry food, whatever the shop called it), life stage from the name when it says so ("Adult", "Kitten"),
 detection of veterinary diets and treats, garbage-row removal. What you type in a column is respected.

@@ -33,7 +33,11 @@ export function estimateMePer100g(
 
 export function computeNutrition(species: Species, foodType: FoodType, a: Analysis): Nutrition | null {
   if (a.protein === undefined || a.fat === undefined) return null;
-  const def = DEFAULTS[foodType];
+  // A label without moisture whose nutrients cannot fit next to the water of a wet food is a dry food that was
+  // filed as wet (a 400 g bag of kibble): 38% protein + 20% fat + 78% "estimated" water is more than 100%.
+  // Wet and frozen food are 65-85% water, so their solids stay well under 38% (same rule as lib/catalog/records.ts).
+  const solids = a.protein + a.fat + (a.ash ?? 0) + (a.fibre ?? 0);
+  const def = a.moisture === undefined && foodType !== "dry" && solids >= 38 ? DEFAULTS.dry : DEFAULTS[foodType];
   const estimated: Nutrition["estimated"] = [];
   const moisture = a.moisture ?? (estimated.push("moisture"), def.moisture);
   const ash = a.ash ?? (estimated.push("ash"), def.ash);

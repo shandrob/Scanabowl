@@ -4,6 +4,8 @@
     "description": "Recherchez n’importe quel aliment pour chien ou chat et obtenez une note indépendante basée sur ses ingrédients et ses valeurs nutritionnelles. Personnalisé pour votre animal, allergènes exclus."
   },
   "nav": {
+    "best": "Meilleurs choix",
+    "compare": "Comparer",
     "allBrands": "Toutes les marques",
     "main": "Navigation principale",
     "home": "Accueil",
@@ -109,6 +111,9 @@
     "unsupported": "Le scan n’est pas disponible sur cet appareil ou ce navigateur. Saisissez plutôt le numéro sous le code-barres."
   },
   "home": {
+    "guidesTitle": "La meilleure nourriture pour…",
+    "guidesText": "Des classements pour chaque situation, établis automatiquement selon le score. Aucune marque ne peut acheter une place.",
+    "guidesAll": "Tous les classements",
     "badge": "Indépendant · Scientifique · Gratuit",
     "title": "La nourriture de votre animal est-elle vraiment aussi bonne que l’emballage le prétend ?",
     "subtitle": "Recherchez n’importe quel aliment pour chien ou chat et obtenez une note indépendante de 0 à 100 – calculée à partir des ingrédients et des valeurs nutritionnelles de l’étiquette, selon les recommandations de nutrition vétérinaire.",
@@ -157,7 +162,7 @@
       },
       {
         "q": "Les marques paient-elles pour une meilleure note ?",
-        "a": "Non. La note est calculée avec la même formule pour chaque aliment. Nous touchons une petite commission lorsque vous commandez via nos liens bol.com, sans frais supplémentaires pour vous – voir la [mention d’affiliation](/{lang}/affiliate)."
+        "a": "Non. La note est calculée avec la même formule pour chaque aliment. Nous touchons une petite commission lorsque vous commandez via nos liens vers zooplus ou bol.com, sans frais supplémentaires pour vous – voir la [mention d’affiliation](/{lang}/affiliate)."
       },
       {
         "q": "Pourquoi un aliment vétérinaire n’est-il pas noté ?",
@@ -174,6 +179,12 @@
     ]
   },
   "finder": {
+    "otherSpeciesCat": "Nous avons trouvé {count} aliments pour chats.",
+    "otherSpeciesDog": "Nous avons trouvé {count} aliments pour chiens.",
+    "switchToCat": "Voir la nourriture pour chats",
+    "switchToDog": "Voir la nourriture pour chiens",
+    "hiddenByFilters": "{count} aliments correspondent à votre recherche mais sont exclus par vos filtres (par exemple les aliments sans note).",
+    "showHidden": "Les afficher",
     "metaTitle": "Trouver des aliments pour chiens et chats – notes indépendantes",
     "metaDescription": "Parcourez et comparez les aliments pour chiens et chats par note, type et âge. Filtrez par marque et allergie, triés par une note indépendante de 0 à 100.",
     "title": "Trouvez le bon aliment",
@@ -362,6 +373,7 @@
     "portionNote": "Il s’agit d’un point de départ : pesez régulièrement votre animal et ajustez pour garder une bonne condition corporelle. Suivez les conseils de votre vétérinaire."
   },
   "order": {
+    "zooplusExact": "Voir chez zooplus",
     "title": "Commander cet aliment",
     "text": "Comparez le prix actuel et la livraison chez zooplus et bol.com.",
     "zooplusButton": "Rechercher sur zooplus",
@@ -527,7 +539,7 @@
       },
       {
         "h": "Données, indépendance et erreurs",
-        "p": ["Les données produits proviennent d’informations produits publiques et de fabricants qui soumettent leurs produits. Nous vérifions toujours les soumissions avant publication, et la même formule s’applique à chaque aliment – aucune marque ne peut influencer sa note. Nous touchons une commission sur les commandes via nos liens bol.com ; cela est expliqué dans la [mention d’affiliation](/{lang}/affiliate).", "Une erreur ? Utilisez le lien « Signaler une correction » sur la page produit. Nous corrigeons rapidement."]
+        "p": ["Les données produits proviennent d’informations produits publiques et de fabricants qui soumettent leurs produits. Nous vérifions toujours les soumissions avant publication, et la même formule s’applique à chaque aliment – aucune marque ne peut influencer sa note. Nous touchons une commission sur les commandes via nos liens vers zooplus ou bol.com ; cela est expliqué dans la [mention d’affiliation](/{lang}/affiliate).", "Une erreur ? Utilisez le lien « Signaler une correction » sur la page produit. Nous corrigeons rapidement."]
       }
     ],
     "refsTitle": "Sources scientifiques",
@@ -638,10 +650,6 @@
     "intro": "Scanabowl aide les propriétaires à comprendre ce qu’il y a vraiment dans la gamelle de leur chien ou chat.",
     "sections": [
       {
-        "h": "Pourquoi nous existons",
-        "p": ["Les emballages d’aliments pour animaux regorgent de promesses – « naturel », « premium », « complet » – mais l’information réelle est cachée en petits caractères. Scanabowl traduit la liste d’ingrédients et l’analyse nutritionnelle en une note claire, avec une explication de chaque point."]
-      },
-      {
         "h": "Ce qui nous distingue",
         "ul": [
           "**Fondé sur la science** – notre notation suit les recommandations FEDIAF et NRC publiées et la recherche évaluée par des pairs, et nous citons nos sources.",
@@ -652,7 +660,7 @@
       },
       {
         "h": "Comment nous sommes financés",
-        "p": ["Scanabowl est gratuit. Lorsque vous commandez un aliment via nos liens bol.com, nous pouvons toucher une petite commission, sans frais supplémentaires pour vous. Ces revenus sont réinvestis dans le site. En savoir plus dans la [mention d’affiliation](/{lang}/affiliate)."]
+        "p": ["Scanabowl est gratuit. Lorsque vous commandez un aliment via nos liens vers zooplus ou bol.com, nous pouvons toucher une petite commission, sans frais supplémentaires pour vous. Ces revenus sont réinvestis dans le site. En savoir plus dans la [mention d’affiliation](/{lang}/affiliate)."]
       },
       {
         "h": "Participez",
@@ -681,12 +689,12 @@
       },
       {
         "h": "Cookies et suivi",
-        "p": ["Nous n’utilisons pas de cookies publicitaires ni de suivi. Nous enregistrons un petit cookie fonctionnel (la langue choisie, pendant un an) et des entrées de stockage local pour le profil de votre animal. Étant strictement fonctionnels, ils ne nécessitent pas de bannière de cookies. Si nous ajoutons un jour des statistiques, nous utiliserons un outil respectueux de la vie privée et mettrons cette page à jour."]
+        "p": ["Nous n'utilisons aucun cookie publicitaire ou de suivi. Nous enregistrons un petit cookie fonctionnel (la langue choisie, pendant un an) et des éléments de stockage local pour le profil de votre animal et votre liste de comparaison. Comme ils sont strictement fonctionnels, aucune bannière cookies n'est nécessaire.", "Pour savoir quelles pages sont consultées et quels aliments sont recherchés sans être trouvés, nous utilisons **Vercel Web Analytics**. Cet outil fonctionne sans cookies et ne relie rien à votre personne : les visiteurs sont seulement comptés avec un code anonyme supprimé après 24 heures. Nous voyons des totaux, comme les visites par page, le pays et la région, le navigateur et le type d'appareil. Nous n'enregistrons pas les recherches, sauf les termes et codes-barres qui n'ont donné aucun résultat : cela nous indique quels aliments ajouter."]
       },
       {
         "h": "Prestataires",
         "ul": [
-          "**Vercel** héberge le site et traite des données techniques comme les adresses IP dans les journaux du serveur.",
+          "**Vercel** héberge le site et traite des données techniques comme les adresses IP dans les journaux du serveur. Vercel Web Analytics compte les visites sans cookies (voir ci-dessus).",
           "**Resend** achemine les e-mails générés par nos formulaires.",
           "**zooplus et Awin** – lorsque vous cliquez sur un lien vers zooplus, zooplus et le réseau d’affiliation Awin peuvent déposer leurs propres cookies selon leur propre politique de confidentialité.",
         "**bol.com** – lorsque vous cliquez sur un lien d’affiliation, bol.com et sa plateforme partenaire peuvent déposer leurs propres cookies selon leur propre politique de confidentialité."
@@ -718,7 +726,7 @@
       },
       {
         "h": "Liens vers des tiers et boutiques",
-        "p": ["Les liens vers bol.com et d’autres sites sont fournis par commodité. Les prix, le stock et la livraison sont déterminés par la boutique. Tout achat est un contrat entre vous et la boutique ; Scanabowl n’y est pas partie."]
+        "p": ["Les liens vers zooplus, bol.com et d’autres sites sont fournis par commodité. Les prix, le stock et la livraison sont déterminés par la boutique. Tout achat est un contrat entre vous et la boutique ; Scanabowl n’y est pas partie."]
       },
       {
         "h": "Informations soumises",
@@ -776,6 +784,73 @@
         ]
       }
     ]
+  },
+  "guides": {
+    "indexMetaTitle": "Meilleure nourriture pour chien et chat {year} : classements indépendants",
+    "indexMetaDescription": "La meilleure nourriture pour chaton, pour chiot, la meilleure pâtée, la nourriture senior et plus : des classements établis automatiquement selon un score indépendant. Aucune place payante.",
+    "indexTitle": "La meilleure nourriture pour votre chien ou votre chat",
+    "indexIntro": "Des classements pour chaque situation, du chaton au senior et de la pâtée à la nourriture à une seule protéine. Chaque liste est établie automatiquement à partir des aliments de notre base, dans l'ordre de leur score Scanabowl.",
+    "indexNote": "Les listes sont recalculées à chaque mise à jour de la base. Aucune marque ne peut acheter une place. Nous pouvons toucher une commission si vous commandez via un lien, mais cela n'influence jamais l'ordre.",
+    "forCats": "Pour chats",
+    "forDogs": "Pour chiens",
+    "topPick": "Actuellement n° 1 :",
+    "openList": "Voir le top {count}",
+    "kicker": "Classement {year}",
+    "compared": "{count} aliments de {brands} marques comparés.",
+    "listTitle": "Le top {count}",
+    "rank": "Numéro {n}",
+    "factProtein": "Protéines {value} % (matière sèche)",
+    "factFat": "matières grasses {value} %",
+    "factKcal": "{value} kcal pour 100 g",
+    "factMoisture": "humidité {value} %",
+    "factCalcium": "calcium {value} % (matière sèche)",
+    "factCalciumUnknown": "calcium non indiqué sur l'étiquette",
+    "factAnimal": "{pct} % des protéines d'origine animale",
+    "view": "Voir le score et les ingrédients",
+    "lookFor": "À quoi faire attention ?",
+    "howRanked": "Comment cette liste est établie",
+    "howRankedText": "Automatiquement, sans sélection manuelle : tous les aliments complets correspondant à ce thème, dans l'ordre de leur score Scanabowl. Nous montrons un seul format par recette et au maximum {perBrand} aliments par marque, pour vous laisser un vrai choix. Les aliments diététiques vétérinaires, les friandises, les aliments complémentaires et les aliments aux données d'étiquette insuffisantes sont exclus. Aucune marque ne peut acheter une place. Le score décrit l'étiquette et ne constitue pas un avis vétérinaire. [Comment nous calculons le score](/{lang}/how-we-score).",
+    "seeAll": "Tous les aliments dans le moteur de recherche",
+    "compareTop": "Comparer le top 3",
+    "readMore": "En savoir plus sur le blog",
+    "otherGuides": "Autres classements",
+    "empty": "Il n'y a pas encore assez d'aliments notés pour cette liste.",
+    "onFoodPage": "Comparer avec le classement"
+  },
+  "compare": {
+    "metaTitle": "Comparer la nourriture pour chien et chat",
+    "metaDescription": "Comparez deux ou trois aliments côte à côte : score, protéines, matières grasses, calories, portion journalière et coût par jour pour votre chien ou votre chat.",
+    "title": "Comparer des aliments",
+    "intro": "Comparez jusqu'à trois aliments côte à côte. Vous voyez le score et les valeurs nutritionnelles, combien de grammes votre animal mange par jour et, si vous saisissez le prix, ce que cela coûte par jour.",
+    "add": "Ajouter un aliment",
+    "full": "Vous comparez déjà {max} aliments. Retirez-en un pour en ajouter un autre.",
+    "noResults": "Aucun résultat. Essayez un autre nom ou choisissez l'autre espèce ci-dessus.",
+    "emptyTitle": "Rien à comparer pour l'instant",
+    "emptyText": "Cherchez un aliment ci-dessus ou utilisez le bouton « Comparer » sur la page d'un aliment.",
+    "food": "Aliment",
+    "remove": "Retirer {name} de la comparaison",
+    "best": "meilleur",
+    "protein": "Protéines (matière sèche)",
+    "animal": "Part animale des protéines",
+    "fat": "Matières grasses (matière sèche)",
+    "kcal": "Énergie pour 100 g",
+    "contains": "Contient (allergènes)",
+    "forPet": "Pour {name}",
+    "petNo": "Ne convient pas (allergie)",
+    "petMatch": "Compatibilité {score}",
+    "grams": "Portion par jour",
+    "price": "Prix que vous payez",
+    "priceFor": "Prix pour {name}",
+    "perPack": "pour {pack}",
+    "perKg": "par kilo",
+    "perDay": "Coût par jour",
+    "weight": "Poids de votre animal (kg) :",
+    "dailyStandard": "Calculé avec {kcal} kcal par jour pour un animal adulte moyen de ce poids.",
+    "dailyForPet": "Portions pour {name} : {kcal} kcal par jour, d'après votre profil d'animal.",
+    "note": "La portion et le coût sont des estimations basées sur l'énergie indiquée sur l'étiquette et les formules FEDIAF ; saisissez un prix pour voir le coût par jour. En vert : le meilleur de ces aliments sur cette ligne. Le score décrit l'étiquette et ne constitue pas un avis vétérinaire.",
+    "addThis": "Comparer",
+    "added": "Dans votre comparaison",
+    "open": "Voir la comparaison ({count}/{max})"
   },
   "errors": {
     "notFoundTitle": "Page introuvable",

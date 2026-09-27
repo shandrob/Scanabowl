@@ -33,6 +33,8 @@ export interface ProductDetail {
   pack: string;
   price?: number;
   bolUrl?: string;
+  /** exact product page at zooplus (Awin product file); without it the zooplus button opens a search */
+  zooplusUrl?: string;
   image?: string;
   /** who took the photo, when it is not our own (licence requires the credit) */
   imageCredit?: ImageCredit;
@@ -102,6 +104,10 @@ export interface IndexEntry {
   nu: [number, number, number, number, number] | null;
   /** price in euro if known */
   pc?: number;
+  /** pillar points (comparison tool): [nutrition /35, ingredients /50, formulation /15] */
+  pl?: [number, number, number];
+  /** share of the protein that comes from animal ingredients, 0-100 */
+  an?: number;
 }
 
 export interface Meta {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CompareButton } from "@/components/compare/CompareButton";
 import { Alternatives } from "@/components/product/Alternatives";
 import { AnalysisTable } from "@/components/product/AnalysisTable";
 import { IngredientsBlock } from "@/components/product/IngredientsBlock";
@@ -12,6 +13,8 @@ import { detailToIndex } from "@/lib/data/index-entry";
 import type { ImageCredit } from "@/lib/data/types";
 import { brandPageSlug } from "@/lib/data/brands";
 import { alternativesFor, getProduct } from "@/lib/data/products";
+import { guidesFor } from "@/lib/guides/defs";
+import { GUIDE_TEXT } from "@/lib/guides/content";
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT, type TFunction } from "@/lib/i18n/t";
@@ -64,6 +67,7 @@ export default async function ProductPage({ params }: Props) {
   const t = createT(await getDictionary(lang));
   const [alternatives, brandSlug] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand)]);
   const entry = detailToIndex(p);
+  const guides = guidesFor(p);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -135,6 +139,7 @@ export default async function ProductPage({ params }: Props) {
             {p.pack && <li className="rounded-lg border border-line bg-paper px-2.5 py-1">{p.pack}</li>}
           </ul>
           {p.ean && <p className="mt-3 font-mono text-xs text-ink-faint">EAN {p.ean}</p>}
+          <div className="mt-4"><CompareButton id={p.id} species={p.species} /></div>
           {p.imageCredit && (
             <p className="mt-1 hidden text-xs text-ink-faint sm:block">
               <PhotoCredit credit={p.imageCredit} t={t} />
@@ -160,7 +165,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <OrderCard ean={p.ean} name={p.name} brand={p.brand} bolUrl={p.bolUrl} lang={lang} t={t} />
+          <OrderCard ean={p.ean} name={p.name} brand={p.brand} bolUrl={p.bolUrl} zooplusUrl={p.zooplusUrl} lang={lang} t={t} />
           <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft">
             <h2 className="font-display text-base font-semibold text-brand-deep">{t("product.dataTitle")}</h2>
             <p className="mt-2">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>
@@ -170,6 +175,18 @@ export default async function ProductPage({ params }: Props) {
               </Link>
             </p>
           </section>
+          {guides.length > 0 && (
+            <section className="rounded-2xl border border-line bg-paper p-5 text-sm">
+              <h2 className="font-display text-base font-semibold text-brand-deep">{t("guides.onFoodPage")}</h2>
+              <ul className="mt-2 space-y-1.5">
+                {guides.map((g) => (
+                  <li key={g.slug}>
+                    <Link href={localePath(lang, `/best/${g.slug}`)} className="font-semibold text-brand underline underline-offset-2">{GUIDE_TEXT[lang][g.slug]?.h1}</Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
           <p className="text-xs leading-relaxed text-ink-faint">{t("product.disclaimer")}</p>
         </aside>
       </div>

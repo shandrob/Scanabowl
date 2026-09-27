@@ -4,6 +4,8 @@
     "description": "Look up any dog or cat food and see an independent score based on its ingredients and nutrients. Personalised for your pet, with allergies filtered out."
   },
   "nav": {
+    "best": "Best picks",
+    "compare": "Compare",
     "allBrands": "All brands",
     "main": "Main navigation",
     "home": "Home",
@@ -109,6 +111,9 @@
     "unsupported": "Scanning is not available on this device or browser. Please type the number under the barcode instead."
   },
   "home": {
+    "guidesTitle": "The best food for…",
+    "guidesText": "Top lists for every situation, ranked automatically by score. No brand can buy a place.",
+    "guidesAll": "All top lists",
     "badge": "Independent · Science-based · Free",
     "title": "Is your pet’s food really as good as the pack says?",
     "subtitle": "Look up any dog or cat food and get an independent score from 0 to 100 – calculated from the ingredients and nutrients on the label, using veterinary nutrition guidelines.",
@@ -157,7 +162,7 @@
       },
       {
         "q": "Do brands pay to get a better score?",
-        "a": "No. Scores are calculated by the same formula for every food. We earn a small commission when you order via our bol.com links, at no extra cost to you – see the [affiliate disclosure](/{lang}/affiliate)."
+        "a": "No. Scores are calculated by the same formula for every food. We earn a small commission when you order via our links to zooplus or bol.com, at no extra cost to you – see the [affiliate disclosure](/{lang}/affiliate)."
       },
       {
         "q": "Why is a prescription or veterinary diet not scored?",
@@ -174,6 +179,12 @@
     ]
   },
   "finder": {
+    "otherSpeciesCat": "We did find {count} foods for cats.",
+    "otherSpeciesDog": "We did find {count} foods for dogs.",
+    "switchToCat": "Show cat food",
+    "switchToDog": "Show dog food",
+    "hiddenByFilters": "{count} foods match your search but fall outside your filters (for example foods without a score).",
+    "showHidden": "Show them",
     "metaTitle": "Find dog & cat food – independent scores",
     "metaDescription": "Browse and compare dog and cat foods by score, type and life stage. Filter by brand and allergy, sorted by an independent 0–100 score.",
     "title": "Find the right food",
@@ -362,6 +373,7 @@
     "portionNote": "This is a starting point: weigh your pet regularly and adjust to keep a healthy body condition. Follow your vet’s advice."
   },
   "order": {
+    "zooplusExact": "View at zooplus",
     "title": "Order this food",
     "text": "Compare the current price and delivery at zooplus and bol.com.",
     "zooplusButton": "Search at zooplus",
@@ -527,7 +539,7 @@
       },
       {
         "h": "Data, independence and errors",
-        "p": ["Product data comes from public product information and from manufacturers who submit their products. We always check submissions before they are published, and the same formula is applied to every food – no brand can influence its score. We earn a commission on orders via our bol.com links; that is explained in the [affiliate disclosure](/{lang}/affiliate).", "Spotted an error? Use the “Report a correction” link on the product page. We fix mistakes quickly."]
+        "p": ["Product data comes from public product information and from manufacturers who submit their products. We always check submissions before they are published, and the same formula is applied to every food – no brand can influence its score. We earn a commission on orders via our links to zooplus or bol.com; that is explained in the [affiliate disclosure](/{lang}/affiliate).", "Spotted an error? Use the “Report a correction” link on the product page. We fix mistakes quickly."]
       }
     ],
     "refsTitle": "Scientific sources",
@@ -638,10 +650,6 @@
     "intro": "Scanabowl helps pet owners understand what is really in their dog’s or cat’s bowl.",
     "sections": [
       {
-        "h": "Why we exist",
-        "p": ["Pet food packaging is full of claims – “natural”, “premium”, “complete” – but the actual information is hidden in small print. Scanabowl translates the ingredient list and nutrient analysis into a clear score, with an explanation of every point."]
-      },
-      {
         "h": "What makes us different",
         "ul": [
           "**Science-based** – our scoring follows published FEDIAF and NRC guidelines and peer-reviewed research, and we list our sources.",
@@ -652,7 +660,7 @@
       },
       {
         "h": "How we are funded",
-        "p": ["Scanabowl is free to use. When you order a food via our bol.com links, we may earn a small commission at no extra cost to you. That income is reinvested in the website. Read more in the [affiliate disclosure](/{lang}/affiliate)."]
+        "p": ["Scanabowl is free to use. When you order a food via our links to zooplus or bol.com, we may earn a small commission at no extra cost to you. That income is reinvested in the website. Read more in the [affiliate disclosure](/{lang}/affiliate)."]
       },
       {
         "h": "Get involved",
@@ -681,12 +689,12 @@
       },
       {
         "h": "Cookies and tracking",
-        "p": ["We do not use advertising or tracking cookies. We store one small functional cookie (your chosen language, for one year) and local-storage entries for your pet profile. Because these are strictly functional, no cookie banner is needed. If we ever add analytics, we will use a privacy-friendly tool and update this page."]
+        "p": ["We use no advertising or tracking cookies. We store one small functional cookie (your chosen language, for one year) and local-storage items for your pet profile and your comparison list. Because these are strictly functional, no cookie banner is needed.", "To see which pages are visited and which foods people search for but cannot find, we use **Vercel Web Analytics**. It works without cookies and links nothing to you as a person: visitors are only counted with an anonymous code that is discarded after 24 hours. We see totals, such as visits per page, country and region, browser and type of device. We do not store searches, except search terms and barcodes that found nothing: that tells us which foods to add."]
       },
       {
         "h": "Service providers",
         "ul": [
-          "**Vercel** hosts the website and processes technical data such as IP addresses in server logs.",
+          "**Vercel** hosts the website and processes technical data such as IP addresses in server logs. Vercel Web Analytics counts visits without cookies (see above).",
           "**Resend** delivers the emails generated by our forms.",
           "**zooplus and Awin** – when you click a link to zooplus, zooplus and the affiliate network Awin may set their own cookies under their own privacy policy.",
         "**bol.com** – when you click an affiliate link, bol.com and its partner platform may set their own cookies under their own privacy policy."
@@ -718,7 +726,7 @@
       },
       {
         "h": "Third-party links and shops",
-        "p": ["Links to bol.com and other sites are provided for convenience. Prices, stock and delivery are determined by the shop. Any purchase is a contract between you and the shop; Scanabowl is not a party to it."]
+        "p": ["Links to zooplus, bol.com and other sites are provided for convenience. Prices, stock and delivery are determined by the shop. Any purchase is a contract between you and the shop; Scanabowl is not a party to it."]
       },
       {
         "h": "Submitted information",
@@ -776,6 +784,73 @@
         ]
       }
     ]
+  },
+  "guides": {
+    "indexMetaTitle": "Best dog food and cat food {year}: independent top lists",
+    "indexMetaDescription": "The best kitten food, puppy food, wet food, senior food and more: top lists ranked automatically by an independent score. No paid placements.",
+    "indexTitle": "The best food for your dog or cat",
+    "indexIntro": "Top lists for every situation, from kitten to senior and from wet food to single-protein food. Every list is put together automatically from the foods in our database, in order of their Scanabowl score.",
+    "indexNote": "The lists are recalculated with every database update. No brand can buy a place. We may earn a commission when you order through a link, but that never affects the order.",
+    "forCats": "For cats",
+    "forDogs": "For dogs",
+    "topPick": "Now at no. 1:",
+    "openList": "See the top {count}",
+    "kicker": "Top list {year}",
+    "compared": "{count} foods from {brands} brands compared.",
+    "listTitle": "The top {count}",
+    "rank": "Number {n}",
+    "factProtein": "Protein {value}% (dry matter)",
+    "factFat": "fat {value}%",
+    "factKcal": "{value} kcal per 100 g",
+    "factMoisture": "moisture {value}%",
+    "factCalcium": "calcium {value}% (dry matter)",
+    "factCalciumUnknown": "calcium not stated on the label",
+    "factAnimal": "{pct}% of the protein from animals",
+    "view": "See score and ingredients",
+    "lookFor": "What to look for",
+    "howRanked": "How this list is made",
+    "howRankedText": "Automatically, with no hand-picking: all complete foods that fit this topic, in order of their Scanabowl score. We show one pack size per recipe and at most {perBrand} foods per brand, so you get a real choice. Veterinary diets, treats, complementary foods and foods with too little label data are left out. No brand can buy a place. The score describes the label and is not veterinary advice. [How we calculate the score](/{lang}/how-we-score).",
+    "seeAll": "All foods in the food finder",
+    "compareTop": "Compare the top 3",
+    "readMore": "Read more on the blog",
+    "otherGuides": "More top lists",
+    "empty": "There are not enough scored foods for this list yet.",
+    "onFoodPage": "Compare with the top list"
+  },
+  "compare": {
+    "metaTitle": "Compare dog food and cat food",
+    "metaDescription": "Put two or three foods side by side: score, protein, fat, calories, daily portion and what it costs per day for your dog or cat.",
+    "title": "Compare foods",
+    "intro": "Put up to three foods side by side. You see the score and nutrients, how many grams your pet needs a day and – if you enter the price – what that costs per day.",
+    "add": "Add a food",
+    "full": "You are already comparing {max} foods. Remove one to add another.",
+    "noResults": "Nothing found. Try another name, or choose the other species above.",
+    "emptyTitle": "Nothing to compare yet",
+    "emptyText": "Search for a food above, or use the “Compare” button on a food's page.",
+    "food": "Food",
+    "remove": "Remove {name} from the comparison",
+    "best": "best",
+    "protein": "Protein (dry matter)",
+    "animal": "Share of protein from animals",
+    "fat": "Fat (dry matter)",
+    "kcal": "Energy per 100 g",
+    "contains": "Contains (allergens)",
+    "forPet": "For {name}",
+    "petNo": "Not suitable (allergy)",
+    "petMatch": "Match {score}",
+    "grams": "Portion per day",
+    "price": "Price you pay",
+    "priceFor": "Price for {name}",
+    "perPack": "for {pack}",
+    "perKg": "per kilo",
+    "perDay": "Cost per day",
+    "weight": "Your pet's weight (kg):",
+    "dailyStandard": "Calculated with {kcal} kcal a day for an average adult pet of this weight.",
+    "dailyForPet": "Portions for {name}: {kcal} kcal a day, from your pet profile.",
+    "note": "Portion and cost are estimates based on the energy on the label and the FEDIAF formulas; enter a price to see the cost per day. Green means: the best of these foods on that line. The score describes the label and is not veterinary advice.",
+    "addThis": "Compare",
+    "added": "In your comparison",
+    "open": "View comparison ({count}/{max})"
   },
   "errors": {
     "notFoundTitle": "Page not found",

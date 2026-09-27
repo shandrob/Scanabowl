@@ -146,6 +146,37 @@ notice next to it and a full disclosure page).
 Without a site id the button still works, it just doesn't earn commission. The button searches bol.com
 by **EAN**. If you know the exact bol.com product URL of a food, put it in the `bol_url` column and that link is used instead.
 
+## 6b. zooplus, statistics, top lists and the About page
+
+**zooplus (Awin).** The green button on every food page goes to zooplus through Awin (publisher 3106869,
+zooplus NL-BE 8139). Without more information it opens a zooplus *search*. Once zooplus has approved you in Awin:
+
+1. In Awin go to **Toolbox -> Create-a-Feed**, pick the zooplus programme, format **CSV**, and tick at least these
+   columns: `product_name`, `brand_name`, `ean`, `product_GTIN`, `merchant_deep_link`, `merchant_image_url`,
+   `search_price`, `merchant_category`, `merchant_product_category_path`, `description`.
+2. Download the file (it may end in `.gz`; that is fine) and put it in `database/feeds/`. Never paste the
+   download link anywhere: it contains your personal Awin key. The folder is not uploaded to GitHub.
+3. Run `npm run data:zooplus` (add `-- --images` to also fetch photos for foods that have none). It writes a small
+   file, `database/zooplus/zooplus-feed.csv`, which *is* uploaded.
+4. Publish. Every food with a matching barcode now gets an exact "Bekijk bij zooplus" link (and a price in the
+   comparison tool); foods we did not have yet are added when zooplus shows their ingredient list.
+   `database/build-report.txt` says how many.
+
+**Visitor statistics (Vercel Web Analytics).** Switch it on once in Vercel: **Project -> Analytics -> Enable**,
+then press **Redeploy** on the latest deployment. It works without cookies (see the privacy page). Searches that
+found nothing appear under **Pages** as `/nl/no-results/<what was typed>` (barcodes as
+`/nl/no-results/barcode-<number>`): the foods people look for and cannot find - add those first. The free Hobby
+plan includes 50,000 events a month; after that counting stops until the next month (the site keeps working).
+
+**Top lists (`/nl/best`) and the comparison tool (`/nl/compare`).** Both are automatic. The lists are defined in
+`lib/guides/defs.ts` (which foods belong in a list) and their texts in `lib/guides/content.ts` (NL/EN/DE/FR);
+they are re-ranked on every publish. Ranking = the plain Scanabowl score, one pack size per recipe, at most two
+foods per brand.
+
+**About page.** Your story is in `content/about/nl.md` (and `en.md`, `de.md`, `fr.md`) - edit it on GitHub like
+a blog post. For your photo, upload a picture named `photo.jpg` (or `.png`) to `content/about/`; the site crops
+it to a square and shows it next to the story on the next publish.
+
 ## 7. Putting the site online
 
 The site is a Next.js app that runs on **Vercel**, where scanabowl.com already lives.

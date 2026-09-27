@@ -5,10 +5,9 @@ import { SITE } from "./site";
  *
  *   https://www.awin1.com/cread.php?awinmid=<zooplus merchant id>&awinaffid=<publisher id>&clickref=<ref>&ued=<target>
  *
- * zooplus.nl cannot search by barcode, so the link opens a zooplus search for the brand and product name.
- * zooplus does not sell every brand; the visitor then sees zooplus' closest alternatives. Once zooplus has
- * approved the publisher account, Awin also offers a product feed with EANs - that would allow exact product
- * links (put them in a "zooplus_url" column, the same way bol_url works).
+ * zooplus.nl cannot search by barcode. Foods found in the zooplus product file from Awin (npm run data:zooplus)
+ * get their exact product page; all others open a zooplus search for the brand and product name. zooplus does
+ * not sell every brand; the visitor then sees zooplus' closest alternatives.
  */
 export interface ZooplusTarget {
   brand: string;
@@ -31,7 +30,34 @@ export function zooplusTargetUrl(p: ZooplusTarget): string {
 }
 
 export function zooplusAffiliateUrl(p: ZooplusTarget, clickRef: string): string {
-  const target = zooplusTargetUrl(p);
+  return awinWrap(zooplusTargetUrl(p), clickRef);
+}
+
+/** Only real zooplus pages (or Awin's own tracking links) are accepted from the product file. */
+function exactUrl(url: string | undefined): URL | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    if (u.protocol !== "https:") return null;
+    return /(^|\.)zooplus\.(nl|be)$/.test(u.hostname) || u.hostname === "www.awin1.com" ? u : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Link for the "buy" button: the exact product page when the zooplus product file has this food, otherwise a
+ * zooplus search. `exact` tells the button which text to show ("view" or "search").
+ */
+export function zooplusLink(p: ZooplusTarget & { zooplusUrl?: string }, clickRef: string): { url: string; exact: boolean } {
+  const exact = exactUrl(p.zooplusUrl);
+  if (!exact) return { url: zooplusAffiliateUrl(p, clickRef), exact: false };
+  // an Awin link from the file already carries our publisher id
+  if (exact.hostname === "www.awin1.com") return { url: exact.toString(), exact: true };
+  return { url: awinWrap(exact.toString(), clickRef), exact: true };
+}
+
+function awinWrap(target: string, clickRef: string): string {
   if (!SITE.awin.publisherId || !SITE.awin.zooplusMerchantId) return target;
   const params = new URLSearchParams({
     awinmid: SITE.awin.zooplusMerchantId,

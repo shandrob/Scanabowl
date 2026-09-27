@@ -10,12 +10,16 @@ next-env.d.ts
 /public/data/
 /public/products/
 /public/blog-images/
+/public/about-photo.webp
 
 # secrets and local settings
 .env
 .env.local
 .env.*.local
 .vercel
+
+# raw product files from affiliate networks (large, change daily; npm run data:zooplus makes a small copy)
+database/feeds/
 
 # scraper progress files and reports
 database/*.done.txt

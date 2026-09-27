@@ -7,6 +7,7 @@ import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { IconAlert, IconPaw } from "@/components/ui/Icons";
 import { SearchBox } from "./SearchBox";
 import { ProductCard } from "./ProductCard";
+import { reportNoResults } from "@/lib/analytics";
 import { loadIndex } from "@/lib/data/client";
 import type { IndexEntry, Meta } from "@/lib/data/types";
 import { localePath } from "@/lib/i18n/config";
@@ -126,6 +127,39 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
     });
     return { rows, hiddenByAllergy };
   }, [index, q, type, stage, brand, grainFree, minScore, sort, extra, pet, searchText]);
+
+  // Does the search find anything at all, ignoring the filters? If not, look at the other species (people often
+  // search a cat food while the dog tab is open) and, if that finds nothing either, report the missing food.
+  const totalMatches = useMemo(() => {
+    const terms = queryTerms(q);
+    if (!index || !terms.length) return null;
+    let n = 0;
+    for (const e of index) if (matchesQuery(searchHaystack(e.b, e.n, e.e), terms)) n++;
+    return n;
+  }, [index, q]);
+  const [other, setOther] = useState<{ q: string; species: Species; count: number } | null>(null);
+  useEffect(() => {
+    if (totalMatches !== 0) return;
+    const otherSpecies: Species = species === "dog" ? "cat" : "dog";
+    let alive = true;
+    const timer = setTimeout(() => {
+      loadIndex(otherSpecies)
+        .then((data) => {
+          if (!alive) return;
+          const terms = queryTerms(q);
+          const count = data.filter((e) => matchesQuery(searchHaystack(e.b, e.n, e.e), terms)).length;
+          setOther({ q, species: otherSpecies, count });
+          // barcodes are reported by the barcode lookup itself
+          if (count === 0 && !/^\d{8,14}$/.test(q.replace(/[\s-]/g, ""))) reportNoResults(lang, q);
+        })
+        .catch(() => {});
+    }, 1500);
+    return () => {
+      alive = false;
+      clearTimeout(timer);
+    };
+  }, [totalMatches, q, species, lang]);
+  const otherHit = totalMatches === 0 && other && other.q === q && other.species !== species && other.count > 0 ? other : null;
 
   const brandList = brands[species];
   const allergenNames = pet ? [...pet.allergens.map((a) => t(`allergen.${a}`)), ...pet.customAllergens] : [];
@@ -299,7 +333,34 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
           {view && view.rows.length === 0 && (
             <div className="rounded-2xl border border-dashed border-line bg-paper p-8 text-center">
               <p className="font-display text-xl font-semibold text-brand-deep">{t("finder.emptyTitle")}</p>
-              <p className="mt-2 text-ink-soft">{t("finder.emptyText")}</p>
+              {totalMatches !== null && totalMatches > 0 ? (
+                <p className="mt-2 text-ink-soft">
+                  {t("finder.hiddenByFilters", { count: totalMatches })}{" "}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setType("all");
+                      setStage("all");
+                      setBrand("");
+                      setMinScore(0);
+                      setGrainFree(false);
+                      setExtra(true);
+                    }}
+                    className="font-semibold text-brand underline underline-offset-2"
+                  >
+                    {t("finder.showHidden")}
+                  </button>
+                </p>
+              ) : otherHit ? (
+                <p className="mt-2 text-ink-soft">
+                  {t(otherHit.species === "cat" ? "finder.otherSpeciesCat" : "finder.otherSpeciesDog", { count: otherHit.count })}{" "}
+                  <button type="button" onClick={() => setSpecies(otherHit.species)} className="font-semibold text-brand underline underline-offset-2">
+                    {t(otherHit.species === "cat" ? "finder.switchToCat" : "finder.switchToDog")}
+                  </button>
+                </p>
+              ) : (
+                <p className="mt-2 text-ink-soft">{t("finder.emptyText")}</p>
+              )}
               <Link href={localePath(lang, "/suggest")} className="mt-4 inline-block font-semibold text-brand underline underline-offset-2">
                 {t("finder.suggestMissing")}
               </Link>

@@ -1,5 +1,7 @@
 import type { IndexEntry, ProductDetail } from "./types";
 
+const r1 = (v: number) => Math.round(v * 10) / 10;
+
 /** Slim record for the browser, derived from the full product record (single source of truth). */
 export function detailToIndex(d: ProductDetail): IndexEntry {
   const n = d.nutrition;
@@ -32,5 +34,7 @@ export function detailToIndex(d: ProductDetail): IndexEntry {
         ]
       : null,
     ...(d.price ? { pc: d.price } : {}),
+    ...(d.pillars ? { pl: [r1(d.pillars.nutrition.points), r1(d.pillars.ingredients.points), r1(d.pillars.formulation.points)] as [number, number, number] } : {}),
+    ...(d.animalProteinShare !== null ? { an: Math.round(d.animalProteinShare * 100) } : {}),
   };
 }
