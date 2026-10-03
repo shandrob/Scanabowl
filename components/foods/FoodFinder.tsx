@@ -46,7 +46,14 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
     setSpeciesTouched(true);
   };
   const [q, setQ] = useState(params.get("q") ?? "");
-  const [type, setType] = useState<FoodType | "all">((params.get("type") as FoodType) || "all");
+  const [typeChoice, setTypeChoice] = useState<FoodType | "all">((params.get("type") as FoodType) || "all");
+  const [typeTouched, setTypeTouched] = useState(params.has("type"));
+  // until the visitor picks a type, start on the type they said they want to feed (pet profile)
+  const type: FoodType | "all" = !typeTouched && active?.preferredType && active.species === species ? active.preferredType : typeChoice;
+  const setType = (v: FoodType | "all") => {
+    setTypeChoice(v);
+    setTypeTouched(true);
+  };
   const [stage, setStage] = useState<LifeStage | "all">((params.get("stage") as LifeStage) || "all");
   const [brand, setBrand] = useState(params.get("brand") ?? "");
   const [grainFree, setGrainFree] = useState(params.get("gf") === "1");
@@ -129,7 +136,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
       let personal: number | null = null;
       if (pet) {
         const fit = personalFit(e, pet);
-        if (fit.allergy.excluded) {
+        if (fit.allergy.excluded || fit.disliked.length) {
           hiddenByAllergy++;
           continue;
         }
@@ -181,7 +188,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
   const otherHit = totalMatches === 0 && other && other.q === q && other.species !== species && other.count > 0 ? other : null;
 
   const brandList = brands[species];
-  const allergenNames = pet ? [...pet.allergens.map((a) => t(`allergen.${a}`)), ...pet.customAllergens] : [];
+  const allergenNames = pet ? [...new Set([...pet.allergens, ...(pet.dislikes ?? [])])].map((a) => t(`allergen.${a}`)).concat(pet.customAllergens) : [];
   const effectiveSort: Sort = sort === "match" && !pet ? "score" : sort;
 
   const field = "h-11 w-full rounded-xl border border-line bg-paper px-3 text-base text-ink focus:border-brand-mid focus:outline-none focus:ring-4 focus:ring-brand-soft";

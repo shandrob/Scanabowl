@@ -17,6 +17,8 @@ export interface Personal {
   delta: number;
   notes: Array<Reason & { good: boolean }>;
   stage: Stage;
+  /** ingredients this pet will not eat that the label names (allergen ids) */
+  disliked: string[];
 }
 
 type Fit = Pick<IndexEntry, "n" | "t" | "l" | "sc" | "nu" | "pr" | "ad" | "ap"> & { ingredientsText?: string };
@@ -36,7 +38,11 @@ export function personalFit(p: Fit, pet: PetProfile, now = new Date()): Personal
   };
 
   // ---- life stage
-  if (stage === "young") {
+  // FEDIAF sets one standard for "growth and reproduction": a pregnant or nursing animal needs growth food too
+  if (pet.reproduction && stage !== "young") {
+    if (p.l === "young" || p.l === "all") add(2, "repro_match", true);
+    else add(-8, "repro_growth_needed", false);
+  } else if (stage === "young") {
     if (p.l === "young") add(2, "stage_match", true);
     else if (p.l === "all") add(1, "stage_all", true);
     else add(-12, "stage_young_needed", false);
@@ -88,5 +94,6 @@ export function personalFit(p: Fit, pet: PetProfile, now = new Date()): Personal
 
   delta = clamp(delta, -20, 8);
   const score = p.sc === null ? null : Math.round(clamp(p.sc + delta, 0, 100));
-  return { allergy, score, delta, notes, stage };
+  const disliked = (pet.dislikes ?? []).filter((d) => p.ad.includes(d));
+  return { allergy, score, delta, notes, stage, disliked };
 }

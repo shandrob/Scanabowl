@@ -175,4 +175,14 @@ export interface PetProfile {
   strictAllergies: boolean;
   urinaryIssues?: boolean;
   sensitiveDigestion?: boolean;
+  /** the food the pet eats now (id from the food index) - lets the site suggest better alternatives */
+  currentFoodId?: string;
+  /** its name when it was chosen, so the profile form can show it without loading the food list */
+  currentFoodName?: string;
+  /** what the owner wants to feed; the food finder starts on this type */
+  preferredType?: "dry" | "wet";
+  /** allergen ids the pet simply will not eat ("no fish"): hidden like allergies, without the medical warning */
+  dislikes?: string[];
+  /** pregnant or nursing: needs a food for growth and far more energy */
+  reproduction?: "pregnant" | "nursing";
 }

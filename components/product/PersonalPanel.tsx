@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { GRADE_STYLE, gradeOf } from "@/components/ui/grade";
 import { IconAlert, IconCheck, IconPaw, IconX } from "@/components/ui/Icons";
 import { ScoreRing } from "@/components/ui/ScoreRing";
+import { loadIndex } from "@/lib/data/client";
 import type { IndexEntry } from "@/lib/data/types";
 import { localePath } from "@/lib/i18n/config";
 import { scoreAria, speciesLabel } from "@/lib/labels";
@@ -18,6 +20,19 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
   const t = useT();
   const lang = useLang();
   const { active } = usePets();
+  // the food this pet eats now (from the profile), to say "12 points higher than what Bella eats now"
+  const currentId = active && active.species === species && active.currentFoodId !== entry.i ? active.currentFoodId : undefined;
+  const [current, setCurrent] = useState<IndexEntry | null>(null);
+  useEffect(() => {
+    if (!currentId) return;
+    let alive = true;
+    loadIndex(species)
+      .then((data) => alive && setCurrent(data.find((e) => e.i === currentId) ?? null))
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [currentId, species]);
 
   if (!active) {
     return (
@@ -54,6 +69,7 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
   const grams = entry.k ? gramsPerDay(energy.kcal, entry.k) : null;
   const pack = packGrams(entry.pk);
   const perDay = price && pack && grams ? (price / pack) * grams : null;
+  const currentFit = current && currentId === current.i ? personalFit(current, active) : null;
   const listNames = (ids: string[]) => ids.map((a) => (t(`allergen.${a}`).startsWith("allergen.") ? a : t(`allergen.${a}`))).join(", ");
 
   return (
@@ -86,6 +102,13 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
         <p className="mt-4 text-sm text-ink-soft">{t("personal.noAllergies", { name: active.name })}</p>
       )}
 
+      {fit.disliked.length > 0 && !allergy.excluded && (
+        <p className="mt-4 flex gap-3 rounded-xl border border-warn/30 bg-warn-soft p-4 text-sm text-ink">
+          <IconAlert className="mt-0.5 h-5 w-5 shrink-0 text-warn" />
+          {t("personal.disliked", { list: listNames(fit.disliked), name: active.name })}
+        </p>
+      )}
+
       {/* personal fit */}
       {fit.score !== null && !allergy.excluded && (
         <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start">
@@ -111,6 +134,24 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
         </div>
       )}
 
+      {/* compared with what the pet eats now */}
+      {active.currentFoodId === entry.i ? (
+        <p className="mt-5 text-sm font-semibold text-brand-deep">{t("personal.isCurrent", { name: active.name })}</p>
+      ) : (
+        currentId && current && currentFit?.score !== null && currentFit?.score !== undefined && fit.score !== null && !allergy.excluded && (
+          <p className="mt-5 text-sm text-ink">
+            <strong>
+              {fit.score === currentFit.score
+                ? t("personal.vsCurrentSame", { name: active.name, food: current.n })
+                : t(fit.score > currentFit.score ? "personal.vsCurrentUp" : "personal.vsCurrentDown", { diff: Math.abs(fit.score - currentFit.score), name: active.name, food: current.n })}
+            </strong>{" "}
+            <Link href={`${localePath(lang, "/compare")}?species=${species}&f=${encodeURIComponent(current.i)},${encodeURIComponent(entry.i)}`} prefetch={false} className="font-semibold text-brand underline underline-offset-2">
+              {t("personal.compareCurrent")}
+            </Link>
+          </p>
+        )
+      )}
+
       {/* portion + cost */}
       {grams !== null && !allergy.excluded && (
         <div className="mt-6 rounded-xl bg-cream/70 p-4">
@@ -119,6 +160,7 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
             {t("personal.portionText", { kcal: energy.kcal, grams })}
             {perDay !== null && <> {t("personal.costText", { cost: perDay.toFixed(2).replace(".", lang === "en" ? "." : ",") })}</>}
           </p>
+          {active.reproduction && <p className="mt-2 text-sm font-medium text-ink">{t("personal.reproNote", { name: active.name })}</p>}
           <p className="mt-2 text-xs text-ink-faint">{t(`personal.energyBasis.${energy.basis}`, { factor: energy.factor })} {t("personal.portionNote")}</p>
         </div>
       )}

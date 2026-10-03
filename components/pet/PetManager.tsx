@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { FoodPicker } from "@/components/foods/FoodPicker";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { IconCheck, IconInfo, IconPaw, IconX } from "@/components/ui/Icons";
 import { localePath } from "@/lib/i18n/config";
@@ -24,6 +25,9 @@ const blank = (species: Species = "dog"): PetProfile => ({
   customAllergens: [],
   strictAllergies: true,
 });
+
+/** animal proteins a pet may simply refuse - offered as "won't eat" chips */
+const DISLIKE_CHIPS = ["chicken", "beef", "fish", "lamb", "turkey", "duck", "pork", "rabbit", "game"] as const;
 
 const inputCls =
   "h-12 w-full rounded-xl border border-line bg-paper px-4 text-base text-ink placeholder:text-ink-faint focus:border-brand-mid focus:outline-none focus:ring-4 focus:ring-brand-soft";
@@ -73,7 +77,14 @@ export function PetManager() {
       dogSize: sp === "dog" ? (draft.dogSize ?? "medium") : undefined,
       weightKg: isSaved ? draft.weightKg : sp === "dog" ? 15 : 4.2,
       allergens: [],
+      currentFoodId: undefined,
+      currentFoodName: undefined,
     });
+
+  const toggleDislike = (id: string) => {
+    const cur = draft.dislikes ?? [];
+    set("dislikes", cur.includes(id) ? cur.filter((a) => a !== id) : [...cur, id]);
+  };
 
   const common = COMMON_ALLERGENS[draft.species];
   const rest = ALLERGEN_IDS.filter((a) => !common.includes(a));
@@ -192,8 +203,15 @@ export function PetManager() {
           )}
           <div>
             <span className={labelCls}>{t("pet.neutered")}</span>
-            <Segmented<"yes" | "no"> name={t("pet.neutered")} value={draft.neutered ? "yes" : "no"} onChange={(v) => set("neutered", v === "yes")} options={[["yes", t("common.yes")], ["no", t("common.no")]]} />
+            <Segmented<"yes" | "no"> name={t("pet.neutered")} value={draft.neutered ? "yes" : "no"} onChange={(v) => setEdit({ ...draft, neutered: v === "yes", reproduction: v === "yes" ? undefined : draft.reproduction })} options={[["yes", t("common.yes")], ["no", t("common.no")]]} />
           </div>
+          {!draft.neutered && (
+            <div>
+              <span className={labelCls}>{t("pet.reproduction")}</span>
+              <Segmented<"none" | "pregnant" | "nursing"> name={t("pet.reproduction")} value={draft.reproduction ?? "none"} onChange={(v) => set("reproduction", v === "none" ? undefined : v)} options={[["none", t("common.no")], ["pregnant", t("pet.pregnant")], ["nursing", t("pet.nursing")]]} />
+              {draft.reproduction && <p className="mt-2 text-sm text-ink-soft">{t("pet.reproductionHint")}</p>}
+            </div>
+          )}
         </fieldset>
 
         {/* 2. lifestyle */}
@@ -221,7 +239,45 @@ export function PetManager() {
           </div>
         </fieldset>
 
-        {/* 3. allergies */}
+        {/* 3. food: what the pet eats now, what the owner wants to feed, what it refuses */}
+        <fieldset className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card">
+          <legend className="px-2 font-display text-xl font-semibold text-brand-deep">{t("pet.foodTitle")}</legend>
+          <div>
+            <span className={labelCls}>{t("pet.currentFood")}</span>
+            {draft.currentFoodId ? (
+              <div className="flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand-tint px-4 py-3">
+                <span className="min-w-0 truncate font-medium text-ink">{draft.currentFoodName}</span>
+                <button type="button" onClick={() => setEdit({ ...draft, currentFoodId: undefined, currentFoodName: undefined })} className="shrink-0 text-sm font-semibold text-brand underline underline-offset-2">
+                  {t("pet.currentFoodChange")}
+                </button>
+              </div>
+            ) : (
+              <FoodPicker id="pet-current-food" species={draft.species} label={t("pet.currentFood")} onPick={(e) => setEdit({ ...draft, currentFoodId: e.i, currentFoodName: e.n })} />
+            )}
+            <p className="mt-1 text-xs text-ink-faint">{t("pet.currentFoodHint")}</p>
+          </div>
+          <div>
+            <span className={labelCls}>{t("pet.preferredType")}</span>
+            <Segmented<"any" | "dry" | "wet"> name={t("pet.preferredType")} value={draft.preferredType ?? "any"} onChange={(v) => set("preferredType", v === "any" ? undefined : v)} options={[["any", t("pet.preferredAny")], ["dry", t("type.dry")], ["wet", t("type.wet")]]} />
+          </div>
+          <div>
+            <span className={labelCls}>{t("pet.dislikes", { name: draft.name.trim() || t("pet.previewTitle") })}</span>
+            <div className="flex flex-wrap gap-2" role="group" aria-label={t("pet.dislikes", { name: draft.name.trim() || t("pet.previewTitle") })}>
+              {DISLIKE_CHIPS.map((a) => {
+                const on = (draft.dislikes ?? []).includes(a);
+                return (
+                  <button key={a} type="button" aria-pressed={on} onClick={() => toggleDislike(a)} className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition ${on ? "border-warn bg-warn-soft text-ink" : "border-line bg-paper text-ink hover:border-brand-mid"}`}>
+                    {on && <IconX className="h-3.5 w-3.5" />}
+                    {t(`allergen.${a}`)}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="mt-1.5 text-xs text-ink-faint">{t("pet.dislikesHint")}</p>
+          </div>
+        </fieldset>
+
+        {/* 4. allergies */}
         <fieldset className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card">
           <legend className="px-2 font-display text-xl font-semibold text-brand-deep">{t("pet.allergyTitle")}</legend>
           <p className="text-sm text-ink-soft">{t("pet.allergyIntro")}</p>

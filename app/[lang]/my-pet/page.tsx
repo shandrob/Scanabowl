@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { CurrentFoodAdvice } from "@/components/pet/CurrentFoodAdvice";
 import { PetManager } from "@/components/pet/PetManager";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -24,6 +25,7 @@ export default async function MyPetPage({ params }: { params: Promise<{ lang: st
       <div className="mt-8">
         <PetManager />
       </div>
+      <CurrentFoodAdvice />
     </div>
   );
 }

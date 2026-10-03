@@ -18,7 +18,7 @@ export function Alternatives({ candidates, species }: { candidates: IndexEntry[]
   const list = useMemo(() => {
     const rows = candidates
       .map((e) => ({ e, fit: pet ? personalFit(e, pet) : null }))
-      .filter((r) => !r.fit?.allergy.excluded);
+      .filter((r) => !r.fit?.allergy.excluded && !r.fit?.disliked.length);
     if (pet) rows.sort((a, b) => (b.fit?.score ?? 0) - (a.fit?.score ?? 0));
     return rows.slice(0, 4);
   }, [candidates, pet]);
