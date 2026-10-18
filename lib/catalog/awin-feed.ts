@@ -1,5 +1,5 @@
 import { parse } from "csv-parse/sync";
-import { normalizeEan } from "./clean";
+import { extractPack, normalizeEan } from "./clean";
 
 /**
  * The zooplus product file ("product feed") from the Awin affiliate network.
@@ -20,6 +20,7 @@ export interface FeedItem {
   url: string;
   image: string;
   price?: number;
+  pack: string;
   category: string;
   ingredients: string;
   analysis: string;
@@ -58,9 +59,13 @@ const pick = (row: Record<string, string>, ...keys: string[]) => {
   return "";
 };
 
-/** Label sections as zooplus writes them in the product description. */
-const COMPOSITION = /(?:samenstelling|ingredi[eë]nten|composition|zusammensetzung)\s*:\s*/i;
-const ANALYSIS = /(?:analytische bestanddelen|analytische componenten|analytical constituents|analytische bestandteile|constituants analytiques)\s*:\s*/i;
+/**
+ * Label sections as zooplus writes them in the product description.
+ * Must start at the beginning of the text or immediately after a sentence break so marketing bullets like
+ * "Tarwevrije samenstelling: ..." or "100% natuurlijke ingrediënten: ..." are not mistaken for a label.
+ */
+const COMPOSITION = /(?:^|[.!?\n]\s*)(?:samenstelling|ingredi[eë]nten|composition|zusammensetzung)\s*:\s*/i;
+const ANALYSIS = /(?:^|[.!?\n]\s*)(?:analytische bestanddelen|analytische componenten|analytical constituents|analytische bestandteile|constituants analytiques)\s*:\s*/i;
 /** what follows the label data in a description */
 const AFTER = /(?:voedingsadvies|voederadvies|voedingsaanbeveling|voeradvies|feeding (?:guide|recommendation)|fütterungsempfehlung|let op|tip:|bewaaradvies)\s*:?/i;
 
@@ -79,6 +84,12 @@ function stripHtml(s: string): string {
     .trim();
 }
 
+function isPlausibleComposition(s: string): boolean {
+  if (!s || /in [eé][eé]n oogopslag/i.test(s)) return false;
+  const commas = (s.match(/,/g) ?? []).length;
+  return commas >= 1 && s.length / (commas + 1) < 120;
+}
+
 /** Pull "Samenstelling: ..." and "Analytische bestanddelen: ..." out of a product description. */
 export function labelFromDescription(description: string): { ingredients: string; analysis: string } {
   const text = stripHtml(description);
@@ -89,25 +100,48 @@ export function labelFromDescription(description: string): { ingredients: string
   if (c && c.index !== undefined) {
     const start = c.index + c[0].length;
     const ends = [a && a.index !== undefined && a.index > start ? a.index : -1, text.slice(start).search(AFTER) >= 0 ? start + text.slice(start).search(AFTER) : -1].filter((x) => x > start);
-    ingredients = text.slice(start, ends.length ? Math.min(...ends) : undefined).trim();
+    const candidate = text.slice(start, ends.length ? Math.min(...ends) : undefined).trim();
+    if (isPlausibleComposition(candidate)) ingredients = candidate;
   }
   if (a && a.index !== undefined) {
     const start = a.index + a[0].length;
     const rest = text.slice(start);
     const stop = [rest.search(COMPOSITION), rest.search(AFTER), rest.search(/(?:toevoegingsmiddelen|additieven|additives|zusatzstoffe)\s*[:(]/i)].filter((x) => x > 0);
-    analysis = rest.slice(0, stop.length ? Math.min(...stop) : undefined).trim();
+    const candidate = rest.slice(0, stop.length ? Math.min(...stop) : undefined).trim();
+    if (/\d/.test(candidate) && /(eiwit|protein|vet|fat)/i.test(candidate)) analysis = candidate;
   }
   const tidy = (s: string) => s.replace(/[\s.;,]+$/, "").slice(0, 3000);
   return { ingredients: tidy(ingredients), analysis: tidy(analysis) };
 }
 
-const NOT_FOOD = /(snack|snoep|traktatie|kauw|speelgoed|toy|accessoire|kattenbak|kattengrit|strooisel|mand|bench|riem|halsband|tuig|verzorging|vlooien|teken|ontworm|shampoo|borstel|krabpaal|voerbak|drinkbak|fontein|kleding|transport|bed\b|supplement)/i;
-const FOOD = /(hondenvoer|kattenvoer|droogvoer|natvoer|brokken|dieetvoer|diervoeding|kittenvoer|puppyvoer|vers vlees|diepvries|barf|dog food|cat food|hundefutter|katzenfutter)/i;
+const NOT_FOOD = /(snack|snoep|traktatie|kauw|speelgoed|toy|accessoire|kattenbak|kattengrit|strooisel|mand|bench|riem|halsband|tuig|verzorging|vlooien|teken|ontworm|shampoo|borstel|krabpaal|voerbak|drinkbak|fontein|kleding|transport|bed\b|supplement|luik|kerstmis|reiniging)/i;
+const FOOD = /(hondenv?oer|kattenv?oer|droogvoer|natvoer|brokken|dieetvoer|diervoeding|kittenvoer|puppyvoer|vers vlees|diepvries|barf|dog food|cat food|hundefutter|katzenfutter)/i;
+
+/** Infer category path from zooplus deep link when the feed leaves category columns blank. */
+function categoryFromUrl(url: string): string {
+  if (!url) return "";
+  if (/\/shop\/honden\/hondenvoer_droog\b/i.test(url)) return "Hond > Hondenvoer > Droogvoer";
+  if (/\/shop\/honden\/hondenvoer_nat\b/i.test(url)) return "Hond > Hondenvoer > Natvoer";
+  if (/\/shop\/honden\/barf\b/i.test(url)) return "Hond > Hondenvoer > Diepvriesvoer";
+  if (/\/shop\/honden\/(voer_naar_ras_en_grootte|graanvrij)\b/i.test(url)) return "Hond > Hondenvoer";
+  if (/\/shop\/katten\/kattenvoer_droog\b/i.test(url)) return "Kat > Kattenvoer > Droogvoer";
+  if (/\/shop\/katten\/kattenvoer_blik\b/i.test(url)) return "Kat > Kattenvoer > Natvoer";
+  if (/\/shop\/katten\/graanvrij\b/i.test(url)) return "Kat > Kattenvoer";
+  if (/\/shop\/(honden|katten)\/(kauwsnack|kattensnacks|voersupplement|kattenvoer_voersupplement)\b/i.test(url)) return "Snack";
+  const utm = url.match(/[?&]utm_content=([^&]+)/i);
+  if (utm) {
+    const c = decodeURIComponent(utm[1]).replace(/\+/g, " ").trim();
+    const sp = /\/shop\/honden\b/i.test(url) ? "Hond > " : /\/shop\/katten\b/i.test(url) ? "Kat > " : "";
+    if (/^(droogvoer|natvoer)$/i.test(c)) return `${sp}Voer > ${c}`;
+    return `${sp}${c}`;
+  }
+  return "";
+}
 
 export function feedSpecies(text: string): FeedItem["species"] {
   const t = text.toLowerCase();
-  const dog = /(hond|dog|hund|chien|puppy|pup\b)/.test(t);
-  const cat = /(kat\b|katten|kitten|cat\b|cats\b|katze|chat\b)/.test(t);
+  const dog = /(hond|dog|hund|chien|puppy|pup\b|canine)/.test(t);
+  const cat = /(kat\b|katten|kitten|cat\b|cats\b|katze|chat\b|feline)/.test(t);
   if (dog && !cat) return "Hond";
   if (cat && !dog) return "Kat";
   return "";
@@ -118,10 +152,13 @@ export function feedItem(row: Record<string, string>): FeedItem | null {
   const ean = normalizeEan(pick(row, "ean", "product_gtin", "gtin", "upc"));
   const name = pick(row, "product_name", "name", "title");
   if (!ean || !name) return null;
-  const category = pick(row, "merchant_product_category_path", "merchant_category", "category_name", "product_type", "google_product_category");
+  const url = pick(row, "merchant_deep_link", "aw_deep_link", "deep_link", "link");
+  const category =
+    pick(row, "merchant_product_category_path", "merchant_category", "category_name", "product_type", "google_product_category") ||
+    categoryFromUrl(url);
   const words = `${category} ${name}`;
   if (NOT_FOOD.test(category) || !FOOD.test(words)) return null;
-  const species = feedSpecies(`${category} ${name}`);
+  const species = feedSpecies(words) || feedSpecies(url);
   if (!species) return null;
   const description = [pick(row, "description"), pick(row, "product_short_description"), pick(row, "specifications")].filter(Boolean).join(". ");
   const { ingredients, analysis } = labelFromDescription(description);
@@ -132,11 +169,13 @@ export function feedItem(row: Record<string, string>): FeedItem | null {
     name,
     brand: pick(row, "brand_name", "brand"),
     species,
-    url: pick(row, "merchant_deep_link", "aw_deep_link", "deep_link", "link"),
+    url,
     image: pick(row, "merchant_image_url", "large_image", "aw_image_url", "image_link"),
     ...(Number.isFinite(price) && price > 0 && price < 1000 ? { price: Math.round(price * 100) / 100 } : {}),
+    pack: extractPack(name) || pick(row, "dimensions"),
     category,
     ingredients,
     analysis,
   };
 }
+

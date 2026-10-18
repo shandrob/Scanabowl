@@ -75,7 +75,7 @@ export function stageInName(name: string): LifeStage | undefined {
 // ------------------------------------------------------------------ category
 
 const VET_NAME_RE =
-  /(veterinary|prescription diet|vet life|vetlife|dieetvoer|diet[ -]?food|veterinaire|\bvhn\b|trovet|farmina vet|specific (?:c[dn]|f[dh]|k[dc]|h[oz]|cx|ck|cdw|cs)|hill'?s (?:id|k\/d|c\/d|z\/d|w\/d|m\/d|i\/d|j\/d|t\/d|u\/d|r\/d|l\/d|a\/d)|purina pro plan veterinary|\bpvd\b)/;
+  /(veterinary|veterinair|prescription diet|vet life|vetlife|dieetvoer|diet[ -]?food|veterinaire|\bvhn\b|trovet|farmina vet|specific (?:c[dn]|f[dh]|k[dc]|h[oz]|cx|ck|cdw|cs)|hill'?s (?:id|k\/d|c\/d|z\/d|w\/d|m\/d|i\/d|j\/d|t\/d|u\/d|r\/d|l\/d|a\/d)|purina pro plan veterinary|\bpvd\b)/;
 const VET_CLINICAL_RE =
   /(gastro ?intestinal|renal(?![a-z])|urinary s\/o|hypoallergenic|hydrolyzed|hydrolysed|hepatic|diabetic|cardiac|satiety|anallergenic|sensitivity control|neutered satiety|fibre response|dermatosis|early cardiac)/;
 const TREAT_RE =
@@ -91,7 +91,7 @@ export function inferCategory(opts: {
 }): Category {
   const dc = normalize(opts.declaredCategory ?? "");
   if (dc) {
-    if (/(dieet|vet|apotheek|veterinary)/.test(dc)) return "veterinary";
+    if (/(dieet|vet|apotheek|veterinary|veterinair)/.test(dc)) return "veterinary";
     if (/(snack|treat|lekker)/.test(dc)) return "treat";
     if (/(supplement)/.test(dc)) return "supplement";
     if (/(aanvullend|complement)/.test(dc)) return "complementary";
@@ -108,7 +108,7 @@ export function inferCategory(opts: {
   const bigBag = /\b\d+(?:[.,]\d+)?\s*kg\b/.test(name) && !/\b0[.,]\d+\s*kg\b/.test(name);
   if (SUPPLEMENT_RE.test(name) && !/(voer|brokken|nat|geperst|adult|junior|senior|puppy|kitten)/.test(name) && !bigBag) return "supplement";
   if (TREAT_RE.test(name) && !/(voer|brokken)/.test(name)) return "treat";
-  if (/(aanvull(?:end|en)\b)/.test(name)) return "complementary";
+  if (/(aanvull(?:end|en)\b|\bgroentemix\b)/.test(name)) return "complementary";
   // soups and plain broths are toppers, never a complete meal ("Felix Soup", "Inaba Silky Broth");
   // "... in bouillon" wet food is left alone: some of those are complete
   if (/\b(soup|soep|suppe|soupe)\b/.test(name) || (/\bbroth\b/.test(name) && !/\bin broth\b/.test(name))) return "complementary";

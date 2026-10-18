@@ -210,6 +210,7 @@
     "sortScore": "Höchste Bewertung",
     "sortName": "Name (A–Z)",
     "sortKcal": "Wenigste Kalorien",
+    "sortPrice": "Niedrigster Preis pro kg",
     "forPet": "Für {name}: {score}",
     "petBanner": "Futter für {name}.",
     "hiddenAllergy": "{count} Futter ausgeblendet: Sie enthalten {allergens}.",
@@ -411,6 +412,8 @@
     "zooplusExact": "Bei zooplus ansehen",
     "title": "Dieses Futter bestellen",
     "text": "Aktuellen Preis und Lieferung bei zooplus und bol.com vergleichen.",
+    "priceLabel": "Richtpreis",
+    "perKg": "€{price} / kg",
     "zooplusButton": "Bei zooplus suchen",
     "button": "Bei bol.com ansehen",
     "disclosure": "Affiliate-Links: Wenn Sie über diese Links kaufen, erhalten wir möglicherweise eine Provision, ohne Mehrkosten für Sie. Das beeinflusst die Bewertung nie.",
@@ -646,7 +649,10 @@
     "message": "Gibt es noch etwas, das wir wissen sollten?",
     "messageHint": "Zum Beispiel: Zertifizierungen, Fütterungsstudien, wo Ihr Futter verkauft wird.",
     "authorised": "Ich bestätige, dass ich berechtigt bin, diese Informationen im Namen des Unternehmens einzureichen, und dass sie mit der Verpackung übereinstimmen.",
-    "submit": "Zur Prüfung einreichen"
+    "submit": "Zur Prüfung einreichen",
+    "csvTitle": "Viele Produkte? CSV senden",
+    "csvText": "Haben Sie ein größeres Sortiment? Laden Sie unsere CSV-Vorlage (Excel-kompatibel) herunter und senden Sie Ihre ausgefüllte Datei an [info@scanabowl.com](mailto:info@scanabowl.com). Bestehende Produkte auf Scanabowl werden automatisch ergänzt und neue hinzugefügt.",
+    "csvButton": "CSV-Vorlage herunterladen"
   },
   "forms": {
     "productName": "Produktname",

@@ -18,8 +18,9 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 import { field, readCsv } from "../lib/catalog/csv";
-import { knownBrands, normalizeEan } from "../lib/catalog/clean";
+import { knownBrands, normalizeEan, slugify } from "../lib/catalog/clean";
 import { rowToProduct, type CatalogProduct, type RowContext, type Source } from "../lib/catalog/records";
+import { packGrams } from "../lib/pets/energy";
 import { detectAllergens } from "../lib/scoring/allergens";
 import { scoreProduct } from "../lib/scoring/score";
 import { speciesIn } from "../lib/scoring/taxonomy";
@@ -42,6 +43,34 @@ function csvFiles(dir: string): string[] {
     .map((f) => path.join(dir, f));
 }
 
+/**
+ * Merge two records for the same product. `winner` (e.g. a brand or manual CSV row) takes precedence for every field
+ * it provides, while any empty field on `winner` falls back to `fallback` so existing prices, links or analyses are never lost.
+ */
+function mergeProducts(winner: CatalogProduct, fallback: CatalogProduct): CatalogProduct {
+  return {
+    ...fallback,
+    ...winner,
+    ean: winner.ean || fallback.ean,
+    id: winner.ean || fallback.ean || winner.id,
+    slug: winner.ean ? winner.slug : fallback.ean ? fallback.slug : winner.slug,
+    ingredients: winner.ingredients || fallback.ingredients,
+    analysis: winner.analysis || fallback.analysis,
+    pack: winner.pack || fallback.pack,
+    price: winner.price ?? fallback.price,
+    bolUrl: winner.bolUrl ?? fallback.bolUrl,
+    zooplusUrl: winner.zooplusUrl ?? fallback.zooplusUrl,
+    image: winner.image ?? fallback.image,
+    imageCredit: winner.imageCredit ?? fallback.imageCredit,
+    sourceUrl: winner.sourceUrl ?? fallback.sourceUrl,
+    notes: winner.notes ?? fallback.notes,
+  };
+}
+
+function nameKey(p: CatalogProduct): string {
+  return `${p.species}|${slugify(p.brand)}|${slugify(p.name)}|${packGrams(p.pack) ?? slugify(p.pack)}`;
+}
+
 async function main() {
   const started = Date.now();
   fs.mkdirSync(OUT, { recursive: true });
@@ -53,6 +82,7 @@ async function main() {
   for (const [folder, source] of [
     ["scraped", "scraped"],
     ["manual", "manual"],
+    ["brands", "brand"],
   ] as const) {
     for (const file of csvFiles(path.join(DB, folder))) {
       const rows = readCsv(file);
@@ -69,13 +99,13 @@ async function main() {
   }
   // database/zooplus/*.csv: the zooplus product file from Awin (npm run data:zooplus). Every food gets its exact
   // zooplus link by barcode; foods we did not have yet are added only when zooplus shows their ingredient list.
-  const zooplus = new Map<string, { url: string; price?: string }>();
+  const zooplus = new Map<string, { url: string; price?: string; pack?: string }>();
   const zooplusNoLabel = new Set<string>();
   for (const file of csvFiles(path.join(DB, "zooplus"))) {
     for (const row of readCsv(file)) {
       const ean = normalizeEan(field(row, "ean"));
       const url = (row.zooplus_url ?? "").trim();
-      if (ean && url) zooplus.set(ean, { url, price: field(row, "price") || undefined });
+      if (ean && url) zooplus.set(ean, { url, price: field(row, "price") || undefined, pack: field(row, "pack") || undefined });
       if (!field(row, "ingredients")) {
         if (ean) zooplusNoLabel.add(ean);
         continue;
@@ -89,6 +119,7 @@ async function main() {
   // ---------------------------------------------------------------- clean + merge
   const report: string[] = [];
   const byId = new Map<string, CatalogProduct>();
+  const idByName = new Map<string, string>();
   let unusable = 0;
   for (const { row, source, file } of raw) {
     let r = row;
@@ -104,11 +135,20 @@ async function main() {
       unusable++;
       continue;
     }
-    const prev = byId.get(p.id);
-    // manual / brand / user rows always win over scraped ones; otherwise keep the richer row
+    const nk = nameKey(p);
+    const existingId = byId.has(p.id) ? p.id : !p.ean ? idByName.get(nk) : undefined;
+    const prev = existingId ? byId.get(existingId) : undefined;
+    // manual / brand / user rows always win over scraped ones; otherwise keep the richer row, merging missing fields
     const rank = (x: CatalogProduct) => (x.source === "scraped" ? 0 : 1);
-    if (!prev || rank(p) > rank(prev) || (rank(p) === rank(prev) && p.ingredients.length + p.analysis.length > prev.ingredients.length + prev.analysis.length)) {
+    if (!prev) {
       byId.set(p.id, p);
+      idByName.set(nk, p.id);
+    } else {
+      const pWins = rank(p) > rank(prev) || (rank(p) === rank(prev) && p.ingredients.length + p.analysis.length > prev.ingredients.length + prev.analysis.length);
+      const merged = pWins ? mergeProducts(p, prev) : mergeProducts(prev, p);
+      if (existingId && existingId !== merged.id) byId.delete(existingId);
+      byId.set(merged.id, merged);
+      idByName.set(nk, merged.id);
     }
     void file;
   }
@@ -135,9 +175,16 @@ async function main() {
     const z = p.ean ? zooplus.get(p.ean) : undefined;
     if (!z) continue;
     p.zooplusUrl = z.url;
+    if (!p.pack && z.pack) p.pack = z.pack;
     if (!p.price && z.price) {
       const n = Number.parseFloat(z.price.replace(",", "."));
-      if (Number.isFinite(n) && n > 0 && n < 1000) p.price = n;
+      if (Number.isFinite(n) && n > 0 && n < 1000) {
+        const pg = packGrams(p.pack);
+        const zg = z.pack ? packGrams(z.pack) : null;
+        // When zooplus sells a multipack (e.g. 6x400g) under the single-can EAN (400g), scale price to match p.pack
+        const scaled = pg && zg && pg !== zg ? Math.round(n * (pg / zg) * 100) / 100 : n;
+        if (scaled > 0 && scaled < 1000) p.price = scaled;
+      }
     }
     zooplusLinked++;
   }
@@ -300,7 +347,8 @@ async function main() {
     if (p.category === "complete") {
       if (!p.ingredients) problems.noIngredients.push(label);
       else if (!p.analysis) problems.noAnalysis.push(label);
-      if (result.score !== null && (result.animalProteinShare ?? 0) === 0 && result.ingredients.length > 0) problems.suspicious.push(`${label}  (no animal ingredient recognised: check the ingredient text)`);
+      const isPlantBased = /\b(plant[-\s]?based|plantaardig\w*|veggie|vegetal|vega|vegetarisch\w*|vegan\w*)\b/i.test(`${p.brand} ${p.name}`);
+      if (result.score !== null && (result.animalProteinShare ?? 0) === 0 && result.ingredients.length > 0 && !isPlantBased) problems.suspicious.push(`${label}  (no animal ingredient recognised: check the ingredient text)`);
       if (result.confidence === "low") problems.lowConfidence++;
       if (result.flags.some((f) => f.severity === "hazard")) problems.hazards.push(`${label}  -> ${result.flags.filter((f) => f.severity === "hazard").map((f) => f.code).join(",")}`);
     }

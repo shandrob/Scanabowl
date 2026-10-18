@@ -110,6 +110,8 @@ export interface IndexEntry {
   an?: number;
   /** share of the energy from carbohydrates (estimated), 0-100 */
   cb?: number;
+  /** exact product page at zooplus if known */
+  zp?: string;
 }
 
 export interface Meta {

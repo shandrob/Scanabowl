@@ -13,17 +13,25 @@ import { loadIndex } from "@/lib/data/client";
 import type { IndexEntry, Meta } from "@/lib/data/types";
 import { localePath } from "@/lib/i18n/config";
 import { foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
+import { packGrams } from "@/lib/pets/energy";
 import { matchesQuery, queryTerms, searchHaystack } from "@/lib/search";
 import { personalFit } from "@/lib/scoring/personalize";
 import type { FoodType, LifeStage, Species } from "@/lib/scoring/types";
 import { usePets } from "@/lib/pets/store";
 
 const PAGE = 24;
-type Sort = "match" | "score" | "name" | "kcal";
+type Sort = "match" | "score" | "price" | "name" | "kcal";
 /** the most common food allergens in dogs and cats (Mueller et al., 2016) plus a few frequent choices */
 const EXCLUDE_CHIPS = ["chicken", "beef", "fish", "dairy", "wheat", "lamb", "pork", "turkey", "egg"] as const;
 /** slider value that means "no maximum" */
 const NO_CARB_LIMIT = 70;
+
+function pricePerKg(e: IndexEntry): number {
+  if (!e.pc || e.pc <= 0) return 99999;
+  const g = e.pk ? packGrams(e.pk) : null;
+  if (!g || g <= 0) return 99999;
+  return e.pc / (g / 1000);
+}
 
 function useSearchText() {
   // normalised "brand name" per entry, computed once
@@ -148,6 +156,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
     rows.sort((a, b) => {
       if (key === "name") return a.e.n.localeCompare(b.e.n);
       if (key === "kcal") return (a.e.k ?? 9999) - (b.e.k ?? 9999);
+      if (key === "price") return pricePerKg(a.e) - pricePerKg(b.e) || (b.e.sc ?? -1) - (a.e.sc ?? -1);
       if (key === "match") return (b.personal ?? -1) - (a.personal ?? -1) || (b.e.sc ?? -1) - (a.e.sc ?? -1);
       return (b.e.sc ?? -1) - (a.e.sc ?? -1) || a.e.n.localeCompare(b.e.n);
     });
@@ -391,6 +400,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
               <select id="f-sort" value={effectiveSort} onChange={(e) => setSort(e.target.value as Sort)} className="h-10 rounded-xl border border-line bg-paper px-3 text-sm">
                 {pet && <option value="match">{t("finder.sortMatch", { name: pet.name })}</option>}
                 <option value="score">{t("finder.sortScore")}</option>
+                <option value="price">{t("finder.sortPrice")}</option>
                 <option value="name">{t("finder.sortName")}</option>
                 <option value="kcal">{t("finder.sortKcal")}</option>
               </select>

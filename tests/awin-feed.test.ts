@@ -79,4 +79,34 @@ describe("zooplus product file in Google Shopping layout", () => {
     expect(isFeedList(list)).toBe(true);
     expect(isFeedList(parseFeed("title,gtin\nx,1234567890128"))).toBe(false);
   });
+
+  it("extracts species, category, and pack from merchant_deep_link when merchant_category is empty", () => {
+    const r = parseFeed(
+      [
+        "product_name,search_price,merchant_deep_link,brand_name,ean,merchant_category",
+        `"Orijen Original - 11,4 kg","86.99","https://www.zooplus.nl/shop/honden/hondenvoer_droog/orijen/180401?utm_content=hondenvoer_droog","Orijen","0064992182120",""`,
+      ].join("\n"),
+    );
+    const item = feedItem(r[0])!;
+    expect(item).not.toBeNull();
+    expect(item.species).toBe("Hond");
+    expect(item.category).toBe("Hond > Hondenvoer > Droogvoer");
+    expect(item.pack).toBe("11,4 kg");
+    expect(item.price).toBe(86.99);
+    expect(item.url).toContain("https://www.zooplus.nl/shop/honden/hondenvoer_droog/orijen/180401");
+  });
+
+  it("ignores marketing bullet points like 'Tarwevrije samenstelling:' in Zooplus descriptions", () => {
+    const r = labelFromDescription("<ul><li>Tarwevrije samenstelling: zeer goed verdraagbaar</li><li>100% natuurlijke ingrediënten: zonder geur-, kleur- en smaakstoffen</li></ul>");
+    expect(r.ingredients).toBe("");
+  });
+
+  it("assembles separate nutrient columns from brand CSVs", async () => {
+    const { assembleAnalysis } = await import("../lib/catalog/csv");
+    const s = assembleAnalysis({ eiwit: "28", vet: "16", celstof: "2,5", as: "7", vocht: "9", calcium: "1,3", fosfor: "0,95", kcal_100g: "385" });
+    expect(s).toContain("Ruw eiwit 28%");
+    expect(s).toContain("ruw vet 16%");
+    expect(s).toContain("385 kcal/100g");
+  });
 });
+

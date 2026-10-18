@@ -44,6 +44,17 @@ export default async function BrandsPage({ params }: { params: Promise<{ lang: s
               ))}
             </ol>
           </section>
+          <section className="rounded-2xl border border-line bg-paper p-6 shadow-card">
+            <h2 className="font-display text-xl font-semibold text-brand-deep">{t("brands.csvTitle")}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink-soft"><Rich text={t("brands.csvText")} /></p>
+            <a
+              href="/scanabowl-brand-template.csv"
+              download="scanabowl-brand-template.csv"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-brand/40 bg-brand-tint px-4 py-2.5 text-sm font-semibold text-brand-deep transition hover:bg-brand-soft"
+            >
+              {t("brands.csvButton")}
+            </a>
+          </section>
           <section className="rounded-2xl border border-brand/25 bg-brand-tint p-6">
             <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-brand-deep"><IconShield className="h-5 w-5" />{t("brands.promiseTitle")}</h2>
             <ul className="mt-4 space-y-3">

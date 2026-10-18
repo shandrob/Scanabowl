@@ -19,7 +19,7 @@ import {
   toLifeStage,
   toSpecies,
 } from "./clean";
-import { field } from "./csv";
+import { assembleAnalysis, field } from "./csv";
 
 export type Source = "scraped" | "manual" | "brand" | "user";
 
@@ -138,7 +138,7 @@ function isScraped(row: Record<string, string>, ctx: RowContext): boolean {
 /** Turn any CSV row (master, scraper output, brand submission) into a clean product, or null if unusable. */
 export function rowToProduct(row: Record<string, string>, ctx: RowContext): CatalogProduct | null {
   let ingredients = cleanText(field(row, "ingredients"));
-  let analysisRaw = cleanText(field(row, "analysis"));
+  let analysisRaw = cleanText(assembleAnalysis(row));
   // the scraper sometimes put the ingredient list in the analysis column and a pack size in the ingredients
   if (!looksLikeIngredients(ingredients) && looksLikeIngredients(analysisRaw)) {
     [ingredients, analysisRaw] = [analysisRaw, looksLikeAnalysis(ingredients) ? ingredients : ""];
@@ -208,6 +208,7 @@ export function rowToProduct(row: Record<string, string>, ctx: RowContext): Cata
     pack,
     price: parsePrice(field(row, "price")),
     bolUrl: field(row, "bolUrl") || undefined,
+    zooplusUrl: field(row, "zooplusUrl") || undefined,
     image: field(row, "image") || undefined,
     source: ((): Source => {
       const s = field(row, "source").toLowerCase();

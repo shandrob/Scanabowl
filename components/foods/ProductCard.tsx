@@ -6,6 +6,7 @@ import type { IndexEntry } from "@/lib/data/types";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import type { TFunction } from "@/lib/i18n/t";
 import { foodTypeLabel, gradeLabel, scoreAria, stageLabel } from "@/lib/labels";
+import { packGrams } from "@/lib/pets/energy";
 import type { Species } from "@/lib/scoring/types";
 
 /** Pure component - used on the server (home page) and in the client-side finder. */
@@ -26,6 +27,8 @@ export function ProductCard({
 }) {
   const grade = entry.g ?? gradeOf(entry.sc);
   const showPersonal = personalScore !== undefined && personalScore !== null && entry.sc !== null && personalScore !== entry.sc;
+  const grams = entry.pk ? packGrams(entry.pk) : null;
+  const perKg = entry.pc && grams && grams > 0 ? (entry.pc / (grams / 1000)).toFixed(2) : null;
   return (
     <Link
       href={localePath(lang, `/foods/${entry.s}`)}
@@ -44,6 +47,11 @@ export function ProductCard({
           <span className="rounded-md bg-cream px-2 py-0.5">{foodTypeLabel(t, entry.t)}</span>
           <span className="rounded-md bg-cream px-2 py-0.5">{stageLabel(t, entry.l, species)}</span>
           {entry.gf === 1 && <span className="rounded-md bg-brand-tint px-2 py-0.5 text-brand-deep">{t("common.grainFree")}</span>}
+          {perKg ? (
+            <span className="rounded-md bg-cream px-2 py-0.5 font-mono text-[0.7rem] text-ink-soft">{t("order.perKg", { price: perKg })}</span>
+          ) : entry.pc ? (
+            <span className="rounded-md bg-cream px-2 py-0.5 font-mono text-[0.7rem] text-ink-soft">€{entry.pc.toFixed(2)}</span>
+          ) : null}
         </div>
       </div>
       <div className="flex shrink-0 flex-col items-center justify-center gap-1.5">

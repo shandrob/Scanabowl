@@ -210,6 +210,7 @@
     "sortScore": "Highest score",
     "sortName": "Name (A–Z)",
     "sortKcal": "Fewest calories",
+    "sortPrice": "Lowest price per kg",
     "forPet": "For {name}: {score}",
     "petBanner": "Showing foods for {name}.",
     "hiddenAllergy": "{count} foods hidden: they contain {allergens}.",
@@ -411,6 +412,8 @@
     "zooplusExact": "View at zooplus",
     "title": "Order this food",
     "text": "Compare the current price and delivery at zooplus and bol.com.",
+    "priceLabel": "Indicative price",
+    "perKg": "€{price} / kg",
     "zooplusButton": "Search at zooplus",
     "button": "View on bol.com",
     "disclosure": "Affiliate links: if you buy via these links we may earn a commission, at no extra cost to you. This never influences the score.",
@@ -646,7 +649,10 @@
     "message": "Anything else we should know?",
     "messageHint": "For example: certifications, feeding trials, where your food is sold.",
     "authorised": "I confirm that I am authorised to submit this information on behalf of the company, and that it matches the packaging.",
-    "submit": "Submit for review"
+    "submit": "Submit for review",
+    "csvTitle": "Many products? Send a CSV",
+    "csvText": "Have a larger range? Download our CSV template (Excel-compatible) and email your completed file to [info@scanabowl.com](mailto:info@scanabowl.com). Existing products on Scanabowl are automatically enriched and new ones added.",
+    "csvButton": "Download CSV template"
   },
   "forms": {
     "productName": "Product name",

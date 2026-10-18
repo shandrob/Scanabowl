@@ -210,6 +210,7 @@
     "sortScore": "Hoogste score",
     "sortName": "Naam (A–Z)",
     "sortKcal": "Minste calorieën",
+    "sortPrice": "Laagste prijs per kg",
     "forPet": "Voor {name}: {score}",
     "petBanner": "Voer voor {name}.",
     "hiddenAllergy": "{count} voeders verborgen: ze bevatten {allergens}.",
@@ -411,6 +412,8 @@
     "zooplusExact": "Bekijk bij zooplus",
     "title": "Bestel dit voer",
     "text": "Vergelijk de actuele prijs en levering bij zooplus en bol.com.",
+    "priceLabel": "Richtprijs",
+    "perKg": "€{price} / kg",
     "zooplusButton": "Zoek bij zooplus",
     "button": "Bekijk bij bol.com",
     "disclosure": "Affiliate-links: als je via deze links koopt, verdienen wij mogelijk een commissie, zonder extra kosten voor jou. Dit beïnvloedt de score nooit.",
@@ -646,7 +649,10 @@
     "message": "Nog iets wat we moeten weten?",
     "messageHint": "Bijvoorbeeld: certificeringen, voedingsproeven, waar je voer verkocht wordt.",
     "authorised": "Ik bevestig dat ik bevoegd ben deze informatie namens het bedrijf in te dienen en dat zij overeenkomt met de verpakking.",
-    "submit": "Indienen ter controle"
+    "submit": "Indienen ter controle",
+    "csvTitle": "Veel producten? Stuur een CSV",
+    "csvText": "Heb je een groter assortiment? Download ons CSV-sjabloon (Excel-compatibel) en mail je ingevulde bestand naar [info@scanabowl.com](mailto:info@scanabowl.com). Bestaande producten op Scanabowl worden automatisch verrijkt en nieuwe producten toegevoegd.",
+    "csvButton": "Download CSV-sjabloon"
   },
   "forms": {
     "productName": "Productnaam",

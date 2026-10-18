@@ -37,5 +37,6 @@ export function detailToIndex(d: ProductDetail): IndexEntry {
     ...(d.pillars ? { pl: [r1(d.pillars.nutrition.points), r1(d.pillars.ingredients.points), r1(d.pillars.formulation.points)] as [number, number, number] } : {}),
     ...(d.animalProteinShare !== null ? { an: Math.round(d.animalProteinShare * 100) } : {}),
     ...(n ? { cb: Math.round(n.energyShare.carbs) } : {}),
+    ...(d.zooplusUrl ? { zp: d.zooplusUrl } : {}),
   };
 }

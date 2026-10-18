@@ -16,6 +16,7 @@
     "data:build": "tsx scripts/build-data.ts",
     "data:import-legacy": "tsx scripts/import-legacy.ts",
     "data:zooplus": "tsx scripts/import-zooplus-feed.ts",
+    "data:import-brand": "tsx scripts/import-brand.ts",
     "new-post": "tsx scripts/new-post.ts",
     "deploy": "vercel --prod"
   },

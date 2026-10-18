@@ -16,6 +16,7 @@ function rememberLanguage(l: string) {
 const NAV = [
   { href: "/foods", key: "nav.foods" },
   { href: "/best", key: "nav.best" },
+  { href: "/compare", key: "nav.compare" },
   { href: "/my-pet", key: "nav.myPet" },
   { href: "/blog", key: "nav.blog" },
   { href: "/how-we-score", key: "nav.howWeScore" },

@@ -18,7 +18,7 @@ import { usePets } from "@/lib/pets/store";
 import { personalFit } from "@/lib/scoring/personalize";
 import type { PetProfile, Species } from "@/lib/scoring/types";
 import { matchesQuery, queryTerms, searchHaystack } from "@/lib/search";
-import { zooplusAffiliateUrl } from "@/lib/zooplus";
+import { zooplusLink } from "@/lib/zooplus";
 
 const DEFAULT_WEIGHT: Record<Species, number> = { dog: 15, cat: 4 };
 
@@ -355,18 +355,21 @@ export function CompareTool() {
               ))}
               <div className="grid items-center gap-4 px-4 py-4" style={grid}>
                 <span />
-                {rows.map(({ e }) => (
-                  <a
-                    key={e.i}
-                    href={zooplusAffiliateUrl({ brand: e.b, name: e.n }, `scanabowl-${lang}-compare`)}
-                    target="_blank"
-                    rel="sponsored nofollow noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-deep"
-                  >
-                    {t("order.zooplusButton")}
-                    <IconExternal className="h-3.5 w-3.5" />
-                  </a>
-                ))}
+                {rows.map(({ e }) => {
+                  const zp = zooplusLink({ brand: e.b, name: e.n, zooplusUrl: e.zp }, `scanabowl-${lang}-compare`);
+                  return (
+                    <a
+                      key={e.i}
+                      href={zp.url}
+                      target="_blank"
+                      rel="sponsored nofollow noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-deep"
+                    >
+                      {zp.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
+                      <IconExternal className="h-3.5 w-3.5" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

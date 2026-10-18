@@ -4,7 +4,7 @@ import { normalize, parseLabelNumber } from "./text";
 
 /** Words that start the additives section of a label; everything after is not "composition". */
 const ADDITIVES_SPLIT =
-  /\b(toevoegingsmiddelen|voedingsadditieven|additieven|technologische toevoegingsmiddelen|sensorische toevoegingsmiddelen|voedingsadditieven per kg|additives|zusatzstoffe|additifs)\b\s*[:.(]/i;
+  /\b(nutritionele toevoegingsmiddelen|toevoegingsmiddelen|voedingsadditieven|additieven|technologische toevoegingsmiddelen|sensorische toevoegingsmiddelen|voedingsadditieven per kg|additives|zusatzstoffe|additifs)\b[\s)]*[:.(]/i;
 
 export interface SplitLabel {
   composition: string;
@@ -87,7 +87,11 @@ export function splitLabel(text: string): SplitLabel {
   const head = m && m.index !== undefined ? cleaned.slice(0, m.index) : cleaned;
   const additives = m && m.index !== undefined ? cleaned.slice(m.index).trim() : "";
   const cut = head.search(NOTE_BREAK);
-  return { composition: (cut > 20 ? head.slice(0, cut) : head).trim(), additives };
+  let composition = (cut > 20 ? head.slice(0, cut) : head).trim();
+  if (!/[,;]/.test(composition) && (composition.match(/\d\s*%\s+(?=[A-Za-zÀ-ÿ])/g) ?? []).length >= 2) {
+    composition = composition.replace(/(\d\s*%)\s+(?=[A-Za-zÀ-ÿ])/g, "$1, ");
+  }
+  return { composition, additives };
 }
 
 /** Split on commas that are not inside brackets. */

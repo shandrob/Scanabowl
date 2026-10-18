@@ -82,6 +82,17 @@ export default async function ProductPage({ params }: Props) {
         category: speciesLabel(t, p.species, true),
         description: t("product.jsonLdDescription", { name: p.name, brand: p.brand }),
         url: `${SITE.url}${localePath(lang, `/foods/${slug}`)}`,
+        ...(p.price !== undefined && p.price > 0
+          ? {
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "EUR",
+                price: p.price.toFixed(2),
+                availability: "https://schema.org/InStock",
+                url: `${SITE.url}${localePath(lang, `/foods/${slug}`)}`,
+              },
+            }
+          : {}),
         ...(p.score !== null
           ? {
               review: {
@@ -167,7 +178,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <OrderCard ean={p.ean} name={p.name} brand={p.brand} bolUrl={p.bolUrl} zooplusUrl={p.zooplusUrl} lang={lang} t={t} />
+          <OrderCard ean={p.ean} name={p.name} brand={p.brand} pack={p.pack} price={p.price} bolUrl={p.bolUrl} zooplusUrl={p.zooplusUrl} lang={lang} t={t} />
           <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft">
             <h2 className="font-display text-base font-semibold text-brand-deep">{t("product.dataTitle")}</h2>
             <p className="mt-2">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>
