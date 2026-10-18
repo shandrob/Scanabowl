@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { parseSubmission, subject, toHtml, toText } from "@/lib/submissions";
-import { SITE } from "@/lib/site";
 
 export const runtime = "nodejs";
 
@@ -47,15 +46,17 @@ export async function POST(req: Request) {
   if (!key) return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
 
   const s = parsed.data;
-  const to = process.env.MAIL_TO || SITE.email;
+  const fallbackInbox = "scanabowl@gmail.com";
+  const to = process.env.MAIL_TO || fallbackInbox;
   const from = process.env.MAIL_FROM || "Scanabowl <onboarding@resend.dev>";
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
+
+  const sendViaResend = async (recipient: string) =>
+    fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from,
-        to: [to],
+        to: [recipient],
         ...(s.email ? { reply_to: s.email } : {}),
         subject: subject(s),
         text: toText(s),
@@ -63,6 +64,13 @@ export async function POST(req: Request) {
         ...(s.photos?.length ? { attachments: s.photos.map((p) => ({ filename: p.filename, content: p.content })) } : {}),
       }),
     });
+
+  try {
+    let res = await sendViaResend(to);
+    if (!res.ok && to.toLowerCase() !== fallbackInbox) {
+      // Resend's onboarding@resend.dev sender only permits delivery to the account owner's inbox
+      res = await sendViaResend(fallbackInbox);
+    }
     if (!res.ok) {
       console.error("Resend error", res.status, await res.text());
       return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
