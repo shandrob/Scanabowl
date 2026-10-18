@@ -32,7 +32,7 @@ CHECKED = ROOT / "tools" / "opff-checked.txt"
 PRODUCTS = [ROOT / "data" / "generated" / "products.dog.json", ROOT / "data" / "generated" / "products.cat.json"]
 
 API = "https://world.openpetfoodfacts.org/api/v2/product/{ean}.json?fields=code,image_front_url,image_url"
-HEADERS = {"User-Agent": "Scanabowl/1.0 (scanabowl@gmail.com) photo sync"}
+HEADERS = {"User-Agent": "Scanabowl/1.0 (info@scanabowl.com) photo sync"}
 # Open Food Facts asks for at most 100 product reads per minute
 DELAY = 0.75
 CREDIT_COLUMNS = ["ean", "bron", "licentie", "url"]

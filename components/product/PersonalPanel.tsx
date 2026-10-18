@@ -35,13 +35,38 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
   }, [currentId, species]);
 
   if (!active) {
+    const avgKcal = species === "dog" ? Math.round(95 * Math.pow(15, 0.75)) : Math.round(75 * Math.pow(4, 0.67));
+    const avgGrams = entry.k ? gramsPerDay(avgKcal, entry.k) : null;
+    const avgPack = packGrams(entry.pk);
+    const avgPerDay = price && avgPack && avgGrams ? (price / avgPack) * avgGrams : null;
     return (
       <section className="rounded-2xl border border-brand/25 bg-brand-tint p-6">
         <div className="flex items-start gap-4">
           <IconPaw className="mt-1 h-6 w-6 shrink-0 text-brand" />
-          <div>
+          <div className="flex-1">
             <h2 className="font-display text-xl font-semibold text-brand-deep">{t("personal.ctaTitle")}</h2>
             <p className="mt-1 text-ink-soft">{t("personal.ctaText")}</p>
+            {avgGrams !== null && (
+              <div className="mt-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl border border-brand/20 bg-paper px-4 py-3 shadow-sm">
+                    <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-ink-faint">{t("personal.portionStatLabel")}</p>
+                    <p className="mt-0.5 font-mono text-xl font-semibold text-ink">{t("personal.gramsPerDayUnit", { grams: avgGrams })}</p>
+                  </div>
+                  {avgPerDay !== null && (
+                    <div className="rounded-xl border border-brand/30 bg-paper px-4 py-3 shadow-sm">
+                      <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-brand">{t("personal.costStatLabel")}</p>
+                      <p className="mt-0.5 font-mono text-xl font-semibold text-brand-deep">
+                        {t("personal.euroPerDayUnit", { cost: avgPerDay.toFixed(2).replace(".", lang === "en" ? "." : ",") })}
+                      </p>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-2 text-xs text-ink-faint">
+                  {t(species === "dog" ? "personal.avgDogBasis" : "personal.avgCatBasis", { kcal: avgKcal })}
+                </p>
+              </div>
+            )}
             <Link href={localePath(lang, "/my-pet")} className="mt-4 inline-block rounded-xl bg-brand px-5 py-2.5 font-semibold text-white transition hover:bg-brand-deep">
               {t("personal.ctaButton")}
             </Link>
@@ -156,7 +181,21 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
       {grams !== null && !allergy.excluded && (
         <div className="mt-6 rounded-xl bg-cream/70 p-4">
           <p className="font-semibold text-brand-deep">{t("personal.portionTitle", { name: active.name })}</p>
-          <p className="mt-1 text-[0.95rem]">
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-line bg-paper px-4 py-3 shadow-sm">
+              <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-ink-faint">{t("personal.portionStatLabel")}</p>
+              <p className="mt-0.5 font-mono text-xl font-semibold text-ink">{t("personal.gramsPerDayUnit", { grams })}</p>
+            </div>
+            {perDay !== null && (
+              <div className="rounded-xl border border-brand/30 bg-brand-tint/60 px-4 py-3 shadow-sm">
+                <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-brand">{t("personal.costStatLabel")}</p>
+                <p className="mt-0.5 font-mono text-xl font-semibold text-brand-deep">
+                  {t("personal.euroPerDayUnit", { cost: perDay.toFixed(2).replace(".", lang === "en" ? "." : ",") })}
+                </p>
+              </div>
+            )}
+          </div>
+          <p className="mt-3 text-[0.95rem]">
             {t("personal.portionText", { kcal: energy.kcal, grams })}
             {perDay !== null && <> {t("personal.costText", { cost: perDay.toFixed(2).replace(".", lang === "en" ? "." : ",") })}</>}
           </p>

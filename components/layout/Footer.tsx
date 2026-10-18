@@ -59,7 +59,8 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
             {t("footer.photos").split("{source}")[1]}
           </p>
           <p className="mt-2">
-            © {new Date().getFullYear()} Scanabowl · {SITE.email}
+            © {new Date().getFullYear()} Scanabowl ·{" "}
+            <a href={`mailto:${SITE.email}`} className="underline underline-offset-2 hover:text-brand">{SITE.email}</a>
             {SITE.company.kvk ? ` · KvK ${SITE.company.kvk}` : ""}
             {SITE.company.vat ? ` · ${t("footer.vat")} ${SITE.company.vat}` : ""}
           </p>

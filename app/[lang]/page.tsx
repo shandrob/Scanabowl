@@ -8,6 +8,7 @@ import { SearchBox } from "@/components/foods/SearchBox";
 import { IconArrow, IconBarcode, IconPaw, IconSearch, IconShield } from "@/components/ui/Icons";
 import { listPosts } from "@/lib/blog";
 import { detailToIndex } from "@/lib/data/index-entry";
+import { HERO_EXAMPLES, POPULAR_FOODS, popularBrands } from "@/lib/data/popular";
 import { productCounts, topProducts } from "@/lib/data/products";
 import { GUIDE_TEXT } from "@/lib/guides/content";
 import { GUIDES } from "@/lib/guides/defs";
@@ -36,7 +37,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const dict = await getDictionary(lang);
   const t = createT(dict);
   const raw = createRaw(dict);
-  const [counts, dogs, cats] = await Promise.all([productCounts(), topProducts("dog", 3), topProducts("cat", 3)]);
+  const [counts, dogs, cats, popBrands] = await Promise.all([
+    productCounts(),
+    topProducts("dog", 3),
+    topProducts("cat", 3),
+    popularBrands(18),
+  ]);
   const posts = listPosts(lang).slice(0, 3);
   const faq = raw<Array<{ q: string; a: string }>>("home.faq");
 
@@ -44,6 +50,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     { icon: <IconSearch className="h-6 w-6" />, title: t("home.step1Title"), text: t("home.step1Text") },
     { icon: <IconShield className="h-6 w-6" />, title: t("home.step2Title"), text: t("home.step2Text") },
     { icon: <IconPaw className="h-6 w-6" />, title: t("home.step3Title"), text: t("home.step3Text") },
+  ];
+
+  const sciencePoints = [
+    { title: t("home.scienceBullet1Title"), text: t("home.scienceBullet1Text") },
+    { title: t("home.scienceBullet2Title"), text: t("home.scienceBullet2Text") },
+    { title: t("home.scienceBullet3Title"), text: t("home.scienceBullet3Text") },
   ];
 
   // Site-wide facts for search engines live on the home page only (not repeated in every page's HTML)
@@ -85,8 +97,23 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="mt-3 flex items-center gap-2 text-sm text-ink-faint">
                 <IconBarcode className="h-4 w-4" /> {t("home.searchHint")}
               </p>
+              <div className="mt-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-ink-faint">{t("home.examplesLabel")}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {HERO_EXAMPLES.map((ex) => (
+                    <Link
+                      key={ex.slug}
+                      href={localePath(lang, `/foods/${ex.slug}`)}
+                      prefetch={false}
+                      className="inline-flex items-center rounded-full border border-line bg-paper px-3.5 py-1.5 text-xs font-medium text-ink shadow-sm transition hover:border-brand hover:bg-brand-tint hover:text-brand-deep sm:text-sm"
+                    >
+                      {t(`home.${ex.key}`)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-wrap gap-3">
               <Link href={`${localePath(lang, "/foods")}?species=dog`} className="rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">{t("home.browseDogs")}</Link>
               <Link href={`${localePath(lang, "/foods")}?species=cat`} className="rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">{t("home.browseCats")}</Link>
               <Link href={localePath(lang, "/foods/brand")} className="rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">{t("nav.allBrands")}</Link>
@@ -106,7 +133,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      {/* how it works */}
+      {/* how it works + scientific methodology & engineer credibility */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6" aria-labelledby="how-h">
         <h2 id="how-h" className="font-display text-3xl font-semibold text-brand-deep">{t("home.howTitle")}</h2>
         <ol className="mt-8 grid gap-5 md:grid-cols-3">
@@ -119,6 +146,35 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </li>
           ))}
         </ol>
+
+        {/* scientific methodology & Product & Quality Engineer profile */}
+        <div className="mt-10 rounded-2xl border border-brand/20 bg-brand-tint/60 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h3 className="font-display text-2xl font-semibold text-brand-deep">{t("home.scienceTitle")}</h3>
+            <Link href={localePath(lang, "/how-we-score")} className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline">
+              {t("home.howScore")} <IconArrow className="h-4 w-4" />
+            </Link>
+          </div>
+          <ul className="mt-6 grid gap-5 md:grid-cols-3">
+            {sciencePoints.map((pt, i) => (
+              <li key={i} className="rounded-xl border border-line bg-paper p-5 shadow-sm">
+                <p className="font-display text-base font-semibold text-brand-deep">✓ {pt.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{pt.text}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 flex flex-col gap-2 border-t border-brand/15 pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm leading-relaxed text-ink">
+              <span className="mr-2 inline-block rounded-md bg-brand px-2.5 py-0.5 font-mono text-xs font-semibold text-white">
+                {t("home.engineerBadge")}
+              </span>
+              {t("home.engineerText")}
+            </p>
+            <Link href={localePath(lang, "/about")} className="shrink-0 text-sm font-semibold text-brand hover:underline">
+              {t("nav.about")} →
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* featured */}
@@ -223,6 +279,63 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 <p className="mt-3 leading-relaxed text-ink-soft"><Rich text={f.a.replaceAll("{lang}", lang)} /></p>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* popular foods & brands for SEO and quick discovery */}
+      <section className="border-t border-line bg-cream/60" aria-labelledby="popular-h">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 id="popular-h" className="font-display text-2xl font-semibold text-brand-deep sm:text-3xl">{t("home.popularTitle")}</h2>
+              <p className="mt-1.5 max-w-2xl text-sm text-ink-soft sm:text-base">{t("home.popularSubtitle")}</p>
+            </div>
+            <Link href={localePath(lang, "/foods/brand")} className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline">
+              {t("nav.allBrands")} ({counts.brands}) <IconArrow className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-8 lg:grid-cols-2">
+            <div>
+              <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-faint">{t("home.popularFoodsHeading")}</h3>
+              <ul className="flex flex-wrap gap-2">
+                {POPULAR_FOODS.map((item) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={localePath(lang, `/foods/${item.slug}`)}
+                      prefetch={false}
+                      className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3.5 py-2 text-sm font-medium text-ink shadow-sm transition hover:border-brand hover:text-brand-deep"
+                    >
+                      <span>{item.label}</span>
+                      <span className="rounded-md bg-brand-soft px-1.5 py-0.5 font-mono text-xs font-semibold text-brand-deep">
+                        {item.score}/100
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-faint">{t("home.popularBrandsHeading")}</h3>
+              <ul className="flex flex-wrap gap-2">
+                {popBrands.map((b) => (
+                  <li key={b.slug}>
+                    <Link
+                      href={localePath(lang, `/foods/brand/${b.slug}`)}
+                      prefetch={false}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-paper px-3.5 py-2 text-sm font-medium text-ink shadow-sm transition hover:border-brand hover:text-brand-deep"
+                    >
+                      <span>{b.name}</span>
+                      {b.avg !== null && (
+                        <span className="font-mono text-xs text-ink-faint">({b.avg})</span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

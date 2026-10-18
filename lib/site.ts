@@ -5,8 +5,11 @@
 export const SITE = {
   name: "Scanabowl",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.scanabowl.com").replace(/\/$/, ""),
-  /** public contact address shown on the site (already used on the live site) */
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "scanabowl@gmail.com",
+  /** public contact address shown on the site */
+  email:
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL && process.env.NEXT_PUBLIC_CONTACT_EMAIL.trim() !== "scanabowl@gmail.com"
+      ? process.env.NEXT_PUBLIC_CONTACT_EMAIL.trim()
+      : "info@scanabowl.com",
   /** bol.com partner "site id" from the Partner Platform; empty = plain (non-affiliate) links */
   bolSiteId: process.env.NEXT_PUBLIC_BOL_SITE_ID ?? "",
   /** Awin affiliate network: publisher id of Scanabowl and the merchant id of the zooplus NL-BE programme */
