@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Analytics, type BeforeSendEvent } from "@vercel/analytics/next";
 
 /**
@@ -14,6 +16,23 @@ function beforeSend(event: BeforeSendEvent): BeforeSendEvent | null {
   return at === -1 ? event : { ...event, url: event.url.slice(0, at) };
 }
 
+/** Our own small visitor counter (lib/visits.ts): one beacon per page shown, no cookies. */
+function useVisitCounter() {
+  const path = usePathname();
+  useEffect(() => {
+    if (!path) return;
+    try {
+      const body = JSON.stringify({ p: path });
+      if (!navigator.sendBeacon?.("/api/visit", new Blob([body], { type: "application/json" }))) {
+        fetch("/api/visit", { method: "POST", body, headers: { "Content-Type": "application/json" }, keepalive: true }).catch(() => {});
+      }
+    } catch {
+      /* counting must never break the page */
+    }
+  }, [path]);
+}
+
 export function SiteAnalytics() {
+  useVisitCounter();
   return <Analytics beforeSend={beforeSend} />;
 }
