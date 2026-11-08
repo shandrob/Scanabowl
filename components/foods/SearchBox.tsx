@@ -84,9 +84,9 @@ export function SearchBox({
   const big = size === "lg";
   return (
     <div>
-      <form onSubmit={submit} role="search" className="grid w-full grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-stretch">
-        <div className="relative col-span-2 sm:min-w-[13rem] sm:flex-[1_1_16rem]">
-          <IconSearch className={`pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft ${big ? "h-5 w-5" : "h-4 w-4"}`} />
+      <form onSubmit={submit} role="search" className="grid w-full grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-stretch">
+        <div className="relative col-span-2 sm:min-w-[14rem] sm:flex-[1_1_16rem]">
+          <IconSearch className={`pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-faint ${big ? "h-5 w-5" : "h-4 w-4"}`} />
           <input
             type="search"
             inputMode="search"
@@ -94,28 +94,28 @@ export function SearchBox({
             onChange={(e) => setValue(e.target.value)}
             placeholder={t("search.placeholder")}
             aria-label={t("search.label")}
-            className={`w-full rounded-sm border-2 border-ink bg-paper pl-12 pr-4 text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft ${big ? "h-13 text-base sm:text-lg" : "h-11 text-base"}`}
+            className={`w-full rounded-xl border border-[#D6D1C7] bg-paper pl-12 pr-4 font-sans text-ink shadow-sm placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand-soft ${big ? "h-14 text-base sm:text-lg" : "h-12 text-base"}`}
           />
         </div>
         <button
           type="button"
           onClick={() => setScanning(true)}
-          className={`inline-flex items-center justify-center gap-2 rounded-sm border-2 border-ink bg-paper px-4 font-mono text-xs font-semibold uppercase tracking-wider text-ink transition hover:bg-stone ${big ? "h-13" : "h-11"}`}
+          className={`inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-paper px-4 font-sans text-sm font-semibold text-brand-deep shadow-sm transition hover:border-brand-mid hover:bg-brand-soft ${big ? "h-12 sm:h-14 sm:text-base" : "h-12"}`}
           aria-label={t("search.scan")}
         >
-          <IconBarcode className="h-4 w-4" />
+          <IconBarcode className="h-5 w-5 text-brand" />
           <span>{t("search.scan")}</span>
         </button>
         <button
           type="submit"
           disabled={busy}
-          className={`rounded-sm border-2 border-ink bg-brand px-5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep disabled:opacity-60 ${big ? "h-13" : "h-11"}`}
+          className={`rounded-lg bg-brand px-6 font-sans text-sm font-semibold text-white shadow-sm transition hover:bg-brand-deep disabled:opacity-60 ${big ? "h-12 sm:h-14 sm:text-base" : "h-12"}`}
         >
           {busy ? t("common.loading") : t("search.button")}
         </button>
       </form>
       {missing && (
-        <p className="mt-3 rounded-sm border border-warn bg-warn-soft px-4 py-3 text-sm text-ink" role="status">
+        <p className="mt-3 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 font-sans text-sm text-ink" role="status">
           {t("search.notFound", { ean: missing })}{" "}
           <Link href={`${localePath(lang, "/suggest")}?ean=${missing}`} className="font-semibold text-brand underline underline-offset-2">
             {t("search.suggestIt")}

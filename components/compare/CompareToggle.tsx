@@ -17,8 +17,8 @@ export function CompareToggle({ id, species, name }: { id: string; species: Spec
       aria-pressed={on}
       aria-label={on ? t("compare.removeCard", { name }) : t("compare.addCard", { name })}
       title={on ? t("compare.added") : t("compare.addThis")}
-      className={`absolute left-2 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-sm border border-ink font-mono text-sm font-bold transition ${
-        on ? "bg-brand text-white" : "bg-paper text-ink hover:bg-stone"
+      className={`absolute left-2.5 top-2.5 z-10 inline-flex h-7 w-7 items-center justify-center rounded-full border font-sans text-sm font-semibold shadow-sm transition ${
+        on ? "border-brand bg-brand text-white" : "border-line bg-paper/95 text-ink-soft hover:border-brand hover:text-brand"
       }`}
     >
       {on ? <IconCheck className="h-3.5 w-3.5" /> : <span aria-hidden>+</span>}

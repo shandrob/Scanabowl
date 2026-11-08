@@ -28,22 +28,22 @@ function GuideCard({ g, lang, t, year }: { g: GuideData; lang: Locale; t: TFunct
   return (
     <Link
       href={localePath(lang, `/best/${g.def.slug}`)}
-      className="group flex h-full gap-4 rounded-sm border border-ink bg-paper p-5 transition-colors hover:bg-stone/70"
+      className="group flex h-full gap-4 rounded-2xl border border-line bg-paper p-5 shadow-card transition hover:border-brand/40 hover:shadow-lift"
     >
       <div className="min-w-0 flex-1">
-        <h3 className="font-display text-lg font-semibold leading-snug tracking-tight text-ink group-hover:text-brand-deep group-hover:underline">{text.h1}</h3>
+        <h3 className="font-display text-lg font-semibold leading-snug tracking-tight text-ink group-hover:text-brand-deep">{text.h1}</h3>
         <p className="mt-1 text-sm text-ink-soft">{text.card}</p>
         {first && (
-          <p className="mt-3 font-mono text-xs tabular-nums text-ink-soft">
+          <p className="mt-3 font-sans text-xs tabular-nums text-ink-soft">
             {t("guides.topPick")} <span className="font-semibold text-ink">{first.brand}</span> · <span className="font-semibold text-brand-deep">{first.score}/100</span>
           </p>
         )}
-        <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-brand">
+        <span className="mt-3 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-brand">
           {t("guides.openList", { count: g.top.length })} <IconArrow className="h-4 w-4" />
         </span>
       </div>
       {first && (
-        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-line bg-white p-1" aria-hidden>
+        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-cream p-1" aria-hidden>
           <ProductImage ean={first.ean} hasImage={!!first.image} alt="" size={80} />
         </div>
       )}
@@ -60,9 +60,7 @@ export default async function GuidesIndex({ params }: { params: Promise<{ lang: 
   const guides = (await allGuides()).filter((g) => g.top.length > 0);
   const section = (sp: Species, title: string) => (
     <section aria-labelledby={`${sp}-h`} className="mt-12">
-      <div className="border-b-2 border-ink pb-2">
-        <h2 id={`${sp}-h`} className="font-display text-2xl font-semibold tracking-tight text-ink">{title}</h2>
-      </div>
+      <h2 id={`${sp}-h`} className="font-display text-2xl font-semibold tracking-tight text-ink">{title}</h2>
       <ul className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
         {guides
           .filter((g) => g.def.species === sp)
@@ -75,16 +73,13 @@ export default async function GuidesIndex({ params }: { params: Promise<{ lang: 
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="border-b-2 border-ink pb-5">
-        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">FEDIAF 2021 · RANKED DOSSIERS</p>
-        <h1 className="mt-1 font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{t("guides.indexTitle")}</h1>
-        <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t("guides.indexIntro")}</p>
-      </header>
+      <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{t("guides.indexTitle")}</h1>
+      <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t("guides.indexIntro")}</p>
       {section("cat", t("guides.forCats"))}
       {section("dog", t("guides.forDogs"))}
-      <p className="mt-12 max-w-3xl font-mono text-xs leading-relaxed text-ink-faint">
+      <p className="mt-12 max-w-3xl font-sans text-xs leading-relaxed text-ink-faint">
         {t("guides.indexNote")}{" "}
-        <Link href={localePath(lang, "/how-we-score")} className="underline underline-offset-2 hover:text-ink">{t("home.howScore")}</Link>
+        <Link href={localePath(lang, "/how-we-score")} className="underline hover:text-ink">{t("home.howScore")}</Link>
       </p>
     </div>
   );

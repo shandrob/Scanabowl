@@ -23,11 +23,11 @@ export function ScoreRing({
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const pct = score === null ? 0 : Math.max(0, Math.min(100, score)) / 100;
-  const color = g ? GRADE_STYLE[g].stroke : "#6B6A65";
+  const color = g ? GRADE_STYLE[g].stroke : "#94a3b8";
   return (
     <div className="relative inline-flex shrink-0 items-center justify-center" style={{ width: size, height: size }} role="img" aria-label={label}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90" aria-hidden>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#D6D1C7" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#E6E2DA" strokeWidth={stroke} />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -35,7 +35,7 @@ export function ScoreRing({
           fill="none"
           stroke={color}
           strokeWidth={stroke}
-          strokeLinecap="butt"
+          strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - pct)}
           className={animate ? "ring-anim" : undefined}
@@ -43,7 +43,7 @@ export function ScoreRing({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-        <span className="font-mono font-semibold tabular-nums text-ink" style={{ fontSize: size * 0.34 }}>
+        <span className="font-mono font-bold tabular-nums text-ink" style={{ fontSize: size * 0.34 }}>
           {score === null ? "–" : score}
         </span>
         {size >= 84 && score !== null && <span className="mt-0.5 font-mono tabular-nums text-ink-faint" style={{ fontSize: size * 0.13 }}>/100</span>}

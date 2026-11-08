@@ -54,12 +54,12 @@ export function CurrentFoodAdvice() {
   const compare = better[0] ? `${localePath(lang, "/compare")}?species=${active.species}&f=${[current.i, ...better.slice(0, 2).map((b) => b.e.i)].map(encodeURIComponent).join(",")}` : null;
 
   return (
-    <section aria-labelledby="current-h" className="mt-12 border-t-2 border-ink pt-8">
+    <section aria-labelledby="current-h" className="mt-12 border-t border-line pt-8">
       <h2 id="current-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("pet.currentTitle", { name: active.name })}</h2>
       <div className="mt-4 max-w-3xl">
         <ProductCard entry={current} species={active.species} lang={lang} t={t} personalScore={fit.score} petName={active.name} />
       </div>
-      {fit.allergy.excluded && <p className="mt-3 max-w-3xl rounded-sm border-2 border-danger bg-danger-soft p-4 text-sm text-ink">{t("personal.allergyBad", { name: active.name })}</p>}
+      {fit.allergy.excluded && <p className="mt-3 max-w-3xl rounded-xl border border-danger/30 bg-danger-soft p-4 text-sm text-ink">{t("personal.allergyBad", { name: active.name })}</p>}
 
       {current.sc === null ? (
         <p className="mt-4 text-ink-soft">{t("pet.currentNoScore")}</p>
@@ -77,7 +77,7 @@ export function CurrentFoodAdvice() {
             ))}
           </ul>
           {compare && (
-            <Link href={compare} prefetch={false} className="mt-5 inline-block rounded-sm border border-ink bg-brand px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep">
+            <Link href={compare} prefetch={false} className="mt-5 inline-block rounded-full bg-brand px-5 py-2.5 font-sans text-sm font-semibold text-white transition hover:bg-brand-deep">
               {t("pet.compareCurrent")} →
             </Link>
           )}

@@ -7,11 +7,11 @@ import { SITE } from "@/lib/site";
 export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
   const col = (title: string, links: Array<[string, string]>) => (
     <div>
-      <h2 className="border-b border-line pb-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">{title}</h2>
-      <ul className="mt-3 space-y-2 text-[0.92rem]">
+      <h2 className="font-sans text-sm font-semibold text-brand-deep">{title}</h2>
+      <ul className="mt-3 space-y-2 text-[0.95rem]">
         {links.map(([href, label]) => (
           <li key={href}>
-            <Link href={localePath(lang, href)} className="text-ink-soft transition-colors hover:text-ink hover:underline">
+            <Link href={localePath(lang, href)} className="text-ink-soft transition-colors hover:text-brand-deep hover:underline">
               {label}
             </Link>
           </li>
@@ -20,18 +20,15 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
     </div>
   );
   return (
-    <footer className="mt-20 border-t-2 border-ink bg-paper">
+    <footer className="mt-20 border-t border-line bg-paper">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Link href={localePath(lang)} className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="" width={32} height={32} className="rounded-sm border border-ink" />
-              <span className="font-display text-lg font-semibold tracking-tight text-ink">Scanabowl</span>
+              <Image src="/logo.png" alt="" width={32} height={32} className="rounded-lg border border-line" />
+              <span className="font-display text-lg font-semibold tracking-tight text-brand-deep">Scanabowl</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-soft">{t("footer.blurb")}</p>
-            <p className="mt-3 inline-block rounded-sm border border-line bg-stone px-2.5 py-1 font-mono text-[0.68rem] uppercase tracking-wider text-ink-soft">
-              FEDIAF 2021 · Dry Matter Basis
-            </p>
           </div>
           {col(t("footer.explore"), [
             ["/foods", t("nav.foods")],
@@ -58,12 +55,12 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
           <p>{t("footer.disclaimer")}</p>
           <p className="mt-2">
             {t("footer.photos").split("{source}")[0]}
-            <a href="https://world.openpetfoodfacts.org" rel="noopener" className="underline underline-offset-2 hover:text-ink">Open Pet Food Facts</a>
+            <a href="https://world.openpetfoodfacts.org" rel="noopener" className="underline underline-offset-2 hover:text-brand">Open Pet Food Facts</a>
             {t("footer.photos").split("{source}")[1]}
           </p>
-          <p className="mt-2 font-mono text-[0.72rem] tabular-nums">
+          <p className="mt-2">
             © {new Date().getFullYear()} Scanabowl ·{" "}
-            <a href={`mailto:${SITE.email}`} className="underline underline-offset-2 hover:text-ink">{SITE.email}</a>
+            <a href={`mailto:${SITE.email}`} className="underline underline-offset-2 hover:text-brand">{SITE.email}</a>
             {SITE.company.kvk ? ` · KvK ${SITE.company.kvk}` : ""}
             {SITE.company.vat ? ` · ${t("footer.vat")} ${SITE.company.vat}` : ""}
           </p>

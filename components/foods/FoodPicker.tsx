@@ -51,13 +51,13 @@ export function FoodPicker({ id, species, onPick, label }: { id: string; species
           onChange={(e) => setQ(e.target.value)}
           placeholder={t("search.placeholder")}
           autoComplete="off"
-          className="h-11 w-full rounded-sm border border-ink bg-paper pl-11 pr-4 text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft"
+          className="h-11 w-full rounded-xl border border-line bg-paper pl-11 pr-4 font-sans text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft"
         />
       </div>
       {wanted && (
-        <ul className="mt-1.5 divide-y divide-line overflow-hidden rounded-sm border-2 border-ink bg-paper shadow-lift">
-          {!index && <li className="px-4 py-3 font-mono text-xs text-ink-faint">{t("common.loading")}</li>}
-          {index && results.length === 0 && <li className="px-4 py-3 text-sm text-ink-faint">{t("compare.noResults")}</li>}
+        <ul className="mt-1.5 divide-y divide-line overflow-hidden rounded-xl border border-line bg-paper shadow-lift">
+          {!index && <li className="px-4 py-3 font-sans text-sm text-ink-faint">{t("common.loading")}</li>}
+          {index && results.length === 0 && <li className="px-4 py-3 font-sans text-sm text-ink-faint">{t("compare.noResults")}</li>}
           {results.map((e) => (
             <li key={e.i}>
               <button
@@ -68,14 +68,14 @@ export function FoodPicker({ id, species, onPick, label }: { id: string; species
                 }}
                 className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-stone"
               >
-                <span className="h-10 w-10 shrink-0 overflow-hidden rounded-sm border border-line bg-white p-0.5">
+                <span className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-cream p-0.5">
                   <ProductImage ean={e.e} hasImage={e.im === 1} alt="" size={40} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">{e.b}</span>
-                  <span className="block truncate text-sm font-medium text-ink">{e.n}</span>
+                  <span className="block truncate font-sans text-xs font-medium text-ink-soft">{e.b}</span>
+                  <span className="block truncate font-sans text-sm font-medium text-ink">{e.n}</span>
                 </span>
-                <span className="shrink-0 rounded-sm border border-brand/30 bg-brand-soft px-2 py-0.5 font-mono text-xs font-semibold tabular-nums text-brand-deep">{e.sc ?? "–"}</span>
+                <span className="shrink-0 rounded-full bg-brand-soft px-2.5 py-0.5 font-sans text-xs font-semibold tabular-nums text-brand-deep">{e.sc ?? "–"}</span>
               </button>
             </li>
           ))}

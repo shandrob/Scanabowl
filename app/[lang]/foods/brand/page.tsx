@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 function AvgBadge({ avg, t }: { avg: number | null; t: TFunction }) {
   const grade = gradeOf(avg);
-  if (avg === null || !grade) return <span className="font-mono text-xs text-ink-faint">{t("brandPages.noAvg")}</span>;
+  if (avg === null || !grade) return <span className="font-sans text-xs text-ink-faint">{t("brandPages.noAvg")}</span>;
   const s = GRADE_STYLE[grade];
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 font-mono text-xs font-semibold tabular-nums ${s.border} ${s.soft} ${s.text}`}>
-      <span className={`inline-block h-2 w-2 rounded-none ${s.solid}`} aria-hidden />
+    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-sans text-xs font-semibold tabular-nums ${s.border} ${s.soft} ${s.text}`}>
+      <span className={`inline-block h-2 w-2 rounded-full ${s.solid}`} aria-hidden />
       {t("brandPages.avg", { score: avg })}
     </span>
   );
@@ -54,7 +54,7 @@ export default async function BrandIndex({ params }: { params: Promise<{ lang: s
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
-      <nav aria-label={t("common.breadcrumb")} className="font-mono text-xs uppercase tracking-wider text-ink-faint">
+      <nav aria-label={t("common.breadcrumb")} className="font-sans text-xs text-ink-faint">
         <ol className="flex flex-wrap items-center gap-2">
           <li><Link href={localePath(lang)} className="hover:text-ink hover:underline">{t("nav.home")}</Link></li>
           <li aria-hidden>/</li>
@@ -63,43 +63,38 @@ export default async function BrandIndex({ params }: { params: Promise<{ lang: s
           <li className="text-ink-soft" aria-current="page">{t("brandPages.indexTitle")}</li>
         </ol>
       </nav>
-      <header className="mt-6 border-b-2 border-ink pb-5">
-        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">MANUFACTURER DIRECTORY</p>
-        <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("brandPages.indexTitle")}</h1>
-        <p className="mt-3 max-w-3xl text-lg text-ink-soft">{t("brandPages.indexIntro", { min: MIN_FOODS_FOR_PAGE })}</p>
-      </header>
+      <h1 className="mt-6 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("brandPages.indexTitle")}</h1>
+      <p className="mt-3 max-w-3xl text-lg text-ink-soft">{t("brandPages.indexIntro", { min: MIN_FOODS_FOR_PAGE })}</p>
 
       {ranking.length > 0 && (
-        <section aria-labelledby="top-h" className="mt-10 rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
-          <div className="border-b-4 border-ink pb-2">
-            <h2 id="top-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("brandPages.topTitle")}</h2>
-          </div>
+        <section aria-labelledby="top-h" className="mt-10 rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
+          <h2 id="top-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("brandPages.topTitle")}</h2>
           <ol className="mt-5 grid gap-x-8 gap-y-3 sm:grid-flow-col sm:grid-rows-5">
             {ranking.map((b, i) => (
               <li key={b.slug} className="flex items-center gap-3 border-b border-line pb-2">
-                <span className="w-6 text-right font-mono text-sm font-semibold tabular-nums text-ink-faint">{i + 1}.</span>
+                <span className="w-6 text-right font-sans text-sm font-semibold tabular-nums text-ink-faint">{i + 1}.</span>
                 <Link href={href(b.slug)} prefetch={false} className="min-w-0 flex-1 truncate font-semibold text-ink hover:text-brand hover:underline">{b.name}</Link>
                 <AvgBadge avg={b.avg} t={t} />
               </li>
             ))}
           </ol>
-          <p className="mt-5 font-mono text-xs text-ink-faint">{t("brandPages.topNote", { min: MIN_SCORED_FOR_RANKING })}</p>
+          <p className="mt-5 font-sans text-xs text-ink-faint">{t("brandPages.topNote", { min: MIN_SCORED_FOR_RANKING })}</p>
         </section>
       )}
 
       <section aria-labelledby="az-h" className="mt-12">
-        <h2 id="az-h" className="border-b-2 border-ink pb-2 font-display text-2xl font-semibold tracking-tight text-ink">{t("brandPages.azTitle")}</h2>
+        <h2 id="az-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("brandPages.azTitle")}</h2>
         <div className="mt-6 space-y-8">
           {[...letters.entries()].map(([letter, list]) => (
             <div key={letter}>
-              <h3 className="border-b border-line pb-1 font-mono text-sm font-semibold uppercase tracking-widest text-brand">{letter}</h3>
+              <h3 className="font-display text-lg font-semibold text-brand">{letter}</h3>
               <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {list.map((b) => (
                   <li key={b.slug}>
-                    <Link href={href(b.slug)} prefetch={false} className="flex items-center justify-between gap-3 rounded-sm border border-ink bg-paper px-4 py-3 transition hover:bg-stone">
+                    <Link href={href(b.slug)} prefetch={false} className="flex items-center justify-between gap-3 rounded-xl border border-line bg-paper px-4 py-3 shadow-card transition hover:border-brand/40">
                       <span className="min-w-0">
                         <span className="block truncate font-semibold text-ink">{b.name}</span>
-                        <span className="block font-mono text-xs tabular-nums text-ink-faint">{t("brandPages.foods", { count: b.count })}</span>
+                        <span className="block font-sans text-xs tabular-nums text-ink-faint">{t("brandPages.foods", { count: b.count })}</span>
                       </span>
                       <AvgBadge avg={b.avg} t={t} />
                     </Link>

@@ -68,11 +68,11 @@ export default async function BlogPost({ params }: Props) {
 
   return (
     <article className="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6">
-      <nav aria-label={t("common.breadcrumb")} className="font-mono text-xs uppercase tracking-wider text-ink-faint">
+      <nav aria-label={t("common.breadcrumb")} className="font-sans text-xs text-ink-faint">
         <Link href={localePath(lang, "/blog")} className="hover:text-ink hover:underline">← {t("blog.back")}</Link>
       </nav>
-      <header className="mt-6 max-w-3xl border-b-2 border-ink pb-6">
-        <p className="font-mono text-xs tabular-nums text-ink-soft">
+      <header className="mt-6 max-w-3xl">
+        <p className="font-sans text-xs text-ink-faint">
           <time dateTime={post.date.toISOString()}>{formatDate(post.date, lang)}</time> · {t("blog.minutes", { n: post.minutes })}
         </p>
         <h1 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{post.title}</h1>
@@ -80,31 +80,31 @@ export default async function BlogPost({ params }: Props) {
       </header>
 
       {!post.translated && (
-        <p className="mt-6 flex max-w-3xl gap-3 rounded-sm border border-warn bg-warn-soft p-4 text-sm text-ink">
+        <p className="mt-6 flex max-w-3xl gap-3 rounded-xl border border-warn/30 bg-warn-soft p-4 text-sm text-ink">
           <IconInfo className="mt-0.5 h-5 w-5 shrink-0 text-warn" />
           {t("blog.notTranslated", { lang: post.lang.toUpperCase() })}
         </p>
       )}
 
       {post.cover && (
-        <div className="relative mt-8 aspect-[16/9] max-w-4xl overflow-hidden rounded-sm border-2 border-ink bg-stone">
+        <div className="relative mt-8 aspect-[16/9] max-w-4xl overflow-hidden rounded-2xl border border-line bg-stone">
           <Image src={post.cover} alt="" fill priority sizes="(min-width: 1024px) 896px, 100vw" unoptimized className="object-cover" />
         </div>
       )}
 
       <div className="prose-scan mt-10" dangerouslySetInnerHTML={{ __html: post.html }} />
 
-      <aside className="mt-12 max-w-3xl rounded-sm border-2 border-ink bg-paper p-6">
+      <aside className="mt-12 max-w-3xl rounded-2xl border border-brand/25 bg-brand-soft/50 p-6">
         <h2 className="font-display text-xl font-semibold tracking-tight text-ink">{t("blog.ctaTitle")}</h2>
         <p className="mt-1 text-ink-soft">{t("blog.ctaText")}</p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Link href={localePath(lang, "/foods")} className="rounded-sm border border-ink bg-brand px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-white hover:bg-brand-deep">{t("blog.ctaFoods")}</Link>
-          <Link href={localePath(lang, "/my-pet")} className="rounded-sm border border-ink bg-stone px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:bg-brand-soft">{t("blog.ctaPet")}</Link>
+          <Link href={localePath(lang, "/foods")} className="rounded-full bg-brand px-5 py-2.5 font-sans text-sm font-semibold text-white hover:bg-brand-deep">{t("blog.ctaFoods")}</Link>
+          <Link href={localePath(lang, "/my-pet")} className="rounded-full border border-line bg-paper px-5 py-2.5 font-sans text-sm font-semibold text-ink hover:border-brand">{t("blog.ctaPet")}</Link>
         </div>
       </aside>
 
       {more.length > 0 && (
-        <section className="mt-16 border-t-2 border-ink pt-8" aria-labelledby="more-h">
+        <section className="mt-16 border-t border-line pt-8" aria-labelledby="more-h">
           <h2 id="more-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("blog.more")}</h2>
           <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {more.map((p) => (

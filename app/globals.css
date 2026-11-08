@@ -1,47 +1,47 @@
 @import "tailwindcss";
 
-/* Scanabowl Editorial & Nutritional-Label Design Tokens (ConsumerLab / OpenPetFoodFacts / Wirecutter standard) */
+/* Scanabowl Human-Friendly Editorial Design System (Wirecutter / Consumentenbond / Yuka standard) */
 @theme {
-  /* Primary Brand & Editorial Accents */
-  --color-brand: #1F4E3D;
-  --color-brand-mid: #2D6A4F;
-  --color-brand-deep: #14362A;
-  --color-brand-soft: #E8F3EE;
-  --color-brand-tint: #EFECE6;
+  /* Primary Brand & Warm Editorial Accents */
+  --color-brand: #1E4D3B;
+  --color-brand-mid: #27634C;
+  --color-brand-deep: #163A2C;
+  --color-brand-soft: #E8F0EC;
+  --color-brand-tint: #F1F6F3;
   --color-accent: #C84B31;
   --color-accent-soft: #FCECE8;
 
-  /* Warm Unbleached Paper & Stone Surfaces */
-  --color-cream: #F7F4EF;
-  --color-stone: #EFECE6;
-  --color-paper: #FAF8F5;
+  /* Warm Cream / Oatmeal Canvas & Pure White Cards */
+  --color-cream: #FAF8F5;
+  --color-stone: #F2EFE9;
+  --color-paper: #FFFFFF;
 
-  /* Structural Rules & Hairlines */
-  --color-line: #D6D1C7;
+  /* Soft Warm Stone Borders (Rule reserved strictly for Nutrition Facts tables) */
+  --color-line: #E6E2DA;
   --color-rule: #18181B;
 
-  /* Ink & Metadata Typography */
+  /* Warm Charcoal Ink & Readable Metadata */
   --color-ink: #18181B;
-  --color-ink-soft: #52524E;
-  --color-ink-faint: #6B6A65;
+  --color-ink-soft: #4B4A46;
+  --color-ink-faint: #6E6C66;
 
-  /* Nutritional Data Semantics */
+  /* Retail & Semantic Accents */
   --color-bol: #0000A4;
-  --color-warn: #B45309;
+  --color-warn: #D97706;
   --color-warn-soft: #FEF3C7;
-  --color-danger: #991B1B;
+  --color-danger: #DC2626;
   --color-danger-soft: #FEE2E2;
 
-  /* Grades (High-contrast laboratory semantics) */
-  --color-grade-a: #2D6A4F;
-  --color-grade-a-soft: #E8F3EE;
-  --color-grade-b: #3F6212;
+  /* Score Badges (Yuka-style clarity) */
+  --color-grade-a: #16A34A;
+  --color-grade-a-soft: #DCFCE7;
+  --color-grade-b: #4D7C0F;
   --color-grade-b-soft: #ECFCCB;
-  --color-grade-c: #B45309;
+  --color-grade-c: #D97706;
   --color-grade-c-soft: #FEF3C7;
-  --color-grade-d: #C2410C;
+  --color-grade-d: #EA580C;
   --color-grade-d-soft: #FFEDD5;
-  --color-grade-e: #991B1B;
+  --color-grade-e: #DC2626;
   --color-grade-e-soft: #FEE2E2;
 
   /* Typographic Stack */
@@ -49,9 +49,9 @@
   --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
-  /* Zero-fluff tactile shadows (no soft SaaS blur) */
-  --shadow-card: none;
-  --shadow-lift: 3px 3px 0px 0px #18181B;
+  /* Subtle warm card shadows */
+  --shadow-card: 0 1px 3px rgb(24 24 27 / 0.04), 0 4px 12px -4px rgb(24 24 27 / 0.06);
+  --shadow-lift: 0 4px 12px -2px rgb(24 24 27 / 0.08), 0 12px 24px -8px rgb(24 24 27 / 0.12);
 }
 
 html {
@@ -72,33 +72,15 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* FDA / EU Nutrition Facts Specification Sheet Primitives */
-.label-sheet {
-  background: var(--color-paper);
-  border: 2px solid var(--color-rule);
-}
-
-.label-bar-thick {
-  border-bottom: 6px solid var(--color-rule);
-}
-
-.label-bar-med {
-  border-bottom: 4px solid var(--color-rule);
-}
-
-.label-bar-thin {
-  border-bottom: 1px solid var(--color-line);
-}
-
 ::selection {
   background: var(--color-brand-soft);
   color: var(--color-brand-deep);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-brand);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -124,26 +106,23 @@ body {
 .prose-scan h2 {
   font-family: var(--font-display);
   font-size: 1.6rem;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   font-weight: 600;
   margin-top: 2em;
-  padding-bottom: 0.35em;
-  border-bottom: 1px solid var(--color-line);
-  color: var(--color-ink);
+  color: var(--color-brand-deep);
 }
 .prose-scan h3 {
   font-family: var(--font-display);
   font-size: 1.25rem;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.25;
   font-weight: 600;
   margin-top: 1.6em;
-  color: var(--color-ink);
+  color: var(--color-brand-deep);
 }
 .prose-scan p,
 .prose-scan li {
-  line-height: 1.65;
+  line-height: 1.7;
 }
 .prose-scan ul {
   list-style: disc;
@@ -163,15 +142,16 @@ body {
   text-underline-offset: 3px;
 }
 .prose-scan blockquote {
-  border-left: 4px solid var(--color-ink);
-  background: var(--color-stone);
-  padding: 0.75em 1em;
+  border-left: 4px solid var(--color-brand-soft);
+  background: var(--color-paper);
+  border-radius: 0.5rem;
+  padding: 0.85em 1.1em;
   color: var(--color-ink-soft);
   font-style: italic;
 }
 .prose-scan img {
-  border-radius: 2px;
-  border: 1px solid var(--color-ink);
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
   margin: 1.6em 0;
   max-width: 100%;
   height: auto;
@@ -179,26 +159,20 @@ body {
 .prose-scan table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   font-variant-numeric: tabular-nums;
-  border-top: 2px solid var(--color-ink);
-  border-bottom: 2px solid var(--color-ink);
 }
 .prose-scan th,
 .prose-scan td {
   border-bottom: 1px solid var(--color-line);
-  padding: 0.55em 0.7em;
+  padding: 0.6em 0.75em;
   text-align: left;
   vertical-align: top;
 }
 .prose-scan th {
-  color: var(--color-ink);
-  font-family: var(--font-mono);
+  color: var(--color-ink-soft);
   font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 2px solid var(--color-ink);
+  font-size: 0.8rem;
 }
 
 /* Score ring animation (respects reduced motion via the rule above) */
@@ -216,13 +190,12 @@ body {
   left: 0.75rem;
   top: -4rem;
   z-index: 100;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
+  background: var(--color-brand);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
   padding: 0.6rem 1rem;
-  border-radius: 2px;
-  border: 1px solid var(--color-ink);
+  border-radius: 0.5rem;
   transition: top 0.15s;
 }
 .skip-link:focus {

@@ -31,61 +31,67 @@ export default async function FoodsPage({ params }: { params: Promise<{ lang: st
   const meta = metaJson as Meta;
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6">
-      <header className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-5">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">
-            DATABASE INDEX · DRY MATTER BASIS
-          </p>
-          <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("finder.title")}</h1>
+          <h1 className="font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("finder.title")}</h1>
           <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("finder.subtitle", { count: (meta.counts.scoredDog + meta.counts.scoredCat).toLocaleString(lang) })}</p>
         </div>
-        <Link href={localePath(lang, "/foods/brand")} className="rounded-sm border border-ink bg-paper px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink transition hover:bg-stone">
+        <Link href={localePath(lang, "/foods/brand")} className="font-sans text-sm font-semibold text-brand hover:underline">
           {t("nav.allBrands")} →
         </Link>
-      </header>
+      </div>
 
       <div className="mt-8">
-        <Suspense fallback={<div className="h-64 animate-pulse rounded-sm border border-line bg-paper" />}>
+        <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl border border-line bg-paper" />}>
           <FoodFinder brands={meta.brands} />
         </Suspense>
       </div>
 
       {/* server-rendered crawlable links to popular foods and brands */}
-      <section className="mt-14 border-t-2 border-ink pt-10" aria-labelledby="foods-popular-h">
+      <section className="mt-14 border-t border-line pt-10" aria-labelledby="foods-popular-h">
         <h2 id="foods-popular-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("home.popularTitle")}</h2>
         <p className="mt-1 text-sm text-ink-soft">{t("home.popularSubtitle")}</p>
         <div className="mt-6 grid gap-8 lg:grid-cols-2">
           <div>
-            <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">{t("home.popularFoodsHeading")}</h3>
+            <h3 className="mb-3 font-sans text-xs font-semibold text-ink-soft">{t("home.popularFoodsHeading")}</h3>
             <ul className="flex flex-wrap gap-2">
-              {POPULAR_FOODS.map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    href={localePath(lang, `/foods/${item.slug}`)}
-                    prefetch={false}
-                    className="inline-flex items-center gap-2 rounded-sm border border-ink bg-paper px-3 py-1.5 text-sm font-medium text-ink transition hover:bg-brand-soft hover:text-brand-deep"
-                  >
-                    <span>{item.label}</span>
-                    <span className="rounded-sm border border-brand/30 bg-brand-soft px-1.5 py-0.5 font-mono text-xs font-semibold tabular-nums text-brand-deep">
-                      {item.score}/100
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              {POPULAR_FOODS.map((item) => {
+                const dotColor =
+                  item.score >= 75
+                    ? "bg-grade-a"
+                    : item.score >= 50
+                      ? "bg-grade-c"
+                      : "bg-grade-e";
+                return (
+                  <li key={item.slug}>
+                    <Link
+                      href={localePath(lang, `/foods/${item.slug}`)}
+                      prefetch={false}
+                      className="inline-flex items-center gap-2 rounded-full border border-[#E2DDD5] bg-paper px-3.5 py-2 font-sans text-sm font-medium text-ink shadow-sm transition hover:border-brand hover:bg-brand-soft/60"
+                    >
+                      <span>{item.label}</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-cream px-2 py-0.5 font-sans text-xs font-bold tabular-nums text-ink">
+                        <span className={`h-2 w-2 rounded-full ${dotColor}`} aria-hidden />
+                        {item.score}/100
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div>
-            <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">{t("home.popularBrandsHeading")}</h3>
+            <h3 className="mb-3 font-sans text-xs font-semibold text-ink-soft">{t("home.popularBrandsHeading")}</h3>
             <ul className="flex flex-wrap gap-2">
               {popBrands.map((b) => (
                 <li key={b.slug}>
                   <Link
                     href={localePath(lang, `/foods/brand/${b.slug}`)}
                     prefetch={false}
-                    className="inline-flex items-center gap-1.5 rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink transition hover:border-ink hover:bg-brand-soft hover:text-brand-deep"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#E2DDD5] bg-paper px-3.5 py-2 font-sans text-sm font-medium text-ink shadow-sm transition hover:border-brand hover:bg-brand-soft/60"
                   >
                     <span>{b.name}</span>
-                    {b.avg !== null && <span className="font-mono text-xs tabular-nums text-ink-faint">({b.avg})</span>}
+                    {b.avg !== null && <span className="font-sans text-xs font-semibold tabular-nums text-ink-faint">({b.avg})</span>}
                   </Link>
                 </li>
               ))}

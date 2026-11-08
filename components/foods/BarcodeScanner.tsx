@@ -80,22 +80,22 @@ export function BarcodeScanner({ onDetect, onClose }: { onDetect: (code: string)
 
   return (
     <div role="dialog" aria-modal="true" aria-label={t("scan.title")} className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4">
-      <div className="w-full max-w-md overflow-hidden rounded-sm border-2 border-ink bg-paper shadow-lift">
-        <div className="flex items-center justify-between border-b-4 border-ink bg-stone px-4 py-3">
+      <div className="w-full max-w-md overflow-hidden rounded-xl border border-line bg-paper shadow-lift">
+        <div className="flex items-center justify-between border-b border-line bg-cream px-4 py-3">
           <h2 className="font-display text-lg font-semibold text-ink">{t("scan.title")}</h2>
-          <button type="button" onClick={onClose} aria-label={t("common.close")} className="rounded-sm border border-ink bg-paper p-1.5 text-ink hover:bg-cream">
+          <button type="button" onClick={onClose} aria-label={t("common.close")} className="rounded-lg border border-line bg-paper p-1.5 text-ink hover:bg-stone">
             <IconX />
           </button>
         </div>
         <div className="relative aspect-[4/3] bg-black">
           <video ref={videoRef} playsInline muted className="h-full w-full object-cover" />
           {status === "scanning" && (
-            <div className="pointer-events-none absolute inset-x-8 top-1/2 h-24 -translate-y-1/2 rounded-sm border-2 border-white/90 shadow-[0_0_0_9999px_rgba(0,0,0,0.45)]">
+            <div className="pointer-events-none absolute inset-x-8 top-1/2 h-24 -translate-y-1/2 rounded-lg border-2 border-white/90 shadow-[0_0_0_9999px_rgba(0,0,0,0.45)]">
               <div className="absolute inset-x-2 top-1/2 h-0.5 -translate-y-1/2 bg-accent" />
             </div>
           )}
         </div>
-        <p className="border-t border-line px-4 py-3 font-mono text-xs text-ink-soft" role="status">
+        <p className="border-t border-line px-4 py-3 font-sans text-sm text-ink-soft" role="status">
           {status === "starting" && t("scan.starting")}
           {status === "scanning" && t("scan.hint")}
           {status === "denied" && t("scan.denied")}

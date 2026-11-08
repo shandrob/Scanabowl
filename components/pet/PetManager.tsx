@@ -30,8 +30,8 @@ const blank = (species: Species = "dog"): PetProfile => ({
 const DISLIKE_CHIPS = ["chicken", "beef", "fish", "lamb", "turkey", "duck", "pork", "rabbit", "game"] as const;
 
 const inputCls =
-  "h-11 w-full rounded-sm border border-ink bg-paper px-3.5 text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft";
-const labelCls = "mb-1.5 block font-mono text-xs font-semibold uppercase tracking-wider text-ink";
+  "h-11 w-full rounded-xl border border-line bg-paper px-3.5 font-sans text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft";
+const labelCls = "mb-1.5 block font-sans text-sm font-semibold text-ink";
 
 function Segmented<T extends string>({ value, onChange, options, name }: { value: T; onChange: (v: T) => void; options: Array<[T, string, string?]>; name: string }) {
   return (
@@ -43,10 +43,10 @@ function Segmented<T extends string>({ value, onChange, options, name }: { value
           role="radio"
           aria-checked={value === v}
           onClick={() => onChange(v)}
-          className={`rounded-sm border px-4 py-2.5 text-left transition ${value === v ? "border-ink bg-brand-soft ring-1 ring-ink" : "border-line bg-paper hover:border-ink"}`}
+          className={`rounded-xl border px-4 py-2.5 text-left transition ${value === v ? "border-brand bg-brand-soft ring-2 ring-brand/25" : "border-line bg-paper hover:border-brand/40"}`}
         >
           <span className="block font-semibold text-ink">{label}</span>
-          {hint && <span className="mt-0.5 block font-mono text-[0.7rem] text-ink-soft">{hint}</span>}
+          {hint && <span className="mt-0.5 block font-sans text-xs text-ink-soft">{hint}</span>}
         </button>
       ))}
     </div>
@@ -151,19 +151,19 @@ export function PetManager() {
                 role="tab"
                 aria-selected={p.id === draft.id}
                 onClick={() => pick(p.id)}
-                className={`inline-flex items-center gap-2 rounded-sm border px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition ${p.id === draft.id ? "border-ink bg-brand text-white" : "border-ink bg-paper text-ink hover:bg-stone"}`}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 font-sans text-sm font-semibold transition ${p.id === draft.id ? "bg-brand text-white" : "border border-line bg-paper text-ink hover:border-brand"}`}
               >
                 <IconPaw className="h-4 w-4" /> {p.name}
               </button>
             ))}
-            <button type="button" onClick={startNew} className="rounded-sm border border-dashed border-ink px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-brand hover:bg-stone">
+            <button type="button" onClick={startNew} className="rounded-full border border-dashed border-line px-4 py-2 font-sans text-sm font-semibold text-brand hover:border-brand">
               + {t("pet.addAnother")}
             </button>
           </div>
         )}
 
         {/* 1. basics */}
-        <fieldset className="space-y-5 rounded-sm border-2 border-ink bg-paper p-6">
+        <fieldset className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card">
           <legend className="px-2 font-display text-xl font-semibold text-ink">{t("pet.basicsTitle")}</legend>
           <div>
             <span className={labelCls}>{t("pet.species")}</span>
@@ -177,8 +177,8 @@ export function PetManager() {
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <div className="mb-1.5 flex items-center justify-between">
-                <label htmlFor="pet-age" className="font-mono text-xs font-semibold uppercase tracking-wider text-ink">{ageMode === "date" ? t("pet.birthDate") : t("pet.ageYears")}</label>
-                <button type="button" className="font-mono text-xs font-semibold text-brand underline underline-offset-2" onClick={() => setAgeChoice(ageMode === "date" ? "years" : "date")}>
+                <label htmlFor="pet-age" className="font-sans text-sm font-semibold text-ink">{ageMode === "date" ? t("pet.birthDate") : t("pet.ageYears")}</label>
+                <button type="button" className="font-sans text-xs font-semibold text-brand hover:underline" onClick={() => setAgeChoice(ageMode === "date" ? "years" : "date")}>
                   {ageMode === "date" ? t("pet.useAge") : t("pet.useBirthDate")}
                 </button>
               </div>
@@ -192,7 +192,7 @@ export function PetManager() {
             <div>
               <label htmlFor="pet-weight" className={labelCls}>{t("pet.weight")}</label>
               <input id="pet-weight" type="number" inputMode="decimal" min={0.5} max={100} step={0.1} className={inputCls} value={draft.weightKg || ""} onChange={(e) => set("weightKg", Number(e.target.value))} aria-invalid={errors.weight} />
-              {errors.weight && <p className="mt-1 text-sm text-danger">{t("pet.weightInvalid")}</p>}
+              {errors.weight && <p id="name-err" className="mt-1 text-sm text-danger">{t("pet.weightInvalid")}</p>}
             </div>
           </div>
           {draft.species === "dog" && (
@@ -215,7 +215,7 @@ export function PetManager() {
         </fieldset>
 
         {/* 2. lifestyle */}
-        <fieldset className="space-y-5 rounded-sm border-2 border-ink bg-paper p-6">
+        <fieldset className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card">
           <legend className="px-2 font-display text-xl font-semibold text-ink">{t("pet.lifestyleTitle")}</legend>
           <div>
             <span className={labelCls}>{t("pet.activity")}</span>
@@ -228,26 +228,26 @@ export function PetManager() {
           <div className="space-y-3">
             {draft.species === "cat" && (
               <label className="flex cursor-pointer items-start gap-3">
-                <input type="checkbox" className="mt-1 h-4 w-4 rounded-none accent-brand" checked={!!draft.urinaryIssues} onChange={(e) => set("urinaryIssues", e.target.checked)} />
+                <input type="checkbox" className="mt-1 h-4 w-4 rounded accent-brand" checked={!!draft.urinaryIssues} onChange={(e) => set("urinaryIssues", e.target.checked)} />
                 <span><span className="font-semibold text-ink">{t("pet.urinary")}</span><span className="block text-sm text-ink-faint">{t("pet.urinaryHint")}</span></span>
               </label>
             )}
             <label className="flex cursor-pointer items-start gap-3">
-              <input type="checkbox" className="mt-1 h-4 w-4 rounded-none accent-brand" checked={!!draft.sensitiveDigestion} onChange={(e) => set("sensitiveDigestion", e.target.checked)} />
+              <input type="checkbox" className="mt-1 h-4 w-4 rounded accent-brand" checked={!!draft.sensitiveDigestion} onChange={(e) => set("sensitiveDigestion", e.target.checked)} />
               <span><span className="font-semibold text-ink">{t("pet.digestion")}</span><span className="block text-sm text-ink-faint">{t("pet.digestionHint")}</span></span>
             </label>
           </div>
         </fieldset>
 
         {/* 3. food: what the pet eats now, what the owner wants to feed, what it refuses */}
-        <fieldset className="space-y-5 rounded-sm border-2 border-ink bg-paper p-6">
+        <fieldset className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card">
           <legend className="px-2 font-display text-xl font-semibold text-ink">{t("pet.foodTitle")}</legend>
           <div>
             <span className={labelCls}>{t("pet.currentFood")}</span>
             {draft.currentFoodId ? (
-              <div className="flex items-center justify-between gap-3 rounded-sm border border-ink bg-stone px-4 py-3">
+              <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-cream px-4 py-3">
                 <span className="min-w-0 truncate font-medium text-ink">{draft.currentFoodName}</span>
-                <button type="button" onClick={() => setEdit({ ...draft, currentFoodId: undefined, currentFoodName: undefined })} className="shrink-0 font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">
+                <button type="button" onClick={() => setEdit({ ...draft, currentFoodId: undefined, currentFoodName: undefined })} className="shrink-0 font-sans text-sm font-semibold text-brand hover:underline">
                   {t("pet.currentFoodChange")}
                 </button>
               </div>
@@ -266,7 +266,7 @@ export function PetManager() {
               {DISLIKE_CHIPS.map((a) => {
                 const on = (draft.dislikes ?? []).includes(a);
                 return (
-                  <button key={a} type="button" aria-pressed={on} onClick={() => toggleDislike(a)} className={`inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 font-mono text-xs font-medium transition ${on ? "border-warn bg-warn-soft text-ink" : "border-line bg-cream text-ink hover:border-ink"}`}>
+                  <button key={a} type="button" aria-pressed={on} onClick={() => toggleDislike(a)} className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-sans text-sm font-medium transition ${on ? "border-warn bg-warn-soft text-ink" : "border-line bg-cream text-ink hover:border-brand"}`}>
                     {on && <IconX className="h-3.5 w-3.5" />}
                     {t(`allergen.${a}`)}
                   </button>
@@ -278,14 +278,14 @@ export function PetManager() {
         </fieldset>
 
         {/* 4. allergies */}
-        <fieldset className="space-y-5 rounded-sm border-2 border-ink bg-paper p-6">
+        <fieldset className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card">
           <legend className="px-2 font-display text-xl font-semibold text-ink">{t("pet.allergyTitle")}</legend>
           <p className="text-sm text-ink-soft">{t("pet.allergyIntro")}</p>
           <div className="flex flex-wrap gap-2" role="group" aria-label={t("pet.allergyTitle")}>
             {chips.map((a) => {
               const on = draft.allergens.includes(a);
               return (
-                <button key={a} type="button" aria-pressed={on} onClick={() => toggleAllergen(a)} className={`inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 font-mono text-xs font-medium transition ${on ? "border-danger bg-danger-soft text-danger" : "border-line bg-cream text-ink hover:border-ink"}`}>
+                <button key={a} type="button" aria-pressed={on} onClick={() => toggleAllergen(a)} className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-sans text-sm font-medium transition ${on ? "border-danger bg-danger-soft text-danger" : "border-line bg-cream text-ink hover:border-brand"}`}>
                   {on && <IconX className="h-3.5 w-3.5" />}
                   {t(`allergen.${a}`)}
                 </button>
@@ -293,7 +293,7 @@ export function PetManager() {
             })}
           </div>
           {!showAll && rest.length > 0 && (
-            <button type="button" className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2" onClick={() => setShowAll(true)}>
+            <button type="button" className="font-sans text-sm font-semibold text-brand hover:underline" onClick={() => setShowAll(true)}>
               {t("pet.showMoreAllergens", { count: rest.length })}
             </button>
           )}
@@ -301,13 +301,13 @@ export function PetManager() {
             <label htmlFor="allergy-custom" className={labelCls}>{t("pet.customAllergy")}</label>
             <div className="flex gap-2">
               <input id="allergy-custom" className={inputCls} value={custom} maxLength={40} onChange={(e) => setCustom(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addCustom(); } }} placeholder={t("pet.customPlaceholder")} />
-              <button type="button" onClick={addCustom} className="shrink-0 rounded-sm border border-ink bg-stone px-5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:bg-brand-soft">{t("common.add")}</button>
+              <button type="button" onClick={addCustom} className="shrink-0 rounded-xl border border-line bg-cream px-5 font-sans text-sm font-semibold text-ink hover:border-brand">{t("common.add")}</button>
             </div>
             {draft.customAllergens.length > 0 && (
               <ul className="mt-3 flex flex-wrap gap-2">
                 {draft.customAllergens.map((c) => (
                   <li key={c}>
-                    <button type="button" onClick={() => set("customAllergens", draft.customAllergens.filter((x) => x !== c))} className="inline-flex items-center gap-1.5 rounded-sm border border-danger bg-danger-soft px-3 py-1 font-mono text-xs font-medium text-danger" aria-label={t("pet.removeAllergen", { name: c })}>
+                    <button type="button" onClick={() => set("customAllergens", draft.customAllergens.filter((x) => x !== c))} className="inline-flex items-center gap-1.5 rounded-full border border-danger bg-danger-soft px-3 py-1 font-sans text-sm font-medium text-danger" aria-label={t("pet.removeAllergen", { name: c })}>
                       {c} <IconX className="h-3.5 w-3.5" />
                     </button>
                   </li>
@@ -315,20 +315,20 @@ export function PetManager() {
               </ul>
             )}
           </div>
-          <label className="flex cursor-pointer items-start gap-3 rounded-sm border border-line bg-cream p-4">
-            <input type="checkbox" className="mt-1 h-4 w-4 rounded-none accent-brand" checked={draft.strictAllergies} onChange={(e) => set("strictAllergies", e.target.checked)} />
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-cream p-4">
+            <input type="checkbox" className="mt-1 h-4 w-4 rounded accent-brand" checked={draft.strictAllergies} onChange={(e) => set("strictAllergies", e.target.checked)} />
             <span><span className="font-semibold text-ink">{t("pet.strict")}</span><span className="block text-sm text-ink-soft">{t("pet.strictHint")}</span></span>
           </label>
         </fieldset>
 
         <div className="flex flex-wrap items-center gap-3">
-          <button type="submit" className="rounded-sm border-2 border-ink bg-brand px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep">
+          <button type="submit" className="rounded-full bg-brand px-8 py-3.5 font-sans text-base font-semibold text-white transition hover:bg-brand-deep">
             {isSaved ? t("pet.saveChanges") : t("pet.save")}
           </button>
           {isSaved && (
             <button
               type="button"
-              className="rounded-sm border border-danger bg-paper px-5 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-danger hover:bg-danger-soft"
+              className="rounded-full border border-line bg-paper px-5 py-3.5 font-sans text-sm font-semibold text-danger hover:border-danger"
               onClick={() => {
                 if (window.confirm(t("pet.confirmDelete", { name: draft.name }))) {
                   remove(draft.id);
@@ -344,9 +344,9 @@ export function PetManager() {
         </div>
 
         {saved && (
-          <div className="flex flex-col gap-4 rounded-sm border-2 border-grade-a bg-grade-a-soft p-5 sm:flex-row sm:items-center sm:justify-between" role="status">
+          <div className="flex flex-col gap-4 rounded-2xl border border-grade-a/30 bg-grade-a-soft p-5 sm:flex-row sm:items-center sm:justify-between" role="status">
             <p className="flex items-center gap-2 font-semibold text-grade-a"><IconCheck className="h-5 w-5" /> {t("pet.saved", { name: saved.name })}</p>
-            <Link href={`${localePath(lang, "/foods")}?species=${saved.species}`} className="rounded-sm border border-ink bg-brand px-6 py-3 text-center font-mono text-xs font-semibold uppercase tracking-wider text-white hover:bg-brand-deep">
+            <Link href={`${localePath(lang, "/foods")}?species=${saved.species}`} className="rounded-full bg-brand px-6 py-3 text-center font-sans text-sm font-semibold text-white hover:bg-brand-deep">
               {t("pet.seeFoods", { name: saved.name })}
             </Link>
           </div>
@@ -355,22 +355,19 @@ export function PetManager() {
 
       {/* live summary */}
       <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-        <section className="rounded-sm border-2 border-ink bg-paper p-6 shadow-lift" aria-live="polite">
-          <div className="border-b-[6px] border-ink pb-3">
-            <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-ink-soft">PET METABOLIC SHEET</p>
-            <h2 className="mt-0.5 flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-ink"><IconPaw className="h-5 w-5 text-brand" />{draft.name.trim() || t("pet.previewTitle")}</h2>
-          </div>
+        <section className="rounded-2xl border border-line bg-paper p-6 shadow-card" aria-live="polite">
+          <h2 className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-ink"><IconPaw className="h-5 w-5 text-brand" />{draft.name.trim() || t("pet.previewTitle")}</h2>
           {preview ? (
-            <dl className="mt-4 divide-y divide-line text-sm">
-              <div className="py-2.5 first:pt-0"><dt className="font-mono text-xs uppercase tracking-wider text-ink-faint">{t("pet.previewStage")}</dt><dd className="mt-0.5 font-semibold text-ink">{t(`pet.stage.${preview.stage}`)}</dd></div>
-              <div className="py-2.5"><dt className="font-mono text-xs uppercase tracking-wider text-ink-faint">{t("pet.previewEnergy")}</dt><dd className="mt-0.5 font-mono text-2xl font-semibold tabular-nums text-brand-deep">{preview.energy.kcal} <span className="text-xs font-normal text-ink-soft">kcal / {t("common.day")}</span></dd></div>
-              <div className="py-2.5 last:pb-0"><dt className="font-mono text-xs uppercase tracking-wider text-ink-faint">{t("pet.previewAllergies")}</dt><dd className="mt-0.5 font-semibold text-ink">{draft.allergens.length + draft.customAllergens.length === 0 ? t("pet.none") : [...draft.allergens.map((a) => t(`allergen.${a}`)), ...draft.customAllergens].join(", ")}</dd></div>
+            <dl className="mt-4 space-y-3 text-sm">
+              <div><dt className="font-sans text-xs text-ink-faint">{t("pet.previewStage")}</dt><dd className="font-semibold text-ink">{t(`pet.stage.${preview.stage}`)}</dd></div>
+              <div><dt className="font-sans text-xs text-ink-faint">{t("pet.previewEnergy")}</dt><dd className="font-display text-2xl font-semibold tabular-nums text-brand-deep">{preview.energy.kcal} <span className="font-sans text-sm font-normal text-ink-soft">kcal / {t("common.day")}</span></dd></div>
+              <div><dt className="font-sans text-xs text-ink-faint">{t("pet.previewAllergies")}</dt><dd className="font-semibold text-ink">{draft.allergens.length + draft.customAllergens.length === 0 ? t("pet.none") : [...draft.allergens.map((a) => t(`allergen.${a}`)), ...draft.customAllergens].join(", ")}</dd></div>
             </dl>
           ) : (
             <p className="mt-3 text-sm text-ink-soft">{t("pet.previewEmpty")}</p>
           )}
         </section>
-        <section className="rounded-sm border border-ink bg-stone p-5 text-sm text-ink-soft">
+        <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft shadow-card">
           <p className="flex gap-2"><IconInfo className="mt-0.5 h-4 w-4 shrink-0 text-brand" /> {t("pet.privacyNote")}</p>
         </section>
       </aside>

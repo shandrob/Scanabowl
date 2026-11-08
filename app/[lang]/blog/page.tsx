@@ -26,13 +26,10 @@ export default async function BlogIndex({ params }: { params: Promise<{ lang: st
   const posts = listPosts(lang);
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6">
-      <header className="border-b-2 border-ink pb-5">
-        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">EDITORIAL & RESEARCH JOURNAL</p>
-        <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("blog.title")}</h1>
-        <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("blog.subtitle")}</p>
-      </header>
+      <h1 className="font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("blog.title")}</h1>
+      <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("blog.subtitle")}</p>
       {posts.length === 0 ? (
-        <p className="mt-10 rounded-sm border-2 border-dashed border-ink bg-paper p-8 text-center text-ink-soft">{t("blog.empty")}</p>
+        <p className="mt-10 rounded-2xl border border-dashed border-line bg-paper p-8 text-center text-ink-soft">{t("blog.empty")}</p>
       ) : (
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((p) => (

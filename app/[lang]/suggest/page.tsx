@@ -20,13 +20,10 @@ export default async function SuggestPage({ params }: { params: Promise<{ lang: 
   const t = createT(await getDictionary(lang));
   return (
     <div className="mx-auto max-w-3xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="border-b-2 border-ink pb-5">
-        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">DATABASE SUBMISSION</p>
-        <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink">{t("suggest.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("suggest.intro")}</p>
-      </header>
+      <h1 className="font-display text-4xl font-semibold tracking-tight text-ink">{t("suggest.title")}</h1>
+      <p className="mt-3 text-lg text-ink-soft">{t("suggest.intro")}</p>
       <div className="mt-8">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-sm border border-line bg-paper" />}>
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl border border-line bg-paper" />}>
           <SuggestForm />
         </Suspense>
       </div>

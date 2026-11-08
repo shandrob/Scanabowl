@@ -40,11 +40,11 @@ export function SuggestForm() {
   if (status === "done") return <SubmitStatus status={status} subject="" body="" />;
 
   return (
-    <form onSubmit={onSubmit} noValidate className="relative space-y-6 rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
+    <form onSubmit={onSubmit} noValidate className="relative space-y-6 rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
       <Honeypot value={hp} onChange={setHp} />
       {isReport ? (
         <>
-          <p className="rounded-sm border border-ink bg-stone p-4 text-sm text-ink">
+          <p className="rounded-xl border border-line bg-cream p-4 text-sm text-ink">
             {t("forms.reportAbout")} <strong>{params.get("name") ?? reportRef}</strong>
           </p>
           <Field id="rp-msg" label={t("forms.reportMessage")} required error={errors.message ? t(`forms.err.${errors.message}`) : undefined} hint={t("forms.reportHint")}>
@@ -67,15 +67,15 @@ export function SuggestForm() {
       </Field>
       {email && (
         <label className="flex cursor-pointer items-start gap-3 text-sm text-ink-soft">
-          <input type="checkbox" className="mt-0.5 h-4 w-4 rounded-none accent-brand" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+          <input type="checkbox" className="mt-0.5 h-4 w-4 rounded accent-brand" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
           <span>{t("forms.consent")}{errors.consent && <span className="ml-2 font-semibold text-danger">{t("forms.err.required")}</span>}</span>
         </label>
       )}
       <SubmitStatus status={status} subject={isReport ? `Foutmelding ${reportRef}` : `Productsuggestie ${product.name}`} body={isReport ? message : `${product.brand} ${product.name}\nEAN ${product.ean}\n\n${product.ingredients}\n\n${product.analysis}`} />
-      <button type="submit" disabled={status === "sending"} className="rounded-sm border-2 border-ink bg-brand px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep disabled:opacity-60">
+      <button type="submit" disabled={status === "sending"} className="rounded-full bg-brand px-8 py-3.5 font-sans text-base font-semibold text-white transition hover:bg-brand-deep disabled:opacity-60">
         {status === "sending" ? t("forms.sending") : t(isReport ? "forms.sendReport" : "forms.sendSuggestion")}
       </button>
-      <p className="font-mono text-xs text-ink-faint">{t("forms.reviewNote")}</p>
+      <p className="font-sans text-xs text-ink-faint">{t("forms.reviewNote")}</p>
     </form>
   );
 }

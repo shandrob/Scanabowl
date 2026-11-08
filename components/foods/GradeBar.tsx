@@ -12,13 +12,13 @@ export function GradeBar({ grades, t }: { grades: Record<Grade, number>; t: TFun
   const label = ORDER.filter((g) => grades[g]).map((g) => `${gradeLabel(t, g)}: ${grades[g]}`).join(", ");
   return (
     <div>
-      <div className="flex h-4 overflow-hidden rounded-none border border-ink bg-stone" role="img" aria-label={label}>
+      <div className="flex h-3.5 overflow-hidden rounded-full bg-stone" role="img" aria-label={label}>
         {ORDER.map((g) => (grades[g] ? <div key={g} className={GRADE_STYLE[g].solid} style={{ width: `${(grades[g] / total) * 100}%` }} /> : null))}
       </div>
-      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs tabular-nums text-ink-soft">
+      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-sans text-xs tabular-nums text-ink-soft">
         {ORDER.filter((g) => grades[g]).map((g) => (
           <li key={g} className="flex items-center gap-1.5">
-            <span className={`inline-block h-2.5 w-2.5 rounded-none border border-ink/40 ${GRADE_STYLE[g].solid}`} aria-hidden />
+            <span className={`inline-block h-2.5 w-2.5 rounded-full ${GRADE_STYLE[g].solid}`} aria-hidden />
             {g} · {gradeLabel(t, g)} ({grades[g]})
           </li>
         ))}

@@ -6,8 +6,8 @@ import { IconAlert, IconCheck } from "@/components/ui/Icons";
 import { SITE } from "@/lib/site";
 
 export const inputCls =
-  "w-full rounded-sm border border-ink bg-paper px-3.5 py-2.5 text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft aria-[invalid=true]:border-danger";
-export const labelCls = "mb-1.5 block font-mono text-xs font-semibold uppercase tracking-wider text-ink";
+  "w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 font-sans text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft aria-[invalid=true]:border-danger";
+export const labelCls = "mb-1.5 block font-sans text-sm font-semibold text-ink";
 
 export function Field({ id, label, hint, error, required, children }: { id: string; label: string; hint?: string; error?: string; required?: boolean; children: React.ReactNode }) {
   return (
@@ -64,7 +64,7 @@ export function SubmitStatus({ status, subject, body }: { status: Status; subjec
   const t = useT();
   if (status === "done")
     return (
-      <div className="flex gap-3 rounded-sm border-2 border-grade-a bg-grade-a-soft p-5 text-ink" role="status">
+      <div className="flex gap-3 rounded-2xl border border-grade-a/30 bg-grade-a-soft p-5 text-ink" role="status">
         <IconCheck className="mt-0.5 h-6 w-6 shrink-0 text-grade-a" />
         <div>
           <p className="font-display text-lg font-semibold text-grade-a">{t("forms.thanksTitle")}</p>
@@ -74,13 +74,13 @@ export function SubmitStatus({ status, subject, body }: { status: Status; subjec
     );
   if (status === "error" || status === "not_configured")
     return (
-      <div className="flex gap-3 rounded-sm border-2 border-danger bg-danger-soft p-5" role="alert">
+      <div className="flex gap-3 rounded-2xl border border-danger/30 bg-danger-soft p-5" role="alert">
         <IconAlert className="mt-0.5 h-5 w-5 shrink-0 text-danger" />
         <div className="text-sm text-ink">
           <p className="font-semibold text-danger">{t("forms.errorTitle")}</p>
           <p className="mt-1">
             {t("forms.errorText")}{" "}
-            <a className="font-semibold text-brand underline underline-offset-2" href={`mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.slice(0, 1500))}`}>
+            <a className="font-semibold text-brand underline" href={`mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.slice(0, 1500))}`}>
               {t("forms.errorMail", { email: SITE.email })}
             </a>
           </p>

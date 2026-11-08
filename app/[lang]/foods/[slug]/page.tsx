@@ -115,7 +115,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
-      <nav aria-label={t("common.breadcrumb")} className="font-mono text-xs uppercase tracking-wider text-ink-faint">
+      <nav aria-label={t("common.breadcrumb")} className="font-sans text-xs text-ink-faint">
         <ol className="flex flex-wrap items-center gap-2">
           <li><Link href={localePath(lang)} className="hover:text-ink hover:underline">{t("nav.home")}</Link></li>
           <li aria-hidden>/</li>
@@ -125,40 +125,38 @@ export default async function ProductPage({ params }: Props) {
         </ol>
       </nav>
 
-      {/* Product Specification Masthead */}
-      <header className="mt-6 flex flex-col gap-6 rounded-sm border-2 border-ink bg-paper p-6 sm:flex-row sm:items-center">
-        <div className="h-40 w-40 shrink-0 overflow-hidden rounded-sm border border-line bg-white p-2">
+      {/* Product Header */}
+      <header className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center">
+        <div className="h-40 w-40 shrink-0 overflow-hidden rounded-2xl border border-line bg-paper p-2 shadow-card">
           <ProductImage ean={p.ean} hasImage={!!p.image} alt={p.name} size={200} priority />
         </div>
         {p.imageCredit && (
-          <p className="-mt-3 font-mono text-[0.68rem] text-ink-faint sm:hidden">
+          <p className="-mt-3 font-sans text-xs text-ink-faint sm:hidden">
             <PhotoCredit credit={p.imageCredit} t={t} />
           </p>
         )}
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-2">
-            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">
-              {brandSlug ? (
-                <Link href={localePath(lang, `/foods/brand/${brandSlug}`)} prefetch={false} title={t("brandPages.moreFromBrand", { brand: p.brand })} className="hover:underline">
-                  {p.brand}
-                </Link>
-              ) : (
-                p.brand
-              )}
-            </p>
-            {p.ean && <span className="font-mono text-xs tabular-nums text-ink-faint">EAN {p.ean}</span>}
-          </div>
-          <h1 className="mt-2 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">{p.name}</h1>
-          <ul className="mt-3 flex flex-wrap gap-2 font-mono text-xs tabular-nums">
-            <li className="rounded-sm border border-ink bg-cream px-2.5 py-1 text-ink">{speciesLabel(t, p.species)}</li>
-            <li className="rounded-sm border border-line bg-cream px-2.5 py-1 text-ink">{foodTypeLabel(t, p.foodType)}</li>
-            <li className="rounded-sm border border-line bg-cream px-2.5 py-1 text-ink">{stageLabel(t, p.lifeStage, p.species)}</li>
-            {p.grainFree && <li className="rounded-sm border border-brand/40 bg-brand-soft px-2.5 py-1 font-semibold text-brand-deep">{t("common.grainFree")}</li>}
-            {p.pack && <li className="rounded-sm border border-line bg-stone px-2.5 py-1 font-semibold text-ink">{p.pack}</li>}
+          <p className="font-sans text-xs font-semibold text-brand">
+            {brandSlug ? (
+              <Link href={localePath(lang, `/foods/brand/${brandSlug}`)} prefetch={false} title={t("brandPages.moreFromBrand", { brand: p.brand })} className="hover:underline">
+                {p.brand}
+              </Link>
+            ) : (
+              p.brand
+            )}
+          </p>
+          <h1 className="mt-1 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">{p.name}</h1>
+          <ul className="mt-3 flex flex-wrap gap-2 font-sans text-xs text-ink-soft">
+            <li className="rounded-full border border-line bg-paper px-3 py-1">{speciesLabel(t, p.species)}</li>
+            <li className="rounded-full border border-line bg-paper px-3 py-1">{foodTypeLabel(t, p.foodType)}</li>
+            <li className="rounded-full border border-line bg-paper px-3 py-1">{stageLabel(t, p.lifeStage, p.species)}</li>
+            {p.grainFree && <li className="rounded-full bg-brand-soft px-3 py-1 font-medium text-brand-deep">{t("common.grainFree")}</li>}
+            {p.pack && <li className="rounded-full border border-line bg-paper px-3 py-1">{p.pack}</li>}
+            {p.ean && <li className="rounded-full border border-line bg-paper px-3 py-1 tabular-nums text-ink-faint">EAN {p.ean}</li>}
           </ul>
           <div className="mt-4"><CompareButton id={p.id} species={p.species} /></div>
           {p.imageCredit && (
-            <p className="mt-2 hidden font-mono text-[0.68rem] text-ink-faint sm:block">
+            <p className="mt-2 hidden font-sans text-xs text-ink-faint sm:block">
               <PhotoCredit credit={p.imageCredit} t={t} />
             </p>
           )}
@@ -170,54 +168,44 @@ export default async function ProductPage({ params }: Props) {
           {p.score !== null && <PersonalPanel entry={entry} species={p.species} ingredientsText={p.ingredientsText} price={p.price} />}
           <ScorePanel p={p} t={t} lang={lang} rank={rank} />
 
-          {/* Ingredient Transparency Breakdown Sheet */}
-          <section aria-labelledby="ingr-h" className="rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
-            <div className="border-b-[6px] border-ink pb-3">
-              <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-ink-soft">
-                EU 767/2009 · COMPOSITION DECLARATION
-              </p>
-              <h2 id="ingr-h" className="mt-0.5 font-display text-2xl font-semibold tracking-tight text-ink">{t("product.ingredientsTitle")}</h2>
-            </div>
-            <div className="mt-5"><IngredientsBlock p={p} t={t} /></div>
+          {/* Ingredient Transparency Card */}
+          <section aria-labelledby="ingr-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
+            <h2 id="ingr-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("product.ingredientsTitle")}</h2>
+            <div className="mt-4"><IngredientsBlock p={p} t={t} /></div>
           </section>
 
-          {/* Guaranteed Analysis & Dry Matter Receipt Block */}
-          <section aria-labelledby="an-h" className="rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
-            <div className="border-b-[6px] border-ink pb-3">
-              <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-ink-soft">
-                FEDIAF 2021 · GUARANTEED ANALYSIS & DRY MATTER BASIS
-              </p>
-              <h2 id="an-h" className="mt-0.5 font-display text-2xl font-semibold tracking-tight text-ink">{t("product.analysisTitle")}</h2>
-            </div>
-            {p.nutrition && <div className="mt-5"><NutritionVisual p={p} bench={bench} lang={lang} t={t} /></div>}
+          {/* Guaranteed Analysis & Dry Matter Card */}
+          <section aria-labelledby="an-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
+            <h2 id="an-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("product.analysisTitle")}</h2>
+            {p.nutrition && <div className="mt-4"><NutritionVisual p={p} bench={bench} lang={lang} t={t} /></div>}
             <div className="mt-6"><AnalysisTable p={p} t={t} /></div>
           </section>
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           <OrderCard ean={p.ean} name={p.name} brand={p.brand} pack={p.pack} price={p.price} bolUrl={p.bolUrl} zooplusUrl={p.zooplusUrl} lang={lang} t={t} />
-          <section className="rounded-sm border border-ink bg-paper p-5 text-sm text-ink-soft">
-            <h2 className="border-b border-line pb-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">{t("product.dataTitle")}</h2>
-            <p className="mt-2.5 leading-relaxed">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>
-            <p className="mt-2.5">
-              <Link href={`${localePath(lang, "/suggest")}?report=${encodeURIComponent(p.ean || p.id)}&name=${encodeURIComponent(p.name)}`} className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">
+          <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft shadow-card">
+            <h2 className="font-sans text-xs font-semibold text-ink">{t("product.dataTitle")}</h2>
+            <p className="mt-2 leading-relaxed">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>
+            <p className="mt-2">
+              <Link href={`${localePath(lang, "/suggest")}?report=${encodeURIComponent(p.ean || p.id)}&name=${encodeURIComponent(p.name)}`} className="font-sans font-semibold text-brand hover:underline">
                 {t("product.reportError")} →
               </Link>
             </p>
           </section>
           {guides.length > 0 && (
-            <section className="rounded-sm border border-ink bg-paper p-5 text-sm">
-              <h2 className="border-b border-line pb-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">{t("guides.onFoodPage")}</h2>
-              <ul className="mt-2.5 space-y-1.5">
+            <section className="rounded-2xl border border-line bg-paper p-5 text-sm shadow-card">
+              <h2 className="font-sans text-xs font-semibold text-ink">{t("guides.onFoodPage")}</h2>
+              <ul className="mt-2 space-y-1.5">
                 {guides.map((g) => (
                   <li key={g.slug}>
-                    <Link href={localePath(lang, `/best/${g.slug}`)} className="font-semibold text-brand underline underline-offset-2">{GUIDE_TEXT[lang][g.slug]?.h1}</Link>
+                    <Link href={localePath(lang, `/best/${g.slug}`)} className="font-semibold text-brand hover:underline">{GUIDE_TEXT[lang][g.slug]?.h1}</Link>
                   </li>
                 ))}
               </ul>
             </section>
           )}
-          <p className="font-mono text-[0.7rem] leading-relaxed text-ink-faint">{t("product.disclaimer")}</p>
+          <p className="font-sans text-xs leading-relaxed text-ink-faint">{t("product.disclaimer")}</p>
         </aside>
       </div>
 

@@ -38,32 +38,27 @@ export default async function MethodPage({ params }: { params: Promise<{ lang: s
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="border-b-2 border-ink pb-5">
-        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">SCORING SPECIFICATION · FEDIAF 2021 / EU 767/2009</p>
-        <h1 className="mt-1 font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{t("method.title")}</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft"><Rich text={t("method.intro")} /></p>
-      </header>
+      <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{t("method.title")}</h1>
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft"><Rich text={t("method.intro")} /></p>
 
-      <section className="mt-10 grid divide-y divide-line rounded-sm border-2 border-ink bg-paper md:grid-cols-3 md:divide-x md:divide-y-0" aria-label={t("method.glance")}>
+      <section className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3" aria-label={t("method.glance")}>
         {PILLARS.map((p) => (
-          <div key={p.key} className="p-6">
-            <p className="font-mono text-4xl font-semibold tabular-nums" style={{ color: p.color }}>{p.pts}<span className="text-lg text-ink-faint"> / 100</span></p>
+          <div key={p.key} className="rounded-xl border border-line bg-paper p-6 shadow-card">
+            <p className="font-display text-4xl font-semibold tabular-nums" style={{ color: p.color }}>{p.pts}<span className="text-lg text-ink-faint"> / 100</span></p>
             <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-ink">{t(`score.pillars.${p.key}`)}</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t(`method.pillar.${p.key}`)}</p>
-            <div className="mt-4 h-2.5 overflow-hidden rounded-none border border-ink/40 bg-stone"><div className="h-full" style={{ width: `${p.pts}%`, background: p.color }} /></div>
+            <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-stone"><div className="h-full rounded-full" style={{ width: `${p.pts}%`, background: p.color }} /></div>
           </div>
         ))}
       </section>
 
-      <section className="mt-10 max-w-3xl rounded-sm border-2 border-ink bg-paper p-6" aria-labelledby="grades-h">
-        <div className="border-b-4 border-ink pb-2">
-          <h2 id="grades-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("method.gradesTitle")}</h2>
-        </div>
-        <ul className="mt-2 divide-y divide-line">
+      <section className="mt-10 max-w-3xl rounded-2xl border border-line bg-paper p-6 shadow-card" aria-labelledby="grades-h">
+        <h2 id="grades-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("method.gradesTitle")}</h2>
+        <ul className="mt-4 divide-y divide-line">
           {ranges.map(([g, range]) => (
             <li key={g} className="flex items-center gap-4 py-3">
-              <span className={`inline-flex h-9 w-9 items-center justify-center rounded-sm border border-ink font-mono text-base font-semibold text-white ${GRADE_STYLE[g].solid}`}>{g}</span>
-              <span className="w-20 font-mono text-sm font-semibold tabular-nums text-ink">{range}</span>
+              <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full font-sans text-base font-semibold text-white ${GRADE_STYLE[g].solid}`}>{g}</span>
+              <span className="w-20 font-sans text-sm font-semibold tabular-nums text-ink">{range}</span>
               <span className="flex-1 text-sm"><strong>{t(`grade.${g}`)}</strong> <span className="text-ink-soft">– {t(`grade.desc.${g}`)}</span></span>
             </li>
           ))}

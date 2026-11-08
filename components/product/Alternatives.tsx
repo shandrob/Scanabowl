@@ -26,10 +26,8 @@ export function Alternatives({ candidates, species }: { candidates: IndexEntry[]
   if (list.length === 0) return null;
   return (
     <section aria-labelledby="alt-h">
-      <div className="border-b-2 border-ink pb-2">
-        <h2 id="alt-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("product.alternativesTitle")}</h2>
-        <p className="mt-1 text-sm text-ink-soft">{pet ? t("product.alternativesPet", { name: pet.name }) : t("product.alternativesText")}</p>
-      </div>
+      <h2 id="alt-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("product.alternativesTitle")}</h2>
+      <p className="mt-1 text-sm text-ink-soft">{pet ? t("product.alternativesPet", { name: pet.name }) : t("product.alternativesText")}</p>
       <ul className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
         {list.map(({ e, fit }) => (
           <li key={e.i}>

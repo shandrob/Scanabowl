@@ -42,11 +42,9 @@ export function Sections({ sections }: { sections: Array<string | Messages> }) {
 export function LongPage({ title, intro, sections, updated, children }: { title: string; intro?: string; sections: Array<string | Messages>; updated?: string; children?: React.ReactNode }) {
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="border-b-2 border-ink pb-5">
-        <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{title}</h1>
-        {intro && <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft"><Rich text={intro} /></p>}
-        {updated && <p className="mt-3 font-mono text-xs text-ink-faint">{updated}</p>}
-      </header>
+      <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{title}</h1>
+      {intro && <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft"><Rich text={intro} /></p>}
+      {updated && <p className="mt-3 font-sans text-xs text-ink-faint">{updated}</p>}
       <div className="prose-scan mt-8">
         <Sections sections={sections} />
         {children}

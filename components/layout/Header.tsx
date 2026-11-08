@@ -50,11 +50,11 @@ export function Header() {
   const isActive = (href: string) => rest === href || rest.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-ink bg-cream">
+    <header className="sticky top-0 z-40 border-b border-line bg-cream/95">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
         <Link href={localePath(lang)} className="flex items-center gap-2.5" aria-label="Scanabowl">
-          <Image src="/logo.png" alt="" width={36} height={36} className="rounded-sm border border-ink" priority />
-          <span className="font-display text-xl font-semibold tracking-tight text-ink">Scanabowl</span>
+          <Image src="/logo.png" alt="" width={36} height={36} className="rounded-lg border border-line" priority />
+          <span className="font-display text-xl font-semibold tracking-tight text-brand-deep">Scanabowl</span>
         </Link>
 
         <nav aria-label={t("nav.main")} className="ml-6 hidden items-center gap-1 lg:flex">
@@ -63,8 +63,8 @@ export function Header() {
               key={n.href}
               href={localePath(lang, n.href)}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className={`whitespace-nowrap rounded-sm px-3 py-1.5 text-[0.92rem] font-medium transition-colors hover:bg-stone hover:text-ink ${
-                isActive(n.href) ? "border border-ink bg-paper font-semibold text-ink" : "text-ink-soft"
+              className={`whitespace-nowrap rounded-lg px-3 py-2 font-sans text-[0.95rem] font-medium transition-colors hover:bg-brand-soft hover:text-brand-deep ${
+                isActive(n.href) ? "bg-brand-soft font-semibold text-brand-deep" : "text-ink-soft"
               }`}
             >
               {t(n.key)}
@@ -75,7 +75,7 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2">
           <Link
             href={localePath(lang, "/my-pet")}
-            className="hidden items-center gap-2 whitespace-nowrap rounded-sm border border-ink bg-paper px-3 py-1.5 text-sm font-medium text-ink transition hover:bg-brand-soft sm:inline-flex"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-line bg-brand-soft px-3.5 py-1.5 font-sans text-sm font-medium text-brand-deep transition hover:border-brand-mid sm:inline-flex"
           >
             <IconPaw className="h-4 w-4 text-brand" />
             {active ? <span className="max-w-[9ch] truncate">{active.name}</span> : <span>{t("nav.addPet")}</span>}
@@ -88,14 +88,14 @@ export function Header() {
               aria-haspopup="menu"
               aria-expanded={langOpen}
               aria-label={t("nav.language")}
-              className="inline-flex items-center gap-1.5 rounded-sm border border-ink bg-paper px-2.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink transition hover:bg-stone"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 font-sans text-sm font-medium text-ink shadow-sm transition hover:border-brand-mid"
             >
-              <IconGlobe className="h-3.5 w-3.5 text-ink-soft" />
-              <span>{lang}</span>
+              <IconGlobe className="h-4 w-4 text-ink-faint" />
+              <span className="uppercase">{lang}</span>
               <IconChevron className={`h-3.5 w-3.5 transition-transform ${langOpen ? "rotate-180" : ""}`} />
             </button>
             {langOpen && (
-              <ul role="menu" className="absolute right-0 mt-1.5 w-44 divide-y divide-line overflow-hidden rounded-sm border-2 border-ink bg-paper shadow-lift">
+              <ul role="menu" className="absolute right-0 mt-2 w-44 divide-y divide-line overflow-hidden rounded-xl border border-line bg-paper py-1 shadow-lift">
                 {LOCALES.map((l) => (
                   <li key={l} role="none">
                     <Link
@@ -104,10 +104,10 @@ export function Header() {
                       hrefLang={l}
                       lang={l}
                       onClick={() => rememberLanguage(l)}
-                      className={`flex items-center justify-between px-3.5 py-2 text-sm hover:bg-stone ${l === lang ? "bg-brand-soft font-semibold text-brand-deep" : "text-ink"}`}
+                      className={`flex items-center justify-between px-4 py-2 font-sans text-sm hover:bg-brand-soft ${l === lang ? "font-semibold text-brand-deep" : "text-ink"}`}
                     >
                       <span>{LOCALE_NAMES[l]}</span>
-                      {l === lang && <span aria-hidden className="font-mono text-xs">✓</span>}
+                      {l === lang && <span aria-hidden>✓</span>}
                     </Link>
                   </li>
                 ))}
@@ -117,7 +117,7 @@ export function Header() {
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-ink bg-paper lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-paper text-ink lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? t("nav.close") : t("nav.menu")}
@@ -129,21 +129,21 @@ export function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label={t("nav.main")} className="border-t border-ink bg-paper px-4 pb-4 pt-2 lg:hidden">
-          <ul className="divide-y divide-line">
+        <nav id="mobile-nav" aria-label={t("nav.main")} className="border-t border-line bg-paper px-4 pb-4 pt-2 lg:hidden">
+          <ul className="grid gap-1">
             {NAV.map((n) => (
               <li key={n.href}>
                 <Link
                   href={localePath(lang, n.href)}
                   aria-current={isActive(n.href) ? "page" : undefined}
-                  className={`block px-2 py-3 text-base font-medium ${isActive(n.href) ? "font-semibold text-brand-deep" : "text-ink"}`}
+                  className={`block rounded-lg px-3 py-3 font-sans text-base font-medium ${isActive(n.href) ? "bg-brand-soft font-semibold text-brand-deep" : "text-ink"}`}
                 >
                   {t(n.key)}
                 </Link>
               </li>
             ))}
-            <li className="pt-2">
-              <Link href={localePath(lang, "/my-pet")} className="flex items-center gap-2 rounded-sm border border-ink bg-brand px-3 py-3 font-semibold text-white">
+            <li className="pt-1">
+              <Link href={localePath(lang, "/my-pet")} className="flex items-center gap-2 rounded-lg bg-brand px-3.5 py-3 font-sans font-semibold text-white">
                 <IconPaw className="h-4 w-4" />
                 {active ? t("nav.petNamed", { name: active.name }) : t("nav.addPet")}
               </Link>

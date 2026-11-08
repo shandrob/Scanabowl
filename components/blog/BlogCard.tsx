@@ -10,21 +10,21 @@ export function formatDate(d: Date, lang: Locale): string {
 
 export function BlogCard({ post, lang, t }: { post: PostMeta; lang: Locale; t: TFunction }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-sm border-2 border-ink bg-paper transition-colors hover:bg-stone/70">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-paper shadow-card transition hover:border-brand-mid/50 hover:shadow-lift">
       <Link href={localePath(lang, `/blog/${post.slug}`)} className="flex h-full flex-col focus-visible:outline-offset-4">
-        <div className="relative aspect-[16/9] border-b border-ink bg-stone">
+        <div className="relative aspect-[16/9] border-b border-line bg-brand-soft">
           {post.cover ? (
             <Image src={post.cover} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" unoptimized className="object-cover" />
           ) : (
-            <div className="flex h-full items-center justify-center font-display text-3xl text-ink/30" aria-hidden>Scanabowl</div>
+            <div className="flex h-full items-center justify-center font-display text-3xl text-brand/30" aria-hidden>Scanabowl</div>
           )}
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <p className="font-mono text-xs tabular-nums text-ink-faint">
+          <p className="font-sans text-xs text-ink-faint">
             <time dateTime={post.date.toISOString()}>{formatDate(post.date, lang)}</time> · {t("blog.minutes", { n: post.minutes })}
-            {!post.translated && <span className="ml-2 rounded-sm border border-warn/40 bg-warn-soft px-1.5 py-0.5 text-warn">{post.lang.toUpperCase()}</span>}
+            {!post.translated && <span className="ml-2 rounded-md bg-warn-soft px-1.5 py-0.5 font-semibold text-warn">{post.lang.toUpperCase()}</span>}
           </p>
-          <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-tight text-ink group-hover:text-brand-deep group-hover:underline">{post.title}</h3>
+          <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-ink group-hover:text-brand-deep">{post.title}</h3>
           {post.description && <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft">{post.description}</p>}
         </div>
       </Link>

@@ -75,17 +75,17 @@ export function PhotoField({
 
   return (
     <div>
-      <p className="block font-mono text-xs font-semibold uppercase tracking-wider text-ink">{t("forms.photos")}</p>
+      <p className="block font-sans text-sm font-semibold text-ink">{t("forms.photos")}</p>
       <p className="mt-1 text-sm text-ink-soft">{t("forms.photosHint")}</p>
       <ul className="mt-3 flex flex-wrap gap-3">
         {photos.map((p, i) => (
-          <li key={`${p.name}-${i}`} className="relative h-24 w-24 overflow-hidden rounded-sm border border-ink bg-white">
+          <li key={`${p.name}-${i}`} className="relative h-24 w-24 overflow-hidden rounded-xl border border-line bg-cream">
             {/* eslint-disable-next-line @next/next/no-img-element -- local preview of a photo that is not uploaded anywhere yet */}
             <img src={p.preview} alt="" className="h-full w-full object-cover" />
             <button
               type="button"
               onClick={() => onChange(photos.filter((_, j) => j !== i))}
-              className="absolute right-1 top-1 rounded-sm border border-ink bg-ink px-1.5 py-0.5 font-mono text-xs font-semibold text-white"
+              className="absolute right-1 top-1 rounded-full bg-ink/80 px-2 py-0.5 font-sans text-xs font-semibold text-white"
               aria-label={t("forms.photosRemove")}
             >
               ×
@@ -96,7 +96,7 @@ export function PhotoField({
           <li>
             <label
               htmlFor={`${idPrefix}-photos`}
-              className="flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-sm border-2 border-dashed border-ink bg-stone text-center font-mono text-xs font-semibold text-ink hover:bg-brand-soft"
+              className="flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-line bg-cream text-center font-sans text-xs font-semibold text-brand hover:border-brand"
             >
               <span className="text-2xl leading-none" aria-hidden>+</span>
               {busy ? t("forms.sending") : t("forms.photosAdd")}
@@ -118,7 +118,7 @@ export function PhotoField({
       {(problem || error) && <p className="mt-2 text-sm font-semibold text-danger">{problem ?? error}</p>}
       {photos.length > 0 && (
         <label className="mt-3 flex cursor-pointer items-start gap-3 text-sm text-ink-soft">
-          <input type="checkbox" className="mt-0.5 h-4 w-4 rounded-none accent-brand" checked={permission} onChange={(e) => onPermission(e.target.checked)} />
+          <input type="checkbox" className="mt-0.5 h-4 w-4 rounded accent-brand" checked={permission} onChange={(e) => onPermission(e.target.checked)} />
           <span>{t("forms.photoPermission")}</span>
         </label>
       )}
