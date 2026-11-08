@@ -1,41 +1,57 @@
 @import "tailwindcss";
 
-/* Scanabowl design tokens - same green / cream identity as the original site */
+/* Scanabowl Editorial & Nutritional-Label Design Tokens (ConsumerLab / OpenPetFoodFacts / Wirecutter standard) */
 @theme {
-  --color-brand: #065f46;
-  --color-brand-mid: #0b7a57;
-  --color-brand-deep: #04412f;
-  --color-brand-soft: #d9eee4;
-  --color-brand-tint: #eef7f2;
-  --color-cream: #faf7f0;
-  --color-paper: #ffffff;
-  --color-line: #e6dfd0;
-  --color-ink: #1e293b;
-  --color-ink-soft: #46516a;
-  --color-ink-faint: #5b6678;
-  --color-bol: #0000a4;
-  --color-warn: #b45309;
-  --color-warn-soft: #fef3c7;
-  --color-danger: #b91c1c;
-  --color-danger-soft: #fee2e2;
+  /* Primary Brand & Editorial Accents */
+  --color-brand: #1F4E3D;
+  --color-brand-mid: #2D6A4F;
+  --color-brand-deep: #14362A;
+  --color-brand-soft: #E8F3EE;
+  --color-brand-tint: #EFECE6;
+  --color-accent: #C84B31;
+  --color-accent-soft: #FCECE8;
 
-  --color-grade-a: #15803d;
-  --color-grade-a-soft: #dcfce7;
-  --color-grade-b: #4d7c0f;
-  --color-grade-b-soft: #ecfccb;
-  --color-grade-c: #a16207;
-  --color-grade-c-soft: #fef3c7;
-  --color-grade-d: #c2410c;
-  --color-grade-d-soft: #ffedd5;
-  --color-grade-e: #b91c1c;
-  --color-grade-e-soft: #fee2e2;
+  /* Warm Unbleached Paper & Stone Surfaces */
+  --color-cream: #F7F4EF;
+  --color-stone: #EFECE6;
+  --color-paper: #FAF8F5;
 
+  /* Structural Rules & Hairlines */
+  --color-line: #D6D1C7;
+  --color-rule: #18181B;
+
+  /* Ink & Metadata Typography */
+  --color-ink: #18181B;
+  --color-ink-soft: #52524E;
+  --color-ink-faint: #6B6A65;
+
+  /* Nutritional Data Semantics */
+  --color-bol: #0000A4;
+  --color-warn: #B45309;
+  --color-warn-soft: #FEF3C7;
+  --color-danger: #991B1B;
+  --color-danger-soft: #FEE2E2;
+
+  /* Grades (High-contrast laboratory semantics) */
+  --color-grade-a: #2D6A4F;
+  --color-grade-a-soft: #E8F3EE;
+  --color-grade-b: #3F6212;
+  --color-grade-b-soft: #ECFCCB;
+  --color-grade-c: #B45309;
+  --color-grade-c-soft: #FEF3C7;
+  --color-grade-d: #C2410C;
+  --color-grade-d-soft: #FFEDD5;
+  --color-grade-e: #991B1B;
+  --color-grade-e-soft: #FEE2E2;
+
+  /* Typographic Stack */
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
-  --shadow-card: 0 1px 2px rgb(30 41 59 / 0.05), 0 6px 20px -8px rgb(30 41 59 / 0.12);
-  --shadow-lift: 0 2px 4px rgb(30 41 59 / 0.06), 0 14px 32px -10px rgb(30 41 59 / 0.2);
+  /* Zero-fluff tactile shadows (no soft SaaS blur) */
+  --shadow-card: none;
+  --shadow-lift: 3px 3px 0px 0px #18181B;
 }
 
 html {
@@ -52,15 +68,37 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* FDA / EU Nutrition Facts Specification Sheet Primitives */
+.label-sheet {
+  background: var(--color-paper);
+  border: 2px solid var(--color-rule);
+}
+
+.label-bar-thick {
+  border-bottom: 6px solid var(--color-rule);
+}
+
+.label-bar-med {
+  border-bottom: 4px solid var(--color-rule);
+}
+
+.label-bar-thin {
+  border-bottom: 1px solid var(--color-line);
+}
+
 ::selection {
   background: var(--color-brand-soft);
   color: var(--color-brand-deep);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brand-mid);
+  outline: 2px solid var(--color-ink);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -86,21 +124,26 @@ body {
 .prose-scan h2 {
   font-family: var(--font-display);
   font-size: 1.6rem;
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   font-weight: 600;
   margin-top: 2em;
-  color: var(--color-brand-deep);
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
 }
 .prose-scan h3 {
   font-family: var(--font-display);
   font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   font-weight: 600;
   margin-top: 1.6em;
-  color: var(--color-brand-deep);
+  color: var(--color-ink);
 }
 .prose-scan p,
 .prose-scan li {
-  line-height: 1.75;
+  line-height: 1.65;
 }
 .prose-scan ul {
   list-style: disc;
@@ -114,18 +157,21 @@ body {
   margin-top: 0.4em;
 }
 .prose-scan a {
-  color: var(--color-brand-mid);
+  color: var(--color-brand);
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .prose-scan blockquote {
-  border-left: 4px solid var(--color-brand-soft);
-  padding-left: 1em;
+  border-left: 4px solid var(--color-ink);
+  background: var(--color-stone);
+  padding: 0.75em 1em;
   color: var(--color-ink-soft);
   font-style: italic;
 }
 .prose-scan img {
-  border-radius: 1rem;
+  border-radius: 2px;
+  border: 1px solid var(--color-ink);
   margin: 1.6em 0;
   max-width: 100%;
   height: auto;
@@ -133,7 +179,10 @@ body {
 .prose-scan table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  border-top: 2px solid var(--color-ink);
+  border-bottom: 2px solid var(--color-ink);
 }
 .prose-scan th,
 .prose-scan td {
@@ -143,11 +192,13 @@ body {
   vertical-align: top;
 }
 .prose-scan th {
-  color: var(--color-ink-faint);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--color-ink);
 }
 
 /* Score ring animation (respects reduced motion via the rule above) */
@@ -165,10 +216,13 @@ body {
   left: 0.75rem;
   top: -4rem;
   z-index: 100;
-  background: var(--color-brand);
-  color: white;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
   padding: 0.6rem 1rem;
-  border-radius: 0.6rem;
+  border-radius: 2px;
+  border: 1px solid var(--color-ink);
   transition: top 0.15s;
 }
 .skip-link:focus {

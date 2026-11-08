@@ -54,12 +54,12 @@ export function CurrentFoodAdvice() {
   const compare = better[0] ? `${localePath(lang, "/compare")}?species=${active.species}&f=${[current.i, ...better.slice(0, 2).map((b) => b.e.i)].map(encodeURIComponent).join(",")}` : null;
 
   return (
-    <section aria-labelledby="current-h" className="mt-12">
-      <h2 id="current-h" className="font-display text-2xl font-semibold text-brand-deep">{t("pet.currentTitle", { name: active.name })}</h2>
+    <section aria-labelledby="current-h" className="mt-12 border-t-2 border-ink pt-8">
+      <h2 id="current-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("pet.currentTitle", { name: active.name })}</h2>
       <div className="mt-4 max-w-3xl">
         <ProductCard entry={current} species={active.species} lang={lang} t={t} personalScore={fit.score} petName={active.name} />
       </div>
-      {fit.allergy.excluded && <p className="mt-3 max-w-3xl rounded-xl border border-danger/30 bg-danger-soft p-4 text-sm text-ink">{t("personal.allergyBad", { name: active.name })}</p>}
+      {fit.allergy.excluded && <p className="mt-3 max-w-3xl rounded-sm border-2 border-danger bg-danger-soft p-4 text-sm text-ink">{t("personal.allergyBad", { name: active.name })}</p>}
 
       {current.sc === null ? (
         <p className="mt-4 text-ink-soft">{t("pet.currentNoScore")}</p>
@@ -67,7 +67,7 @@ export function CurrentFoodAdvice() {
         <p className="mt-4 text-ink-soft">{t("pet.currentBest", { name: active.name })}</p>
       ) : (
         <>
-          <h3 className="mt-8 font-display text-xl font-semibold text-ink">{t("pet.betterTitle", { name: active.name })}</h3>
+          <h3 className="mt-8 font-display text-xl font-semibold tracking-tight text-ink">{t("pet.betterTitle", { name: active.name })}</h3>
           <p className="mt-1 text-sm text-ink-soft">{t("pet.betterText")}</p>
           <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
             {better.map(({ e, score }) => (
@@ -77,8 +77,8 @@ export function CurrentFoodAdvice() {
             ))}
           </ul>
           {compare && (
-            <Link href={compare} prefetch={false} className="mt-5 inline-block rounded-xl bg-brand px-5 py-2.5 font-semibold text-white shadow-card transition hover:bg-brand-deep">
-              {t("pet.compareCurrent")}
+            <Link href={compare} prefetch={false} className="mt-5 inline-block rounded-sm border border-ink bg-brand px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep">
+              {t("pet.compareCurrent")} →
             </Link>
           )}
         </>

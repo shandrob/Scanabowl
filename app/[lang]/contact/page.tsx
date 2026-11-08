@@ -20,10 +20,13 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
   const t = createT(await getDictionary(lang));
   return (
     <div className="mx-auto max-w-3xl px-4 pb-8 pt-12 sm:px-6">
-      <h1 className="font-display text-4xl font-semibold text-brand-deep">{t("contact.title")}</h1>
-      <p className="mt-3 text-lg text-ink-soft">
-        {t("contact.intro")} <a className="font-semibold text-brand underline underline-offset-2" href={`mailto:${SITE.email}`}>{SITE.email}</a>
-      </p>
+      <header className="border-b-2 border-ink pb-5">
+        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">EDITORIAL DESK</p>
+        <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink">{t("contact.title")}</h1>
+        <p className="mt-3 text-lg text-ink-soft">
+          {t("contact.intro")} <a className="font-mono text-sm font-semibold text-brand underline underline-offset-2" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+      </header>
       <div className="mt-8"><ContactForm /></div>
     </div>
   );

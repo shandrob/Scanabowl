@@ -39,9 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-line bg-paper p-4 shadow-card">
-      <p className="text-xs font-semibold uppercase tracking-wider text-ink-faint">{label}</p>
-      <p className="mt-1 font-display text-3xl font-semibold text-brand-deep">{value}</p>
+    <div className="p-4">
+      <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">{label}</p>
+      <p className="mt-1 font-mono text-3xl font-semibold tabular-nums text-ink">{value}</p>
     </div>
   );
 }
@@ -50,10 +50,10 @@ function SpeciesSection({ id, title, summary, species, brand, lang, t }: { id: s
   const finder = `${localePath(lang, "/foods")}?species=${species}&brand=${encodeURIComponent(brand)}`;
   return (
     <section aria-labelledby={id} className="mt-12">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <h2 id={id} className="font-display text-2xl font-semibold text-brand-deep">{title}</h2>
+      <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-ink pb-2">
+        <h2 id={id} className="font-display text-2xl font-semibold tracking-tight text-ink">{title}</h2>
         {summary.count > summary.top.length && (
-          <Link href={finder} className="text-sm font-semibold text-brand underline underline-offset-2">{t("brandPages.showAll", { count: summary.count })}</Link>
+          <Link href={finder} className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">{t("brandPages.showAll", { count: summary.count })} →</Link>
         )}
       </div>
       {summary.scored > 0 && (
@@ -99,20 +99,23 @@ export default async function BrandPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
-      <nav aria-label={t("common.breadcrumb")} className="text-sm text-ink-faint">
+      <nav aria-label={t("common.breadcrumb")} className="font-mono text-xs uppercase tracking-wider text-ink-faint">
         <ol className="flex flex-wrap items-center gap-2">
-          <li><Link href={localePath(lang)} className="hover:text-brand hover:underline">{t("nav.home")}</Link></li>
+          <li><Link href={localePath(lang)} className="hover:text-ink hover:underline">{t("nav.home")}</Link></li>
           <li aria-hidden>/</li>
-          <li><Link href={localePath(lang, "/foods/brand")} className="hover:text-brand hover:underline">{t("brandPages.indexTitle")}</Link></li>
+          <li><Link href={localePath(lang, "/foods/brand")} className="hover:text-ink hover:underline">{t("brandPages.indexTitle")}</Link></li>
           <li aria-hidden>/</li>
           <li className="text-ink-soft" aria-current="page">{b.name}</li>
         </ol>
       </nav>
 
-      <h1 className="mt-6 font-display text-4xl font-semibold text-brand-deep">{b.name}</h1>
-      <p className="mt-3 max-w-3xl text-lg text-ink-soft">{t("brandPages.intro", { brand: b.name, count: b.count })}</p>
+      <header className="mt-6 border-b-2 border-ink pb-5">
+        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">BRAND AUDIT DOSSIER</p>
+        <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{b.name}</h1>
+        <p className="mt-3 max-w-3xl text-lg text-ink-soft">{t("brandPages.intro", { brand: b.name, count: b.count })}</p>
+      </header>
 
-      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 divide-x divide-y divide-line rounded-sm border-2 border-ink bg-paper md:grid-cols-4 md:divide-y-0">
         <Stat label={t("brandPages.statFoods")} value={String(b.count)} />
         <Stat label={t("brandPages.statAvg")} value={b.avg === null ? "–" : `${b.avg}`} />
         <Stat label={t("brandPages.statBest")} value={b.best === null ? "–" : `${b.best}`} />
@@ -121,7 +124,7 @@ export default async function BrandPage({ params }: Props) {
 
       {b.scored > 0 && (
         <section aria-labelledby="dist-h" className="mt-8 max-w-xl">
-          <h2 id="dist-h" className="text-sm font-semibold text-ink-soft">{t("brandPages.distribution")}</h2>
+          <h2 id="dist-h" className="font-mono text-xs font-semibold uppercase tracking-wider text-ink-soft">{t("brandPages.distribution")}</h2>
           <div className="mt-2"><GradeBar grades={b.grades} t={t} /></div>
         </section>
       )}
@@ -129,7 +132,7 @@ export default async function BrandPage({ params }: Props) {
       {b.dog && <SpeciesSection id="dogs-h" title={t("brandPages.dogsTitle", { brand: b.name })} summary={b.dog} species="dog" brand={b.name} lang={lang} t={t} />}
       {b.cat && <SpeciesSection id="cats-h" title={t("brandPages.catsTitle", { brand: b.name })} summary={b.cat} species="cat" brand={b.name} lang={lang} t={t} />}
 
-      <div className="mt-12 max-w-3xl space-y-2 text-sm text-ink-faint">
+      <div className="mt-12 max-w-3xl space-y-2 font-mono text-xs text-ink-faint">
         {b.notScored > 0 && <p>{t("brandPages.notScoredNote", { brand: b.name, count: b.notScored })}</p>}
         <p>{t("brandPages.independent", { brand: b.name })}</p>
       </div>

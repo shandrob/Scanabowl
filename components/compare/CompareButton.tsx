@@ -23,16 +23,16 @@ export function CompareButton({ id, species }: { id: string; species: Species })
         type="button"
         onClick={() => toggle(species, id)}
         aria-pressed={added}
-        className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition ${
-          added ? "border-brand bg-brand-tint text-brand-deep" : "border-line bg-paper text-ink hover:border-brand-mid"
+        className={`inline-flex items-center gap-2 rounded-sm border border-ink px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition ${
+          added ? "bg-brand-soft text-brand-deep" : "bg-paper text-ink hover:bg-stone"
         }`}
       >
         {added ? <IconCheck className="h-4 w-4" /> : <span aria-hidden>+</span>}
         {added ? t("compare.added") : t("compare.addThis")}
       </button>
       {list.length > 0 && (
-        <Link href={`${localePath(lang, "/compare")}?species=${species}&f=${list.map(encodeURIComponent).join(",")}`} prefetch={false} className="text-sm font-semibold text-brand underline underline-offset-2">
-          {t("compare.open", { count: list.length, max: MAX_COMPARE })}
+        <Link href={`${localePath(lang, "/compare")}?species=${species}&f=${list.map(encodeURIComponent).join(",")}`} prefetch={false} className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">
+          {t("compare.open", { count: list.length, max: MAX_COMPARE })} →
         </Link>
       )}
     </div>

@@ -31,34 +31,42 @@ export default async function FoodsPage({ params }: { params: Promise<{ lang: st
   const meta = metaJson as Meta;
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6">
-      <h1 className="font-display text-4xl font-semibold text-brand-deep">{t("finder.title")}</h1>
-      <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("finder.subtitle", { count: (meta.counts.scoredDog + meta.counts.scoredCat).toLocaleString(lang) })}</p>
-      <p className="mt-3">
-        <Link href={localePath(lang, "/foods/brand")} className="font-semibold text-brand underline underline-offset-2">{t("nav.allBrands")} →</Link>
-      </p>
+      <header className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-5">
+        <div>
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">
+            DATABASE INDEX · DRY MATTER BASIS
+          </p>
+          <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("finder.title")}</h1>
+          <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("finder.subtitle", { count: (meta.counts.scoredDog + meta.counts.scoredCat).toLocaleString(lang) })}</p>
+        </div>
+        <Link href={localePath(lang, "/foods/brand")} className="rounded-sm border border-ink bg-paper px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink transition hover:bg-stone">
+          {t("nav.allBrands")} →
+        </Link>
+      </header>
+
       <div className="mt-8">
-        <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl bg-line/60" />}>
+        <Suspense fallback={<div className="h-64 animate-pulse rounded-sm border border-line bg-paper" />}>
           <FoodFinder brands={meta.brands} />
         </Suspense>
       </div>
 
       {/* server-rendered crawlable links to popular foods and brands */}
-      <section className="mt-14 border-t border-line pt-10" aria-labelledby="foods-popular-h">
-        <h2 id="foods-popular-h" className="font-display text-2xl font-semibold text-brand-deep">{t("home.popularTitle")}</h2>
+      <section className="mt-14 border-t-2 border-ink pt-10" aria-labelledby="foods-popular-h">
+        <h2 id="foods-popular-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("home.popularTitle")}</h2>
         <p className="mt-1 text-sm text-ink-soft">{t("home.popularSubtitle")}</p>
         <div className="mt-6 grid gap-8 lg:grid-cols-2">
           <div>
-            <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-faint">{t("home.popularFoodsHeading")}</h3>
+            <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">{t("home.popularFoodsHeading")}</h3>
             <ul className="flex flex-wrap gap-2">
               {POPULAR_FOODS.map((item) => (
                 <li key={item.slug}>
                   <Link
                     href={localePath(lang, `/foods/${item.slug}`)}
                     prefetch={false}
-                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink shadow-sm transition hover:border-brand hover:text-brand-deep"
+                    className="inline-flex items-center gap-2 rounded-sm border border-ink bg-paper px-3 py-1.5 text-sm font-medium text-ink transition hover:bg-brand-soft hover:text-brand-deep"
                   >
                     <span>{item.label}</span>
-                    <span className="rounded-md bg-brand-soft px-1.5 py-0.5 font-mono text-xs font-semibold text-brand-deep">
+                    <span className="rounded-sm border border-brand/30 bg-brand-soft px-1.5 py-0.5 font-mono text-xs font-semibold tabular-nums text-brand-deep">
                       {item.score}/100
                     </span>
                   </Link>
@@ -67,17 +75,17 @@ export default async function FoodsPage({ params }: { params: Promise<{ lang: st
             </ul>
           </div>
           <div>
-            <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-faint">{t("home.popularBrandsHeading")}</h3>
+            <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">{t("home.popularBrandsHeading")}</h3>
             <ul className="flex flex-wrap gap-2">
               {popBrands.map((b) => (
                 <li key={b.slug}>
                   <Link
                     href={localePath(lang, `/foods/brand/${b.slug}`)}
                     prefetch={false}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink shadow-sm transition hover:border-brand hover:text-brand-deep"
+                    className="inline-flex items-center gap-1.5 rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink transition hover:border-ink hover:bg-brand-soft hover:text-brand-deep"
                   >
                     <span>{b.name}</span>
-                    {b.avg !== null && <span className="font-mono text-xs text-ink-faint">({b.avg})</span>}
+                    {b.avg !== null && <span className="font-mono text-xs tabular-nums text-ink-faint">({b.avg})</span>}
                   </Link>
                 </li>
               ))}

@@ -23,51 +23,56 @@ export function AnalysisTable({ p, t }: { p: ProductDetail; t: TFunction }) {
 
   return (
     <div>
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[22rem] text-left text-[0.95rem]">
+      <div className="overflow-x-auto rounded-sm border-2 border-ink bg-paper">
+        <table className="w-full min-w-[22rem] text-left text-[0.92rem]">
           <thead>
-            <tr className="border-b border-line font-mono text-[0.68rem] uppercase tracking-wider text-ink-faint">
-              <th className="py-2 pr-4 font-semibold">{t("analysis.nutrient")}</th>
-              <th className="py-2 pr-4 text-right font-semibold">{t("analysis.asFed")}</th>
-              <th className="py-2 text-right font-semibold">{t("analysis.dryMatter")}</th>
+            <tr className="border-b-4 border-ink bg-stone font-mono text-[0.7rem] uppercase tracking-wider text-ink">
+              <th className="px-3 py-2.5 font-semibold">{t("analysis.nutrient")}</th>
+              <th className="px-3 py-2.5 text-right font-semibold">{t("analysis.asFed")}</th>
+              <th className="px-3 py-2.5 text-right font-semibold">{t("analysis.dryMatter")}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-line font-mono tabular-nums">
             {rows.map(([label, asFed, dm, estimated], i) => (
-              <tr key={i} className="border-b border-line/60">
-                <td className="py-2 pr-4 text-ink">{label}{estimated ? <span className="text-ink-faint" title={t("analysis.estimated")}> *</span> : null}</td>
-                <td className="py-2 pr-4 text-right font-mono">{f1(asFed)}%</td>
-                <td className="py-2 text-right font-mono text-ink-soft">{label === t("analysis.moisture") ? "–" : `${f1(dm)}%`}</td>
+              <tr key={i} className="even:bg-cream/50">
+                <td className="px-3 py-2 font-sans font-medium text-ink">
+                  {label}
+                  {estimated ? <span className="font-mono text-ink-faint" title={t("analysis.estimated")}> *</span> : null}
+                </td>
+                <td className="px-3 py-2 text-right text-ink">{f1(asFed)}%</td>
+                <td className="px-3 py-2 text-right font-semibold text-brand-deep">
+                  {label === t("analysis.moisture") ? "–" : `${f1(dm)}%`}
+                </td>
               </tr>
             ))}
             {n.dm.calcium !== undefined && (
-              <tr className="border-b border-line/60">
-                <td className="py-2 pr-4 text-ink">{t("analysis.calcium")}</td>
-                <td className="py-2 pr-4 text-right font-mono">{f1((n.dm.calcium * (100 - n.asFed.moisture)) / 100)}%</td>
-                <td className="py-2 text-right font-mono text-ink-soft">{f1(n.dm.calcium)}%</td>
+              <tr className="even:bg-cream/50">
+                <td className="px-3 py-2 font-sans font-medium text-ink">{t("analysis.calcium")}</td>
+                <td className="px-3 py-2 text-right text-ink">{f1((n.dm.calcium * (100 - n.asFed.moisture)) / 100)}%</td>
+                <td className="px-3 py-2 text-right font-semibold text-brand-deep">{f1(n.dm.calcium)}%</td>
               </tr>
             )}
             {n.dm.phosphorus !== undefined && (
-              <tr className="border-b border-line/60">
-                <td className="py-2 pr-4 text-ink">{t("analysis.phosphorus")}</td>
-                <td className="py-2 pr-4 text-right font-mono">{f1((n.dm.phosphorus * (100 - n.asFed.moisture)) / 100)}%</td>
-                <td className="py-2 text-right font-mono text-ink-soft">{f1(n.dm.phosphorus)}%</td>
+              <tr className="even:bg-cream/50">
+                <td className="px-3 py-2 font-sans font-medium text-ink">{t("analysis.phosphorus")}</td>
+                <td className="px-3 py-2 text-right text-ink">{f1((n.dm.phosphorus * (100 - n.asFed.moisture)) / 100)}%</td>
+                <td className="px-3 py-2 text-right font-semibold text-brand-deep">{f1(n.dm.phosphorus)}%</td>
               </tr>
             )}
-            <tr>
-              <td className="py-2 pr-4 text-ink">{t("analysis.energy")}</td>
-              <td className="py-2 pr-4 text-right font-mono" colSpan={2}>
-                {Math.round(n.kcalPer100g)} kcal / 100 g <span className="text-xs text-ink-faint">({t(`analysis.kcal.${n.kcalSource}`)})</span>
+            <tr className="border-t-2 border-ink bg-stone">
+              <td className="px-3 py-2.5 font-sans font-semibold text-ink">{t("analysis.energy")}</td>
+              <td className="px-3 py-2.5 text-right font-mono font-semibold text-ink" colSpan={2}>
+                {Math.round(n.kcalPer100g)} kcal / 100 g <span className="font-sans text-xs font-normal text-ink-faint">({t(`analysis.kcal.${n.kcalSource}`)})</span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      {<p className="mt-2 text-xs text-ink-faint">* {t("analysis.estimatedNote")}</p>}
+      <p className="mt-2 font-mono text-xs text-ink-faint">* {t("analysis.estimatedNote")}</p>
 
-      <div className="mt-5 rounded-xl border border-line bg-cream/60 p-4 text-sm">
-        <p className="font-semibold text-brand-deep">{t("analysis.fediafTitle")}</p>
-        <ul className="mt-2 space-y-1.5">
+      <div className="mt-5 rounded-sm border border-ink bg-stone p-4 text-sm">
+        <p className="font-mono text-xs font-semibold uppercase tracking-wider text-ink">{t("analysis.fediafTitle")}</p>
+        <ul className="mt-2 space-y-1.5 font-mono text-xs tabular-nums">
           <li className="flex items-start gap-2">
             {proteinOk ? <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-grade-a" /> : <IconAlert className="mt-0.5 h-4 w-4 shrink-0 text-grade-e" />}
             <span>{t("analysis.proteinPer1000", { value: f1(n.proteinPer1000kcal), min: ref.proteinPer1000 })}</span>

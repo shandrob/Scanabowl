@@ -23,12 +23,17 @@ export default async function ComparePage({ params }: { params: Promise<{ lang: 
   const t = createT(await getDictionary(lang));
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="font-display text-4xl font-semibold leading-tight text-brand-deep sm:text-5xl">{t("compare.title")}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-ink-soft">{t("compare.intro")}</p>
+      <header className="border-b-2 border-ink pb-5">
+        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">
+          FEDIAF 2021 · DRY MATTER BASIS SPECIFICATION
+        </p>
+        <h1 className="mt-1 font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
+          {t("compare.title")}
+        </h1>
+        <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t("compare.intro")}</p>
       </header>
       <div className="mt-8">
-        <Suspense fallback={<div className="h-40 animate-pulse rounded-2xl bg-line/60" aria-hidden />}>
+        <Suspense fallback={<div className="h-40 animate-pulse rounded-sm border border-line bg-paper" aria-hidden />}>
           <CompareTool />
         </Suspense>
       </div>

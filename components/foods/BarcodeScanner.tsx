@@ -79,23 +79,23 @@ export function BarcodeScanner({ onDetect, onClose }: { onDetect: (code: string)
   }, [onDetect, onClose]);
 
   return (
-    <div role="dialog" aria-modal="true" aria-label={t("scan.title")} className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl bg-paper shadow-lift">
-        <div className="flex items-center justify-between border-b border-line px-4 py-3">
-          <h2 className="font-display text-lg font-semibold text-brand-deep">{t("scan.title")}</h2>
-          <button type="button" onClick={onClose} aria-label={t("common.close")} className="rounded-lg p-2 text-ink-soft hover:bg-cream">
+    <div role="dialog" aria-modal="true" aria-label={t("scan.title")} className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4">
+      <div className="w-full max-w-md overflow-hidden rounded-sm border-2 border-ink bg-paper shadow-lift">
+        <div className="flex items-center justify-between border-b-4 border-ink bg-stone px-4 py-3">
+          <h2 className="font-display text-lg font-semibold text-ink">{t("scan.title")}</h2>
+          <button type="button" onClick={onClose} aria-label={t("common.close")} className="rounded-sm border border-ink bg-paper p-1.5 text-ink hover:bg-cream">
             <IconX />
           </button>
         </div>
         <div className="relative aspect-[4/3] bg-black">
           <video ref={videoRef} playsInline muted className="h-full w-full object-cover" />
           {status === "scanning" && (
-            <div className="pointer-events-none absolute inset-x-8 top-1/2 h-24 -translate-y-1/2 rounded-xl border-2 border-white/90 shadow-[0_0_0_9999px_rgba(0,0,0,0.35)]">
-              <div className="absolute inset-x-2 top-1/2 h-0.5 -translate-y-1/2 bg-red-500/80" />
+            <div className="pointer-events-none absolute inset-x-8 top-1/2 h-24 -translate-y-1/2 rounded-sm border-2 border-white/90 shadow-[0_0_0_9999px_rgba(0,0,0,0.45)]">
+              <div className="absolute inset-x-2 top-1/2 h-0.5 -translate-y-1/2 bg-accent" />
             </div>
           )}
         </div>
-        <p className="px-4 py-3 text-sm text-ink-soft" role="status">
+        <p className="border-t border-line px-4 py-3 font-mono text-xs text-ink-soft" role="status">
           {status === "starting" && t("scan.starting")}
           {status === "scanning" && t("scan.hint")}
           {status === "denied" && t("scan.denied")}

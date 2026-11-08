@@ -92,30 +92,30 @@ export default async function GuidePage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
-      <nav aria-label={t("common.breadcrumb")} className="text-sm text-ink-faint">
+      <nav aria-label={t("common.breadcrumb")} className="font-mono text-xs uppercase tracking-wider text-ink-faint">
         <ol className="flex flex-wrap items-center gap-2">
-          <li><Link href={localePath(lang)} className="hover:text-brand hover:underline">{t("nav.home")}</Link></li>
+          <li><Link href={localePath(lang)} className="hover:text-ink hover:underline">{t("nav.home")}</Link></li>
           <li aria-hidden>/</li>
-          <li><Link href={localePath(lang, "/best")} className="hover:text-brand hover:underline">{t("guides.indexTitle")}</Link></li>
+          <li><Link href={localePath(lang, "/best")} className="hover:text-ink hover:underline">{t("guides.indexTitle")}</Link></li>
           <li aria-hidden>/</li>
           <li className="text-ink-soft" aria-current="page">{text.h1}</li>
         </ol>
       </nav>
 
-      <header className="mt-6 max-w-3xl">
+      <header className="mt-6 border-b-2 border-ink pb-6">
         <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">
           {speciesLabel(t, g.def.species, true)} · {t("guides.kicker", { year })}
         </p>
-        <h1 className="mt-2 font-display text-4xl font-semibold leading-tight text-brand-deep sm:text-5xl">{text.h1}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-ink-soft"><Rich text={text.intro} /></p>
-        <p className="mt-3 text-sm text-ink-faint">{t("guides.compared", { count: g.candidates.toLocaleString(lang), brands: g.brands })}</p>
+        <h1 className="mt-2 font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{text.h1}</h1>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft"><Rich text={text.intro} /></p>
+        <p className="mt-3 font-mono text-xs tabular-nums text-ink-faint">{t("guides.compared", { count: g.candidates.toLocaleString(lang), brands: g.brands })}</p>
       </header>
 
-      <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
         <section aria-labelledby="list-h">
           <h2 id="list-h" className="sr-only">{t("guides.listTitle", { count: g.top.length })}</h2>
           {g.top.length === 0 ? (
-            <p className="rounded-2xl border border-dashed border-line bg-paper p-8 text-center text-ink-soft">{t("guides.empty")}</p>
+            <p className="rounded-sm border-2 border-dashed border-ink bg-paper p-8 text-center text-ink-soft">{t("guides.empty")}</p>
           ) : (
             <ol className="space-y-4">
               {g.top.map((p, i) => (
@@ -127,40 +127,40 @@ export default async function GuidePage({ params }: Props) {
           )}
           <div className="mt-6 flex flex-wrap gap-3">
             {compare && (
-              <Link href={compare} prefetch={false} className="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 font-semibold text-white shadow-card transition hover:bg-brand-deep">
+              <Link href={compare} prefetch={false} className="inline-flex items-center gap-2 rounded-sm border border-ink bg-brand px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep">
                 {t("guides.compareTop")} <IconArrow className="h-4 w-4" />
               </Link>
             )}
-            <Link href={`${localePath(lang, "/foods")}?${finder.toString()}`} prefetch={false} className="inline-flex items-center gap-2 rounded-xl border border-brand bg-paper px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-tint">
+            <Link href={`${localePath(lang, "/foods")}?${finder.toString()}`} prefetch={false} className="inline-flex items-center gap-2 rounded-sm border border-ink bg-paper px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink transition hover:bg-stone">
               {t("guides.seeAll")}
             </Link>
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-ink-faint">
+          <p className="mt-6 font-mono text-xs leading-relaxed text-ink-faint">
             {t("order.disclosure")}{" "}
-            <Link href={localePath(lang, "/affiliate")} className="underline underline-offset-2 hover:text-brand">{t("order.moreInfo")}</Link>
+            <Link href={localePath(lang, "/affiliate")} className="underline underline-offset-2 hover:text-ink">{t("order.moreInfo")}</Link>
           </p>
         </section>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <section aria-labelledby="tips-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card">
-            <h2 id="tips-h" className="font-display text-xl font-semibold text-brand-deep">{t("guides.lookFor")}</h2>
-            <ul className="mt-4 space-y-3 text-[0.95rem] leading-relaxed text-ink-soft">
+          <section aria-labelledby="tips-h" className="rounded-sm border-2 border-ink bg-paper p-6">
+            <h2 id="tips-h" className="border-b-4 border-ink pb-2 font-display text-xl font-semibold tracking-tight text-ink">{t("guides.lookFor")}</h2>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-ink-soft">
               {text.tips.map((tip, i) => (
                 <li key={i} className="flex gap-2.5">
-                  <span aria-hidden className="mt-0.5 text-brand">✓</span>
+                  <span aria-hidden className="mt-0.5 font-mono font-bold text-brand">✓</span>
                   <span><Rich text={tip} /></span>
                 </li>
               ))}
             </ul>
           </section>
-          <section aria-labelledby="how-h" className="rounded-2xl border border-line bg-cream/60 p-6 text-sm leading-relaxed text-ink-soft">
-            <h2 id="how-h" className="font-display text-base font-semibold text-brand-deep">{t("guides.howRanked")}</h2>
-            <p className="mt-2"><Rich text={t("guides.howRankedText", { perBrand: PER_BRAND })} /></p>
+          <section aria-labelledby="how-h" className="rounded-sm border border-ink bg-stone p-6 text-sm leading-relaxed text-ink-soft">
+            <h2 id="how-h" className="border-b border-line pb-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">{t("guides.howRanked")}</h2>
+            <p className="mt-2.5"><Rich text={t("guides.howRankedText", { perBrand: PER_BRAND })} /></p>
           </section>
           {posts.length > 0 && (
-            <section aria-labelledby="read-h" className="rounded-2xl border border-line bg-paper p-6">
-              <h2 id="read-h" className="font-display text-base font-semibold text-brand-deep">{t("guides.readMore")}</h2>
-              <ul className="mt-2 space-y-2 text-sm">
+            <section aria-labelledby="read-h" className="rounded-sm border border-ink bg-paper p-6">
+              <h2 id="read-h" className="border-b border-line pb-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">{t("guides.readMore")}</h2>
+              <ul className="mt-2.5 space-y-2 text-sm">
                 {posts.map((post) => (
                   <li key={post.slug}>
                     <Link href={localePath(lang, `/blog/${post.slug}`)} className="font-semibold text-brand underline underline-offset-2">{post.title}</Link>
@@ -173,14 +173,14 @@ export default async function GuidePage({ params }: Props) {
       </div>
 
       {sameSpecies.length > 0 && (
-        <section aria-labelledby="more-h" className="mt-16">
-          <h2 id="more-h" className="font-display text-2xl font-semibold text-brand-deep">{t("guides.otherGuides")}</h2>
+        <section aria-labelledby="more-h" className="mt-16 border-t-2 border-ink pt-8">
+          <h2 id="more-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("guides.otherGuides")}</h2>
           <ul className="mt-5 flex flex-wrap gap-2">
             {sameSpecies.map((o) => {
               const ot = guideText(lang, o.def.slug, { year, count: o.candidates });
               return ot ? (
                 <li key={o.def.slug}>
-                  <Link href={localePath(lang, `/best/${o.def.slug}`)} className="inline-block rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-ink transition hover:border-brand-mid hover:text-brand-deep">
+                  <Link href={localePath(lang, `/best/${o.def.slug}`)} className="inline-block rounded-sm border border-ink bg-paper px-3.5 py-2 text-sm font-medium text-ink transition hover:bg-brand-soft hover:text-brand-deep">
                     {ot.h1}
                   </Link>
                 </li>

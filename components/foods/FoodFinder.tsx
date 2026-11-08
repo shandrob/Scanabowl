@@ -200,11 +200,14 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
   const allergenNames = pet ? [...new Set([...pet.allergens, ...(pet.dislikes ?? [])])].map((a) => t(`allergen.${a}`)).concat(pet.customAllergens) : [];
   const effectiveSort: Sort = sort === "match" && !pet ? "score" : sort;
 
-  const field = "h-11 w-full rounded-xl border border-line bg-paper px-3 text-base text-ink focus:border-brand-mid focus:outline-none focus:ring-4 focus:ring-brand-soft";
-  const label = "mb-1.5 block font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-ink-faint";
+  const field = "h-10 w-full rounded-sm border border-ink bg-paper px-3 text-sm text-ink focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft";
+  const label = "mb-1.5 block font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft";
 
   const filters = (
     <div className="space-y-4">
+      <div className="border-b-4 border-ink pb-2">
+        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink">{t("finder.filters")}</p>
+      </div>
       <div>
         <label htmlFor="f-type" className={label}>{t("finder.type")}</label>
         <select id="f-type" className={field} value={type} onChange={(e) => setType(e.target.value as FoodType | "all")}>
@@ -237,10 +240,10 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
         <input id="f-min" type="range" min={0} max={90} step={5} value={minScore} onChange={(e) => setMinScore(Number(e.target.value))} className="w-full accent-brand" />
       </div>
       <label className="flex cursor-pointer items-center gap-3 text-sm text-ink">
-        <input type="checkbox" checked={grainFree} onChange={(e) => setGrainFree(e.target.checked)} className="h-5 w-5 rounded accent-brand" />
+        <input type="checkbox" checked={grainFree} onChange={(e) => setGrainFree(e.target.checked)} className="h-4 w-4 rounded-none accent-brand" />
         {t("finder.grainFree")}
       </label>
-      <fieldset>
+      <fieldset className="border-t border-line pt-3">
         <legend className={label}>{t("finder.without")}</legend>
         <div className="flex flex-wrap gap-1.5">
           {EXCLUDE_CHIPS.map((a) => {
@@ -251,7 +254,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setExclude((cur) => (on ? cur.filter((x) => x !== a) : [...cur, a]))}
-                className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${on ? "border-danger/40 bg-danger-soft text-danger line-through" : "border-line bg-paper text-ink-soft hover:border-brand-mid"}`}
+                className={`rounded-sm border px-2 py-0.5 font-mono text-xs font-medium transition ${on ? "border-danger bg-danger-soft text-danger line-through" : "border-line bg-cream text-ink-soft hover:border-ink"}`}
               >
                 {t(`allergen.${a}`)}
               </button>
@@ -261,7 +264,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
         <p className="mt-1.5 text-[0.7rem] leading-snug text-ink-faint">{t("finder.withoutHint")}</p>
       </fieldset>
       <label className="flex cursor-pointer items-start gap-3 text-sm text-ink">
-        <input type="checkbox" checked={single} onChange={(e) => setSingle(e.target.checked)} className="mt-0.5 h-5 w-5 rounded accent-brand" />
+        <input type="checkbox" checked={single} onChange={(e) => setSingle(e.target.checked)} className="mt-0.5 h-4 w-4 rounded-none accent-brand" />
         <span>{t("finder.singleProtein")}</span>
       </label>
       <div>
@@ -273,12 +276,12 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
         <input id="f-maxc" type="range" min={10} max={NO_CARB_LIMIT} step={5} value={maxCarbs} onChange={(e) => setMaxCarbs(Number(e.target.value))} className="w-full accent-brand" />
       </div>
       <label className="flex cursor-pointer items-start gap-3 text-sm text-ink-soft">
-        <input type="checkbox" checked={extra} onChange={(e) => setExtra(e.target.checked)} className="mt-0.5 h-5 w-5 rounded accent-brand" />
+        <input type="checkbox" checked={extra} onChange={(e) => setExtra(e.target.checked)} className="mt-0.5 h-4 w-4 rounded-none accent-brand" />
         <span>{t("finder.includeUnscored")}</span>
       </label>
       <button
         type="button"
-        className="text-sm font-semibold text-brand underline underline-offset-2"
+        className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2"
         onClick={() => {
           setType("all");
           setStage("all");
@@ -302,7 +305,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
     <div>
       {/* species + search */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
-        <div role="tablist" aria-label={t("finder.species")} className="inline-flex shrink-0 rounded-2xl border border-line bg-paper p-1 shadow-sm">
+        <div role="tablist" aria-label={t("finder.species")} className="inline-flex shrink-0 divide-x divide-ink overflow-hidden rounded-sm border-2 border-ink bg-paper">
           {(["dog", "cat"] as const).map((sp) => (
             <button
               key={sp}
@@ -313,7 +316,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
                 setSpecies(sp);
                 setBrand("");
               }}
-              className={`rounded-xl px-6 py-2.5 text-base font-semibold transition ${species === sp ? "bg-brand text-white shadow" : "text-ink-soft hover:bg-brand-tint"}`}
+              className={`px-6 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider transition ${species === sp ? "bg-brand text-white" : "text-ink hover:bg-stone"}`}
             >
               {speciesLabel(t, sp, true)}
             </button>
@@ -332,8 +335,8 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
             type="button"
             aria-pressed={type === v}
             onClick={() => setType(v)}
-            className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-              type === v ? "border-brand bg-brand text-white" : "border-line bg-paper text-ink-soft hover:border-brand-mid hover:text-brand-deep"
+            className={`rounded-sm border px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition ${
+              type === v ? "border-ink bg-brand text-white" : "border-ink bg-paper text-ink hover:bg-stone"
             }`}
           >
             {v === "all" ? t("finder.allTypes") : foodTypeLabel(t, v)}
@@ -343,8 +346,8 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
 
       {/* pet banner */}
       {active && active.species === species && (
-        <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-brand/20 bg-brand-tint px-4 py-3 text-sm">
-          <IconPaw className="h-5 w-5 text-brand" />
+        <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-sm border-2 border-ink bg-brand-soft/60 px-4 py-3 text-sm">
+          <IconPaw className="h-4 w-4 text-brand" />
           {ignorePet ? (
             <span className="text-ink-soft">{t("finder.petIgnored", { name: active.name })}</span>
           ) : (
@@ -358,19 +361,19 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
               )}
             </span>
           )}
-          <span className="ml-auto flex gap-4">
-            <Link href={localePath(lang, "/my-pet")} className="font-semibold text-brand underline underline-offset-2">{t("finder.editProfile")}</Link>
-            <button type="button" className="font-semibold text-brand underline underline-offset-2" onClick={() => setIgnorePet((v) => !v)}>
+          <span className="ml-auto flex gap-4 font-mono text-xs font-semibold uppercase tracking-wider">
+            <Link href={localePath(lang, "/my-pet")} className="text-brand underline underline-offset-2">{t("finder.editProfile")}</Link>
+            <button type="button" className="text-brand underline underline-offset-2" onClick={() => setIgnorePet((v) => !v)}>
               {ignorePet ? t("finder.usePet", { name: active.name }) : t("finder.ignorePet")}
             </button>
           </span>
         </div>
       )}
       {!active && (
-        <div className="mt-5 rounded-2xl border border-line bg-paper px-4 py-3 text-sm text-ink-soft">
-          <IconPaw className="mr-2 inline h-4 w-4 text-brand-mid" />
+        <div className="mt-5 rounded-sm border border-ink bg-paper px-4 py-3 text-sm text-ink-soft">
+          <IconPaw className="mr-2 inline h-4 w-4 text-brand" />
           {t("finder.noPet")}{" "}
-          <Link href={localePath(lang, "/my-pet")} className="font-semibold text-brand underline underline-offset-2">{t("finder.createProfile")}</Link>
+          <Link href={localePath(lang, "/my-pet")} className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">{t("finder.createProfile")} →</Link>
         </div>
       )}
 
@@ -379,25 +382,25 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
         <aside>
           <button
             type="button"
-            className="mb-3 flex w-full items-center justify-between rounded-xl border border-line bg-paper px-4 py-3 font-semibold lg:hidden"
+            className="mb-3 flex w-full items-center justify-between rounded-sm border-2 border-ink bg-paper px-4 py-3 font-mono text-xs font-semibold uppercase tracking-wider lg:hidden"
             aria-expanded={filtersOpen}
             onClick={() => setFiltersOpen((v) => !v)}
           >
             {t("finder.filters")}
             <span aria-hidden>{filtersOpen ? "−" : "+"}</span>
           </button>
-          <div className={`${filtersOpen ? "block" : "hidden"} rounded-2xl border border-line bg-paper p-5 shadow-card lg:sticky lg:top-24 lg:block`}>{filters}</div>
+          <div className={`${filtersOpen ? "block" : "hidden"} rounded-sm border-2 border-ink bg-paper p-5 lg:sticky lg:top-24 lg:block`}>{filters}</div>
         </aside>
 
         {/* results */}
         <div>
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm text-ink-soft" role="status" aria-live="polite">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-ink pb-3">
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-ink-soft tabular-nums" role="status" aria-live="polite">
               {view ? t("finder.count", { count: view.rows.length.toLocaleString(lang) }) : t("common.loading")}
             </p>
             <div className="flex items-center gap-2">
-              <label htmlFor="f-sort" className="text-sm text-ink-soft">{t("finder.sort")}</label>
-              <select id="f-sort" value={effectiveSort} onChange={(e) => setSort(e.target.value as Sort)} className="h-10 rounded-xl border border-line bg-paper px-3 text-sm">
+              <label htmlFor="f-sort" className="font-mono text-xs uppercase tracking-wider text-ink-soft">{t("finder.sort")}</label>
+              <select id="f-sort" value={effectiveSort} onChange={(e) => setSort(e.target.value as Sort)} className="h-9 rounded-sm border border-ink bg-paper px-3 font-mono text-xs">
                 {pet && <option value="match">{t("finder.sortMatch", { name: pet.name })}</option>}
                 <option value="score">{t("finder.sortScore")}</option>
                 <option value="price">{t("finder.sortPrice")}</option>
@@ -408,20 +411,20 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
           </div>
 
           {error && (
-            <div className="flex items-center gap-3 rounded-2xl border border-danger/30 bg-danger-soft p-4 text-danger" role="alert">
+            <div className="flex items-center gap-3 rounded-sm border-2 border-danger bg-danger-soft p-4 text-danger" role="alert">
               <IconAlert /> {t("finder.error")}
             </div>
           )}
           {!view && !error && (
             <ul className="grid gap-4 sm:grid-cols-2" aria-hidden>
               {Array.from({ length: 6 }).map((_, i) => (
-                <li key={i} className="h-32 animate-pulse rounded-2xl bg-line/60" />
+                <li key={i} className="h-32 animate-pulse rounded-sm border border-line bg-paper" />
               ))}
             </ul>
           )}
           {view && view.rows.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-line bg-paper p-8 text-center">
-              <p className="font-display text-xl font-semibold text-brand-deep">{t("finder.emptyTitle")}</p>
+            <div className="rounded-sm border-2 border-dashed border-ink bg-paper p-8 text-center">
+              <p className="font-display text-xl font-semibold text-ink">{t("finder.emptyTitle")}</p>
               {totalMatches !== null && totalMatches > 0 ? (
                 <p className="mt-2 text-ink-soft">
                   {t("finder.hiddenByFilters", { count: totalMatches })}{" "}
@@ -454,8 +457,8 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
               ) : (
                 <p className="mt-2 text-ink-soft">{t("finder.emptyText")}</p>
               )}
-              <Link href={localePath(lang, "/suggest")} className="mt-4 inline-block font-semibold text-brand underline underline-offset-2">
-                {t("finder.suggestMissing")}
+              <Link href={localePath(lang, "/suggest")} className="mt-4 inline-block font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">
+                {t("finder.suggestMissing")} →
               </Link>
             </div>
           )}
@@ -471,7 +474,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
               </ul>
               {shown < view.rows.length && (
                 <div className="mt-8 text-center">
-                  <button type="button" onClick={() => setMore({ signature, shown: shown + PAGE })} className="rounded-2xl border border-brand bg-paper px-8 py-3 font-semibold text-brand hover:bg-brand-tint">
+                  <button type="button" onClick={() => setMore({ signature, shown: shown + PAGE })} className="rounded-sm border-2 border-ink bg-paper px-8 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:bg-stone">
                     {t("common.showMore", { count: Math.min(PAGE, view.rows.length - shown) })}
                   </button>
                 </div>

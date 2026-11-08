@@ -139,45 +139,74 @@ export function CompareTool() {
     show(sp, lists[sp]);
   };
 
-  const label = "font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-faint";
   const cols = Math.max(foods.length, 1);
-  const grid = { gridTemplateColumns: `minmax(7.5rem, 0.8fr) repeat(${cols}, minmax(9rem, 1fr))` };
+  const grid = { gridTemplateColumns: `minmax(9rem, 0.9fr) repeat(${cols}, minmax(10.5rem, 1fr))` };
 
-  type Row = { key: string; label: string; cells: React.ReactNode[] };
+  type Row = { key: string; section?: string; label: string; mono?: boolean; cells: React.ReactNode[] };
   // "best" only where more (or less) is clearly better: score parts, animal protein, cost. More protein or a bigger
   // portion is not better in itself.
-  const numberRow = (key: string, text: string, values: Array<number | null | undefined>, format: (v: number) => string, mark: "high" | "low" | "none" = "high"): Row => {
+  const numberRow = (key: string, text: string, values: Array<number | null | undefined>, format: (v: number) => string, mark: "high" | "low" | "none" = "high", section?: string): Row => {
     const b = mark === "none" ? null : best(values, mark === "low");
     return {
       key,
+      section,
       label: text,
-      cells: values.map((v, i) => (
-        <span key={i} className={v !== null && v !== undefined && v === b ? "font-semibold text-grade-a" : undefined}>
-          {v === null || v === undefined ? "–" : format(v)}
-          {v !== null && v !== undefined && v === b && <span className="sr-only"> ({t("compare.best")})</span>}
-        </span>
-      )),
+      mono: true,
+      cells: values.map((v, i) => {
+        const isBest = v !== null && v !== undefined && v === b;
+        return (
+          <span
+            key={i}
+            className={
+              isBest
+                ? "inline-flex items-center gap-1.5 rounded-sm border border-grade-a/40 bg-grade-a-soft px-2 py-0.5 font-mono font-semibold tabular-nums text-grade-a"
+                : "font-mono tabular-nums text-ink"
+            }
+          >
+            {v === null || v === undefined ? "–" : format(v)}
+            {isBest && (
+              <>
+                <span aria-hidden className="text-[0.65rem] uppercase">★</span>
+                <span className="sr-only"> ({t("compare.best")})</span>
+              </>
+            )}
+          </span>
+        );
+      }),
     };
   };
 
   const table: Row[] = foods.length
     ? [
-        numberRow("n", `${t("score.pillars.nutrition")} (/35)`, rows.map((r) => r.e.pl?.[0]), (v) => v.toLocaleString(lang, { maximumFractionDigits: 1 })),
+        numberRow("n", `${t("score.pillars.nutrition")} (/35)`, rows.map((r) => r.e.pl?.[0]), (v) => v.toLocaleString(lang, { maximumFractionDigits: 1 }), "high", "01 · SCORE BREAKDOWN"),
         numberRow("i", `${t("score.pillars.ingredients")} (/50)`, rows.map((r) => r.e.pl?.[1]), (v) => v.toLocaleString(lang, { maximumFractionDigits: 1 })),
         numberRow("f", `${t("score.pillars.formulation")} (/15)`, rows.map((r) => r.e.pl?.[2]), (v) => v.toLocaleString(lang, { maximumFractionDigits: 1 })),
-        { key: "type", label: t("finder.type"), cells: rows.map((r) => foodTypeLabel(t, r.e.t)) },
+        { key: "type", section: "02 · GUARANTEED ANALYSIS (DRY MATTER)", label: t("finder.type"), cells: rows.map((r) => foodTypeLabel(t, r.e.t)) },
         { key: "stage", label: t("finder.stage"), cells: rows.map((r) => stageLabel(t, r.e.l, species)) },
         numberRow("p", t("compare.protein"), rows.map((r) => r.e.nu?.[0]), (v) => pct(v), "none"),
         numberRow("an", t("compare.animal"), rows.map((r) => r.e.an), (v) => pct(v)),
-        { key: "fat", label: t("compare.fat"), cells: rows.map((r) => pct(r.e.nu?.[1])) },
-        { key: "kcal", label: t("compare.kcal"), cells: rows.map((r) => (r.e.k ? `${r.e.k} kcal` : "–")) },
-        { key: "gf", label: t("common.grainFree"), cells: rows.map((r) => (r.e.gf ? t("common.yes") : t("common.no"))) },
+        { key: "fat", label: t("compare.fat"), mono: true, cells: rows.map((r) => <span key={r.e.i} className="font-mono tabular-nums">{pct(r.e.nu?.[1])}</span>) },
+        { key: "kcal", label: t("compare.kcal"), mono: true, cells: rows.map((r) => <span key={r.e.i} className="font-mono tabular-nums">{r.e.k ? `${r.e.k} kcal` : "–"}</span>) },
+        {
+          key: "gf",
+          section: "03 · FORMULATION & ALLERGEN AUDIT",
+          label: t("common.grainFree"),
+          cells: rows.map((r) => (
+            <span key={r.e.i} className="font-mono text-xs font-semibold uppercase">
+              {r.e.gf ? t("common.yes") : t("common.no")}
+            </span>
+          )),
+        },
         {
           key: "al",
           label: t("compare.contains"),
           cells: rows.map((r) => {
             const names = r.e.ad.map((a) => (t(`allergen.${a}`).startsWith("allergen.") ? a : t(`allergen.${a}`)));
-            return names.length ? names.join(", ") : "–";
+            return names.length ? (
+              <span key={r.e.i} className="text-xs leading-snug text-ink-soft">{names.join(", ")}</span>
+            ) : (
+              <span key={r.e.i} className="font-mono text-ink-faint">–</span>
+            );
           }),
         },
         ...(pet
@@ -187,32 +216,36 @@ export function CompareTool() {
                 label: t("compare.forPet", { name: pet.name }),
                 cells: rows.map((r) =>
                   r.fit?.allergy.excluded ? (
-                    <span key={r.e.i} className="font-semibold text-danger">{t("compare.petNo")}</span>
+                    <span key={r.e.i} className="inline-block rounded-sm border border-danger/40 bg-danger-soft px-2 py-0.5 font-mono text-xs font-semibold text-danger">
+                      {t("compare.petNo")}
+                    </span>
                   ) : (
-                    <span key={r.e.i}>{t("compare.petMatch", { score: r.fit?.score ?? "–" })}</span>
+                    <span key={r.e.i} className="font-mono font-semibold tabular-nums text-ink">{t("compare.petMatch", { score: r.fit?.score ?? "–" })}</span>
                   ),
                 ),
               },
             ]
           : []),
-        numberRow("g", t("compare.grams"), rows.map((r) => r.grams), (v) => `${v} g`, "none"),
+        numberRow("g", t("compare.grams"), rows.map((r) => r.grams), (v) => `${v} g`, "none", "04 · DAILY FEEDING & COST LEDGER"),
         {
           key: "price",
           label: t("compare.price"),
           cells: rows.map((r) => (
             <label key={r.e.i} className="block">
               <span className="sr-only">{t("compare.priceFor", { name: r.e.n })}</span>
-              <span className="flex items-center gap-1">
-                <span aria-hidden>€</span>
+              <span className="flex items-center gap-1 font-mono">
+                <span aria-hidden className="text-ink-soft">€</span>
                 <input
                   inputMode="decimal"
                   value={prices[r.e.i] ?? (r.e.pc ? String(r.e.pc) : "")}
                   onChange={(ev) => setPrices((cur) => ({ ...cur, [r.e.i]: ev.target.value }))}
                   placeholder="0,00"
-                  className="h-9 w-24 rounded-lg border border-line bg-paper px-2 text-sm focus:border-brand-mid focus:outline-none focus:ring-2 focus:ring-brand-soft"
+                  className="h-8 w-24 rounded-sm border border-ink bg-paper px-2 font-mono text-sm tabular-nums focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft"
                 />
               </span>
-              <span className="mt-1 block text-[0.7rem] text-ink-faint">{r.pack ? t("compare.perPack", { pack: r.e.pk }) : t("compare.perKg")}</span>
+              <span className="mt-1 block font-mono text-[0.68rem] tabular-nums text-ink-faint">
+                {r.pack ? t("compare.perPack", { pack: r.e.pk }) : t("compare.perKg")}
+              </span>
             </label>
           )),
         },
@@ -222,8 +255,8 @@ export function CompareTool() {
 
   return (
     <div>
-      {/* species */}
-      <div role="tablist" aria-label={t("finder.species")} className="inline-flex rounded-2xl border border-line bg-paper p-1 shadow-sm">
+      {/* Species Selector Tabs */}
+      <div role="tablist" aria-label={t("finder.species")} className="inline-flex divide-x divide-ink overflow-hidden rounded-sm border-2 border-ink bg-paper">
         {(["dog", "cat"] as const).map((sp) => (
           <button
             key={sp}
@@ -231,20 +264,22 @@ export function CompareTool() {
             type="button"
             aria-selected={species === sp}
             onClick={() => switchSpecies(sp)}
-            className={`rounded-xl px-6 py-2.5 text-base font-semibold transition ${species === sp ? "bg-brand text-white shadow" : "text-ink-soft hover:bg-brand-tint"}`}
+            className={`px-6 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider transition ${
+              species === sp ? "bg-brand text-white" : "text-ink hover:bg-stone"
+            }`}
           >
             {speciesLabel(t, sp, true)}
           </button>
         ))}
       </div>
 
-      {/* picker */}
+      {/* Product Picker */}
       <div className="mt-6 max-w-2xl">
-        <label htmlFor="cmp-q" className="mb-1.5 block text-sm font-semibold text-ink">
+        <label htmlFor="cmp-q" className="mb-1.5 block font-mono text-xs font-semibold uppercase tracking-wider text-ink">
           {foods.length >= MAX_COMPARE ? t("compare.full", { max: MAX_COMPARE }) : t("compare.add")}
         </label>
         <div className="relative">
-          <IconSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
+          <IconSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" />
           <input
             id="cmp-q"
             type="search"
@@ -253,24 +288,26 @@ export function CompareTool() {
             disabled={foods.length >= MAX_COMPARE}
             placeholder={t("search.placeholder")}
             autoComplete="off"
-            className="h-12 w-full rounded-2xl border border-line bg-paper pl-11 pr-4 text-base shadow-card focus:border-brand-mid focus:outline-none focus:ring-4 focus:ring-brand-soft disabled:opacity-60"
+            className="h-12 w-full rounded-sm border-2 border-ink bg-paper pl-11 pr-4 text-base text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft disabled:opacity-60"
           />
         </div>
         {q.trim() && foods.length < MAX_COMPARE && (
-          <ul className="mt-2 divide-y divide-line overflow-hidden rounded-2xl border border-line bg-paper shadow-card">
-            {!index && <li className="px-4 py-3 text-sm text-ink-faint">{t("common.loading")}</li>}
+          <ul className="mt-1.5 divide-y divide-line overflow-hidden rounded-sm border-2 border-ink bg-paper shadow-lift">
+            {!index && <li className="px-4 py-3 font-mono text-xs text-ink-faint">{t("common.loading")}</li>}
             {index && results.length === 0 && <li className="px-4 py-3 text-sm text-ink-faint">{t("compare.noResults")}</li>}
             {results.map((e) => (
               <li key={e.i}>
-                <button type="button" onClick={() => add(e.i)} className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-brand-tint">
-                  <span className="h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-line bg-white">
+                <button type="button" onClick={() => add(e.i)} className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-stone">
+                  <span className="h-10 w-10 shrink-0 overflow-hidden rounded-sm border border-line bg-white p-0.5">
                     <ProductImage ean={e.e} hasImage={e.im === 1} alt="" size={40} />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-xs font-semibold uppercase tracking-wide text-ink-faint">{e.b}</span>
-                    <span className="block truncate text-sm text-ink">{e.n}</span>
+                    <span className="block truncate font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">{e.b}</span>
+                    <span className="block truncate text-sm font-medium text-ink">{e.n}</span>
                   </span>
-                  <span className="shrink-0 font-mono text-sm font-semibold text-brand-deep">{e.sc ?? "–"}</span>
+                  <span className="shrink-0 rounded-sm border border-brand/30 bg-brand-soft px-2 py-0.5 font-mono text-xs font-semibold tabular-nums text-brand-deep">
+                    {e.sc ?? "–"}
+                  </span>
                 </button>
               </li>
             ))}
@@ -278,13 +315,13 @@ export function CompareTool() {
         )}
       </div>
 
-      {failed && <p className="mt-6 text-danger" role="alert">{t("finder.error")}</p>}
+      {failed && <p className="mt-6 font-semibold text-danger" role="alert">{t("finder.error")}</p>}
 
       {foods.length === 0 && index && (
-        <div className="mt-8 rounded-2xl border border-dashed border-line bg-paper p-8 text-center text-ink-soft">
-          <p className="font-display text-xl font-semibold text-brand-deep">{t("compare.emptyTitle")}</p>
+        <div className="mt-8 rounded-sm border-2 border-dashed border-ink bg-paper p-8 text-center text-ink-soft">
+          <p className="font-display text-xl font-semibold text-ink">{t("compare.emptyTitle")}</p>
           <p className="mt-2">{t("compare.emptyText")}</p>
-          <p className="mt-4 flex flex-wrap justify-center gap-4 text-sm font-semibold">
+          <p className="mt-4 flex flex-wrap justify-center gap-4 font-mono text-xs font-semibold uppercase tracking-wider">
             <Link href={localePath(lang, "/best")} className="text-brand underline underline-offset-2">{t("nav.best")}</Link>
             <Link href={`${localePath(lang, "/foods")}?species=${species}`} className="text-brand underline underline-offset-2">{t("nav.foods")}</Link>
           </p>
@@ -293,87 +330,153 @@ export function CompareTool() {
 
       {foods.length > 0 && (
         <>
-          {/* who the portions are for */}
-          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-brand/20 bg-brand-tint px-4 py-3 text-sm text-ink">
-            <IconPaw className="h-5 w-5 text-brand" />
+          {/* Reference Pet Weight / Daily Energy Calibration Bar */}
+          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-sm border-2 border-ink bg-stone px-4 py-3 text-sm text-ink">
+            <IconPaw className="h-4 w-4 text-brand" />
             {pet ? (
-              <span>{t("compare.dailyForPet", { name: pet.name, kcal: energy.kcal })}</span>
+              <span className="font-mono text-xs font-semibold tabular-nums">{t("compare.dailyForPet", { name: pet.name, kcal: energy.kcal })}</span>
             ) : (
               <>
-                <label htmlFor="cmp-w">{t("compare.weight")}</label>
+                <label htmlFor="cmp-w" className="font-mono text-xs font-semibold uppercase tracking-wider">{t("compare.weight")}</label>
                 <input
                   id="cmp-w"
                   inputMode="decimal"
                   value={weight}
                   placeholder={String(DEFAULT_WEIGHT[species])}
                   onChange={(e) => setWeight(e.target.value)}
-                  className="h-9 w-20 rounded-lg border border-line bg-paper px-2"
+                  className="h-8 w-20 rounded-sm border border-ink bg-paper px-2 font-mono text-sm tabular-nums"
                 />
-                <span className="text-ink-soft">{t("compare.dailyStandard", { kcal: energy.kcal })}</span>
-                <Link href={localePath(lang, "/my-pet")} className="font-semibold text-brand underline underline-offset-2">{t("finder.createProfile")}</Link>
+                <span className="font-mono text-xs tabular-nums text-ink-soft">{t("compare.dailyStandard", { kcal: energy.kcal })}</span>
+                <Link href={localePath(lang, "/my-pet")} className="ml-auto font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">
+                  {t("finder.createProfile")} →
+                </Link>
               </>
             )}
           </div>
 
-          {/* relative: keeps the screen-reader-only labels inside the scroll box (else they widen the page on phones) */}
-          <div className="relative mt-6 overflow-x-auto rounded-2xl border border-line bg-paper shadow-card">
-            <div className="min-w-[36rem]">
-              {/* food headers */}
-              <div className="grid items-start gap-4 border-b border-line p-4" style={grid}>
-                <span className={label}>{t("compare.food")}</span>
+          {/* FDA / EU Nutrition Facts Specification Sheet Comparison Matrix */}
+          <div className="relative mt-4 overflow-x-auto rounded-sm border-2 border-ink bg-paper shadow-lift">
+            <div className="min-w-[38rem]">
+              {/* Top Nutrition Facts Banner */}
+              <div className="flex items-center justify-between border-b-4 border-ink bg-ink px-4 py-2 text-paper">
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest">
+                  NUTRITION FACTS & SPECIFICATION MATRIX (DRY MATTER BASIS)
+                </span>
+                <span className="font-mono text-xs tabular-nums text-paper/80">
+                  {foods.length} / {MAX_COMPARE} SPECIMENS
+                </span>
+              </div>
+
+              {/* Product Column Headers with Thick 6px Black Bar */}
+              <div className="grid items-stretch divide-x divide-line border-b-[6px] border-ink bg-paper" style={grid}>
+                <div className="flex flex-col justify-between p-4">
+                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-ink-soft">
+                    {t("compare.food")}
+                  </span>
+                  <span className="font-mono text-[0.65rem] text-ink-faint">
+                    FEDIAF 2021 DMB
+                  </span>
+                </div>
                 {rows.map(({ e }) => {
                   const grade = e.g ?? gradeOf(e.sc);
+                  const prot = Math.max(0, Math.min(100, e.nu?.[0] ?? 0));
+                  const fat = Math.max(0, Math.min(100 - prot, e.nu?.[1] ?? 0));
+                  const rest = Math.max(0, 100 - prot - fat);
                   return (
-                    <div key={e.i} className="flex flex-col items-start gap-2">
-                      <div className="flex w-full items-start justify-between gap-2">
-                        <span className="h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-line bg-white">
-                          <ProductImage ean={e.e} hasImage={e.im === 1} alt="" size={64} />
-                        </span>
-                        <button type="button" onClick={() => remove(e.i)} aria-label={t("compare.remove", { name: e.n })} className="rounded-lg p-1.5 text-ink-faint hover:bg-cream hover:text-ink">
-                          <IconX className="h-4 w-4" />
-                        </button>
+                    <div key={e.i} className="flex flex-col justify-between gap-3 p-4">
+                      <div>
+                        <div className="flex w-full items-start justify-between gap-2">
+                          <span className="h-16 w-16 shrink-0 overflow-hidden rounded-sm border border-line bg-white p-1">
+                            <ProductImage ean={e.e} hasImage={e.im === 1} alt="" size={64} />
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => remove(e.i)}
+                            aria-label={t("compare.remove", { name: e.n })}
+                            className="rounded-sm border border-line bg-cream p-1.5 text-ink-soft hover:border-ink hover:text-ink"
+                          >
+                            <IconX className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                        <span className="mt-2.5 block font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">{e.b}</span>
+                        <Link
+                          href={localePath(lang, `/foods/${e.s}`)}
+                          prefetch={false}
+                          className="mt-0.5 line-clamp-3 font-display text-[0.98rem] font-semibold leading-snug tracking-tight text-ink hover:text-brand-deep hover:underline"
+                        >
+                          {e.n}
+                        </Link>
                       </div>
-                      <span className="text-[0.68rem] font-semibold uppercase tracking-wider text-ink-faint">{e.b}</span>
-                      <Link href={localePath(lang, `/foods/${e.s}`)} prefetch={false} className="line-clamp-3 font-display text-[0.98rem] font-semibold leading-snug text-ink hover:text-brand-deep hover:underline">
-                        {e.n}
-                      </Link>
-                      <div className="flex items-center gap-2">
-                        <ScoreRing score={e.sc} grade={grade} size={52} label={scoreAria(t, e.sc, grade)} />
-                        {grade && <GradeBadge grade={grade} label={gradeLabel(t, grade)} />}
+
+                      <div className="space-y-2 border-t border-line pt-2.5">
+                        <div className="flex items-center gap-2">
+                          <ScoreRing score={e.sc} grade={grade} size={50} label={scoreAria(t, e.sc, grade)} />
+                          {grade && <GradeBadge grade={grade} label={gradeLabel(t, grade)} />}
+                        </div>
+
+                        {/* Stacked Dry Matter Macro Breakdown Bar */}
+                        {prot > 0 && (
+                          <div>
+                            <div className="flex h-2 w-full overflow-hidden rounded-none border border-ink/40 bg-stone" aria-hidden>
+                              <div className="bg-grade-a" style={{ width: `${prot}%` }} title={`Protein: ${prot}%`} />
+                              <div className="bg-warn" style={{ width: `${fat}%` }} title={`Fat: ${fat}%`} />
+                              <div className="bg-line" style={{ width: `${rest}%` }} />
+                            </div>
+                            <div className="mt-1 flex justify-between font-mono text-[0.62rem] tabular-nums text-ink-faint">
+                              <span>P {prot.toFixed(0)}%</span>
+                              <span>F {fat.toFixed(0)}%</span>
+                              <span>DM</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   );
                 })}
               </div>
+
+              {/* Specification Rows */}
               {table.map((row) => (
-                <div key={row.key} className="grid items-center gap-4 border-b border-line px-4 py-2.5 text-sm last:border-b-0 even:bg-cream/40" style={grid}>
-                  <span className="text-ink-soft">{row.label}</span>
-                  {row.cells.map((c, i) => (
-                    <div key={i} className="text-ink">{c}</div>
-                  ))}
+                <div key={row.key}>
+                  {row.section && (
+                    <div className="border-y-2 border-ink bg-stone px-4 py-1.5 font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-ink">
+                      {row.section}
+                    </div>
+                  )}
+                  <div className="grid items-center divide-x divide-line border-b border-line text-sm last:border-b-0 even:bg-cream/50" style={grid}>
+                    <span className="px-4 py-2.5 text-xs font-medium text-ink-soft">{row.label}</span>
+                    {row.cells.map((c, i) => (
+                      <div key={i} className="px-4 py-2.5 text-ink">{c}</div>
+                    ))}
+                  </div>
                 </div>
               ))}
-              <div className="grid items-center gap-4 px-4 py-4" style={grid}>
-                <span />
+
+              {/* Bottom Retailer Order Bar */}
+              <div className="grid items-center divide-x divide-line border-t-4 border-ink bg-stone" style={grid}>
+                <span className="px-4 py-3 font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">
+                  RETAIL CHECK
+                </span>
                 {rows.map(({ e }) => {
                   const zp = zooplusLink({ brand: e.b, name: e.n, zooplusUrl: e.zp }, `scanabowl-${lang}-compare`);
                   return (
-                    <a
-                      key={e.i}
-                      href={zp.url}
-                      target="_blank"
-                      rel="sponsored nofollow noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-deep"
-                    >
-                      {zp.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
-                      <IconExternal className="h-3.5 w-3.5" />
-                    </a>
+                    <div key={e.i} className="p-3">
+                      <a
+                        href={zp.url}
+                        target="_blank"
+                        rel="sponsored nofollow noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-1.5 rounded-sm border border-ink bg-brand px-3 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep"
+                      >
+                        {zp.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
+                        <IconExternal className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
                   );
                 })}
               </div>
             </div>
           </div>
-          <p className="mt-4 max-w-3xl text-xs leading-relaxed text-ink-faint">{t("compare.note")}</p>
+          <p className="mt-4 max-w-3xl font-mono text-xs leading-relaxed text-ink-faint">{t("compare.note")}</p>
         </>
       )}
     </div>

@@ -31,37 +31,37 @@ export function GuideItem({ p, rank, def, lang, t }: { p: ProductDetail; rank: n
   if (p.animalProteinShare !== null) facts.push(t("guides.factAnimal", { pct: Math.round(p.animalProteinShare * 100) }));
 
   return (
-    <article className="flex flex-col gap-4 rounded-2xl border border-line bg-paper p-4 shadow-card sm:flex-row sm:items-center sm:p-5">
+    <article className="flex flex-col gap-4 rounded-sm border-2 border-ink bg-paper p-4 sm:flex-row sm:items-center sm:p-5">
       <div className="flex items-center gap-4 sm:contents">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-deep font-mono text-base font-semibold text-white" aria-label={t("guides.rank", { n: rank })}>
-          {rank}
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-ink bg-ink font-mono text-base font-semibold tabular-nums text-paper" aria-label={t("guides.rank", { n: rank })}>
+          #{rank}
         </span>
-        <Link href={href} prefetch={false} className="h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-line bg-white" tabIndex={-1} aria-hidden>
+        <Link href={href} prefetch={false} className="h-24 w-24 shrink-0 overflow-hidden rounded-sm border border-line bg-white p-1" tabIndex={-1} aria-hidden>
           <ProductImage ean={p.ean} hasImage={!!p.image} alt="" size={96} />
         </Link>
-        <div className="flex shrink-0 flex-col items-center gap-1.5 sm:order-last">
+        <div className="flex shrink-0 flex-col items-center gap-1.5 border-l border-line pl-4 sm:order-last">
           <ScoreRing score={p.score} grade={grade} size={64} label={scoreAria(t, p.score, grade)} />
           {grade && <GradeBadge grade={grade} label={gradeLabel(t, grade)} />}
         </div>
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-faint">{p.brand}</p>
-        <h3 className="mt-0.5 font-display text-lg font-semibold leading-snug text-ink">
+        <p className="truncate font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">{p.brand}</p>
+        <h3 className="mt-0.5 font-display text-lg font-semibold leading-snug tracking-tight text-ink">
           <Link href={href} prefetch={false} className="hover:text-brand-deep hover:underline">{p.name}</Link>
         </h3>
-        <div className="mt-2 flex flex-wrap gap-1.5 text-xs text-ink-soft">
-          <span className="rounded-md bg-cream px-2 py-0.5">{foodTypeLabel(t, p.foodType)}</span>
-          <span className="rounded-md bg-cream px-2 py-0.5">{stageLabel(t, p.lifeStage, p.species)}</span>
-          {p.grainFree && <span className="rounded-md bg-brand-tint px-2 py-0.5 text-brand-deep">{t("common.grainFree")}</span>}
+        <div className="mt-2 flex flex-wrap gap-1.5 font-mono text-xs tabular-nums text-ink-soft">
+          <span className="rounded-sm border border-line bg-cream px-2 py-0.5">{foodTypeLabel(t, p.foodType)}</span>
+          <span className="rounded-sm border border-line bg-cream px-2 py-0.5">{stageLabel(t, p.lifeStage, p.species)}</span>
+          {p.grainFree && <span className="rounded-sm border border-brand/30 bg-brand-soft px-2 py-0.5 text-brand-deep">{t("common.grainFree")}</span>}
         </div>
-        {facts.length > 0 && <p className="mt-2 text-sm text-ink-soft">{facts.join(" · ")}</p>}
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-          <Link href={href} prefetch={false} className="font-semibold text-brand underline underline-offset-2">{t("guides.view")}</Link>
+        {facts.length > 0 && <p className="mt-2 font-mono text-xs tabular-nums text-ink-soft">{facts.join(" · ")}</p>}
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <Link href={href} prefetch={false} className="font-mono text-xs font-semibold uppercase tracking-wider text-brand underline underline-offset-2">{t("guides.view")} →</Link>
           <a
             href={shop.url}
             target="_blank"
             rel="sponsored nofollow noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 font-semibold text-white transition hover:bg-brand-deep"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-ink bg-brand px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep"
           >
             {shop.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
             <IconExternal className="h-3.5 w-3.5" />

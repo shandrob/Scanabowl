@@ -5,10 +5,10 @@ import { kindGroup, type KindGroup } from "@/lib/labels";
 import { splitGroups } from "@/lib/scoring/splitting";
 
 const GROUP_STYLE: Record<KindGroup, { chip: string; bar: string }> = {
-  animal: { chip: "border-grade-a/30 bg-grade-a-soft text-ink", bar: "#15803d" },
-  fat: { chip: "border-sky-300/50 bg-sky-50 text-ink", bar: "#38bdf8" },
-  plant: { chip: "border-grade-c/30 bg-grade-c-soft text-ink", bar: "#ca8a04" },
-  other: { chip: "border-line bg-cream text-ink-soft", bar: "#94a3b8" },
+  animal: { chip: "border-grade-a/40 bg-grade-a-soft text-ink", bar: "#2D6A4F" },
+  fat: { chip: "border-brand/40 bg-stone text-ink", bar: "#1F4E3D" },
+  plant: { chip: "border-warn/40 bg-warn-soft text-ink", bar: "#B45309" },
+  other: { chip: "border-line bg-cream text-ink-soft", bar: "#6B6A65" },
 };
 
 /** additives a pet does not need: shown in red (they already cost points in the score) */
@@ -29,50 +29,52 @@ export function IngredientsBlock({ p, t }: { p: ProductDetail; t: TFunction }) {
 
   return (
     <div>
-      <div className="flex h-4 overflow-hidden rounded-full bg-line/60" role="img" aria-label={order.map((g) => `${t(`product.group.${g}`)} ${Math.round((totals[g] / sum) * 100)}%`).join(", ")}>
+      <div className="flex h-5 overflow-hidden rounded-none border border-ink bg-stone" role="img" aria-label={order.map((g) => `${t(`product.group.${g}`)} ${Math.round((totals[g] / sum) * 100)}%`).join(", ")}>
         {order.map((g) => (
           <div key={g} style={{ width: `${(totals[g] / sum) * 100}%`, background: GROUP_STYLE[g].bar }} />
         ))}
       </div>
-      <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-ink-soft">
+      <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs tabular-nums text-ink-soft">
         {order.map((g) => (
           <li key={g} className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: GROUP_STYLE[g].bar }} aria-hidden />
+            <span className="inline-block h-2.5 w-2.5 rounded-none border border-ink/40" style={{ background: GROUP_STYLE[g].bar }} aria-hidden />
             {t(`product.group.${g}`)} ≈ {Math.round((totals[g] / sum) * 100)}%
           </li>
         ))}
       </ul>
-      <p className="mt-1 text-xs text-ink-faint">{t("product.estimateNote")}</p>
+      <p className="mt-1 font-mono text-[0.7rem] text-ink-faint">{t("product.estimateNote")}</p>
 
       <ol className="mt-5 flex flex-wrap gap-2">
         {p.ingredients.map((i, idx) => (
           <li
             key={`${i.raw}-${idx}`}
             title={UNNEEDED.has(i.kind) ? t("product.legendUnneeded") : !i.named && kindGroup(i.kind) !== "other" ? t("product.legendVague") : undefined}
-            className={`rounded-lg border px-2.5 py-1 text-sm ${
+            className={`rounded-sm border px-2.5 py-1 text-sm ${
+              idx < 5 ? "font-medium" : ""
+            } ${
               UNNEEDED.has(i.kind)
-                ? "border-danger/40 bg-danger-soft text-danger"
-                : `${GROUP_STYLE[kindGroup(i.kind)].chip}${!i.named && kindGroup(i.kind) !== "other" ? " border-dashed" : ""}`
+                ? "border-danger bg-danger-soft font-semibold text-danger"
+                : `${GROUP_STYLE[kindGroup(i.kind)].chip}${!i.named && kindGroup(i.kind) !== "other" ? " border-dashed border-ink" : ""}`
             }`}
           >
-            <span className="mr-1.5 font-mono text-[0.65rem] text-ink-faint">{idx + 1}</span>
+            <span className="mr-1.5 font-mono text-[0.65rem] tabular-nums text-ink-faint">#{idx + 1}</span>
             {i.raw}
-            {!i.named && !UNNEEDED.has(i.kind) && kindGroup(i.kind) !== "other" && <span className="ml-1 text-ink-faint" aria-hidden>?</span>}
-            {i.pct !== undefined && <span className="ml-1 font-mono text-xs text-ink-soft">{i.pct}%</span>}
+            {!i.named && !UNNEEDED.has(i.kind) && kindGroup(i.kind) !== "other" && <span className="ml-1 font-mono text-ink-faint" aria-hidden>?</span>}
+            {i.pct !== undefined && <span className="ml-1.5 font-mono text-xs font-semibold tabular-nums text-ink">{i.pct}%</span>}
           </li>
         ))}
       </ol>
       {(hasVague || hasUnneeded) && (
-        <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-ink-soft">
+        <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-ink-soft">
           {hasVague && (
             <li className="flex items-center gap-1.5">
-              <span className="inline-block h-3 w-4 rounded border border-dashed border-ink-faint" aria-hidden />
+              <span className="inline-block h-3 w-4 rounded-none border border-dashed border-ink" aria-hidden />
               {t("product.legendVague")}
             </li>
           )}
           {hasUnneeded && (
             <li className="flex items-center gap-1.5">
-              <span className="inline-block h-3 w-4 rounded border border-danger/40 bg-danger-soft" aria-hidden />
+              <span className="inline-block h-3 w-4 rounded-none border border-danger bg-danger-soft" aria-hidden />
               {t("product.legendUnneeded")}
             </li>
           )}
@@ -80,18 +82,18 @@ export function IngredientsBlock({ p, t }: { p: ProductDetail; t: TFunction }) {
       )}
 
       {splits.map((g) => (
-        <p key={g.forms.join("|")} className="mt-4 flex gap-3 rounded-xl border border-warn/30 bg-warn-soft p-4 text-sm text-ink">
+        <p key={g.forms.join("|")} className="mt-4 flex gap-3 rounded-sm border border-warn bg-warn-soft p-4 text-sm text-ink">
           <IconInfo className="mt-0.5 h-5 w-5 shrink-0 text-warn" />
           <span>
-            <strong>{t("product.splitTitle")}</strong>{" "}
+            <strong className="font-mono text-xs uppercase tracking-wider">{t("product.splitTitle")}</strong>{" "}
             {t(g.outweighsFirst ? "product.splitTextFirst" : "product.splitText", { count: g.forms.length, forms: g.forms.join(", "), pct: g.share, first: p.ingredients[0].raw })}
           </span>
         </p>
       ))}
 
-      <details className="mt-5 rounded-xl border border-line bg-cream/60 p-4 text-sm">
-        <summary className="cursor-pointer font-semibold text-brand-deep">{t("product.originalText")}</summary>
-        <p className="mt-2 leading-relaxed text-ink-soft">{p.ingredientsText}</p>
+      <details className="mt-5 rounded-sm border border-ink bg-cream p-4 text-sm">
+        <summary className="cursor-pointer font-mono text-xs font-semibold uppercase tracking-wider text-ink">{t("product.originalText")}</summary>
+        <p className="mt-2 border-t border-line pt-2 font-mono text-xs leading-relaxed text-ink-soft">{p.ingredientsText}</p>
         <p className="mt-2 text-xs text-ink-faint">{t("product.originalLanguageNote")}</p>
       </details>
     </div>

@@ -37,19 +37,22 @@ export function OrderCard({
   const grams = pack ? packGrams(pack) : null;
   const perKg = price && grams && grams > 0 ? (price / (grams / 1000)).toFixed(2) : null;
   return (
-    <section aria-labelledby="order-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card">
-      <h2 id="order-h" className="font-display text-xl font-semibold text-brand-deep">{t("order.title")}</h2>
-      <p className="mt-1 text-sm text-ink-soft">{t("order.text")}</p>
+    <section aria-labelledby="order-h" className="rounded-sm border-2 border-ink bg-paper p-6 shadow-lift">
+      <div className="border-b-4 border-ink pb-2">
+        <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-ink-soft">PRICE & RETAIL LEDGER</p>
+        <h2 id="order-h" className="font-display text-xl font-semibold tracking-tight text-ink">{t("order.title")}</h2>
+      </div>
+      <p className="mt-2.5 text-sm text-ink-soft">{t("order.text")}</p>
       {price !== undefined && price > 0 && (
-        <div className="mt-4 flex items-baseline justify-between rounded-xl border border-line bg-cream/60 px-4 py-3">
+        <div className="mt-4 flex items-baseline justify-between rounded-sm border border-ink bg-stone px-4 py-3">
           <div>
-            <span className="block font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-faint">
+            <span className="block font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-ink-soft">
               {t("order.priceLabel")}{pack ? ` · ${pack}` : ""}
             </span>
-            <span className="font-display text-2xl font-semibold text-ink">€{price.toFixed(2)}</span>
+            <span className="font-mono text-2xl font-semibold tabular-nums text-ink">€{price.toFixed(2)}</span>
           </div>
           {perKg && (
-            <span className="rounded-lg bg-paper px-2.5 py-1 font-mono text-xs font-semibold text-ink-soft">
+            <span className="rounded-sm border border-ink bg-paper px-2.5 py-1 font-mono text-xs font-semibold tabular-nums text-ink">
               {t("order.perKg", { price: perKg })}
             </span>
           )}
@@ -59,7 +62,7 @@ export function OrderCard({
         href={zooplus.url}
         target="_blank"
         rel={rel}
-        className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-base font-semibold text-white shadow transition hover:bg-brand-deep"
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-sm border border-ink bg-brand px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep"
       >
         {zooplus.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
         <IconExternal className="h-4 w-4" />
@@ -68,16 +71,16 @@ export function OrderCard({
         href={bol}
         target="_blank"
         rel={rel}
-        className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-bol/40 bg-paper px-5 py-3 text-base font-semibold text-bol transition hover:bg-bol/5"
+        className="mt-2 flex w-full items-center justify-center gap-2 rounded-sm border border-bol bg-paper px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-bol transition hover:bg-bol/5"
       >
         {t("order.button")}
         <IconExternal className="h-4 w-4" />
       </a>
-      <p className="mt-3 text-xs leading-relaxed text-ink-faint">
+      <p className="mt-3 font-mono text-[0.7rem] leading-relaxed text-ink-faint">
         {t("order.disclosure")}{" "}
-        <Link href={localePath(lang, "/affiliate")} className="underline underline-offset-2 hover:text-brand">{t("order.moreInfo")}</Link>
+        <Link href={localePath(lang, "/affiliate")} className="underline underline-offset-2 hover:text-ink">{t("order.moreInfo")}</Link>
       </p>
-      {lang !== "nl" && <p className="mt-2 text-xs text-ink-faint">{t("order.dutchOnly")}</p>}
+      {lang !== "nl" && <p className="mt-2 font-mono text-[0.7rem] text-ink-faint">{t("order.dutchOnly")}</p>}
     </section>
   );
 }

@@ -17,11 +17,11 @@ export function CompareToggle({ id, species, name }: { id: string; species: Spec
       aria-pressed={on}
       aria-label={on ? t("compare.removeCard", { name }) : t("compare.addCard", { name })}
       title={on ? t("compare.added") : t("compare.addThis")}
-      className={`absolute left-2 top-2 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full border text-base font-semibold shadow-card transition ${
-        on ? "border-brand bg-brand text-white" : "border-line bg-paper text-brand hover:border-brand-mid"
+      className={`absolute left-2 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-sm border border-ink font-mono text-sm font-bold transition ${
+        on ? "bg-brand text-white" : "bg-paper text-ink hover:bg-stone"
       }`}
     >
-      {on ? <IconCheck className="h-4 w-4" /> : <span aria-hidden>+</span>}
+      {on ? <IconCheck className="h-3.5 w-3.5" /> : <span aria-hidden>+</span>}
     </button>
   );
 }

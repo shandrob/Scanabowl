@@ -35,22 +35,23 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="font-display text-4xl font-semibold leading-tight text-brand-deep sm:text-5xl">{t("about.title")}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-ink-soft"><Rich text={t("about.intro")} /></p>
+      <header className="border-b-2 border-ink pb-5">
+        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">INDEPENDENT PET FOOD AUDIT</p>
+        <h1 className="mt-1 font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{t("about.title")}</h1>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft"><Rich text={t("about.intro")} /></p>
       </header>
 
       {story && (
-        <section aria-labelledby="story-h" className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 rounded-3xl border border-line bg-paper p-6 shadow-card sm:p-10 md:grid-cols-[240px_minmax(0,1fr)]">
+        <section aria-labelledby="story-h" className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 rounded-sm border-2 border-ink bg-paper p-6 sm:p-10 md:grid-cols-[240px_minmax(0,1fr)]">
           {story.photo ? (
-            <Image src={story.photo} alt={story.photoAlt} width={480} height={600} unoptimized priority className="h-auto w-full max-w-[240px] rounded-2xl border border-line object-cover shadow-card" />
+            <Image src={story.photo} alt={story.photoAlt} width={480} height={600} unoptimized priority className="h-auto w-full max-w-[240px] rounded-sm border border-ink object-cover" />
           ) : (
             <div className="hidden md:block">
-              <Image src="/logo.png" alt="" width={240} height={240} className="rounded-2xl shadow-card" />
+              <Image src="/logo.png" alt="" width={240} height={240} className="rounded-sm border border-ink" />
             </div>
           )}
           <div>
-            <h2 id="story-h" className="font-display text-3xl font-semibold text-brand-deep">{story.title}</h2>
+            <h2 id="story-h" className="border-b-4 border-ink pb-2 font-display text-3xl font-semibold tracking-tight text-ink">{story.title}</h2>
             <div className="prose-scan mt-5" dangerouslySetInnerHTML={{ __html: story.html }} />
           </div>
         </section>

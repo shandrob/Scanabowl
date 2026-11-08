@@ -41,8 +41,8 @@ export function BrandForm() {
     <form onSubmit={onSubmit} noValidate className="relative space-y-8">
       <Honeypot value={hp} onChange={setHp} />
 
-      <fieldset className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
-        <legend className="px-2 font-display text-xl font-semibold text-brand-deep">{t("brands.companyTitle")}</legend>
+      <fieldset className="rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
+        <legend className="px-2 font-display text-xl font-semibold text-ink">{t("brands.companyTitle")}</legend>
         <div className="mt-2 grid gap-5 sm:grid-cols-2">
           <Field id="bc-name" label={t("brands.companyName")} required error={err("companyName")}>
             <input id="bc-name" className={inputCls} value={company.name} maxLength={120} onChange={(e) => setC("name", e.target.value)} aria-invalid={!!errors.companyName} autoComplete="organization" />
@@ -66,38 +66,38 @@ export function BrandForm() {
       </fieldset>
 
       {products.map((p, i) => (
-        <fieldset key={i} className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
-          <legend className="px-2 font-display text-xl font-semibold text-brand-deep">{t("brands.productN", { n: i + 1 })}</legend>
+        <fieldset key={i} className="rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
+          <legend className="px-2 font-display text-xl font-semibold text-ink">{t("brands.productN", { n: i + 1 })}</legend>
           <div className="mt-2">
             <ProductFields idPrefix={`bp${i}`} value={p} onChange={(v) => setProducts((list) => list.map((x, j) => (j === i ? v : x)))} errors={errors} showBrand={false} ingredientsRequired />
           </div>
           {products.length > 1 && (
-            <button type="button" className="mt-4 text-sm font-semibold text-danger underline underline-offset-2" onClick={() => setProducts((list) => list.filter((_, j) => j !== i))}>
+            <button type="button" className="mt-4 font-mono text-xs font-semibold uppercase tracking-wider text-danger underline underline-offset-2" onClick={() => setProducts((list) => list.filter((_, j) => j !== i))}>
               {t("brands.removeProduct")}
             </button>
           )}
         </fieldset>
       ))}
       {products.length < MAX && (
-        <button type="button" onClick={() => setProducts((l) => [...l, { ...emptyProduct(), species: l[l.length - 1].species, foodType: l[l.length - 1].foodType }])} className="rounded-xl border border-dashed border-brand px-5 py-3 font-semibold text-brand hover:bg-brand-tint">
+        <button type="button" onClick={() => setProducts((l) => [...l, { ...emptyProduct(), species: l[l.length - 1].species, foodType: l[l.length - 1].foodType }])} className="rounded-sm border-2 border-dashed border-ink px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-brand hover:bg-stone">
           + {t("brands.addProduct")}
         </button>
       )}
 
-      <div className="space-y-5 rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
+      <div className="space-y-5 rounded-sm border-2 border-ink bg-paper p-6 sm:p-8">
         <Field id="bc-msg" label={t("brands.message")} hint={t("brands.messageHint")}>
           <textarea id="bc-msg" rows={3} className={inputCls} value={message} maxLength={3000} onChange={(e) => setMessage(e.target.value)} />
         </Field>
         <label className="flex cursor-pointer items-start gap-3 text-sm text-ink">
-          <input type="checkbox" className="mt-0.5 h-5 w-5 rounded accent-brand" checked={authorised} onChange={(e) => setAuthorised(e.target.checked)} />
+          <input type="checkbox" className="mt-0.5 h-4 w-4 rounded-none accent-brand" checked={authorised} onChange={(e) => setAuthorised(e.target.checked)} />
           <span>{t("brands.authorised")}{errors.authorised && <span className="ml-2 font-semibold text-danger">{t("forms.err.required")}</span>}</span>
         </label>
         <label className="flex cursor-pointer items-start gap-3 text-sm text-ink-soft">
-          <input type="checkbox" className="mt-0.5 h-5 w-5 rounded accent-brand" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+          <input type="checkbox" className="mt-0.5 h-4 w-4 rounded-none accent-brand" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
           <span>{t("forms.consent")}{errors.consent && <span className="ml-2 font-semibold text-danger">{t("forms.err.required")}</span>}</span>
         </label>
         <SubmitStatus status={status} subject={`Merk-inzending ${company.name}`} body={`${company.name}\n${company.website}\n${products.map((p) => `${p.name}\n${p.ingredients}`).join("\n\n")}`} />
-        <button type="submit" disabled={status === "sending"} className="rounded-xl bg-brand px-8 py-3.5 text-base font-semibold text-white shadow-card transition hover:bg-brand-deep disabled:opacity-60">
+        <button type="submit" disabled={status === "sending"} className="rounded-sm border-2 border-ink bg-brand px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-brand-deep disabled:opacity-60">
           {status === "sending" ? t("forms.sending") : t("brands.submit")}
         </button>
       </div>

@@ -25,41 +25,42 @@ export default async function BrandsPage({ params }: { params: Promise<{ lang: s
   const promises = raw<string[]>("brands.promises");
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="font-display text-4xl font-semibold text-brand-deep sm:text-5xl">{t("brands.title")}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-ink-soft">{t("brands.intro")}</p>
+      <header className="border-b-2 border-ink pb-5">
+        <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">MANUFACTURER TRANSPARENCY PORTAL</p>
+        <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("brands.title")}</h1>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft">{t("brands.intro")}</p>
       </header>
 
       <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="order-2 lg:order-1"><BrandForm /></div>
         <aside className="order-1 space-y-6 lg:order-2 lg:sticky lg:top-24 lg:self-start">
-          <section className="rounded-2xl border border-line bg-paper p-6 shadow-card">
-            <h2 className="font-display text-xl font-semibold text-brand-deep">{t("brands.howTitle")}</h2>
+          <section className="rounded-sm border-2 border-ink bg-paper p-6">
+            <h2 className="border-b-4 border-ink pb-2 font-display text-xl font-semibold tracking-tight text-ink">{t("brands.howTitle")}</h2>
             <ol className="mt-4 space-y-3">
               {steps.map((s, i) => (
-                <li key={i} className="flex gap-3 text-[0.95rem] text-ink-soft">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white">{i + 1}</span>
+                <li key={i} className="flex gap-3 text-sm text-ink-soft">
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border border-ink bg-stone font-mono text-xs font-semibold text-ink">{i + 1}</span>
                   <Rich text={s} />
                 </li>
               ))}
             </ol>
           </section>
-          <section className="rounded-2xl border border-line bg-paper p-6 shadow-card">
-            <h2 className="font-display text-xl font-semibold text-brand-deep">{t("brands.csvTitle")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink-soft"><Rich text={t("brands.csvText")} /></p>
+          <section className="rounded-sm border-2 border-ink bg-paper p-6">
+            <h2 className="border-b border-line pb-2 font-display text-xl font-semibold tracking-tight text-ink">{t("brands.csvTitle")}</h2>
+            <p className="mt-2.5 text-sm leading-relaxed text-ink-soft"><Rich text={t("brands.csvText")} /></p>
             <a
               href="/scanabowl-brand-template.csv"
               download="scanabowl-brand-template.csv"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-brand/40 bg-brand-tint px-4 py-2.5 text-sm font-semibold text-brand-deep transition hover:bg-brand-soft"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-ink bg-stone px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink transition hover:bg-brand-soft"
             >
               {t("brands.csvButton")}
             </a>
           </section>
-          <section className="rounded-2xl border border-brand/25 bg-brand-tint p-6">
-            <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-brand-deep"><IconShield className="h-5 w-5" />{t("brands.promiseTitle")}</h2>
+          <section className="rounded-sm border-2 border-ink bg-brand-soft/60 p-6">
+            <h2 className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-ink"><IconShield className="h-5 w-5 text-brand" />{t("brands.promiseTitle")}</h2>
             <ul className="mt-4 space-y-3">
               {promises.map((s, i) => (
-                <li key={i} className="flex gap-2.5 text-[0.95rem] text-ink"><IconCheck className="mt-0.5 h-5 w-5 shrink-0 text-grade-a" /><Rich text={s} /></li>
+                <li key={i} className="flex gap-2.5 text-sm text-ink"><IconCheck className="mt-0.5 h-5 w-5 shrink-0 text-grade-a" /><Rich text={s} /></li>
               ))}
             </ul>
           </section>
