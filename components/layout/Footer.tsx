@@ -48,7 +48,6 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
           {col(t("footer.legal"), [
             ["/privacy", t("nav.privacy")],
             ["/terms", t("nav.terms")],
-            ["/affiliate", t("nav.affiliate")],
           ])}
         </div>
         <div className="mt-10 border-t border-line pt-6 text-xs leading-relaxed text-ink-faint">

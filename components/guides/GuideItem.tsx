@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { GradeBadge, gradeOf } from "@/components/ui/grade";
-import { IconExternal } from "@/components/ui/Icons";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { ScoreRing } from "@/components/ui/ScoreRing";
 import type { ProductDetail } from "@/lib/data/types";
@@ -8,16 +7,14 @@ import type { GuideDef } from "@/lib/guides/defs";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import type { TFunction } from "@/lib/i18n/t";
 import { foodTypeLabel, gradeLabel, scoreAria, stageLabel } from "@/lib/labels";
-import { zooplusLink } from "@/lib/zooplus";
 
 const num = (v: number, lang: Locale, digits = 0) => v.toLocaleString(lang, { maximumFractionDigits: digits, minimumFractionDigits: digits });
 
-/** One ranked food in a "best food for ..." list: photo, score, the numbers that matter and where to buy it. */
+/** One ranked food in a "best food for ..." list: photo, score, and the numbers that matter. */
 export function GuideItem({ p, rank, def, lang, t }: { p: ProductDetail; rank: number; def: GuideDef; lang: Locale; t: TFunction }) {
   const grade = p.grade ?? gradeOf(p.score);
   const n = p.nutrition;
   const href = localePath(lang, `/foods/${p.slug}`);
-  const shop = zooplusLink(p, `scanabowl-${lang}-best-${def.slug}`);
   const facts: string[] = [];
   if (n) {
     facts.push(t("guides.factProtein", { value: num(n.dm.protein, lang) }));
@@ -57,15 +54,6 @@ export function GuideItem({ p, rank, def, lang, t }: { p: ProductDetail; rank: n
         {facts.length > 0 && <p className="mt-2 font-sans text-xs tabular-nums text-ink-soft">{facts.join(" · ")}</p>}
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href={href} prefetch={false} className="font-sans text-sm font-semibold text-brand hover:underline">{t("guides.view")} →</Link>
-          <a
-            href={shop.url}
-            target="_blank"
-            rel="sponsored nofollow noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-brand px-3.5 py-1.5 font-sans text-xs font-semibold text-white transition hover:bg-brand-deep"
-          >
-            {shop.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
-            <IconExternal className="h-3.5 w-3.5" />
-          </a>
         </div>
       </div>
     </article>

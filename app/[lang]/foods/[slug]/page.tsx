@@ -183,7 +183,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <OrderCard ean={p.ean} name={p.name} brand={p.brand} pack={p.pack} price={p.price} bolUrl={p.bolUrl} zooplusUrl={p.zooplusUrl} lang={lang} t={t} />
+          <OrderCard pack={p.pack} price={p.price} t={t} />
           <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft shadow-card">
             <h2 className="font-sans text-xs font-semibold text-ink">{t("product.dataTitle")}</h2>
             <p className="mt-2 leading-relaxed">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>

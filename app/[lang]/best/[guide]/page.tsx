@@ -135,10 +135,6 @@ export default async function GuidePage({ params }: Props) {
               {t("guides.seeAll")}
             </Link>
           </div>
-          <p className="mt-6 font-sans text-xs leading-relaxed text-ink-faint">
-            {t("order.disclosure")}{" "}
-            <Link href={localePath(lang, "/affiliate")} className="underline hover:text-ink">{t("order.moreInfo")}</Link>
-          </p>
         </section>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">

@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { GradeBadge, gradeOf } from "@/components/ui/grade";
-import { IconExternal, IconPaw, IconSearch, IconX } from "@/components/ui/Icons";
+import { IconPaw, IconSearch, IconX } from "@/components/ui/Icons";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { ScoreRing } from "@/components/ui/ScoreRing";
 import { MAX_COMPARE, useCompare } from "@/lib/compare/store";
@@ -18,7 +18,6 @@ import { usePets } from "@/lib/pets/store";
 import { personalFit } from "@/lib/scoring/personalize";
 import type { PetProfile, Species } from "@/lib/scoring/types";
 import { matchesQuery, queryTerms, searchHaystack } from "@/lib/search";
-import { zooplusLink } from "@/lib/zooplus";
 
 const DEFAULT_WEIGHT: Record<Species, number> = { dog: 15, cat: 4 };
 
@@ -407,27 +406,6 @@ export function CompareTool() {
                   ))}
                 </div>
               ))}
-
-              {/* Bottom Retailer Order Bar */}
-              <div className="grid items-center divide-x divide-line border-t border-line bg-cream/60" style={grid}>
-                <span className="px-4 py-3 font-sans text-xs font-medium text-ink-soft" />
-                {rows.map(({ e }) => {
-                  const zp = zooplusLink({ brand: e.b, name: e.n, zooplusUrl: e.zp }, `scanabowl-${lang}-compare`);
-                  return (
-                    <div key={e.i} className="p-3">
-                      <a
-                        href={zp.url}
-                        target="_blank"
-                        rel="sponsored nofollow noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-brand px-3 py-2.5 font-sans text-xs font-semibold text-white transition hover:bg-brand-deep"
-                      >
-                        {zp.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
-                        <IconExternal className="h-3.5 w-3.5" />
-                      </a>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           </div>
           <p className="mt-4 max-w-3xl font-sans text-xs leading-relaxed text-ink-faint">{t("compare.note")}</p>
