@@ -179,7 +179,7 @@
       },
       {
         "q": "Les marques paient-elles pour une meilleure note ?",
-        "a": "Non. La note est calculée avec la même formule pour chaque aliment. Nous touchons une petite commission lorsque vous commandez via nos liens vers zooplus ou bol.com, sans frais supplémentaires pour vous – voir la [mention d’affiliation](/{lang}/affiliate)."
+        "a": "Non. La note est calculée avec la même formule pour chaque aliment. Les marques ne peuvent pas payer pour obtenir une meilleure note ou être recommandées."
       },
       {
         "q": "Pourquoi un aliment vétérinaire n’est-il pas noté ?",
@@ -618,7 +618,7 @@
       },
       {
         "h": "Données, indépendance et erreurs",
-        "p": ["Les données produits proviennent d’informations produits publiques et de fabricants qui soumettent leurs produits. Nous vérifions toujours les soumissions avant publication, et la même formule s’applique à chaque aliment – aucune marque ne peut influencer sa note. Nous touchons une commission sur les commandes via nos liens vers zooplus ou bol.com ; cela est expliqué dans la [mention d’affiliation](/{lang}/affiliate).", "Une erreur ? Utilisez le lien « Signaler une correction » sur la page produit. Nous corrigeons rapidement."]
+        "p": ["Les données produits proviennent d’informations produits publiques et de fabricants qui soumettent leurs produits. Nous vérifions toujours les soumissions avant publication, et la même formule s’applique à chaque aliment – aucune marque ne peut influencer sa note.", "Une erreur ? Utilisez le lien « Signaler une correction » sur la page produit. Nous corrigeons rapidement."]
       }
     ],
     "refsTitle": "Sources scientifiques",
@@ -742,7 +742,7 @@
       },
       {
         "h": "Comment nous sommes financés",
-        "p": ["Scanabowl est gratuit. Lorsque vous commandez un aliment via nos liens vers zooplus ou bol.com, nous pouvons toucher une petite commission, sans frais supplémentaires pour vous. Ces revenus sont réinvestis dans le site. En savoir plus dans la [mention d’affiliation](/{lang}/affiliate)."]
+        "p": ["Scanabowl est un projet indépendant et entièrement gratuit. Les marques ne peuvent pas payer pour obtenir une meilleure note ou un meilleur classement."]
       },
       {
         "h": "Participez",
@@ -949,7 +949,7 @@
     "contribute": "Participer",
     "legal": "Mentions légales",
     "vat": "TVA",
-    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement. Les liens vers zooplus et bol.com sont des liens d’affiliation.",
+    "disclaimer": "Scanabowl fournit des informations générales et non un avis vétérinaire. Les notes décrivent les étiquettes des produits et sont calculées automatiquement.",
     "photos": "Une partie des photos de produits provient de {source} (licence CC BY-SA 3.0)."
   },
   "brandPages": {

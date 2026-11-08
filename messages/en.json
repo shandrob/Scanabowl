@@ -179,7 +179,7 @@
       },
       {
         "q": "Do brands pay to get a better score?",
-        "a": "No. Scores are calculated by the same formula for every food. We earn a small commission when you order via our links to zooplus or bol.com, at no extra cost to you – see the [affiliate disclosure](/{lang}/affiliate)."
+        "a": "No. Scores are calculated by the same formula for every food. Brands cannot pay to get a higher score or to be recommended."
       },
       {
         "q": "Why is a prescription or veterinary diet not scored?",
@@ -618,7 +618,7 @@
       },
       {
         "h": "Data, independence and errors",
-        "p": ["Product data comes from public product information and from manufacturers who submit their products. We always check submissions before they are published, and the same formula is applied to every food – no brand can influence its score. We earn a commission on orders via our links to zooplus or bol.com; that is explained in the [affiliate disclosure](/{lang}/affiliate).", "Spotted an error? Use the “Report a correction” link on the product page. We fix mistakes quickly."]
+        "p": ["Product data comes from public product information and from manufacturers who submit their products. We always check submissions before they are published, and the same formula is applied to every food – no brand can influence its score.", "Spotted an error? Use the “Report a correction” link on the product page. We fix mistakes quickly."]
       }
     ],
     "refsTitle": "Scientific sources",
@@ -742,7 +742,7 @@
       },
       {
         "h": "How we are funded",
-        "p": ["Scanabowl is free to use. When you order a food via our links to zooplus or bol.com, we may earn a small commission at no extra cost to you. That income is reinvested in the website. Read more in the [affiliate disclosure](/{lang}/affiliate)."]
+        "p": ["Scanabowl is an independent project and is completely free to use. Brands cannot pay for a better score or placement."]
       },
       {
         "h": "Get involved",
@@ -949,7 +949,7 @@
     "contribute": "Get involved",
     "legal": "Legal",
     "vat": "VAT",
-    "disclaimer": "Scanabowl provides general information and no veterinary advice. Scores describe product labels and are calculated automatically. Links to zooplus and bol.com are affiliate links.",
+    "disclaimer": "Scanabowl provides general information and no veterinary advice. Scores describe product labels and are calculated automatically.",
     "photos": "Some product photos come from {source} (licence CC BY-SA 3.0)."
   },
   "brandPages": {

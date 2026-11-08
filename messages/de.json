@@ -179,7 +179,7 @@
       },
       {
         "q": "Zahlen Marken für eine bessere Bewertung?",
-        "a": "Nein. Die Bewertung wird für jedes Futter mit derselben Formel berechnet. Wir erhalten eine kleine Provision, wenn Sie über unsere Links zu zooplus oder bol.com bestellen, ohne Mehrkosten für Sie – siehe [Affiliate-Hinweis](/{lang}/affiliate)."
+        "a": "Nein. Die Bewertung wird für jedes Futter mit derselben Formel berechnet. Marken können nicht für eine höhere Bewertung oder Empfehlung bezahlen."
       },
       {
         "q": "Warum hat ein Diätfutter vom Tierarzt keine Bewertung?",
@@ -618,7 +618,7 @@
       },
       {
         "h": "Daten, Unabhängigkeit und Fehler",
-        "p": ["Produktdaten stammen aus öffentlichen Produktinformationen und von Herstellern, die ihre Produkte einreichen. Wir prüfen Einreichungen immer, bevor sie veröffentlicht werden, und dieselbe Formel gilt für jedes Futter – keine Marke kann ihre Bewertung beeinflussen. Wir erhalten eine Provision für Bestellungen über unsere Links zu zooplus oder bol.com; das wird im [Affiliate-Hinweis](/{lang}/affiliate) erklärt.", "Fehler entdeckt? Nutzen Sie den Link „Korrektur melden“ auf der Produktseite. Wir beheben Fehler schnell."]
+        "p": ["Produktdaten stammen aus öffentlichen Produktinformationen und von Herstellern, die ihre Produkte einreichen. Wir prüfen Einreichungen immer, bevor sie veröffentlicht werden, und dieselbe Formel gilt für jedes Futter – keine Marke kann ihre Bewertung beeinflussen.", "Fehler entdeckt? Nutzen Sie den Link „Korrektur melden“ auf der Produktseite. Wir beheben Fehler schnell."]
       }
     ],
     "refsTitle": "Wissenschaftliche Quellen",
@@ -742,7 +742,7 @@
       },
       {
         "h": "Wie wir finanziert werden",
-        "p": ["Scanabowl ist kostenlos nutzbar. Wenn Sie ein Futter über unsere Links zu zooplus oder bol.com bestellen, erhalten wir möglicherweise eine kleine Provision, ohne Mehrkosten für Sie. Diese Einnahmen investieren wir in die Website. Mehr dazu im [Affiliate-Hinweis](/{lang}/affiliate)."]
+        "p": ["Scanabowl ist ein unabhängiges Projekt und völlig kostenlos nutzbar. Marken können nicht für eine bessere Bewertung oder Platzierung bezahlen."]
       },
       {
         "h": "Machen Sie mit",
@@ -949,7 +949,7 @@
     "contribute": "Mitmachen",
     "legal": "Rechtliches",
     "vat": "USt-IdNr.",
-    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet. Links zu zooplus und bol.com sind Affiliate-Links.",
+    "disclaimer": "Scanabowl bietet allgemeine Informationen und keine tierärztliche Beratung. Bewertungen beschreiben Produktetiketten und werden automatisch berechnet.",
     "photos": "Ein Teil der Produktfotos stammt von {source} (Lizenz CC BY-SA 3.0)."
   },
   "brandPages": {

@@ -179,7 +179,7 @@
       },
       {
         "q": "Betalen merken voor een betere score?",
-        "a": "Nee. Scores worden voor elk voer met dezelfde formule berekend. We verdienen een kleine commissie als je via onze links naar zooplus of bol.com bestelt, zonder extra kosten voor jou – zie de [affiliate-vermelding](/{lang}/affiliate)."
+        "a": "Nee. Scores worden voor elk voer met dezelfde formule berekend. Merken kunnen niet betalen voor een hogere score of om aanbevolen te worden."
       },
       {
         "q": "Waarom heeft een dieetvoer van de dierenarts geen score?",
@@ -618,7 +618,7 @@
       },
       {
         "h": "Gegevens, onafhankelijkheid en fouten",
-        "p": ["Productgegevens komen uit openbare productinformatie en van fabrikanten die hun producten indienen. We controleren inzendingen altijd voordat ze gepubliceerd worden, en dezelfde formule geldt voor elk voer – geen enkel merk kan zijn score beïnvloeden. We verdienen een commissie op bestellingen via onze links naar zooplus of bol.com; dat staat uitgelegd in de [affiliate-vermelding](/{lang}/affiliate).", "Een fout gezien? Gebruik de link “Meld een correctie” op de productpagina. We herstellen fouten snel."]
+        "p": ["Productgegevens komen uit openbare productinformatie en van fabrikanten die hun producten indienen. We controleren inzendingen altijd voordat ze gepubliceerd worden, en dezelfde formule geldt voor elk voer – geen enkel merk kan zijn score beïnvloeden.", "Een fout gezien? Gebruik de link “Meld een correctie” op de productpagina. We herstellen fouten snel."]
       }
     ],
     "refsTitle": "Wetenschappelijke bronnen",
@@ -742,7 +742,7 @@
       },
       {
         "h": "Hoe we gefinancierd worden",
-        "p": ["Scanabowl is gratis te gebruiken. Als je voer bestelt via onze links naar zooplus of bol.com, verdienen we mogelijk een kleine commissie, zonder extra kosten voor jou. Die inkomsten investeren we in de website. Lees meer in de [affiliate-vermelding](/{lang}/affiliate)."]
+        "p": ["Scanabowl is een onafhankelijk project en is volledig gratis te gebruiken. Merken kunnen niet betalen voor een hogere score of plaatsing."]
       },
       {
         "h": "Doe mee",
@@ -949,7 +949,7 @@
     "contribute": "Doe mee",
     "legal": "Juridisch",
     "vat": "BTW",
-    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend. Links naar zooplus en bol.com zijn affiliate-links.",
+    "disclaimer": "Scanabowl geeft algemene informatie en geen diergeneeskundig advies. Scores beschrijven productetiketten en worden automatisch berekend.",
     "photos": "Een deel van de productfoto's komt van {source} (licentie CC BY-SA 3.0)."
   },
   "brandPages": {
