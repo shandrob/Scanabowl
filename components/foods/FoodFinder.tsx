@@ -20,7 +20,7 @@ import type { FoodType, LifeStage, Species } from "@/lib/scoring/types";
 import { usePets } from "@/lib/pets/store";
 
 const PAGE = 24;
-type Sort = "match" | "score" | "price" | "name" | "kcal";
+type Sort = "match" | "score" | "value" | "price" | "name" | "kcal";
 /** the most common food allergens in dogs and cats (Mueller et al., 2016) plus a few frequent choices */
 const EXCLUDE_CHIPS = ["chicken", "beef", "fish", "dairy", "wheat", "lamb", "pork", "turkey", "egg"] as const;
 /** slider value that means "no maximum" */
@@ -31,6 +31,13 @@ function pricePerKg(e: IndexEntry): number {
   const g = e.pk ? packGrams(e.pk) : null;
   if (!g || g <= 0) return 99999;
   return e.pc / (g / 1000);
+}
+
+function valueRatio(e: IndexEntry): number {
+  if (e.sc === null || e.sc < 65) return -1;
+  const ppk = pricePerKg(e);
+  if (ppk >= 99999) return -1;
+  return (e.sc * e.sc) / Math.max(ppk, 1.5);
 }
 
 function useSearchText() {
@@ -157,6 +164,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
       if (key === "name") return a.e.n.localeCompare(b.e.n);
       if (key === "kcal") return (a.e.k ?? 9999) - (b.e.k ?? 9999);
       if (key === "price") return pricePerKg(a.e) - pricePerKg(b.e) || (b.e.sc ?? -1) - (a.e.sc ?? -1);
+      if (key === "value") return valueRatio(b.e) - valueRatio(a.e) || (b.e.sc ?? -1) - (a.e.sc ?? -1);
       if (key === "match") return (b.personal ?? -1) - (a.personal ?? -1) || (b.e.sc ?? -1) - (a.e.sc ?? -1);
       return (b.e.sc ?? -1) - (a.e.sc ?? -1) || a.e.n.localeCompare(b.e.n);
     });
@@ -400,6 +408,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
               <select id="f-sort" value={effectiveSort} onChange={(e) => setSort(e.target.value as Sort)} className="h-9 rounded-xl border border-line bg-paper px-3 font-sans text-sm">
                 {pet && <option value="match">{t("finder.sortMatch", { name: pet.name })}</option>}
                 <option value="score">{t("finder.sortScore")}</option>
+                <option value="value">{t("finder.sortValue")}</option>
                 <option value="price">{t("finder.sortPrice")}</option>
                 <option value="name">{t("finder.sortName")}</option>
                 <option value="kcal">{t("finder.sortKcal")}</option>

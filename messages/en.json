@@ -41,6 +41,7 @@
     "loading": "Loading…",
     "day": "day",
     "grainFree": "Grain-free",
+    "bestValue": "Best value",
     "showMore": "Show {count} more",
     "breadcrumb": "Breadcrumb"
   },
@@ -101,7 +102,8 @@
     "button": "Search",
     "scan": "Scan barcode",
     "notFound": "We don’t know barcode {ean} yet.",
-    "suggestIt": "Tell us about this food →"
+    "suggestIt": "Tell us about this food →",
+    "seeAllResults": "See all search results for “{q}”"
   },
   "scan": {
     "title": "Scan a barcode",
@@ -225,6 +227,7 @@
     "sort": "Sort by",
     "sortMatch": "Best match for {name}",
     "sortScore": "Highest score",
+    "sortValue": "Best value (price/quality)",
     "sortName": "Name (A–Z)",
     "sortKcal": "Fewest calories",
     "sortPrice": "Lowest price per kg",
@@ -280,6 +283,22 @@
     "alternativesTitle": "Higher-scoring alternatives",
     "alternativesText": "Similar foods of the same type and life stage that score higher.",
     "alternativesPet": "Similar foods that score higher and are safe for {name}.",
+    "altTabScore": "Highest score",
+    "altTabValue": "Best value",
+    "tapIngredientHint": "Tap any ingredient to learn what it does in this recipe.",
+    "ingDeclaredPct": "{pct}% declared on the label",
+    "ingEstimatedPct": "Estimated ~{pct}% of the recipe (based on label position)",
+    "ingExplain": {
+      "unneeded": "Additive a dog or cat does not need (such as sugar, caramel, artificial colourant or synthetic preservative). Deducts points from Clean Formulation.",
+      "vagueAnimal": "Vague group term for animal ingredients. Because the species and parts used are not specified, you cannot see what you are feeding – tricky for food allergies.",
+      "namedAnimal": "Clearly named animal ingredient. Provides bioavailable animal protein and essential amino acids.",
+      "fishOil": "Rich source of the long-chain omega-3 fatty acids EPA and DHA, supporting skin, coat, joints and brain.",
+      "fatOil": "Concentrated energy source and carrier for fat-soluble vitamins (A, D, E and K) and essential fatty acids.",
+      "plantProtein": "Concentrated plant protein (such as corn gluten, pea protein or potato protein). Raises crude protein on the label, but lacks the amino acid profile of meat.",
+      "carbSource": "Source of starch and carbohydrates. Provides energy and helps dry kibble hold its shape.",
+      "fibreVeg": "Plant source of dietary fibre, prebiotics or phytonutrients for healthy digestion and firm stools.",
+      "other": "Functional ingredient, mineral, yeast or nutritional additive supporting a complete daily diet."
+    },
     "dataTitle": "About this data",
     "dataPack": "Ingredients and analysis as printed on the pack, checked by Scanabowl.",
     "dataScraped": "Ingredients and analysis were collected from public product information and processed automatically; they have not always been checked by hand. Compare them with the pack and tell us if something is wrong.",
@@ -441,7 +460,18 @@
     "button": "View on bol.com",
     "disclosure": "Affiliate links: if you buy via these links we may earn a commission, at no extra cost to you. This never influences the score.",
     "moreInfo": "More information",
-    "dutchOnly": "These links go to Dutch web shops."
+    "dutchOnly": "These links go to Dutch web shops.",
+    "calcTitle": "Daily feeding & cost calculator",
+    "calcSubtitle": "Instantly calculate how much your pet eats per day, how long a pack lasts and what it costs.",
+    "perMonth": "≈ €{cost} / month",
+    "packLastsLabel": "Pack lasts",
+    "packLastsDays": "{days} days",
+    "packLastsSummary": "A {pack} pack lasts roughly {days} days.",
+    "transitionTitle": "View 7-day food transition schedule",
+    "transitionIntro": "Introduce a new food gradually over 7 days to avoid digestive upset or loose stools (based on your calculated daily portion):",
+    "transitionDays": "Day {days}",
+    "transitionNew": "new",
+    "transitionOld": "current"
   },
   "pet": {
     "foodTitle": "Food",
@@ -936,7 +966,12 @@
     "note": "Portion and cost are estimates based on the energy on the label and the FEDIAF formulas; enter a price to see the cost per day. Green means: the best of these foods on that line. The score describes the label and is not veterinary advice.",
     "addThis": "Compare",
     "added": "In your comparison",
-    "open": "View comparison ({count}/{max})"
+    "open": "View comparison ({count}/{max})",
+    "presetsTitle": "Or jump straight into a popular head-to-head comparison",
+    "presetMeat": "Top meat-rich grain-free brands",
+    "presetPopular": "Well-known pet shop & vet brands",
+    "presetDutch": "Popular Dutch brands",
+    "presetWet": "Highest-scoring wet foods"
   },
   "errors": {
     "notFoundTitle": "Page not found",
@@ -976,6 +1011,17 @@
     "showAll": "All {count} foods in the food finder",
     "notScoredNote": "{count} {brand} foods have no score: veterinary diets, treats, complementary foods, or foods whose ingredient list we do not have yet.",
     "independent": "Scanabowl is not affiliated with {brand} and receives nothing from brands. Scores describe the label; they say nothing about production and are not advice for your pet.",
-    "moreFromBrand": "All {brand} foods"
+    "moreFromBrand": "All {brand} foods",
+    "scoredCount": "scored",
+    "statLowest": "Lowest score",
+    "aboutTitle": "About {brand}",
+    "rangeByType": "Product range by food type",
+    "avgPillarsTitle": "Average score breakdown",
+    "highlightsTitle": "Highest & lowest rated from {brand}",
+    "bestRatedFood": "Highest rated",
+    "lowestRatedFood": "Lowest rated",
+    "allProductsTitle": "All {count} {brand} foods on one page",
+    "allProductsSubtitle": "Showing {shown} of {total} products",
+    "searchPlaceholder": "Search within {brand} (e.g. puppy, salmon, sterilised)…"
   }
 }

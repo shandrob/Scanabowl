@@ -41,6 +41,7 @@
     "loading": "Laden…",
     "day": "dag",
     "grainFree": "Graanvrij",
+    "bestValue": "Beste prijs/kwaliteit",
     "showMore": "Toon nog {count}",
     "breadcrumb": "Kruimelpad"
   },
@@ -101,7 +102,8 @@
     "button": "Zoeken",
     "scan": "Scan barcode",
     "notFound": "Barcode {ean} kennen we nog niet.",
-    "suggestIt": "Vertel ons over dit voer →"
+    "suggestIt": "Vertel ons over dit voer →",
+    "seeAllResults": "Bekijk alle zoekresultaten voor “{q}”"
   },
   "scan": {
     "title": "Scan een barcode",
@@ -225,6 +227,7 @@
     "sort": "Sorteren op",
     "sortMatch": "Beste match voor {name}",
     "sortScore": "Hoogste score",
+    "sortValue": "Beste prijs/kwaliteit",
     "sortName": "Naam (A–Z)",
     "sortKcal": "Minste calorieën",
     "sortPrice": "Laagste prijs per kg",
@@ -280,6 +283,22 @@
     "alternativesTitle": "Alternatieven met een hogere score",
     "alternativesText": "Vergelijkbaar voer van hetzelfde type en dezelfde levensfase met een hogere score.",
     "alternativesPet": "Vergelijkbaar voer met een hogere score dat veilig is voor {name}.",
+    "altTabScore": "Hoogste score",
+    "altTabValue": "Beste prijs/kwaliteit",
+    "tapIngredientHint": "Tik op een ingrediënt om te lezen wat het in het voer doet.",
+    "ingDeclaredPct": "{pct}% vermeld op het etiket",
+    "ingEstimatedPct": "Naar schatting ~{pct}% van het recept (op basis van positie)",
+    "ingExplain": {
+      "unneeded": "Toevoeging die een hond of kat niet nodig heeft (zoals suiker, karamel, kunstmatige kleurstof of synthetisch conserveermiddel). Kost punten bij Schone receptuur.",
+      "vagueAnimal": "Vage groepsnaam voor dierlijke ingrediënten. Omdat de diersoort en gebruikte delen niet genoemd zijn, weet je niet precies wat je voert – lastig bij een voedselallergie.",
+      "namedAnimal": "Duidelijk bij diersoort genoemd dierlijk ingrediënt. Levert goed opneembaar dierlijk eiwit en essentiële aminozuren.",
+      "fishOil": "Rijke bron van de langeketen-omega-3-vetzuren EPA en DHA, die huid, vacht, gewrichten en hersenen ondersteunen.",
+      "fatOil": "Geconcentreerde energiebron en drager van vetoplosbare vitamines (A, D, E en K) en vetzuren.",
+      "plantProtein": "Geconcentreerd plantaardig eiwit (zoals maïsgluten, erwteneiwit of aardappeleiwit). Verhoogt het eiwitpercentage op het etiket, maar mist de aminozuurbalans van vlees.",
+      "carbSource": "Bron van zetmeel en koolhydraten. Geeft energie en zorgt ervoor dat droge brokken hun vorm behouden.",
+      "fibreVeg": "Plantaardige bron van voedingsvezels, prebiotica of phytonutriënten voor een gezonde darmwerking en stevige ontlasting.",
+      "other": "Functioneel ingrediënt, mineraal, gist of voedingskundige toevoeging ter ondersteuning van een volledig dagmenu."
+    },
     "dataTitle": "Over deze gegevens",
     "dataPack": "Ingrediënten en analyse zoals gedrukt op de verpakking, gecontroleerd door Scanabowl.",
     "dataScraped": "Ingrediënten en analyse zijn verzameld uit openbare productinformatie en automatisch verwerkt; ze zijn niet altijd handmatig gecontroleerd. Vergelijk ze met de verpakking en meld het ons als er iets niet klopt.",
@@ -441,7 +460,18 @@
     "button": "Bekijk bij bol.com",
     "disclosure": "Affiliate-links: als je via deze links koopt, verdienen wij mogelijk een commissie, zonder extra kosten voor jou. Dit beïnvloedt de score nooit.",
     "moreInfo": "Meer informatie",
-    "dutchOnly": "Deze links gaan naar Nederlandse webwinkels."
+    "dutchOnly": "Deze links gaan naar Nederlandse webwinkels.",
+    "calcTitle": "Dagportie- & kostencalculator",
+    "calcSubtitle": "Bereken direct hoeveel je huisdier per dag eet, hoelang een verpakking meegaat en wat het kost.",
+    "perMonth": "≈ €{cost} / maand",
+    "packLastsLabel": "Verpakking gaat mee",
+    "packLastsDays": "{days} dagen",
+    "packLastsSummary": "Een verpakking van {pack} gaat ongeveer {days} dagen mee.",
+    "transitionTitle": "7-daags overstapschema bekijken",
+    "transitionIntro": "Bouw nieuw voer rustig op in 7 dagen om darmklachten of zachte ontlasting te voorkomen (gebaseerd op je berekende dagportie):",
+    "transitionDays": "Dag {days}",
+    "transitionNew": "nieuw",
+    "transitionOld": "huidig"
   },
   "pet": {
     "foodTitle": "Voer",
@@ -936,7 +966,12 @@
     "note": "Portie en kosten zijn een schatting op basis van de energie op het etiket en de FEDIAF-formules; vul een prijs in om de kosten per dag te zien. Groen betekent: het beste van deze voeders op die regel. De score beschrijft het etiket en is geen diergeneeskundig advies.",
     "addThis": "Vergelijken",
     "added": "In je vergelijking",
-    "open": "Bekijk vergelijking ({count}/{max})"
+    "open": "Bekijk vergelijking ({count}/{max})",
+    "presetsTitle": "Of start direct met een populaire vergelijking",
+    "presetMeat": "Top vleesrijke graanvrije merken",
+    "presetPopular": "Bekende dierenwinkel- & dierenartsmerken",
+    "presetDutch": "Populaire Nederlandse merken",
+    "presetWet": "Hoogst scorende natvoeders"
   },
   "errors": {
     "notFoundTitle": "Pagina niet gevonden",
@@ -976,6 +1011,17 @@
     "showAll": "Alle {count} voeders in de voerzoeker",
     "notScoredNote": "{count} voeders van {brand} hebben geen score: dieetvoer van de dierenarts, snacks, aanvullend voer, of voer waarvan we de ingrediëntenlijst nog niet hebben.",
     "independent": "Scanabowl is niet verbonden aan {brand} en ontvangt niets van merken. Scores beschrijven het etiket; ze zeggen niets over de productie en zijn geen advies voor jouw dier.",
-    "moreFromBrand": "Alle voeders van {brand}"
+    "moreFromBrand": "Alle voeders van {brand}",
+    "scoredCount": "beoordeeld",
+    "statLowest": "Laagste score",
+    "aboutTitle": "Over het merk {brand}",
+    "rangeByType": "Assortiment per soort voer",
+    "avgPillarsTitle": "Gemiddelde opbouw van de score",
+    "highlightsTitle": "Hoogst en laagst scorend van {brand}",
+    "bestRatedFood": "Hoogst beoordeeld",
+    "lowestRatedFood": "Laagst beoordeeld",
+    "allProductsTitle": "Alle {count} voeders van {brand} op één pagina",
+    "allProductsSubtitle": "{shown} van {total} producten getoond",
+    "searchPlaceholder": "Zoek binnen {brand} (bijv. puppy, zalm, sterilised)…"
   }
 }

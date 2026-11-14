@@ -41,6 +41,7 @@
     "loading": "Chargement…",
     "day": "jour",
     "grainFree": "Sans céréales",
+    "bestValue": "Meilleur rapport qualité/prix",
     "showMore": "Afficher {count} de plus",
     "breadcrumb": "Fil d’Ariane"
   },
@@ -101,7 +102,8 @@
     "button": "Rechercher",
     "scan": "Scanner un code-barres",
     "notFound": "Nous ne connaissons pas encore le code-barres {ean}.",
-    "suggestIt": "Parlez-nous de cet aliment →"
+    "suggestIt": "Parlez-nous de cet aliment →",
+    "seeAllResults": "Voir tous les résultats pour « {q} »"
   },
   "scan": {
     "title": "Scanner un code-barres",
@@ -225,6 +227,7 @@
     "sort": "Trier par",
     "sortMatch": "Meilleure adéquation pour {name}",
     "sortScore": "Meilleure note",
+    "sortValue": "Meilleur rapport qualité/prix",
     "sortName": "Nom (A–Z)",
     "sortKcal": "Moins de calories",
     "sortPrice": "Prix au kg le plus bas",
@@ -280,6 +283,22 @@
     "alternativesTitle": "Alternatives mieux notées",
     "alternativesText": "Aliments similaires du même type et du même âge avec une meilleure note.",
     "alternativesPet": "Aliments similaires mieux notés et sans danger pour {name}.",
+    "altTabScore": "Meilleure note",
+    "altTabValue": "Rapport qualité/prix",
+    "tapIngredientHint": "Touchez un ingrédient pour comprendre son rôle dans la recette.",
+    "ingDeclaredPct": "{pct} % déclaré sur l’étiquette",
+    "ingEstimatedPct": "Estimé à ~{pct} % de la recette (selon la position)",
+    "ingExplain": {
+      "unneeded": "Additif dont un chien ou un chat n’a pas besoin (sucre, caramel, colorant artificiel ou conservateur de synthèse). Retire des points dans Formule propre.",
+      "vagueAnimal": "Terme générique vague pour des ingrédients animaux. L’espèce et les morceaux utilisés n’étant pas précisés, on ne sait pas exactement ce que l’on donne – délicat en cas d’allergie.",
+      "namedAnimal": "Ingrédient animal clairement nommé par espèce. Apporte des protéines animales digestibles et des acides aminés essentiels.",
+      "fishOil": "Source riche en acides gras oméga-3 à longue chaîne EPA et DHA, bénéfiques pour la peau, le pelage, les articulations et le cerveau.",
+      "fatOil": "Source concentrée d’énergie et vecteur des vitamines liposolubles (A, D, E et K) et d’acides gras essentiels.",
+      "plantProtein": "Concentré de protéines végétales (gluten de maïs, protéine de pois ou de pomme de terre). Augmente le taux de protéines sur l’étiquette, mais n’a pas le profil d’acides aminés de la viande.",
+      "carbSource": "Source d’amidon et de glucides. Fournit de l’énergie et permet aux croquettes sèches de garder leur forme.",
+      "fibreVeg": "Source végétale de fibres alimentaires, de prébiotiques ou de phytonutriments pour un bon transit et des selles fermes.",
+      "other": "Ingrédient fonctionnel, minéral, levure ou additif nutritionnel contribuant à une ration quotidienne complète."
+    },
     "dataTitle": "À propos de ces données",
     "dataPack": "Ingrédients et analyse tels qu’imprimés sur l’emballage, vérifiés par Scanabowl.",
     "dataScraped": "Les ingrédients et l’analyse proviennent d’informations produit publiques et ont été traités automatiquement ; ils n’ont pas toujours été vérifiés à la main. Comparez-les avec l’emballage et signalez-nous toute erreur.",
@@ -441,7 +460,18 @@
     "button": "Voir sur bol.com",
     "disclosure": "Liens d’affiliation : si vous achetez via ces liens, nous pouvons toucher une commission, sans frais supplémentaires pour vous. Cela n’influence jamais la note.",
     "moreInfo": "Plus d’informations",
-    "dutchOnly": "Ces liens mènent à des boutiques en ligne néerlandaises."
+    "dutchOnly": "Ces liens mènent à des boutiques en ligne néerlandaises.",
+    "calcTitle": "Calculateur de ration & coût par jour",
+    "calcSubtitle": "Calculez instantanément la ration quotidienne de votre animal, la durée d’un sac et le coût par jour.",
+    "perMonth": "≈ €{cost} / mois",
+    "packLastsLabel": "Durée du sac",
+    "packLastsDays": "{days} jours",
+    "packLastsSummary": "Un format de {pack} dure environ {days} jours.",
+    "transitionTitle": "Voir le calendrier de transition sur 7 jours",
+    "transitionIntro": "Introduisez un nouvel aliment progressivement sur 7 jours pour éviter les troubles digestifs (selon votre ration quotidienne calculée) :",
+    "transitionDays": "Jour {days}",
+    "transitionNew": "nouveau",
+    "transitionOld": "actuel"
   },
   "pet": {
     "foodTitle": "Alimentation",
@@ -936,7 +966,12 @@
     "note": "La portion et le coût sont des estimations basées sur l'énergie indiquée sur l'étiquette et les formules FEDIAF ; saisissez un prix pour voir le coût par jour. En vert : le meilleur de ces aliments sur cette ligne. Le score décrit l'étiquette et ne constitue pas un avis vétérinaire.",
     "addThis": "Comparer",
     "added": "Dans votre comparaison",
-    "open": "Voir la comparaison ({count}/{max})"
+    "open": "Voir la comparaison ({count}/{max})",
+    "presetsTitle": "Ou lancez directement un duel populaire",
+    "presetMeat": "Grandes marques riches en viande & sans céréales",
+    "presetPopular": "Marques populaires d’animalerie & vétérinaires",
+    "presetDutch": "Marques néerlandaises populaires",
+    "presetWet": "Pâtées les mieux notées"
   },
   "errors": {
     "notFoundTitle": "Page introuvable",
@@ -976,6 +1011,17 @@
     "showAll": "Les {count} aliments dans le moteur de recherche",
     "notScoredNote": "{count} aliments {brand} n’ont pas de note : régimes vétérinaires, friandises, aliments complémentaires ou aliments dont nous n’avons pas encore la liste d’ingrédients.",
     "independent": "Scanabowl n’est pas lié à {brand} et ne reçoit rien des marques. Les notes décrivent l’étiquette ; elles ne disent rien de la fabrication et ne sont pas un conseil pour votre animal.",
-    "moreFromBrand": "Tous les aliments {brand}"
+    "moreFromBrand": "Tous les aliments {brand}",
+    "scoredCount": "notés",
+    "statLowest": "Note la plus basse",
+    "aboutTitle": "À propos de la marque {brand}",
+    "rangeByType": "Gamme par type d’aliment",
+    "avgPillarsTitle": "Détail moyen de la note",
+    "highlightsTitle": "Meilleure et moins bonne note chez {brand}",
+    "bestRatedFood": "Mieux noté",
+    "lowestRatedFood": "Moins bien noté",
+    "allProductsTitle": "Les {count} aliments {brand} sur une seule page",
+    "allProductsSubtitle": "{shown} sur {total} produits affichés",
+    "searchPlaceholder": "Rechercher dans {brand} (p. ex. chiot, saumon, stérilisé)…"
   }
 }

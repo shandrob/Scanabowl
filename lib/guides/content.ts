@@ -113,6 +113,30 @@ const nl: Texts = {
       "**Controleer altijd de verpakking.** Recepturen veranderen soms. Bij een ernstige allergie adviseert je dierenarts mogelijk een dieetvoer.",
     ],
   },
+  "sensitive-cat-food": {
+    h1: "Het beste hypoallergene & gevoelige kattenvoer",
+    title: "Beste kattenvoer voor gevoelige maag & darmen {year}: top 10",
+    description: "Kattenvoer met één dierlijke eiwitbron én graanvrij voor gevoelige katten: de top 10 uit {count} voeders op onafhankelijke score.",
+    card: "Eén dierlijke eiwitbron én graanvrij, zonder vage bijproducten.",
+    intro: "Voor katten met een gevoelige spijsvertering of voedselintolerantie combineert deze lijst twee strenge eisen: precies één benoemde dierlijke eiwitbron (zonder vage bijproducten) én vrij van granen.",
+    tips: [
+      "**Eén dier en geen granen maakt wegstrepen makkelijker.** Zit er maar één diersoort in de bak en geen tarwe of maïs, dan weet je sneller waar je kat goed op reageert.",
+      "**Kies een onbekende eiwitbron.** Kip, vis en rund geven het vaakst klachten bij katten (Mueller et al., 2016). Denk bijvoorbeeld aan eend, konijn of lam.",
+      "**Wissel rustig in 7 dagen.** Een gevoelige darm reageert op plotseling wisselen. Gebruik het overstapschema op de productpagina.",
+    ],
+  },
+  "indoor-light-cat-food": {
+    h1: "Het beste indoor & light droogvoer voor katten",
+    title: "Beste light & indoor kattenbrokken {year}: top 10 op score",
+    description: "Kattenbrokken met maximaal 15% vet op droge stof voor binnenkatten en katten die op gewicht moeten blijven: de top 10 uit {count} voeders.",
+    card: "Brokken met een gematigd vetgehalte (tot 15% op droge stof) voor binnenkatten.",
+    intro: "Binnenkatten en katten met aanleg voor overgewicht verbruiken minder energie. In deze lijst staan alleen droogvoeders voor volwassen katten met hoogstens 15% vet op droge stof, gerangschikt op hun Scanabowl-score.",
+    tips: [
+      "**Hoog eiwit, gematigd vet.** Bij afvallen of op gewicht blijven wil je dat je kat vet verliest en geen spiermassa. Kies daarom een voer met veel dierlijk eiwit en minder vet.",
+      "**Kijk naar het echte vetgehalte, niet alleen naar het woord “Light”.** Wij filteren deze lijst streng op maximaal 15% vet op droge stof.",
+      "**Weeg elke dag af.** Gebruik de portiecalculator op de productpagina of maak een [huisdierprofiel](/{lang}/my-pet) aan voor de exacte dagportie.",
+    ],
+  },
   "puppy-food": {
     h1: "Het beste puppyvoer",
     title: "Beste puppyvoer {year}: de top 10 op onafhankelijke score",
@@ -223,6 +247,30 @@ const nl: Texts = {
       "**Let ook op de rest van de lijst.** Eén dierlijke eiwitbron zegt niets over granen of andere ingrediënten. Stel allergieën in je [huisdierprofiel](/{lang}/my-pet) in om ook die uit te filteren.",
     ],
   },
+  "sensitive-dog-food": {
+    h1: "Het beste hypoallergene & gevoelige hondenvoer",
+    title: "Beste hondenvoer voor gevoelige maag & huid {year}: top 10",
+    description: "Hondenvoer met één dierlijke eiwitbron én graanvrij voor gevoelige honden: de top 10 uit {count} voeders op onafhankelijke score.",
+    card: "Eén dierlijke eiwitbron én graanvrij, zonder vage bijproducten.",
+    intro: "Heeft je hond snel jeuk, oorklachten of wisselende ontlasting? In deze lijst staan alleen voeders die tegelijk één enkele benoemde dierlijke eiwitbron hebben én volledig graanvrij zijn.",
+    tips: [
+      "**Zonder rund, kip of tarwe beginnen.** Dat zijn drie van de meest voorkomende allergenen bij honden (Mueller et al., 2016). Kies in deze lijst bijvoorbeeld lam, zalm, eend of hert.",
+      "**Geen verborgen bijproducten.** Voeders met vage “vlees en dierlijke bijproducten” zijn uitgesloten, zodat er geen onverwachte diersoort in zit.",
+      "**Stap geleidelijk over.** Neem minstens 7 dagen voor de overstap en geef tussendoor geen snacks van andere diersoorten.",
+    ],
+  },
+  "light-dog-food": {
+    h1: "Het beste light & gewichtsbeheersing droogvoer voor honden",
+    title: "Beste light hondenbrokken {year}: top 10 met laag vetgehalte",
+    description: "Hondenbrokken met maximaal 13% vet op droge stof voor honden die moeten afvallen of aanleg hebben voor overgewicht: de top 10 uit {count} voeders.",
+    card: "Brokken met een laag vetgehalte (tot 13% op droge stof) voor een gezond gewicht.",
+    intro: "Veel “light”-brokken op de markt zijn nauwelijks minder vet dan normaal voer. Daarom selecteren we in deze lijst op cijfers: alleen volledige droogvoeders voor volwassen honden met maximaal 13% vet op droge stof.",
+    tips: [
+      "**Een slanke hond leeft bijna twee jaar langer.** Dat bleek uit de bekende levenslange studie bij labradors (Kealy et al., 2002).",
+      "**Voldoende eiwit houdt je hond verzadigd.** Goede light-brokken verlagen het vetgehalte maar houden het eiwitgehalte op peil voor het behoud van spieren.",
+      "**Reken op het streefgewicht.** Vul in je [huisdierprofiel](/{lang}/my-pet) of in de calculator op de productpagina het gezonde streefgewicht van je hond in.",
+    ],
+  },
 };
 
 const en: Texts = {
@@ -312,6 +360,30 @@ const en: Texts = {
       "**The most common food allergens in cats** are beef, fish and chicken (Mueller et al., 2016). Choose a protein your cat has not eaten before.",
       "**An allergy is diagnosed with an elimination diet:** at least 8 weeks of one food and nothing else, together with your vet. After 8 weeks about 90% of animals with a food allergy are free of symptoms (Olivry et al., 2015).",
       "**Always check the pack.** Recipes sometimes change. With a severe allergy your vet may recommend a veterinary diet.",
+    ],
+  },
+  "sensitive-cat-food": {
+    h1: "The best sensitive & hypoallergenic cat food",
+    title: "Best cat food for sensitive stomach & digestion {year}: top 10",
+    description: "Single-protein, grain-free cat food for sensitive cats: the top 10 of {count} foods ranked by independent score.",
+    card: "Single animal protein and grain-free, with no vague derivatives.",
+    intro: "For cats with sensitive digestion or food intolerances, this list combines two strict criteria: exactly one named animal protein source (without vague by-products) and a completely grain-free recipe.",
+    tips: [
+      "**One animal and no grains makes elimination easier.** When there is only one animal species in the bowl and no wheat or maize, it is much easier to see what agrees with your cat.",
+      "**Pick a novel protein.** Beef, fish and chicken are the most common triggers in cats (Mueller et al., 2016). Consider duck, rabbit or lamb instead.",
+      "**Switch gradually over 7 days.** A sensitive gut reacts to sudden changes. Use the transition schedule on each food page.",
+    ],
+  },
+  "indoor-light-cat-food": {
+    h1: "The best indoor & light dry cat food",
+    title: "Best light & indoor dry cat food {year}: top 10 by score",
+    description: "Dry cat food with at most 15% fat on dry matter for indoor cats and weight control: the top 10 of {count} foods.",
+    card: "Kibble with moderate fat (up to 15% on dry matter) for indoor cats.",
+    intro: "Indoor cats and cats prone to weight gain burn less energy. This list only includes complete dry foods for adult cats with at most 15% fat on a dry-matter basis, ranked by their Scanabowl score.",
+    tips: [
+      "**High protein, moderate fat.** When managing weight, you want your cat to lose fat rather than muscle mass. Look for plenty of animal protein alongside lower fat.",
+      "**Check the actual fat figure, not just the word “Light”.** We strictly filter this list to a maximum of 15% fat on dry matter.",
+      "**Weigh every daily portion.** Use the calculator on the food page or create a [pet profile](/{lang}/my-pet) for the exact daily amount.",
     ],
   },
   "puppy-food": {
@@ -424,6 +496,30 @@ const en: Texts = {
       "**Check the rest of the list too.** One animal protein says nothing about cereals or other ingredients. Set allergies in your [pet profile](/{lang}/my-pet) to filter those out as well.",
     ],
   },
+  "sensitive-dog-food": {
+    h1: "The best sensitive & hypoallergenic dog food",
+    title: "Best dog food for sensitive stomach & skin {year}: top 10",
+    description: "Single-protein, grain-free dog food for sensitive dogs: the top 10 of {count} foods ranked by independent score.",
+    card: "Single animal protein and grain-free, with no vague derivatives.",
+    intro: "Does your dog suffer from itchy skin, ear trouble or loose stools? This list only includes foods that combine a single named animal protein source with a completely grain-free recipe.",
+    tips: [
+      "**Skip beef, chicken and wheat first.** Those are three of the most common food allergens in dogs (Mueller et al., 2016). Try lamb, salmon, duck or venison from this list.",
+      "**No hidden derivatives.** Foods with vague “meat and animal derivatives” are excluded so no unexpected animal species slips in.",
+      "**Transition gradually.** Take at least 7 days when switching food and avoid treats made from other animal species in the meantime.",
+    ],
+  },
+  "light-dog-food": {
+    h1: "The best light & weight-control dry dog food",
+    title: "Best light dry dog food {year}: top 10 low-fat kibble",
+    description: "Dry dog food with at most 13% fat on dry matter for weight management: the top 10 of {count} foods ranked by score.",
+    card: "Low-fat kibble (up to 13% fat on dry matter) for healthy weight.",
+    intro: "Many “light” dog foods on the shelf are barely lower in fat than regular kibble. That is why this list filters by the numbers: only complete adult dry foods with at most 13% fat on a dry-matter basis.",
+    tips: [
+      "**Lean dogs live almost two years longer.** That was shown in the landmark lifelong Labrador study (Kealy et al., 2002).",
+      "**Good protein keeps your dog satisfied.** Quality light foods cut the fat while keeping protein high to preserve lean muscle.",
+      "**Feed for the target weight.** Enter your dog's healthy target weight in your [pet profile](/{lang}/my-pet) or the calculator on the food page.",
+    ],
+  },
 };
 
 const de: Texts = {
@@ -513,6 +609,30 @@ const de: Texts = {
       "**Die häufigsten Futterallergene bei Katzen** sind Rind, Fisch und Huhn (Mueller et al., 2016). Wählen Sie eine Eiweißquelle, die Ihre Katze noch nicht gefressen hat.",
       "**Eine Allergie stellt man mit einer Ausschlussdiät fest:** mindestens 8 Wochen ein Futter und sonst nichts, zusammen mit Ihrem Tierarzt. Nach 8 Wochen sind etwa 90 % der Tiere mit Futterallergie beschwerdefrei (Olivry et al., 2015).",
       "**Prüfen Sie immer die Packung.** Rezepturen ändern sich manchmal. Bei einer schweren Allergie empfiehlt Ihr Tierarzt eventuell ein Diätfutter.",
+    ],
+  },
+  "sensitive-cat-food": {
+    h1: "Das beste sensitive & hypoallergene Katzenfutter",
+    title: "Bestes Katzenfutter für empfindlichen Magen & Darm {year}: Top 10",
+    description: "Katzenfutter mit einer tierischen Eiweißquelle und getreidefrei für empfindliche Katzen: die Top 10 aus {count} Futtern.",
+    card: "Eine tierische Eiweißquelle und getreidefrei, ohne vage Nebenerzeugnisse.",
+    intro: "Für Katzen mit empfindlicher Verdauung oder Unverträglichkeiten kombiniert diese Liste zwei strenge Kriterien: genau eine benannte tierische Eiweißquelle (ohne vage Nebenerzeugnisse) und eine getreidefreie Rezeptur.",
+    tips: [
+      "**Ein Tier und kein Getreide erleichtert das Ausschließen.** Wenn nur eine Tierart im Napf ist und weder Weizen noch Mais enthalten sind, erkennen Sie schneller, was Ihre Katze verträgt.",
+      "**Wählen Sie eine unbekannte Eiweißquelle.** Rind, Fisch und Huhn lösen bei Katzen am häufigsten Beschwerden aus (Mueller et al., 2016). Denken Sie zum Beispiel an Ente, Kaninchen oder Lamm.",
+      "**Stellen Sie über 7 Tage um.** Ein empfindlicher Darm reagiert auf abrupte Wechsel. Nutzen Sie den Umstellungsplan auf der Produktseite.",
+    ],
+  },
+  "indoor-light-cat-food": {
+    h1: "Das beste Indoor- & Light-Trockenfutter für Katzen",
+    title: "Bestes Light- & Indoor-Katzen-Trockenfutter {year}: Top 10",
+    description: "Katzen-Trockenfutter mit höchstens 15 % Fett in der Trockenmasse für Wohnungskatzen: die Top 10 aus {count} Futtern.",
+    card: "Trockenfutter mit moderatem Fettgehalt (bis 15 % i. d. TM) für Wohnungskatzen.",
+    intro: "Wohnungskatzen und Katzen mit Neigung zu Übergewicht verbrauchen weniger Energie. In dieser Liste stehen nur Trocken-Alleinfutter für erwachsene Katzen mit höchstens 15 % Fett in der Trockenmasse.",
+    tips: [
+      "**Viel Eiweiß, moderates Fett.** Beim Gewichthalten soll Ihre Katze Fett abbauen, nicht Muskelmasse. Achten Sie daher auf viel tierisches Eiweiß bei weniger Fett.",
+      "**Schauen Sie auf den echten Fettgehalt, nicht nur auf das Wort „Light“.** Wir filtern diese Liste streng auf maximal 15 % Fett in der Trockenmasse.",
+      "**Wiegen Sie jede Tagesportion ab.** Nutzen Sie den Rechner auf der Produktseite oder legen Sie ein [Tierprofil](/{lang}/my-pet) an.",
     ],
   },
   "puppy-food": {
@@ -625,6 +745,30 @@ const de: Texts = {
       "**Achten Sie auch auf den Rest der Liste.** Eine tierische Eiweißquelle sagt nichts über Getreide oder andere Zutaten. Tragen Sie Allergien im [Tierprofil](/{lang}/my-pet) ein, um auch diese auszufiltern.",
     ],
   },
+  "sensitive-dog-food": {
+    h1: "Das beste sensitive & hypoallergene Hundefutter",
+    title: "Bestes Hundefutter für empfindlichen Magen & Haut {year}: Top 10",
+    description: "Hundefutter mit einer tierischen Eiweißquelle und getreidefrei für empfindliche Hunde: die Top 10 aus {count} Futtern.",
+    card: "Eine tierische Eiweißquelle und getreidefrei, ohne vage Nebenerzeugnisse.",
+    intro: "Hat Ihr Hund oft Juckreiz, Ohrenprobleme oder empfindliche Verdauung? In dieser Liste stehen nur Futter, die gleichzeitig eine einzige benannte tierische Eiweißquelle haben und komplett getreidefrei sind.",
+    tips: [
+      "**Ohne Rind, Huhn und Weizen starten.** Das sind drei der häufigsten Allergieauslöser bei Hunden (Mueller et al., 2016). Wählen Sie in dieser Liste zum Beispiel Lamm, Lachs, Ente oder Hirsch.",
+      "**Keine versteckten Nebenerzeugnisse.** Futter mit vagen „Fleisch und tierischen Nebenerzeugnissen“ sind ausgeschlossen, damit keine unerwartete Tierart enthalten ist.",
+      "**Schrittweise umstellen.** Nehmen Sie sich mindestens 7 Tage für die Umstellung und geben Sie zwischendurch keine Snacks anderer Tierarten.",
+    ],
+  },
+  "light-dog-food": {
+    h1: "Das beste Light- & Gewichtskontrolle-Trockenfutter für Hunde",
+    title: "Bestes Light-Hundefutter {year}: Top 10 mit wenig Fett",
+    description: "Hunde-Trockenfutter mit höchstens 13 % Fett in der Trockenmasse für Hunde mit Übergewicht: die Top 10 aus {count} Futtern.",
+    card: "Fettarmes Trockenfutter (bis 13 % Fett i. d. TM) für ein gesundes Gewicht.",
+    intro: "Viele „Light“-Futter auf dem Markt enthalten kaum weniger Fett als normales Futter. Deshalb filtern wir diese Liste nach Zahlen: nur Alleinfutter für erwachsene Hunde mit maximal 13 % Fett in der Trockenmasse.",
+    tips: [
+      "**Ein schlanker Hund lebt fast zwei Jahre länger.** Das zeigte die bekannte lebenslange Labrador-Studie (Kealy et al., 2002).",
+      "**Ausreichend Eiweiß hält satt.** Gutes Light-Futter senkt den Fettgehalt, hält aber den Eiweißgehalt hoch, um die Muskulatur zu erhalten.",
+      "**Auf das Zielgewicht füttern.** Tragen Sie im [Tierprofil](/{lang}/my-pet) oder im Rechner auf der Produktseite das gesunde Zielgewicht Ihres Hundes ein.",
+    ],
+  },
 };
 
 const fr: Texts = {
@@ -714,6 +858,30 @@ const fr: Texts = {
       "**Les allergènes alimentaires les plus fréquents chez le chat** sont le bœuf, le poisson et le poulet (Mueller et al., 2016). Choisissez une protéine que votre chat n'a jamais mangée.",
       "**Une allergie se diagnostique par un régime d'éviction :** au moins 8 semaines d'un seul aliment et rien d'autre, avec votre vétérinaire. Après 8 semaines, environ 90 % des animaux allergiques n'ont plus de symptômes (Olivry et al., 2015).",
       "**Vérifiez toujours l'emballage.** Les recettes changent parfois. En cas d'allergie sévère, votre vétérinaire peut conseiller un aliment diététique.",
+    ],
+  },
+  "sensitive-cat-food": {
+    h1: "La meilleure nourriture hypoallergénique & sensible pour chat",
+    title: "Meilleure nourriture pour chat sensible (estomac & digestion) {year} : top 10",
+    description: "Nourriture pour chat à une seule protéine animale et sans céréales pour chats sensibles : le top 10 parmi {count} aliments.",
+    card: "Une seule protéine animale et sans céréales, sans sous-produits vagues.",
+    intro: "Pour les chats à la digestion sensible ou sujets aux intolérances, cette liste réunit deux critères stricts : une seule source de protéines animales nommée (sans sous-produits vagues) et une recette sans céréales.",
+    tips: [
+      "**Un seul animal et pas de céréales facilite le tri.** Lorsqu'il n'y a qu'une espèce animale dans la gamelle et ni blé ni maïs, vous voyez plus vite ce qui convient à votre chat.",
+      "**Choisissez une protéine nouvelle.** Le bœuf, le poisson et le poulet sont les allergènes les plus fréquents chez le chat (Mueller et al., 2016). Pensez par exemple au canard, au lapin ou à l'agneau.",
+      "**Faites une transition sur 7 jours.** Un intestin sensible réagit aux changements brusques. Utilisez le calendrier de transition sur la fiche produit.",
+    ],
+  },
+  "indoor-light-cat-food": {
+    h1: "Les meilleures croquettes light & chat d'intérieur",
+    title: "Meilleures croquettes light & indoor pour chat {year} : top 10",
+    description: "Croquettes pour chat avec au maximum 15 % de matières grasses sur matière sèche pour chats d'intérieur : le top 10 parmi {count} aliments.",
+    card: "Croquettes modérées en matières grasses (jusqu'à 15 % sur matière sèche) pour chats d'intérieur.",
+    intro: "Les chats d'intérieur et ceux qui prennent facilement du poids dépensent moins d'énergie. Cette liste ne retient que les croquettes complètes pour chats adultes contenant au maximum 15 % de matières grasses sur matière sèche.",
+    tips: [
+      "**Riche en protéines, modéré en graisses.** Pour maintenir le poids, votre chat doit perdre de la graisse et non du muscle. Privilégiez beaucoup de protéines animales et moins de matières grasses.",
+      "**Regardez le taux réel de matières grasses, pas seulement le mot « Light ».** Nous filtrons strictement cette liste à 15 % de matières grasses maximum sur matière sèche.",
+      "**Pesez chaque portion quotidienne.** Utilisez le calculateur sur la fiche produit ou créez un [profil d'animal](/{lang}/my-pet) pour la ration exacte.",
     ],
   },
   "puppy-food": {
@@ -824,6 +992,30 @@ const fr: Texts = {
       "**Les allergènes alimentaires les plus fréquents chez le chien** sont le bœuf, les produits laitiers, le poulet et le blé (Mueller et al., 2016). Choisissez une protéine que votre chien n'a jamais mangée.",
       "**Une allergie se diagnostique par un régime d'éviction :** au moins 8 semaines d'un seul aliment et rien d'autre, avec votre vétérinaire. Après 8 semaines, environ 90 % des animaux allergiques n'ont plus de symptômes (Olivry et al., 2015).",
       "**Regardez aussi le reste de la liste.** Une seule protéine animale ne dit rien des céréales ou des autres ingrédients. Indiquez les allergies dans votre [profil d'animal](/{lang}/my-pet) pour les filtrer aussi.",
+    ],
+  },
+  "sensitive-dog-food": {
+    h1: "La meilleure nourriture hypoallergénique & sensible pour chien",
+    title: "Meilleure nourriture pour chien sensible (digestion & peau) {year} : top 10",
+    description: "Nourriture pour chien à une seule protéine animale et sans céréales pour chiens sensibles : le top 10 parmi {count} aliments.",
+    card: "Une seule protéine animale et sans céréales, sans sous-produits vagues.",
+    intro: "Votre chien a souvent des démangeaisons, des soucis d'oreilles ou des selles irrégulières ? Cette liste ne retient que les aliments qui combinent une seule protéine animale nommée et une recette sans céréales.",
+    tips: [
+      "**Évitez d'abord le bœuf, le poulet et le blé.** Ce sont trois des allergènes les plus fréquents chez le chien (Mueller et al., 2016). Essayez l'agneau, le saumon, le canard ou le cerf dans cette liste.",
+      "**Aucun sous-produit caché.** Les aliments mentionnant de vagues « viandes et sous-produits animaux » sont exclus afin qu'aucune espèce imprévue ne s'y glisse.",
+      "**Faites une transition douce.** Prenez au moins 7 jours pour changer d'aliment et évitez entre-temps les friandises d'autres espèces animales.",
+    ],
+  },
+  "light-dog-food": {
+    h1: "Les meilleures croquettes light & contrôle du poids pour chien",
+    title: "Meilleures croquettes light pour chien {year} : top 10 pauvre en graisses",
+    description: "Croquettes pour chien avec au maximum 13 % de matières grasses sur matière sèche pour le contrôle du poids : le top 10 parmi {count} aliments.",
+    card: "Croquettes pauvres en graisses (jusqu'à 13 % sur matière sèche) pour un poids sain.",
+    intro: "Beaucoup de croquettes « light » du commerce sont à peine moins grasses qu'un aliment standard. C'est pourquoi nous filtrons cette liste sur les chiffres : uniquement des croquettes complètes pour chiens adultes avec au plus 13 % de matières grasses sur matière sèche.",
+    tips: [
+      "**Un chien mince vit près de deux ans de plus.** C'est ce qu'a montré l'étude de référence menée sur toute la vie de labradors (Kealy et al., 2002).",
+      "**Des protéines suffisantes rassasient votre chien.** De bonnes croquettes light réduisent les graisses tout en maintenant les protéines pour préserver les muscles.",
+      "**Calculez sur le poids cible.** Indiquez le poids idéal de votre chien dans votre [profil d'animal](/{lang}/my-pet) ou dans le calculateur de la fiche produit.",
     ],
   },
 };

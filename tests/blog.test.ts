@@ -16,11 +16,11 @@ describe("scheduled blog publishing", () => {
     expect(getPost("nl", "2026-09-28-natvoer-kat-water", day("2026-10-01"))?.title).toMatch(/natvoer/i);
   });
 
-  it("never shows drafts, however long ago their date was", () => {
+  it("publishes verified winter posts once draft is false", () => {
     const slugs = listPosts("nl", day("2030-01-01")).map((p) => p.slug);
-    expect(slugs).not.toContain("2026-01-12-kat-uitdroging-winter");
-    expect(slugs).not.toContain("2026-01-19-hond-winterdip-darmen");
-    expect(getPost("nl", "2026-01-12-kat-uitdroging-winter", day("2030-01-01"))).toBeNull();
+    expect(slugs).toContain("2026-01-12-kat-uitdroging-winter");
+    expect(slugs).toContain("2026-01-19-hond-winterdip-darmen");
+    expect(getPost("nl", "2026-01-12-kat-uitdroging-winter", day("2030-01-01"))?.title).toMatch(/uitdroogt/i);
   });
 
   it("never lists the template folder", () => {
@@ -47,7 +47,7 @@ describe("scheduled blog publishing", () => {
 
   it("points cover images at the optimised copy", () => {
     const p = getPost("nl", "2026-01-12-kat-uitdroging-winter", day("2030-01-01"));
-    expect(p).toBeNull(); // draft
+    expect(p?.cover).toBe("/blog-images/2026-01-12-kat-uitdroging-winter/cover.webp");
     const dir = listPosts("nl", day("2030-01-01"));
     expect(dir.every((x) => !x.cover || x.cover.startsWith("/blog-images/"))).toBe(true);
   });

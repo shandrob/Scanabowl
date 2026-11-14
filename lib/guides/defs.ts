@@ -38,6 +38,8 @@ export const GUIDES: GuideDef[] = [
   { slug: "sterilised-cat-food", species: "cat", match: (p) => STERILISED.test(p.name) && notYoung(p), posts: ["2026-10-22-gesteriliseerde-kat-voeding"], finder: { q: "sterilised" } },
   { slug: "grain-free-cat-food", species: "cat", match: (p) => p.grainFree && notYoung(p), posts: ["2026-10-12-graanvrij-voer-beter"], finder: { gf: "1" } },
   { slug: "single-protein-cat-food", species: "cat", match: (p) => singleProtein(p) && notYoung(p), posts: ["2026-09-26-voedselallergie-herkennen"], finder: {} },
+  { slug: "sensitive-cat-food", species: "cat", match: (p) => singleProtein(p) && p.grainFree && notYoung(p), posts: ["2026-09-26-voedselallergie-herkennen", "2026-10-12-graanvrij-voer-beter"], finder: { gf: "1" } },
+  { slug: "indoor-light-cat-food", species: "cat", match: (p) => p.foodType === "dry" && notYoung(p) && (p.nutrition?.dm.fat ?? 99) <= 15, posts: ["2026-10-22-gesteriliseerde-kat-voeding", "2026-10-08-hoeveel-voer-per-dag"], finder: { type: "dry" } },
   // ---------------------------------------------------------------- dogs
   { slug: "puppy-food", species: "dog", match: (p) => p.lifeStage === "young", posts: ["2026-10-19-puppyvoer-groot-klein-ras"], finder: { stage: "young" } },
   // FEDIAF caps calcium for growing large-breed puppies at 1.8 g per 100 g dry matter: foods above it never make this list
@@ -49,6 +51,8 @@ export const GUIDES: GuideDef[] = [
   { slug: "senior-dog-food", species: "dog", match: (p) => p.lifeStage === "senior", posts: ["2026-10-29-senior-hond-kat-voeding"], finder: { stage: "senior" } },
   { slug: "grain-free-dog-food", species: "dog", match: (p) => p.grainFree && notYoung(p), posts: ["2026-10-12-graanvrij-voer-beter"], finder: { gf: "1" } },
   { slug: "single-protein-dog-food", species: "dog", match: (p) => singleProtein(p) && notYoung(p), posts: ["2026-09-26-voedselallergie-herkennen"], finder: {} },
+  { slug: "sensitive-dog-food", species: "dog", match: (p) => singleProtein(p) && p.grainFree && notYoung(p), posts: ["2026-09-26-voedselallergie-herkennen", "2026-10-12-graanvrij-voer-beter"], finder: { gf: "1" } },
+  { slug: "light-dog-food", species: "dog", match: (p) => p.foodType === "dry" && notYoung(p) && (p.nutrition?.dm.fat ?? 99) <= 13, posts: ["2026-10-08-hoeveel-voer-per-dag"], finder: { type: "dry" } },
 ];
 
 export const GUIDE_SIZE = 10;

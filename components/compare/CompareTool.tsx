@@ -82,6 +82,32 @@ export function CompareTool() {
   const byId = useMemo(() => new Map((index ?? []).map((e) => [e.i, e])), [index]);
   const foods = ids.map((id) => byId.get(id)).filter((e): e is IndexEntry => !!e);
 
+  const presets = useMemo(() => {
+    if (!index) return [];
+    const pickBrand = (brands: string[], type?: "dry" | "wet") => {
+      const out: IndexEntry[] = [];
+      for (const b of brands) {
+        const match = index
+          .filter((e) => e.b.toLowerCase() === b.toLowerCase() && e.sc !== null && e.c === "complete" && (!type || e.t === type))
+          .sort((x, y) => (y.sc ?? 0) - (x.sc ?? 0))[0];
+        if (match) out.push(match);
+        if (out.length === 3) break;
+      }
+      return out;
+    };
+    const p1 = pickBrand(["Orijen", "Acana", "Carnilove", "Riverwood", "Edgard & Cooper"], "dry");
+    const p2 = pickBrand(["Royal Canin", "Hill's", "Pro Plan", "Purina One", "Iams"], "dry");
+    const p3 =
+      species === "dog"
+        ? pickBrand(["Prins", "CaroCroc", "Smølke", "Farm Food", "Renske"], "dry")
+        : pickBrand(["Bozita", "Edgard & Cooper", "Whiskas", "Felix", "Sheba"], "wet");
+    return [
+      { key: "compare.presetMeat", items: p1 },
+      { key: "compare.presetPopular", items: p2 },
+      { key: species === "dog" ? "compare.presetDutch" : "compare.presetWet", items: p3 },
+    ].filter((p) => p.items.length >= 2);
+  }, [index, species]);
+
   // ------------------------------------------------------------ picker
   const [q, setQ] = useState("");
   const results = useMemo(() => {
@@ -314,10 +340,51 @@ export function CompareTool() {
       {failed && <p className="mt-6 font-semibold text-danger" role="alert">{t("finder.error")}</p>}
 
       {foods.length === 0 && index && (
-        <div className="mt-8 rounded-2xl border border-dashed border-line bg-paper p-8 text-center text-ink-soft">
-          <p className="font-display text-xl font-semibold text-ink">{t("compare.emptyTitle")}</p>
-          <p className="mt-2">{t("compare.emptyText")}</p>
-          <p className="mt-4 flex flex-wrap justify-center gap-4 font-sans text-sm font-semibold">
+        <div className="mt-8 rounded-2xl border border-line bg-paper p-8 shadow-card">
+          <div className="text-center">
+            <p className="font-display text-2xl font-semibold text-brand-deep">{t("compare.emptyTitle")}</p>
+            <p className="mt-2 font-sans text-ink-soft">{t("compare.emptyText")}</p>
+          </div>
+
+          {presets.length > 0 && (
+            <div className="mt-7 border-t border-line pt-6">
+              <p className="text-center font-sans text-xs font-semibold text-ink-soft">
+                {t("compare.presetsTitle")}
+              </p>
+              <div className="mt-3.5 grid grid-cols-1 gap-3.5 md:grid-cols-3">
+                {presets.map((pr) => (
+                  <button
+                    key={pr.key}
+                    type="button"
+                    onClick={() => update(pr.items.map((x) => x.i))}
+                    className="flex flex-col justify-between rounded-xl border border-[#E2DDD5] bg-cream/70 p-4 text-left transition hover:border-brand-mid hover:bg-brand-soft/60"
+                  >
+                    <div>
+                      <span className="inline-block rounded-full bg-brand-soft px-2.5 py-0.5 font-sans text-[11px] font-semibold text-brand-deep">
+                        {t(pr.key)}
+                      </span>
+                      <p className="mt-2 font-display text-base font-semibold text-ink">
+                        {pr.items.map((x) => x.b).join(" vs. ")}
+                      </p>
+                      <ul className="mt-2 space-y-1 font-sans text-xs text-ink-soft">
+                        {pr.items.map((x) => (
+                          <li key={x.i} className="flex items-center justify-between gap-2 truncate">
+                            <span className="truncate">{x.n}</span>
+                            <span className="shrink-0 font-bold tabular-nums text-brand-deep">{x.sc}/100</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <span className="mt-3 inline-block font-sans text-xs font-semibold text-brand">
+                      {t("compare.addThis")} →
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <p className="mt-6 flex flex-wrap justify-center gap-4 font-sans text-sm font-semibold">
             <Link href={localePath(lang, "/best")} className="text-brand hover:underline">{t("nav.best")}</Link>
             <Link href={`${localePath(lang, "/foods")}?species=${species}`} className="text-brand hover:underline">{t("nav.foods")}</Link>
           </p>

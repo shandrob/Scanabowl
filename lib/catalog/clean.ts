@@ -202,6 +202,7 @@ const BRAND_ALIASES: Array<[RegExp, string]> = [
   [/^vitalstyle$/i, "VITALstyle"],
   [/^edgard ?& ?cooper$/i, "Edgard & Cooper"],
   [/^caro ?croc$/i, "CaroCroc"],
+  [/^sm[oø]lke$/i, "Smølke"],
 ];
 const JUNK_BRANDS = new Set(["en dogwash trimsalon", "productsubgroep secundaire", "familie", "onbekend", "natvoer", "droogvoer", ""]);
 

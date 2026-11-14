@@ -10,6 +10,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  allowedDevOrigins: ["192.168.1.190", "192.168.1.*", "100.119.214.64", "100.*", "localhost", "127.0.0.1"],
   // blog posts are read from disk at run time (scheduled posts appear without a rebuild)
   outputFileTracingIncludes: { "/*": ["./content/**/*"] },
   async headers() {

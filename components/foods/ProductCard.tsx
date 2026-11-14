@@ -28,7 +28,9 @@ export function ProductCard({
   const grade = entry.g ?? gradeOf(entry.sc);
   const showPersonal = personalScore !== undefined && personalScore !== null && entry.sc !== null && personalScore !== entry.sc;
   const grams = entry.pk ? packGrams(entry.pk) : null;
-  const perKg = entry.pc && grams && grams > 0 ? (entry.pc / (grams / 1000)).toFixed(2) : null;
+  const perKgNum = entry.pc && grams && grams > 0 ? entry.pc / (grams / 1000) : null;
+  const perKg = perKgNum !== null ? perKgNum.toFixed(2) : null;
+  const isBestValue = entry.sc !== null && entry.sc >= 75 && perKgNum !== null && perKgNum <= (entry.t === "wet" ? 6.5 : 5.5);
 
   return (
     <Link
@@ -50,6 +52,7 @@ export function ProductCard({
           <span className="rounded-md bg-stone px-2 py-0.5">{foodTypeLabel(t, entry.t)}</span>
           <span className="rounded-md bg-stone px-2 py-0.5">{stageLabel(t, entry.l, species)}</span>
           {entry.gf === 1 && <span className="rounded-md bg-brand-soft px-2 py-0.5 font-medium text-brand-deep">{t("common.grainFree")}</span>}
+          {isBestValue && <span className="rounded-md bg-grade-a-soft px-2 py-0.5 font-semibold text-grade-a">★ {t("common.bestValue")}</span>}
           {perKg ? (
             <span className="rounded-md bg-stone px-2 py-0.5 font-mono text-[0.72rem] font-semibold tabular-nums text-ink-soft">{t("order.perKg", { price: perKg })}</span>
           ) : entry.pc ? (

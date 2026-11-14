@@ -143,6 +143,16 @@ export function rowToProduct(row: Record<string, string>, ctx: RowContext): Cata
   if (!looksLikeIngredients(ingredients) && looksLikeIngredients(analysisRaw)) {
     [ingredients, analysisRaw] = [analysisRaw, looksLikeAnalysis(ingredients) ? ingredients : ""];
   }
+  // some scraped rows pack "Samenstelling: ... Analytische bestanddelen: ... Toevoegingsmiddelen: ..." into one field
+  const embeddedAna = ingredients.match(/^(.*?)\b(?:analytische bestanddelen|analyse)\s*\*?\s*(?:\(%?\))?\s*:\s*(.+)$/i);
+  if (embeddedAna && looksLikeAnalysis(embeddedAna[2])) {
+    const beforeAna = embeddedAna[1].replace(/\btoevoegingsmiddelen\b[\s\S]*$/i, "").trim();
+    const afterAna = embeddedAna[2].replace(/\b(?:toevoegingsmiddelen|sporenelementen)\b[\s\S]*$/i, "").trim();
+    if (beforeAna.length >= 10) {
+      ingredients = beforeAna;
+      if (!analysisRaw) analysisRaw = afterAna;
+    }
+  }
   if (metadataOnly(ingredients)) ingredients = "";
   const rawName = field(row, "name");
   if (isGarbageRow({ name: rawName, ingredients })) return null;

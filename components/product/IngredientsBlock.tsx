@@ -3,12 +3,13 @@ import type { TFunction } from "@/lib/i18n/t";
 import { IconInfo } from "@/components/ui/Icons";
 import { kindGroup, type KindGroup } from "@/lib/labels";
 import { splitGroups } from "@/lib/scoring/splitting";
+import { IngredientInspector } from "./IngredientInspector";
 
-const GROUP_STYLE: Record<KindGroup, { chip: string; bar: string }> = {
-  animal: { chip: "border-grade-a/40 bg-grade-a-soft text-ink", bar: "#2D6A4F" },
-  fat: { chip: "border-brand/40 bg-stone text-ink", bar: "#1F4E3D" },
-  plant: { chip: "border-warn/40 bg-warn-soft text-ink", bar: "#B45309" },
-  other: { chip: "border-line bg-cream text-ink-soft", bar: "#6B6A65" },
+const GROUP_STYLE: Record<KindGroup, { bar: string }> = {
+  animal: { bar: "#2D6A4F" },
+  fat: { bar: "#1F4E3D" },
+  plant: { bar: "#B45309" },
+  other: { bar: "#6B6A65" },
 };
 
 /** additives a pet does not need: shown in red (they already cost points in the score) */
@@ -44,25 +45,8 @@ export function IngredientsBlock({ p, t }: { p: ProductDetail; t: TFunction }) {
       </ul>
       <p className="mt-1 font-sans text-xs text-ink-faint">{t("product.estimateNote")}</p>
 
-      <ol className="mt-5 flex flex-wrap gap-2">
-        {p.ingredients.map((i, idx) => (
-          <li
-            key={`${i.raw}-${idx}`}
-            title={UNNEEDED.has(i.kind) ? t("product.legendUnneeded") : !i.named && kindGroup(i.kind) !== "other" ? t("product.legendVague") : undefined}
-            className={`rounded-lg border px-3 py-1 text-sm ${
-              idx < 5 ? "font-medium" : ""
-            } ${
-              UNNEEDED.has(i.kind)
-                ? "border-danger/40 bg-danger-soft font-semibold text-danger"
-                : `${GROUP_STYLE[kindGroup(i.kind)].chip}${!i.named && kindGroup(i.kind) !== "other" ? " border-dashed border-ink-faint" : ""}`
-            }`}
-          >
-            {i.raw}
-            {!i.named && !UNNEEDED.has(i.kind) && kindGroup(i.kind) !== "other" && <span className="ml-1 text-ink-faint" aria-hidden>?</span>}
-            {i.pct !== undefined && <span className="ml-1.5 font-semibold tabular-nums text-ink">{i.pct}%</span>}
-          </li>
-        ))}
-      </ol>
+      <IngredientInspector ingredients={p.ingredients} />
+
       {(hasVague || hasUnneeded) && (
         <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-sans text-xs text-ink-soft">
           {hasVague && (

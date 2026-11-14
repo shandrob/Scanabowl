@@ -182,8 +182,9 @@ export default async function ProductPage({ params }: Props) {
           </section>
         </div>
 
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <OrderCard pack={p.pack} price={p.price} t={t} />
+        <aside className="space-y-6 lg:self-start">
+          <OrderCard pack={p.pack} price={p.price} species={p.species} kcalPer100g={p.nutrition?.kcalPer100g ?? null} />
+          <Alternatives candidates={alternatives} species={p.species} currentScore={p.score} />
           <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft shadow-card">
             <h2 className="font-sans text-xs font-semibold text-ink">{t("product.dataTitle")}</h2>
             <p className="mt-2 leading-relaxed">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>
@@ -207,10 +208,6 @@ export default async function ProductPage({ params }: Props) {
           )}
           <p className="font-sans text-xs leading-relaxed text-ink-faint">{t("product.disclaimer")}</p>
         </aside>
-      </div>
-
-      <div className="mt-14">
-        <Alternatives candidates={alternatives} species={p.species} />
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

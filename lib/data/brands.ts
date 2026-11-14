@@ -1,16 +1,14 @@
 import "server-only";
 import { slugify } from "../catalog/clean";
-import type { Grade, Species } from "../scoring/types";
+import type { FoodType, Grade, Species } from "../scoring/types";
 import { detailToIndex } from "./index-entry";
 import { allProducts } from "./products";
 import type { IndexEntry, ProductDetail } from "./types";
 
-/** A brand gets its own page from this many foods on; smaller brands would make thin pages. */
-export const MIN_FOODS_FOR_PAGE = 3;
+/** Every real brand in the database gets its own dedicated brand page. */
+export const MIN_FOODS_FOR_PAGE = 1;
 /** The "highest-scoring brands" ranking only includes brands with at least this many scored foods. */
 export const MIN_SCORED_FOR_RANKING = 5;
-/** Foods listed per species on a brand page; the finder shows the rest. */
-const LIST_PER_SPECIES = 12;
 /** Collective names that are not real brands. */
 const NOT_A_BRAND = new Set(["overig", "onbekend", ""]);
 
@@ -21,8 +19,15 @@ export interface SpeciesSummary {
   best: number | null;
   /** scored complete foods per grade */
   grades: Record<Grade, number>;
-  /** best-scoring foods first, then the unscored ones */
+  /** all foods of this species for this brand: best-scoring foods first, then unscored ones */
   top: IndexEntry[];
+}
+
+export interface BrandTypeStat {
+  type: FoodType;
+  count: number;
+  scored: number;
+  avg: number | null;
 }
 
 export interface BrandSummary {
@@ -32,8 +37,15 @@ export interface BrandSummary {
   scored: number;
   avg: number | null;
   best: number | null;
+  lowest: number | null;
   grades: Record<Grade, number>;
   notScored: number;
+  grainFreeCount: number;
+  avgAnimalProtein: number | null;
+  avgPillars: { nutrition: number; ingredients: number; formulation: number } | null;
+  byType: BrandTypeStat[];
+  bestFood: { entry: IndexEntry; species: Species } | null;
+  lowestFood: { entry: IndexEntry; species: Species } | null;
   dog: SpeciesSummary | null;
   cat: SpeciesSummary | null;
 }
@@ -53,7 +65,7 @@ function summarize(list: ProductDetail[]): SpeciesSummary | null {
     avg: average(scored.map((p) => p.score!)),
     best: scored.length ? Math.max(...scored.map((p) => p.score!)) : null,
     grades,
-    top: sorted.slice(0, LIST_PER_SPECIES).map(detailToIndex),
+    top: sorted.map(detailToIndex),
   };
 }
 
@@ -81,6 +93,39 @@ export async function allBrands(): Promise<BrandSummary[]> {
     const scored = all.filter((p) => p.score !== null);
     const grades = emptyGrades();
     for (const p of scored) if (p.grade) grades[p.grade]++;
+
+    const withPillars = scored.filter((p) => p.pillars !== null);
+    const avgPillars = withPillars.length
+      ? {
+          nutrition: Math.round(withPillars.reduce((s, p) => s + p.pillars!.nutrition.points, 0) / withPillars.length),
+          ingredients: Math.round(withPillars.reduce((s, p) => s + p.pillars!.ingredients.points, 0) / withPillars.length),
+          formulation: Math.round(withPillars.reduce((s, p) => s + p.pillars!.formulation.points, 0) / withPillars.length),
+        }
+      : null;
+
+    const animalShares = scored
+      .map((p) => p.animalProteinShare)
+      .filter((v): v is number => typeof v === "number")
+      .map((v) => Math.round(v * 100));
+
+    const typeOrder: FoodType[] = ["dry", "wet", "frozen", "semi-moist", "other"];
+    const byType: BrandTypeStat[] = [];
+    for (const t of typeOrder) {
+      const matching = all.filter((p) => p.foodType === t);
+      if (!matching.length) continue;
+      const sc = matching.filter((p) => p.score !== null);
+      byType.push({
+        type: t,
+        count: matching.length,
+        scored: sc.length,
+        avg: average(sc.map((p) => p.score!)),
+      });
+    }
+
+    const sortedScored = [...scored].sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || a.name.localeCompare(b.name));
+    const bestProd = sortedScored[0] ?? null;
+    const lowestProd = sortedScored.length > 1 ? sortedScored[sortedScored.length - 1] : null;
+
     out.push({
       slug,
       name: g.name,
@@ -88,8 +133,15 @@ export async function allBrands(): Promise<BrandSummary[]> {
       scored: scored.length,
       avg: average(scored.map((p) => p.score!)),
       best: scored.length ? Math.max(...scored.map((p) => p.score!)) : null,
+      lowest: scored.length ? Math.min(...scored.map((p) => p.score!)) : null,
       grades,
       notScored: all.length - scored.length,
+      grainFreeCount: all.filter((p) => p.grainFree).length,
+      avgAnimalProtein: average(animalShares),
+      avgPillars,
+      byType,
+      bestFood: bestProd ? { entry: detailToIndex(bestProd), species: bestProd.species } : null,
+      lowestFood: lowestProd && lowestProd.id !== bestProd?.id ? { entry: detailToIndex(lowestProd), species: lowestProd.species } : null,
       dog: summarize(g.dog),
       cat: summarize(g.cat),
     });

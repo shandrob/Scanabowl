@@ -1,4 +1,5 @@
 import "server-only";
+import { packGrams } from "../pets/energy";
 import type { Species } from "../scoring/types";
 import type { IndexEntry, ProductDetail } from "./types";
 import { detailToIndex } from "./index-entry";
@@ -113,21 +114,69 @@ export async function productCounts(): Promise<{ products: number; brands: numbe
  * Higher-scoring foods of the same kind. The browser filters this candidate list again for the
  * visitor's pet (allergies), so we hand over a generous number.
  */
-export async function alternativesFor(p: ProductDetail, count = 8): Promise<IndexEntry[]> {
+export async function alternativesFor(p: ProductDetail, count = 20): Promise<IndexEntry[]> {
   if (p.score === null) return [];
   const list = [...(await table(p.species)).values()];
-  return list
-    .filter(
-      (x) =>
-        x.id !== p.id &&
-        x.category === "complete" &&
-        x.score !== null &&
-        x.score >= p.score! + 4 &&
-        x.confidence !== "low" &&
-        x.foodType === p.foodType &&
-        (x.lifeStage === p.lifeStage || x.lifeStage === "all" || p.lifeStage === "all"),
-    )
-    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
-    .slice(0, count)
-    .map(detailToIndex);
+  const compatible = list.filter(
+    (x) =>
+      x.id !== p.id &&
+      x.category === "complete" &&
+      x.score !== null &&
+      x.confidence !== "low" &&
+      x.foodType === p.foodType &&
+      (x.lifeStage === p.lifeStage || x.lifeStage === "all" || p.lifeStage === "all"),
+  );
+
+  const ppkOf = (x: ProductDetail): number | null => {
+    if (!x.price || x.price <= 0 || !x.pack) return null;
+    const g = packGrams(x.pack);
+    return g && g > 0 ? x.price / (g / 1000) : null;
+  };
+
+  const strictlyHigher = compatible
+    .filter((x) => x.score! > p.score!)
+    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+
+  const topPeers =
+    strictlyHigher.length < 6
+      ? compatible
+          .filter((x) => x.score! >= 85 && x.brand !== p.brand)
+          .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+      : [];
+
+  const higher: ProductDetail[] = [];
+  const brandCountHigher = new Map<string, number>();
+  for (const x of [...strictlyHigher, ...topPeers]) {
+    if (higher.some((h) => h.id === x.id)) continue;
+    const bc = brandCountHigher.get(x.brand) ?? 0;
+    if (bc >= 2) continue;
+    brandCountHigher.set(x.brand, bc + 1);
+    higher.push(x);
+    if (higher.length >= count) break;
+  }
+
+  const cheaperCandidates = compatible
+    .map((x) => ({ x, ppk: ppkOf(x) }))
+    .filter((r): r is { x: ProductDetail; ppk: number } => r.ppk !== null && (r.x.score ?? 0) >= 75)
+    .sort((a, b) => a.ppk - b.ppk || (b.x.score ?? 0) - (a.x.score ?? 0));
+
+  const cheaperHigh: ProductDetail[] = [];
+  const brandCountValue = new Map<string, number>();
+  for (const { x } of cheaperCandidates) {
+    const bc = brandCountValue.get(x.brand) ?? 0;
+    if (bc >= 2) continue;
+    brandCountValue.set(x.brand, bc + 1);
+    cheaperHigh.push(x);
+    if (cheaperHigh.length >= 12) break;
+  }
+
+  const seen = new Set<string>();
+  const merged: ProductDetail[] = [];
+  for (const item of [...higher, ...cheaperHigh]) {
+    if (!seen.has(item.id)) {
+      seen.add(item.id);
+      merged.push(item);
+    }
+  }
+  return merged.map(detailToIndex);
 }

@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BrandCatalog } from "@/components/brands/BrandCatalog";
 import { GradeBar } from "@/components/foods/GradeBar";
 import { ProductCard } from "@/components/foods/ProductCard";
-import { allBrands, getBrand, type SpeciesSummary } from "@/lib/data/brands";
+import { Rich } from "@/components/ui/Rich";
+import { allBrands, getBrand } from "@/lib/data/brands";
+import { getBrandStory } from "@/lib/data/brand-stories";
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { createT, type TFunction } from "@/lib/i18n/t";
-import type { Species } from "@/lib/scoring/types";
+import { createT } from "@/lib/i18n/t";
+import { foodTypeLabel } from "@/lib/labels";
 import { SITE } from "@/lib/site";
 
 /**
- * About 100 brand pages per language, built during the deployment (cheap, and pages built at deploy time cost
+ * Brand pages built during the deployment (cheap, and pages built at deploy time cost
  * no ISR writes on Vercel). Brand data only changes with a deployment, so they are never refreshed on a timer.
  */
 export const revalidate = false;
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return (await allBrands()).map((b) => ({ brand: b.slug }));
@@ -37,38 +40,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="rounded-xl border border-line bg-paper p-4 shadow-card">
       <p className="font-sans text-xs font-medium text-ink-soft">{label}</p>
-      <p className="mt-1 font-display text-3xl font-semibold tabular-nums text-ink">{value}</p>
+      <p className="mt-1 font-display text-3xl font-semibold tabular-nums text-brand-deep">{value}</p>
+      {sub && <p className="mt-0.5 font-sans text-xs tabular-nums text-ink-faint">{sub}</p>}
     </div>
-  );
-}
-
-function SpeciesSection({ id, title, summary, species, brand, lang, t }: { id: string; title: string; summary: SpeciesSummary; species: Species; brand: string; lang: Locale; t: TFunction }) {
-  const finder = `${localePath(lang, "/foods")}?species=${species}&brand=${encodeURIComponent(brand)}`;
-  return (
-    <section aria-labelledby={id} className="mt-12">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <h2 id={id} className="font-display text-2xl font-semibold tracking-tight text-ink">{title}</h2>
-        {summary.count > summary.top.length && (
-          <Link href={finder} className="font-sans text-sm font-semibold text-brand hover:underline">{t("brandPages.showAll", { count: summary.count })} →</Link>
-        )}
-      </div>
-      {summary.scored > 0 && (
-        <div className="mt-4 max-w-xl">
-          <GradeBar grades={summary.grades} t={t} />
-        </div>
-      )}
-      <ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
-        {summary.top.map((e) => (
-          <li key={e.i}>
-            <ProductCard entry={e} species={species} lang={lang} t={t} />
-          </li>
-        ))}
-      </ul>
-    </section>
   );
 }
 
@@ -80,6 +58,7 @@ export default async function BrandPage({ params }: Props) {
   if (!b) notFound();
   const t = createT(await getDictionary(lang));
   const topShare = b.scored ? Math.round(((b.grades.A + b.grades.B) / b.scored) * 100) : null;
+  const story = getBrandStory(b, lang);
   const url = `${SITE.url}${localePath(lang, `/foods/brand/${slug}`)}`;
 
   const jsonLd = {
@@ -98,7 +77,7 @@ export default async function BrandPage({ params }: Props) {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 pb-12 pt-8 sm:px-6">
       <nav aria-label={t("common.breadcrumb")} className="font-sans text-xs text-ink-faint">
         <ol className="flex flex-wrap items-center gap-2">
           <li><Link href={localePath(lang)} className="hover:text-ink hover:underline">{t("nav.home")}</Link></li>
@@ -109,25 +88,141 @@ export default async function BrandPage({ params }: Props) {
         </ol>
       </nav>
 
-      <h1 className="mt-6 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{b.name}</h1>
-      <p className="mt-3 max-w-3xl text-lg text-ink-soft">{t("brandPages.intro", { brand: b.name, count: b.count })}</p>
+      {/* Header */}
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <h1 className="font-display text-4xl font-semibold tracking-tight text-brand-deep sm:text-5xl">{b.name}</h1>
+        {story.origin && (
+          <span className="rounded-full bg-brand-soft px-3 py-1 font-sans text-xs font-semibold text-brand-deep">
+            {story.origin}
+          </span>
+        )}
+      </div>
+      <p className="mt-3 max-w-3xl font-sans text-lg leading-relaxed text-ink-soft">
+        {t("brandPages.intro", { brand: b.name, count: b.count })}
+      </p>
 
+      {/* Key Stats */}
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <Stat label={t("brandPages.statFoods")} value={String(b.count)} />
-        <Stat label={t("brandPages.statAvg")} value={b.avg === null ? "–" : `${b.avg}`} />
-        <Stat label={t("brandPages.statBest")} value={b.best === null ? "–" : `${b.best}`} />
+        <Stat label={t("brandPages.statFoods")} value={String(b.count)} sub={b.scored > 0 ? `${b.scored} ${t("brandPages.scoredCount")}` : undefined} />
+        <Stat label={t("brandPages.statAvg")} value={b.avg === null ? "–" : `${b.avg}/100`} />
+        <Stat label={t("brandPages.statBest")} value={b.best === null ? "–" : `${b.best}/100`} sub={b.lowest !== null && b.lowest !== b.best ? `${t("brandPages.statLowest")}: ${b.lowest}/100` : undefined} />
         <Stat label={t("brandPages.statTop")} value={topShare === null ? "–" : `${topShare}%`} />
       </div>
 
-      {b.scored > 0 && (
-        <section aria-labelledby="dist-h" className="mt-8 max-w-xl">
-          <h2 id="dist-h" className="font-sans text-xs font-semibold text-ink-soft">{t("brandPages.distribution")}</h2>
-          <div className="mt-2"><GradeBar grades={b.grades} t={t} /></div>
+      {/* About the Brand & Nutritional Profile */}
+      <section aria-labelledby="about-brand-h" className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <div className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-7">
+          <h2 id="about-brand-h" className="font-display text-2xl font-semibold tracking-tight text-brand-deep">
+            {t("brandPages.aboutTitle", { brand: b.name })}
+          </h2>
+          {story.curated && (
+            <p className="mt-3 font-sans text-[0.975rem] leading-relaxed text-ink">
+              {story.curated}
+            </p>
+          )}
+          <p className="mt-3 font-sans text-[0.95rem] leading-relaxed text-ink-soft">
+            <Rich text={story.dataSummary} />
+          </p>
+
+          {/* Food Type Breakdown Pills */}
+          {b.byType.length > 0 && (
+            <div className="mt-5 border-t border-line pt-4">
+              <p className="font-sans text-xs font-semibold text-ink-soft">{t("brandPages.rangeByType")}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                {b.byType.map((bt) => (
+                  <span
+                    key={bt.type}
+                    className="inline-flex items-center gap-2 rounded-full border border-[#E2DDD5] bg-cream px-3.5 py-1.5 font-sans text-xs font-medium text-ink"
+                  >
+                    <span>{foodTypeLabel(t, bt.type)}</span>
+                    <span className="font-semibold tabular-nums text-ink-soft">({bt.count})</span>
+                    {bt.avg !== null && (
+                      <span className="rounded-full bg-brand-soft px-2 py-0.5 font-bold tabular-nums text-brand-deep">
+                        {bt.avg}/100
+                      </span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Score Distribution & Average Pillar Profile */}
+        <div className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-7">
+          {b.scored > 0 ? (
+            <>
+              <h2 className="font-sans text-xs font-semibold text-ink-soft">{t("brandPages.distribution")}</h2>
+              <div className="mt-2.5">
+                <GradeBar grades={b.grades} t={t} />
+              </div>
+
+              {b.avgPillars && (
+                <div className="mt-6 border-t border-line pt-5">
+                  <h3 className="font-sans text-xs font-semibold text-ink-soft">{t("brandPages.avgPillarsTitle")}</h3>
+                  <dl className="mt-3 space-y-3">
+                    {([
+                      ["nutrition", b.avgPillars.nutrition, 35],
+                      ["ingredients", b.avgPillars.ingredients, 50],
+                      ["formulation", b.avgPillars.formulation, 15],
+                    ] as const).map(([key, pts, max]) => {
+                      const pct = Math.round((pts / max) * 100);
+                      return (
+                        <div key={key}>
+                          <div className="flex items-baseline justify-between font-sans text-xs">
+                            <dt className="font-medium text-ink">{t(`score.pillars.${key}`)}</dt>
+                            <dd className="font-semibold tabular-nums text-brand-deep">
+                              {pts} / {max}
+                            </dd>
+                          </div>
+                          <div className="mt-1 h-2 overflow-hidden rounded-full bg-stone">
+                            <div
+                              className="h-full rounded-full bg-brand"
+                              style={{ width: `${Math.min(100, Math.max(4, pct))}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </dl>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="font-sans text-sm text-ink-soft">{t("brandPages.noAvg")}</p>
+          )}
+        </div>
+      </section>
+
+      {/* Best & Lowest Rated Highlights */}
+      {b.bestFood && b.lowestFood && (
+        <section aria-labelledby="highlights-h" className="mt-10">
+          <h2 id="highlights-h" className="font-display text-2xl font-semibold tracking-tight text-brand-deep">
+            {t("brandPages.highlightsTitle", { brand: b.name })}
+          </h2>
+          <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-2">
+            <div>
+              <p className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-grade-a-soft px-3 py-1 font-sans text-xs font-semibold text-grade-a">
+                ★ {t("brandPages.bestRatedFood")}
+              </p>
+              <ProductCard entry={b.bestFood.entry} species={b.bestFood.species} lang={lang} t={t} />
+            </div>
+            <div>
+              <p className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-stone px-3 py-1 font-sans text-xs font-semibold text-ink-soft">
+                {t("brandPages.lowestRatedFood")}
+              </p>
+              <ProductCard entry={b.lowestFood.entry} species={b.lowestFood.species} lang={lang} t={t} />
+            </div>
+          </div>
         </section>
       )}
 
-      {b.dog && <SpeciesSection id="dogs-h" title={t("brandPages.dogsTitle", { brand: b.name })} summary={b.dog} species="dog" brand={b.name} lang={lang} t={t} />}
-      {b.cat && <SpeciesSection id="cats-h" title={t("brandPages.catsTitle", { brand: b.name })} summary={b.cat} species="cat" brand={b.name} lang={lang} t={t} />}
+      {/* All Products of This Brand on One Single Page */}
+      <BrandCatalog
+        brandName={b.name}
+        dogItems={b.dog?.top ?? []}
+        catItems={b.cat?.top ?? []}
+      />
 
       <div className="mt-12 max-w-3xl space-y-2 font-sans text-xs text-ink-faint">
         {b.notScored > 0 && <p>{t("brandPages.notScoredNote", { brand: b.name, count: b.notScored })}</p>}
