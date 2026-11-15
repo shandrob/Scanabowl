@@ -471,7 +471,12 @@
     "transitionIntro": "Bouw nieuw voer rustig op in 7 dagen om darmklachten of zachte ontlasting te voorkomen (gebaseerd op je berekende dagportie):",
     "transitionDays": "Dag {days}",
     "transitionNew": "nieuw",
-    "transitionOld": "huidig"
+    "transitionOld": "huidig",
+    "mixedDryLabel": "Gemengd voeren: hoeveel natvoer geef je per dag?",
+    "mixedWetLabel": "Gemengd voeren: hoeveel van dit natvoer geef je per dag?",
+    "mixedOff": "Alleen dit",
+    "mixedSummaryDry": "Geef {dryGrams} g van deze brok naast {wetGrams} g natvoer (~{wetKcal} kcal).",
+    "mixedSummaryWet": "Geef {wetGrams} g van dit natvoer aangevuld met ~{dryGrams} g droge brokken (~{dryKcal} kcal)."
   },
   "pet": {
     "foodTitle": "Voer",
@@ -1023,5 +1028,23 @@
     "allProductsTitle": "Alle {count} voeders van {brand} op één pagina",
     "allProductsSubtitle": "{shown} van {total} producten getoond",
     "searchPlaceholder": "Zoek binnen {brand} (bijv. puppy, zalm, sterilised)…"
+  },
+  "allergenPages": {
+    "metaTitle": "Honden- & kattenvoer zonder {allergen} – strikt gecontroleerd",
+    "metaDescription": "Alle {count} volledige honden- en kattenvoeders gegarandeerd zonder {allergen} en zonder vage dierlijke of plantaardige bijproducten, gerangschikt op Scanabowl-score.",
+    "strictBadge": "Strikt gecontroleerd · ook vrij van vage bijproducten",
+    "h1": "Dierenvoer zonder {allergen}",
+    "intro": "Zoek je hondenvoer of kattenvoer zonder {allergen}? Hieronder staan alle {count} volledige voeders uit onze database waarin geen {allergen} zit én waarin geen vage groepsnamen staan waar {allergen} achter kan schuilen.",
+    "statSafeTotal": "Strikt veilig totaal",
+    "statSafeDogs": "Veilig hondenvoer",
+    "statSafeCats": "Veilig kattenvoer",
+    "statFilteredOut": "Uitgesloten voeders",
+    "statFilteredSub": "{definite} bevat het · {vague} vaag etiket",
+    "whyTitle": "Waarom voer zonder {allergen}?",
+    "vagueTitle": "Waarom we ook vage etiketten uitsluiten",
+    "catalogTitle": "Alle {count} voeders zonder {allergen} op één pagina",
+    "searchPlaceholder": "Zoek binnen voer zonder {allergen} (bijv. merk, puppy, natvoer)…",
+    "indexTitle": "Allergeenvrij voer (zonder specifiek ingrediënt)",
+    "indexSubtitle": "Heeft je hond of kat een voedselallergie of intolerantie? Bekijk direct alle strikt gecontroleerde voeders zonder het betreffende allergeen – inclusief uitsluiting van vage bijproducten."
   }
 }

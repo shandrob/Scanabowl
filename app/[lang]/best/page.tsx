@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IconArrow } from "@/components/ui/Icons";
 import { ProductImage } from "@/components/ui/ProductImage";
+import { ALLERGEN_SLUGS } from "@/lib/data/allergens";
 import { allGuides, dataYear, type GuideData } from "@/lib/data/guides";
 import { guideText } from "@/lib/guides/content";
 import { isLocale, localePath, type Locale } from "@/lib/i18n/config";
@@ -77,6 +78,29 @@ export default async function GuidesIndex({ params }: { params: Promise<{ lang: 
       <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t("guides.indexIntro")}</p>
       {section("cat", t("guides.forCats"))}
       {section("dog", t("guides.forDogs"))}
+
+      <section aria-labelledby="allergen-guides-h" className="mt-14 rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
+        <h2 id="allergen-guides-h" className="font-display text-2xl font-semibold tracking-tight text-brand-deep">
+          {t("allergenPages.indexTitle")}
+        </h2>
+        <p className="mt-1.5 max-w-3xl font-sans text-sm leading-relaxed text-ink-soft">
+          {t("allergenPages.indexSubtitle")}
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2.5">
+          {ALLERGEN_SLUGS.map((slug) => (
+            <Link
+              key={slug}
+              href={localePath(lang, `/foods/without/${slug}`)}
+              prefetch={false}
+              className="inline-flex items-center gap-1.5 rounded-full border border-line bg-cream px-4 py-2 font-sans text-sm font-semibold text-ink transition hover:border-brand hover:bg-brand-soft/60 hover:text-brand-deep"
+            >
+              <span>{t("finder.without")} {t(`allergen.${slug}`).toLowerCase()}</span>
+              <IconArrow className="h-3.5 w-3.5 text-brand" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <p className="mt-12 max-w-3xl font-sans text-xs leading-relaxed text-ink-faint">
         {t("guides.indexNote")}{" "}
         <Link href={localePath(lang, "/how-we-score")} className="underline hover:text-ink">{t("home.howScore")}</Link>

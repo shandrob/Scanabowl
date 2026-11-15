@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { dailyEnergy, gramsPerDay, packGrams } from "@/lib/pets/energy";
 import { usePets } from "@/lib/pets/store";
-import type { PetProfile, Species } from "@/lib/scoring/types";
+import type { FoodType, PetProfile, Species } from "@/lib/scoring/types";
 
 type Activity = PetProfile["activity"];
 
@@ -32,11 +32,13 @@ export function OrderCard({
   pack,
   price,
   species = "dog",
+  foodType = "dry",
   kcalPer100g = null,
 }: {
   pack?: string;
   price?: number;
   species?: Species;
+  foodType?: FoodType;
   kcalPer100g?: number | null;
 }) {
   const t = useT();
@@ -48,6 +50,7 @@ export function OrderCard({
   const [weightInput, setWeightInput] = useState<string>(String(defaultWeight));
   const [activity, setActivity] = useState<Activity>(matchedPet?.activity ?? "moderate");
   const [customPrice, setCustomPrice] = useState<string>(price && price > 0 ? price.toFixed(2) : "");
+  const [wetGrams, setWetGrams] = useState<number>(0);
 
   const parsedWeight = Number.parseFloat(weightInput.replace(",", "."));
   const weightKg = Number.isFinite(parsedWeight) && parsedWeight > 0 ? parsedWeight : defaultWeight;
@@ -67,11 +70,35 @@ export function OrderCard({
       : null;
 
   const energy = dailyEnergy(buildCalcPet(species, weightKg, activity));
-  const dailyGrams = kcalPer100g && kcalPer100g > 0 ? gramsPerDay(energy.kcal, kcalPer100g) : null;
+  const typicalWetKcalPer100g = species === "cat" ? 85 : 95;
+  const typicalDryKcalPer100g = species === "cat" ? 385 : 365;
+
+  let dailyGrams: number | null = null;
+  let mainKcal = energy.kcal;
+  let companionGrams = 0;
+  let companionKcal = 0;
+
+  if (kcalPer100g && kcalPer100g > 0) {
+    if (foodType === "wet" && wetGrams > 0) {
+      dailyGrams = wetGrams;
+      mainKcal = Math.min(energy.kcal, Math.round((wetGrams * kcalPer100g) / 100));
+      companionKcal = Math.max(0, energy.kcal - mainKcal);
+      companionGrams = companionKcal > 0 ? gramsPerDay(companionKcal, typicalDryKcalPer100g) : 0;
+    } else if (foodType !== "wet" && wetGrams > 0) {
+      companionGrams = wetGrams;
+      companionKcal = Math.min(Math.round(energy.kcal * 0.85), Math.round((wetGrams * typicalWetKcalPer100g) / 100));
+      mainKcal = Math.max(0, energy.kcal - companionKcal);
+      dailyGrams = gramsPerDay(mainKcal, kcalPer100g);
+    } else {
+      dailyGrams = gramsPerDay(energy.kcal, kcalPer100g);
+    }
+  }
+
+  const wetPresets = species === "cat" ? [0, 85, 100, 170] : [0, 100, 200, 400];
   const daysPerPack =
-    dailyGrams && gramsInPack && gramsInPack > 0 ? Math.max(1, Math.round(gramsInPack / dailyGrams)) : null;
+    dailyGrams && dailyGrams > 0 && gramsInPack && gramsInPack > 0 ? Math.max(1, Math.round(gramsInPack / dailyGrams)) : null;
   const costPerDay =
-    effectivePrice && gramsInPack && dailyGrams ? (effectivePrice / gramsInPack) * dailyGrams : null;
+    effectivePrice && gramsInPack && dailyGrams !== null ? (effectivePrice / gramsInPack) * dailyGrams : null;
   const costPerMonth = costPerDay !== null ? costPerDay * 30 : null;
 
   const fmtMoney = (v: number) => v.toFixed(2).replace(".", lang === "en" ? "." : ",");
@@ -144,6 +171,28 @@ export function OrderCard({
               </div>
             </div>
 
+            <div>
+              <span className="block font-sans text-xs font-medium text-ink">
+                {t(foodType === "wet" ? "order.mixedWetLabel" : "order.mixedDryLabel")}
+              </span>
+              <div className="mt-1.5 grid grid-cols-4 gap-1.5">
+                {wetPresets.map((g) => (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => setWetGrams(g)}
+                    className={`rounded-lg px-2 py-1.5 font-sans text-xs font-semibold tabular-nums transition ${
+                      wetGrams === g
+                        ? "bg-brand text-white shadow-sm"
+                        : "border border-[#E2DDD5] bg-paper text-ink-soft hover:border-brand-mid hover:text-ink"
+                    }`}
+                  >
+                    {g === 0 ? t("order.mixedOff") : `${g} g`}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {gramsInPack && (
               <div>
                 <label htmlFor="calc-price" className="block font-sans text-xs font-medium text-ink">
@@ -166,13 +215,21 @@ export function OrderCard({
           </div>
 
           {/* Results Grid */}
+          {wetGrams > 0 && (
+            <div className="mt-3 rounded-xl border border-brand/25 bg-brand-soft/60 px-3 py-2 font-sans text-xs leading-snug text-brand-deep">
+              {foodType === "wet"
+                ? t("order.mixedSummaryWet", { wetGrams: dailyGrams, dryGrams: companionGrams, dryKcal: companionKcal })
+                : t("order.mixedSummaryDry", { dryGrams: dailyGrams, wetGrams: companionGrams, wetKcal: companionKcal })}
+            </div>
+          )}
+
           <div className="mt-3.5 grid grid-cols-2 gap-2.5">
             <div className="rounded-xl border border-line bg-cream p-3">
               <p className="font-sans text-[11px] font-medium text-ink-soft">{t("personal.portionStatLabel")}</p>
               <p className="mt-0.5 font-sans text-base font-bold tabular-nums text-brand-deep">
                 {t("personal.gramsPerDayUnit", { grams: dailyGrams })}
               </p>
-              <p className="font-sans text-[11px] tabular-nums text-ink-faint">~{energy.kcal} kcal</p>
+              <p className="font-sans text-[11px] tabular-nums text-ink-faint">~{mainKcal} kcal</p>
             </div>
 
             {costPerDay !== null ? (

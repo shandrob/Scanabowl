@@ -27,15 +27,28 @@ describe("scheduled blog publishing", () => {
     expect(listPosts("nl", day("2030-01-01")).some((p) => p.slug.startsWith("_"))).toBe(false);
   });
 
-  it("serves the translation when it exists and falls back to Dutch when it does not", () => {
-    const now = day("2026-10-05");
+  it("serves translated posts in all 4 supported locales (nl, en, de, fr)", () => {
+    const now = day("2030-01-01");
     const en = getPost("en", "2026-09-21-etiket-lezen", now)!;
     expect(en.lang).toBe("en");
     expect(en.translated).toBe(true);
     const de = getPost("de", "2026-09-21-etiket-lezen", now)!;
-    expect(de.lang).toBe("nl");
-    expect(de.translated).toBe(false);
-    expect(postLanguages("2026-09-21-etiket-lezen")).toEqual(expect.arrayContaining(["nl", "en"]));
+    expect(de.lang).toBe("de");
+    expect(de.translated).toBe(true);
+    const fr = getPost("fr", "2026-09-21-etiket-lezen", now)!;
+    expect(fr.lang).toBe("fr");
+    expect(fr.translated).toBe(true);
+    expect(postLanguages("2026-09-21-etiket-lezen")).toEqual(expect.arrayContaining(["nl", "en", "de", "fr"]));
+
+    for (const lang of ["nl", "en", "de", "fr"] as const) {
+      const posts = listPosts(lang, now);
+      expect(posts.length).toBeGreaterThanOrEqual(15);
+      for (const post of posts) {
+        const full = getPost(lang, post.slug, now);
+        expect(full?.lang).toBe(lang);
+        expect(full?.translated).toBe(true);
+      }
+    }
   });
 
   it("renders Markdown to HTML with headings, lists and tables", () => {

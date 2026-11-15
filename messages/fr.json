@@ -471,7 +471,12 @@
     "transitionIntro": "Introduisez un nouvel aliment progressivement sur 7 jours pour éviter les troubles digestifs (selon votre ration quotidienne calculée) :",
     "transitionDays": "Jour {days}",
     "transitionNew": "nouveau",
-    "transitionOld": "actuel"
+    "transitionOld": "actuel",
+    "mixedDryLabel": "Bi-nutrition : quelle quantité de pâtée donnez-vous par jour ?",
+    "mixedWetLabel": "Bi-nutrition : quelle quantité de cette pâtée donnez-vous par jour ?",
+    "mixedOff": "Seulement ceci",
+    "mixedSummaryDry": "Donnez {dryGrams} g de ces croquettes en complément de {wetGrams} g de pâtée (~{wetKcal} kcal).",
+    "mixedSummaryWet": "Donnez {wetGrams} g de cette pâtée complétés par ~{dryGrams} g de croquettes (~{dryKcal} kcal)."
   },
   "pet": {
     "foodTitle": "Alimentation",
@@ -1023,5 +1028,23 @@
     "allProductsTitle": "Les {count} aliments {brand} sur une seule page",
     "allProductsSubtitle": "{shown} sur {total} produits affichés",
     "searchPlaceholder": "Rechercher dans {brand} (p. ex. chiot, saumon, stérilisé)…"
+  },
+  "allergenPages": {
+    "metaTitle": "Aliment chien & chat sans {allergen} – contrôle strict",
+    "metaDescription": "Les {count} aliments complets pour chiens et chats garantis sans {allergen} et sans sous-produits animaux ou végétaux vagues, classés selon la note Scanabowl.",
+    "strictBadge": "Contrôle strict · également sans sous-produits vagues",
+    "h1": "Aliment pour animaux sans {allergen}",
+    "intro": "Vous cherchez un aliment pour chien ou chat sans {allergen} ? Voici les {count} aliments complets de notre base qui ne contiennent pas de {allergen} et n’utilisent aucun terme générique vague pouvant cacher du {allergen}.",
+    "statSafeTotal": "Total strictement sûr",
+    "statSafeDogs": "Aliments sûrs chiens",
+    "statSafeCats": "Aliments sûrs chats",
+    "statFilteredOut": "Aliments exclus",
+    "statFilteredSub": "{definite} en contient · {vague} étiquette vague",
+    "whyTitle": "Pourquoi choisir un aliment sans {allergen} ?",
+    "vagueTitle": "Pourquoi nous excluons aussi les étiquettes vagues",
+    "catalogTitle": "Les {count} aliments sans {allergen} sur une seule page",
+    "searchPlaceholder": "Rechercher parmi les aliments sans {allergen} (p. ex. marque, chiot, pâtée)…",
+    "indexTitle": "Aliments sans allergène (sans ingrédient spécifique)",
+    "indexSubtitle": "Votre chien ou chat souffre d’une allergie ou intolérance alimentaire ? Découvrez tous les aliments strictement contrôlés sans cet allergène – avec exclusion automatique des sous-produits vagues."
   }
 }

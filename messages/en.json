@@ -471,7 +471,12 @@
     "transitionIntro": "Introduce a new food gradually over 7 days to avoid digestive upset or loose stools (based on your calculated daily portion):",
     "transitionDays": "Day {days}",
     "transitionNew": "new",
-    "transitionOld": "current"
+    "transitionOld": "current",
+    "mixedDryLabel": "Mixed feeding: how much wet food do you give per day?",
+    "mixedWetLabel": "Mixed feeding: how much of this wet food do you give per day?",
+    "mixedOff": "Only this",
+    "mixedSummaryDry": "Feed {dryGrams} g of this dry food alongside {wetGrams} g wet food (~{wetKcal} kcal).",
+    "mixedSummaryWet": "Feed {wetGrams} g of this wet food topped up with ~{dryGrams} g dry kibble (~{dryKcal} kcal)."
   },
   "pet": {
     "foodTitle": "Food",
@@ -1023,5 +1028,23 @@
     "allProductsTitle": "All {count} {brand} foods on one page",
     "allProductsSubtitle": "Showing {shown} of {total} products",
     "searchPlaceholder": "Search within {brand} (e.g. puppy, salmon, sterilised)…"
+  },
+  "allergenPages": {
+    "metaTitle": "Dog & cat food without {allergen} – strictly checked",
+    "metaDescription": "All {count} complete dog and cat foods guaranteed without {allergen} and without vague animal or plant by-products, ranked by Scanabowl score.",
+    "strictBadge": "Strictly checked · also free from vague by-products",
+    "h1": "Pet food without {allergen}",
+    "intro": "Looking for dog or cat food without {allergen}? Below are all {count} complete foods in our database that contain no {allergen} and use no vague group terms that could hide {allergen}.",
+    "statSafeTotal": "Strictly safe total",
+    "statSafeDogs": "Safe dog foods",
+    "statSafeCats": "Safe cat foods",
+    "statFilteredOut": "Excluded foods",
+    "statFilteredSub": "{definite} contains it · {vague} vague label",
+    "whyTitle": "Why choose food without {allergen}?",
+    "vagueTitle": "Why we also filter out vague labels",
+    "catalogTitle": "All {count} foods without {allergen} on one page",
+    "searchPlaceholder": "Search within {allergen}-free food (e.g. brand, puppy, wet food)…",
+    "indexTitle": "Allergen-free food (without specific ingredient)",
+    "indexSubtitle": "Does your dog or cat have a food allergy or intolerance? Browse all strictly checked foods without that allergen – automatically excluding vague by-products."
   }
 }

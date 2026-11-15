@@ -32,10 +32,14 @@ export function BrandCatalog({
   brandName,
   dogItems,
   catItems,
+  title,
+  searchPlaceholder,
 }: {
   brandName: string;
   dogItems: IndexEntry[];
   catItems: IndexEntry[];
+  title?: string;
+  searchPlaceholder?: string;
 }) {
   const t = useT();
   const lang = useLang();
@@ -95,7 +99,7 @@ export function BrandCatalog({
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 id="brand-all-h" className="font-display text-3xl font-semibold tracking-tight text-brand-deep">
-            {t("brandPages.allProductsTitle", { brand: brandName, count: allItems.length })}
+            {title ?? t("brandPages.allProductsTitle", { brand: brandName, count: allItems.length })}
           </h2>
           <p className="mt-1 font-sans text-sm text-ink-soft">
             {t("brandPages.allProductsSubtitle", { shown: filtered.length, total: allItems.length })}
@@ -127,8 +131,8 @@ export function BrandCatalog({
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder={t("brandPages.searchPlaceholder", { brand: brandName })}
-              aria-label={t("brandPages.searchPlaceholder", { brand: brandName })}
+              placeholder={searchPlaceholder ?? t("brandPages.searchPlaceholder", { brand: brandName })}
+              aria-label={searchPlaceholder ?? t("brandPages.searchPlaceholder", { brand: brandName })}
               className="h-11 w-full rounded-xl border border-[#D6D1C7] bg-cream/60 pl-10 pr-4 font-sans text-sm text-ink placeholder:text-ink-faint focus:border-brand focus:bg-paper focus:outline-none focus:ring-2 focus:ring-brand-soft"
             />
           </div>

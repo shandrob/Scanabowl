@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ALLERGEN_SLUGS } from "@/lib/data/allergens";
 import { allBrands } from "@/lib/data/brands";
 import { GUIDES } from "@/lib/guides/defs";
 import { allProductSlugs } from "@/lib/data/products";
@@ -28,6 +29,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   for (const g of GUIDES) {
     const path = `/best/${g.slug}`;
+    for (const lang of LOCALES) out.push({ url: url(lang, path), changeFrequency: "weekly", priority: 0.8, alternates: { languages: languages(path) } });
+  }
+  for (const allergen of ALLERGEN_SLUGS) {
+    const path = `/foods/without/${allergen}`;
     for (const lang of LOCALES) out.push({ url: url(lang, path), changeFrequency: "weekly", priority: 0.8, alternates: { languages: languages(path) } });
   }
   for (const b of await allBrands()) {

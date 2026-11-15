@@ -471,7 +471,12 @@
     "transitionIntro": "Stellen Sie neues Futter schrittweise über 7 Tage um, um Magen-Darm-Probleme oder weichen Kot zu vermeiden (basierend auf Ihrer berechneten Tagesration):",
     "transitionDays": "Tag {days}",
     "transitionNew": "neu",
-    "transitionOld": "aktuell"
+    "transitionOld": "aktuell",
+    "mixedDryLabel": "Mischfütterung: Wie viel Nassfutter geben Sie pro Tag?",
+    "mixedWetLabel": "Mischfütterung: Wie viel von diesem Nassfutter geben Sie pro Tag?",
+    "mixedOff": "Nur dieses",
+    "mixedSummaryDry": "Füttern Sie {dryGrams} g dieses Trockenfutters neben {wetGrams} g Nassfutter (~{wetKcal} kcal).",
+    "mixedSummaryWet": "Füttern Sie {wetGrams} g dieses Nassfutters ergänzt durch ~{dryGrams} g Trockenfutter (~{dryKcal} kcal)."
   },
   "pet": {
     "foodTitle": "Futter",
@@ -1023,5 +1028,23 @@
     "allProductsTitle": "Alle {count} Sorten von {brand} auf einer Seite",
     "allProductsSubtitle": "{shown} von {total} Produkten angezeigt",
     "searchPlaceholder": "Innerhalb von {brand} suchen (z. B. Welpe, Lachs, sterilised)…"
+  },
+  "allergenPages": {
+    "metaTitle": "Hunde- & Katzenfutter ohne {allergen} – streng geprüft",
+    "metaDescription": "Alle {count} Alleinfuttermittel für Hunde und Katzen garantiert ohne {allergen} und ohne vage tierische oder pflanzliche Nebenerzeugnisse, sortiert nach Scanabowl-Bewertung.",
+    "strictBadge": "Streng geprüft · auch frei von vagen Nebenerzeugnissen",
+    "h1": "Tierfutter ohne {allergen}",
+    "intro": "Suchen Sie Hundefutter oder Katzenfutter ohne {allergen}? Hier finden Sie alle {count} Alleinfuttermittel aus unserer Datenbank, die kein {allergen} enthalten und keine vagen Sammelbegriffe verwenden, hinter denen sich {allergen} verbergen könnte.",
+    "statSafeTotal": "Streng sicher gesamt",
+    "statSafeDogs": "Sicheres Hundefutter",
+    "statSafeCats": "Sicheres Katzenfutter",
+    "statFilteredOut": "Ausgeschlossene Futter",
+    "statFilteredSub": "{definite} enthält es · {vague} vages Etikett",
+    "whyTitle": "Warum Futter ohne {allergen}?",
+    "vagueTitle": "Warum wir auch vage Etiketten ausschließen",
+    "catalogTitle": "Alle {count} Futter ohne {allergen} auf einer Seite",
+    "searchPlaceholder": "In Futter ohne {allergen} suchen (z. B. Marke, Welpe, Nassfutter)…",
+    "indexTitle": "Allergenfreies Futter (ohne bestimmte Zutat)",
+    "indexSubtitle": "Hat Ihr Hund oder Ihre Katze eine Futtermittelallergie oder Unverträglichkeit? Entdecken Sie alle streng geprüften Futtersorten ohne das jeweilige Allergen – inklusive Ausschluss vager Nebenerzeugnisse."
   }
 }

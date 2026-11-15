@@ -12,7 +12,7 @@ describe("sitemap.xml", async () => {
   });
 
   it("stays small: food pages carry no hreflang blocks (the pages declare them themselves)", () => {
-    const foods = entries.filter((e) => /\/foods\/(?!brand(\/|$)).+/.test(new URL(e.url).pathname));
+    const foods = entries.filter((e) => /\/foods\/(?!(brand|without)(\/|$)).+/.test(new URL(e.url).pathname));
     expect(foods.length).toBeGreaterThan(1000);
     expect(foods.every((e) => !e.alternates)).toBe(true);
     expect(JSON.stringify(entries).length).toBeLessThan(3_000_000);
