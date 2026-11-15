@@ -6,11 +6,14 @@ import type { ProductDetail } from "@/lib/data/types";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import type { TFunction } from "@/lib/i18n/t";
 import { foodTypeLabel, gradeLabel, scoreAria, speciesLabel } from "@/lib/labels";
+import { translateIngredient } from "@/lib/scoring/translate-ingredient";
 import type { Reason } from "@/lib/scoring/types";
 
-function reasonText(t: TFunction, r: Reason, prefix = "reasons"): string {
+function reasonText(t: TFunction, r: Reason, lang: Locale, prefix = "reasons"): string {
   const params = { ...(r.params ?? {}) };
-  // ingredient names / lists come from the label and are shown as printed
+  if (typeof params.name === "string") {
+    params.name = translateIngredient(params.name, lang);
+  }
   return t(`${prefix}.${r.code}`, params);
 }
 
@@ -111,7 +114,7 @@ export function ScorePanel({ p, t, lang, rank }: { p: ProductDetail; t: TFunctio
               {p.positives.map((r) => (
                 <li key={r.code} className="flex gap-2.5 text-[0.95rem] leading-snug">
                   <IconCheck className="mt-0.5 h-5 w-5 shrink-0 text-grade-a" />
-                  <span>{reasonText(t, r)}</span>
+                  <span>{reasonText(t, r, lang)}</span>
                 </li>
               ))}
             </ul>
@@ -126,7 +129,7 @@ export function ScorePanel({ p, t, lang, rank }: { p: ProductDetail; t: TFunctio
               {p.negatives.map((r) => (
                 <li key={r.code} className="flex gap-2.5 text-[0.95rem] leading-snug">
                   <IconX className="mt-0.5 h-5 w-5 shrink-0 text-grade-e" />
-                  <span>{reasonText(t, r)}</span>
+                  <span>{reasonText(t, r, lang)}</span>
                 </li>
               ))}
             </ul>

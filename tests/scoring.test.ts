@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { parseAnalysis } from "../lib/scoring/parse-analysis";
 import { parseIngredients } from "../lib/scoring/parse-ingredients";
+import { translateIngredient } from "../lib/scoring/translate-ingredient";
 import { detectAllergens, checkAllergies } from "../lib/scoring/allergens";
 import { computeNutrition, estimateMePer100g } from "../lib/scoring/nutrition";
 import { scoreProduct, gradeFor } from "../lib/scoring/score";
@@ -76,6 +77,22 @@ describe("ingredient parsing", () => {
     const { ingredients } = parseIngredients("kip (gedehydreerd) 25%, rijst, maïs, dierlijk vet, gist, mineralen");
     expect(ingredients.reduce((s, i) => s + i.share, 0)).toBeCloseTo(1, 5);
     expect(ingredients[2].share).toBeLessThanOrEqual(ingredients[1].share + 1e-9);
+  });
+  it("preserves European decimal commas in percentages without splitting on the comma", () => {
+    const { ingredients } = parseIngredients("42% kip, 3,3% zoete aardappelen, 0,2% zalmolie, mineralen");
+    expect(ingredients.map((i) => i.raw)).toEqual(["kip", "zoete aardappelen", "zalmolie", "mineralen"]);
+    expect(ingredients[1].pct).toBe(3.3);
+    expect(ingredients[2].pct).toBe(0.2);
+  });
+  it("translates ingredients into the active page locale (nl, en, de, fr)", () => {
+    expect(translateIngredient("vlees en dierlijke bijproducten", "en")).toBe("meat and animal derivatives");
+    expect(translateIngredient("vlees en dierlijke bijproducten", "de")).toBe("Fleisch und tierische Nebenerzeugnisse");
+    expect(translateIngredient("vlees en dierlijke bijproducten", "fr")).toBe("viandes et sous-produits animaux");
+    expect(translateIngredient("gedroogde bietenpulp", "en")).toBe("dried beet pulp");
+    expect(translateIngredient("gedroogde bietenpulp", "de")).toBe("getrocknete Rübenschnitzel");
+    expect(translateIngredient("gedroogde bietenpulp", "fr")).toBe("pulpe de betterave séchée");
+    expect(translateIngredient("salmon oil", "nl")).toBe("zalmolie");
+    expect(translateIngredient("glucosamine 500 mg/kg", "de")).toBe("Glucosamin (500 mg/kg)");
   });
 });
 

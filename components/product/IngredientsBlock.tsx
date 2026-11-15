@@ -1,8 +1,10 @@
 import type { ProductDetail } from "@/lib/data/types";
+import type { Locale } from "@/lib/i18n/config";
 import type { TFunction } from "@/lib/i18n/t";
 import { IconInfo } from "@/components/ui/Icons";
 import { kindGroup, type KindGroup } from "@/lib/labels";
 import { splitGroups } from "@/lib/scoring/splitting";
+import { translateIngredient } from "@/lib/scoring/translate-ingredient";
 import { IngredientInspector } from "./IngredientInspector";
 
 const GROUP_STYLE: Record<KindGroup, { bar: string }> = {
@@ -15,7 +17,7 @@ const GROUP_STYLE: Record<KindGroup, { bar: string }> = {
 /** additives a pet does not need: shown in red (they already cost points in the score) */
 const UNNEEDED = new Set(["sugar", "colourant", "preservative"]);
 
-export function IngredientsBlock({ p, t }: { p: ProductDetail; t: TFunction }) {
+export function IngredientsBlock({ p, t, lang = "nl" }: { p: ProductDetail; t: TFunction; lang?: Locale }) {
   // an unreliable ingredient text (see scoring) is not shown or broken down at all
   if (!p.ingredients.length || p.notScored === "ingredients_unclear") {
     return <p className="text-ink-soft">{t("product.noIngredients")}</p>;
@@ -69,7 +71,12 @@ export function IngredientsBlock({ p, t }: { p: ProductDetail; t: TFunction }) {
           <IconInfo className="mt-0.5 h-5 w-5 shrink-0 text-warn" />
           <span>
             <strong>{t("product.splitTitle")}</strong>{" "}
-            {t(g.outweighsFirst ? "product.splitTextFirst" : "product.splitText", { count: g.forms.length, forms: g.forms.join(", "), pct: g.share, first: p.ingredients[0].raw })}
+            {t(g.outweighsFirst ? "product.splitTextFirst" : "product.splitText", {
+              count: g.forms.length,
+              forms: g.forms.map((f) => translateIngredient(f, lang)).join(", "),
+              pct: g.share,
+              first: translateIngredient(p.ingredients[0].raw, lang),
+            })}
           </span>
         </p>
       ))}

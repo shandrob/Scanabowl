@@ -171,7 +171,7 @@ export default async function ProductPage({ params }: Props) {
           {/* Ingredient Transparency Card */}
           <section aria-labelledby="ingr-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
             <h2 id="ingr-h" className="font-display text-2xl font-semibold tracking-tight text-ink">{t("product.ingredientsTitle")}</h2>
-            <div className="mt-4"><IngredientsBlock p={p} t={t} /></div>
+            <div className="mt-4"><IngredientsBlock p={p} t={t} lang={lang} /></div>
           </section>
 
           {/* Guaranteed Analysis & Dry Matter Card */}

@@ -94,15 +94,17 @@ export function splitLabel(text: string): SplitLabel {
   return { composition, additives };
 }
 
-/** Split on commas that are not inside brackets. */
+/** Split on commas that are not inside brackets (and not decimal commas like 0,5%). */
 export function splitTopLevel(text: string): string[] {
   const parts: string[] = [];
   let depth = 0;
   let cur = "";
-  for (const ch of text) {
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
     if (ch === "(" || ch === "[") depth++;
     else if (ch === ")" || ch === "]") depth = Math.max(0, depth - 1);
-    if ((ch === "," || ch === ";") && depth === 0) {
+    const isDecimalComma = ch === "," && i > 0 && /\d/.test(text[i - 1]) && /\d/.test(text[i + 1] ?? "");
+    if ((ch === "," || ch === ";") && depth === 0 && !isDecimalComma) {
       if (cur.trim()) parts.push(cur.trim());
       cur = "";
     } else cur += ch;

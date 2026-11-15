@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useT } from "@/components/i18n/DictionaryProvider";
+import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import type { IngredientView } from "@/lib/data/types";
 import { kindGroup, type KindGroup } from "@/lib/labels";
+import { translateIngredient } from "@/lib/scoring/translate-ingredient";
 
 const GROUP_STYLE: Record<KindGroup, { chip: string; badge: string }> = {
   animal: { chip: "border-grade-a/40 bg-grade-a-soft text-ink", badge: "bg-grade-a-soft text-grade-a" },
@@ -28,8 +29,10 @@ function explainKindKey(kind: string, named: boolean): string {
 
 export function IngredientInspector({ ingredients }: { ingredients: IngredientView[] }) {
   const t = useT();
+  const lang = useLang();
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const selected = selectedIdx !== null ? ingredients[selectedIdx] ?? null : null;
+  const selectedLabel = selected ? translateIngredient(selected.raw, lang) : "";
 
   return (
     <div className="mt-5">
@@ -41,6 +44,7 @@ export function IngredientInspector({ ingredients }: { ingredients: IngredientVi
           const isSelected = selectedIdx === idx;
           const group = kindGroup(i.kind);
           const unneeded = UNNEEDED.has(i.kind);
+          const label = translateIngredient(i.raw, lang);
           return (
             <li key={`${i.raw}-${idx}`}>
               <button
@@ -55,7 +59,7 @@ export function IngredientInspector({ ingredients }: { ingredients: IngredientVi
                     : `${GROUP_STYLE[group].chip}${!i.named && group !== "other" ? " border-dashed border-ink-faint" : ""}`
                 } ${isSelected ? "ring-2 ring-brand shadow-sm" : "hover:brightness-95"}`}
               >
-                <span>{i.raw}</span>
+                <span>{label}</span>
                 {!i.named && !unneeded && group !== "other" && (
                   <span className="ml-1 text-ink-faint" aria-hidden>?</span>
                 )}
@@ -72,7 +76,10 @@ export function IngredientInspector({ ingredients }: { ingredients: IngredientVi
         <div className="mt-3.5 rounded-xl border border-line bg-cream/80 p-4 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-display text-base font-semibold text-ink">{selected.raw}</span>
+              <span className="font-display text-base font-semibold text-ink">{selectedLabel}</span>
+              {selectedLabel.toLowerCase() !== selected.raw.toLowerCase() && (
+                <span className="font-sans text-xs text-ink-faint">({selected.raw})</span>
+              )}
               <span
                 className={`rounded-full px-2.5 py-0.5 font-sans text-xs font-semibold ${
                   UNNEEDED.has(selected.kind)
