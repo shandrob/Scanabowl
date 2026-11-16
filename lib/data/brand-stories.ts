@@ -236,6 +236,15 @@ export const BRAND_STORIES: Record<string, BrandEditorial> = {
       fr: "Amanova est une marque espagnole (Visán) qui cuisine ses aliments pour chiens et chats avec de la viande ou du poisson frais, souvent en recettes monoprotéiques pour animaux sensibles.",
     },
   },
+  "bf-petfood": {
+    origin: "NL",
+    text: {
+      nl: "BF®Petfood (voorheen Biofood) is een Nederlands familiebedrijf uit Friesland dat sinds 1989 natuurlijke honden- en kattenvoeding en supplementen maakt, waaronder koudgeperste brokken, gestoomde vleesmaaltijden en EU-biologische voeding.",
+      en: "BF®Petfood (formerly Biofood) is a Dutch family business from Friesland crafting natural dog and cat food and supplements since 1989, including cold-pressed kibble, steamed meat meals and EU-organic recipes.",
+      de: "BF®Petfood (ehemals Biofood) ist ein niederländisches Familienunternehmen aus Friesland, das seit 1989 natürliches Hunde- und Katzenfutter sowie Nahrungsergänzungsmittel herstellt – von kaltgepresstem Trockenfutter bis zu EU-Bio-Menüs.",
+      fr: "BF®Petfood (anciennement Biofood) est une entreprise familiale néerlandaise de Frise qui fabrique depuis 1989 des aliments naturels et compléments pour chiens et chats, dont des croquettes pressées à froid et des recettes bio.",
+    },
+  },
   "wellness-core": {
     origin: "USA",
     text: {

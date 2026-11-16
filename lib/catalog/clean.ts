@@ -194,6 +194,7 @@ export function cleanName(name: string): string {
 
 /** Brand fixes for scraper artefacts and sub-lines that belong to a parent brand. */
 const BRAND_ALIASES: Array<[RegExp, string]> = [
+  [/^(?:bf|bf\s*petfood|biofood)$/i, "BF Petfood"],
   [/^royal canin veterinary( diets?)?$/i, "Royal Canin"],
   [/^hill'?s prescription diet$/i, "Hill's"],
   [/^pro plan veterinary( diets?)?$/i, "Pro Plan"],

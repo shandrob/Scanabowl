@@ -134,7 +134,7 @@ const CURATED_BRAND_SLUGS = [
   "wolf-of-wilderness",
   "concept-for-life",
   "carocroc",
-  "biofood",
+  "bf-petfood",
   "smolke",
   "pedigree",
 ];
