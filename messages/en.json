@@ -476,7 +476,9 @@
     "mixedWetLabel": "Mixed feeding: how much of this wet food do you give per day?",
     "mixedOff": "Only this",
     "mixedSummaryDry": "Feed {dryGrams} g of this dry food alongside {wetGrams} g wet food (~{wetKcal} kcal).",
-    "mixedSummaryWet": "Feed {wetGrams} g of this wet food topped up with ~{dryGrams} g dry kibble (~{dryKcal} kcal)."
+    "mixedSummaryWet": "Feed {wetGrams} g of this wet food topped up with ~{dryGrams} g dry kibble (~{dryKcal} kcal).",
+    "comparePricesTitle": "Compare current prices",
+    "comparePricesText": "Check availability and compare live prices across shops:"
   },
   "pet": {
     "foodTitle": "Food",
@@ -710,7 +712,14 @@
     "submit": "Submit for review",
     "csvTitle": "Many products? Send a CSV",
     "csvText": "Have a larger range? Download our CSV template (Excel-compatible) and email your completed file to [info@scanabowl.com](mailto:info@scanabowl.com). Existing products on Scanabowl are automatically enriched and new ones added.",
-    "csvButton": "Download CSV template"
+    "csvButton": "Download CSV template",
+    "b2bTitle": "Score badge licence & brand partnerships",
+    "b2bIntro": "Does your food naturally earn a high score? Brands can never buy a higher score, but you can collaborate transparently.",
+    "badgeLicenseTitle": "Scanabowl Score Badge (75+/100)",
+    "badgeLicenseText": "Foods that independently achieve Grade A or B can licence the official Scanabowl Score badge for packaging and online stores.",
+    "verifiedPageTitle": "Verified brand page",
+    "verifiedPageText": "Manage official pack photos, direct store links or a reader discount on your dedicated Scanabowl brand page.",
+    "b2bCta": "Enquire about partnerships"
   },
   "forms": {
     "productName": "Product name",
@@ -1027,7 +1036,9 @@
     "lowestRatedFood": "Lowest rated",
     "allProductsTitle": "All {count} {brand} foods on one page",
     "allProductsSubtitle": "Showing {shown} of {total} products",
-    "searchPlaceholder": "Search within {brand} (e.g. puppy, salmon, sterilised)…"
+    "searchPlaceholder": "Search within {brand} (e.g. puppy, salmon, sterilised)…",
+    "brandRepText": "Do you represent {brand}?",
+    "brandRepCta": "Update products or request the Score badge"
   },
   "allergenPages": {
     "metaTitle": "Dog & cat food without {allergen} – strictly checked",
@@ -1046,5 +1057,51 @@
     "searchPlaceholder": "Search within {allergen}-free food (e.g. brand, puppy, wet food)…",
     "indexTitle": "Allergen-free food (without specific ingredient)",
     "indexSubtitle": "Does your dog or cat have a food allergy or intolerance? Browse all strictly checked foods without that allergen – automatically excluding vague by-products."
+  },
+  "support": {
+    "badge": "100% free for every pet owner",
+    "title": "Help keep Scanabowl independent and free of paywalls",
+    "text": "We deliberately keep every tool completely free so every owner can choose what is truly best for their dog or cat. Did our portion calculator or allergy shield save you money or worry? Feel free to support our hosting and database updates.",
+    "cta": "Support Scanabowl",
+    "note": "No subscription · completely optional",
+    "footerLink": "Support Scanabowl (keep it free)"
+  },
+  "insurance": {
+    "navTitle": "Pet insurance & vet costs",
+    "metaTitle": "Pet insurance for dogs and cats: is it worth it?",
+    "metaDescription": "An honest comparison between pet health insurance and building a monthly emergency vet fund, including common allergy exclusions.",
+    "badge": "Independent consumer guide",
+    "title": "Pet insurance: worth it or save yourself?",
+    "intro": "An unexpected surgery or chronic allergy treatment can cost thousands of euros. Use our estimator to compare typical monthly insurance premiums against setting aside your own emergency vet fund.",
+    "calcTitle": "Estimator: insurance vs. personal vet savings fund",
+    "calcSubtitle": "Indicative European estimates based on species and age when you enrol.",
+    "ageLabel": "Age when enrolling",
+    "age": {
+      "young": "Puppy / kitten (< 2 yr)",
+      "adult": "Adult (2–6 yr)",
+      "senior": "Senior (7+ yr)"
+    },
+    "optionInsure": "Pet insurance (estimate)",
+    "optionBuffer": "Save monthly yourself",
+    "perMonth": "/ month",
+    "fiveYearCost": "5-year premiums: approx. €{min} – €{max}",
+    "fiveYearBuffer": "Saved after 5 years: €{total}",
+    "insureNote": "Covers sudden high surgery costs right away (watch for 30-day waiting periods and co-pays).",
+    "bufferNote": "The money stays yours if your pet stays healthy, but only covers large bills once you have saved enough.",
+    "checklistTitle": "When pet insurance often makes sense",
+    "checklist": [
+      "**Enrol early:** before allergies, joint issues or chronic conditions are noted in your vet file.",
+      "**Limited emergency savings:** if a sudden €1,500–€3,000 surgery bill would be hard to cover out of pocket.",
+      "**Breed-specific peace of mind:** for breeds prone to hip, knee, spinal or heart conditions."
+    ],
+    "exclusionsTitle": "Read the small print carefully",
+    "exclusions": [
+      "**Pre-existing conditions:** if your pet has already seen a vet for itching, diarrhoea or ear infections, allergies are usually excluded.",
+      "**Annual caps & excess:** check the yearly payout limit (often €2,500–€5,000) and your co-payment percentage.",
+      "**Routine food & prevention:** regular pet food, vaccines and prescription diets are rarely covered in standard plans."
+    ],
+    "preventionTitle": "Good nutrition remains the best prevention",
+    "preventionText": "Many stomach, skin and coat problems start with what goes into the bowl every day. Check your pet’s food for free for allergens and nutritional balance.",
+    "allergenTip": "Vet cost & pet insurance guide for allergies"
   }
 }

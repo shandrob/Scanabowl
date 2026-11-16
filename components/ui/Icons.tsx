@@ -82,3 +82,14 @@ export const IconShield = ({ className }: P) => (
     <path d="m9 12 2 2 4-4" />
   </svg>
 );
+export const IconHeart = ({ className }: P) => (
+  <svg {...base} className={className}>
+    <path d="M12 20.5s-7-4.4-9-8.6C1.4 8.6 3.5 5 7 5c2 0 3.6 1 5 2.7C13.4 6 15 5 17 5c3.5 0 5.6 3.6 4 6.9-2 4.2-9 8.6-9 8.6z" />
+  </svg>
+);
+export const IconAward = ({ className }: P) => (
+  <svg {...base} className={className}>
+    <circle cx="12" cy="9" r="5" />
+    <path d="m9 13.5-1.5 7 4.5-2.5 4.5 2.5-1.5-7" />
+  </svg>
+);

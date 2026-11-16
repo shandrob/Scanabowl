@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { shopLinks } from "../lib/shops";
 import { zooplusAffiliateUrl, zooplusSearchQuery } from "../lib/zooplus";
 
 describe("zooplus links", () => {
@@ -13,5 +14,16 @@ describe("zooplus links", () => {
     expect(url.searchParams.get("awinaffid")).toBe("3106869");
     expect(url.searchParams.get("awinmid")).toBe("8139");
     expect(url.searchParams.get("ued")).toBe("https://www.zooplus.nl/search/results?q=Orijen%20Original%20Cat");
+  });
+  it("builds localized multi-shop comparison links across nl, de, and fr", () => {
+    const nl = shopLinks({ ean: "0064992280131", name: "Orijen Original Cat", brand: "Orijen" }, "nl", "test-nl");
+    expect(nl.map((s) => s.id)).toEqual(["zooplus", "brekz", "bol", "amazon"]);
+    expect(nl.find((s) => s.id === "brekz")?.url).toContain("https://www.brekz.nl/search");
+    expect(nl.find((s) => s.id === "amazon")?.url).toContain("https://www.amazon.nl/s");
+
+    const de = shopLinks({ ean: "0064992280131", name: "Orijen Original Cat", brand: "Orijen" }, "de", "test-de");
+    expect(de.map((s) => s.id)).toEqual(["zooplus", "brekz", "amazon"]);
+    expect(de.find((s) => s.id === "zooplus")?.url).toContain("https://www.zooplus.de/");
+    expect(de.find((s) => s.id === "brekz")?.url).toContain("https://www.brekz.de/search");
   });
 });

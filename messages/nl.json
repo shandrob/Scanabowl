@@ -476,7 +476,9 @@
     "mixedWetLabel": "Gemengd voeren: hoeveel van dit natvoer geef je per dag?",
     "mixedOff": "Alleen dit",
     "mixedSummaryDry": "Geef {dryGrams} g van deze brok naast {wetGrams} g natvoer (~{wetKcal} kcal).",
-    "mixedSummaryWet": "Geef {wetGrams} g van dit natvoer aangevuld met ~{dryGrams} g droge brokken (~{dryKcal} kcal)."
+    "mixedSummaryWet": "Geef {wetGrams} g van dit natvoer aangevuld met ~{dryGrams} g droge brokken (~{dryKcal} kcal).",
+    "comparePricesTitle": "Actuele prijzen vergelijken",
+    "comparePricesText": "Bekijk waar dit voer op voorraad is en vergelijk direct de prijs per winkel:"
   },
   "pet": {
     "foodTitle": "Voer",
@@ -710,7 +712,14 @@
     "submit": "Indienen ter controle",
     "csvTitle": "Veel producten? Stuur een CSV",
     "csvText": "Heb je een groter assortiment? Download ons CSV-sjabloon (Excel-compatibel) en mail je ingevulde bestand naar [info@scanabowl.com](mailto:info@scanabowl.com). Bestaande producten op Scanabowl worden automatisch verrijkt en nieuwe producten toegevoegd.",
-    "csvButton": "Download CSV-sjabloon"
+    "csvButton": "Download CSV-sjabloon",
+    "b2bTitle": "Keurmerklicentie & merkpartnerschap",
+    "b2bIntro": "Scoort jouw voer uit zichzelf hoog? Merken kunnen nooit een hogere score kopen, maar wel transparant samenwerken.",
+    "badgeLicenseTitle": "Scanabowl Score-keurmerk (75+/100)",
+    "badgeLicenseText": "Voeders die onafhankelijk score A of B behalen, kunnen het officiële Scanabowl-scorebadge licentiëren voor verpakking en webshop.",
+    "verifiedPageTitle": "Geverifieerde merkpagina",
+    "verifiedPageText": "Beheer officiële productfoto's, directe webshoplinks of een bezoekerskorting op jullie eigen Scanabowl-merkpagina.",
+    "b2bCta": "Vraag partnerschap aan"
   },
   "forms": {
     "productName": "Productnaam",
@@ -1027,7 +1036,9 @@
     "lowestRatedFood": "Laagst beoordeeld",
     "allProductsTitle": "Alle {count} voeders van {brand} op één pagina",
     "allProductsSubtitle": "{shown} van {total} producten getoond",
-    "searchPlaceholder": "Zoek binnen {brand} (bijv. puppy, zalm, sterilised)…"
+    "searchPlaceholder": "Zoek binnen {brand} (bijv. puppy, zalm, sterilised)…",
+    "brandRepText": "Werk je bij {brand}?",
+    "brandRepCta": "Producten bijwerken of Score-keurmerk aanvragen"
   },
   "allergenPages": {
     "metaTitle": "Honden- & kattenvoer zonder {allergen} – strikt gecontroleerd",
@@ -1046,5 +1057,51 @@
     "searchPlaceholder": "Zoek binnen voer zonder {allergen} (bijv. merk, puppy, natvoer)…",
     "indexTitle": "Allergeenvrij voer (zonder specifiek ingrediënt)",
     "indexSubtitle": "Heeft je hond of kat een voedselallergie of intolerantie? Bekijk direct alle strikt gecontroleerde voeders zonder het betreffende allergeen – inclusief uitsluiting van vage bijproducten."
+  },
+  "support": {
+    "badge": "100% gratis voor iedere huisdiereigenaar",
+    "title": "Help Scanabowl onafhankelijk en vrij van betaalmuren te houden",
+    "text": "Wij zetten bewust geen enkele tool achter een betaalmuur: elke eigenaar moet het beste voor zijn hond of kat kunnen kiezen. Heeft de portiecalculator of allergiecheck jou geld of zorgen bespaard? Steun dan vrijwillig onze hosting en database-updates.",
+    "cta": "Steun Scanabowl vrijwillig",
+    "note": "Geen abonnement · volledig vrijblijvend",
+    "footerLink": "Steun Scanabowl (gratis houden)"
+  },
+  "insurance": {
+    "navTitle": "Dierenverzekering & zorgkosten",
+    "metaTitle": "Dierenverzekering voor hond of kat: wanneer loont het?",
+    "metaDescription": "Eerlijke vergelijking tussen een dierenverzekering en zelf maandelijks sparen voor de dierenarts, inclusief veelvoorkomende uitsluitingen bij allergieën.",
+    "badge": "Onafhankelijke consumentengids",
+    "title": "Dierenverzekering: verstandig of zelf sparen?",
+    "intro": "Een onverwachte operatie of langdurige allergiebehandeling kan duizenden euro's kosten. Gebruik onze rekentool om het maandbedrag van een verzekering te vergelijken met zelf een noodpotje opbouwen.",
+    "calcTitle": "Rekenhulp: verzekering vs. eigen dierenartspotje",
+    "calcSubtitle": "Indicatieve richtwaarden voor Nederland en België op basis van diersoort en leeftijd bij aanvang.",
+    "ageLabel": "Leeftijd bij afsluiten",
+    "age": {
+      "young": "Pup / kitten (< 2 jr)",
+      "adult": "Volwassen (2–6 jr)",
+      "senior": "Senior (7+ jr)"
+    },
+    "optionInsure": "Dierenverzekering (indicatie)",
+    "optionBuffer": "Zelf maandelijks apart zetten",
+    "perMonth": "/ maand",
+    "fiveYearCost": "Inleg over 5 jaar: ca. €{min} – €{max}",
+    "fiveYearBuffer": "Opgebouwd potje na 5 jaar: €{total}",
+    "insureNote": "Dekt direct vanaf het begin onverwachte hoge operatiekosten (let op wachttijd van 30 dagen en eigen bijdrage).",
+    "bufferNote": "Het geld blijft van jou als je dier gezond blijft, maar biedt pas dekking zodra je genoeg hebt gespaard.",
+    "checklistTitle": "Wanneer een verzekering vaak slim is",
+    "checklist": [
+      "**Je sluit hem jong af:** vóórdat allergieën, gewrichtsklachten of andere aandoeningen zijn vastgesteld.",
+      "**Geen grote spaarbuffer:** als een plotselinge operatie van €1.500–€3.000 lastig in één keer te betalen is.",
+      "**Duidelijke polis op basis van ras:** bij rassen met bekende risico's op heup-, knie- of hartproblemen."
+    ],
+    "exclusionsTitle": "Let goed op deze kleine lettertjes",
+    "exclusions": [
+      "**Bestaande klachten uitgesloten:** heeft je dier al jeuk, diarree of oorontsteking bij de dierenarts gemeld? Dan wordt die allergie meestal uitgesloten.",
+      "**Jaarlijks maximum & eigen risico:** controleer tot welk bedrag per jaar wordt vergoed (vaak €2.500–€5.000) en welk percentage je zelf betaalt.",
+      "**Preventie & voeding:** regulier voer, vaccinaties en dieetvoer worden in een basispakket meestal niet vergoed."
+    ],
+    "preventionTitle": "Goede voeding blijft de beste preventie",
+    "preventionText": "Veel maag-, darm- en huidklachten beginnen bij wat er elke dag in de voerbak ligt. Controleer gratis het voer van je dier op allergenen en voedingsbalans.",
+    "allergenTip": "Vergoedings- & allergietips voor dierenartskosten"
   }
 }

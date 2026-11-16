@@ -1,10 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
+import { IconExternal } from "@/components/ui/Icons";
+import { localePath } from "@/lib/i18n/config";
 import { dailyEnergy, gramsPerDay, packGrams } from "@/lib/pets/energy";
 import { usePets } from "@/lib/pets/store";
 import type { FoodType, PetProfile, Species } from "@/lib/scoring/types";
+import { shopLinks } from "@/lib/shops";
 
 type Activity = PetProfile["activity"];
 
@@ -26,17 +30,27 @@ function buildCalcPet(species: Species, weightKg: number, activity: Activity): P
 }
 
 /**
- * Reference price card + interactive daily portion, cost & 7-day transition calculator on product detail pages.
+ * Reference price card + interactive daily portion, cost, 7-day transition & multi-shop price comparison card.
  */
 export function OrderCard({
+  ean = "",
+  name = "",
+  brand = "",
   pack,
   price,
+  bolUrl,
+  zooplusUrl,
   species = "dog",
   foodType = "dry",
   kcalPer100g = null,
 }: {
+  ean?: string;
+  name?: string;
+  brand?: string;
   pack?: string;
   price?: number;
+  bolUrl?: string;
+  zooplusUrl?: string;
   species?: Species;
   foodType?: FoodType;
   kcalPer100g?: number | null;
@@ -102,8 +116,12 @@ export function OrderCard({
   const costPerMonth = costPerDay !== null ? costPerDay * 30 : null;
 
   const fmtMoney = (v: number) => v.toFixed(2).replace(".", lang === "en" ? "." : ",");
+  const shops =
+    name || ean
+      ? shopLinks({ ean, name, brand, bolUrl, zooplusUrl }, lang, `scanabowl-${lang}-${ean || "product"}`)
+      : [];
 
-  if (effectivePrice === null && !dailyGrams) return null;
+  if (effectivePrice === null && !dailyGrams && shops.length === 0) return null;
 
   return (
     <section aria-labelledby="order-h" className="rounded-2xl border border-line bg-paper p-5 shadow-card">
@@ -290,6 +308,39 @@ export function OrderCard({
               })}
             </ul>
           </details>
+        </div>
+      )}
+
+      {shops.length > 0 && (
+        <div className={dailyGrams !== null || (price !== undefined && price > 0) ? "mt-5 border-t border-line pt-4" : ""}>
+          <h3 id={price && price > 0 ? undefined : dailyGrams !== null ? undefined : "order-h"} className="font-display text-base font-semibold text-brand-deep">
+            {t("order.comparePricesTitle")}
+          </h3>
+          <p className="mt-0.5 font-sans text-xs text-ink-soft">{t("order.comparePricesText")}</p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            {shops.map((s) => (
+              <a
+                key={s.id}
+                href={s.url}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2 font-sans text-xs font-semibold transition ${
+                  s.id === "zooplus"
+                    ? "bg-brand text-white hover:bg-brand-deep"
+                    : "border border-line bg-cream text-ink hover:border-brand hover:bg-paper hover:text-brand-deep"
+                }`}
+              >
+                <span className="truncate">{s.label}</span>
+                <IconExternal className="h-3.5 w-3.5 shrink-0" />
+              </a>
+            ))}
+          </div>
+          <p className="mt-2.5 font-sans text-[11px] leading-relaxed text-ink-faint">
+            {t("order.disclosure")}{" "}
+            <Link href={localePath(lang, "/affiliate")} className="underline hover:text-ink">
+              {t("order.moreInfo")}
+            </Link>
+          </p>
         </div>
       )}
     </section>

@@ -154,14 +154,20 @@ export default async function AllergenFreePage({ params }: Props) {
               {t("allergenPages.vagueTitle")}
             </h3>
             <p className="mt-1.5 font-sans text-sm leading-relaxed text-ink-soft">{editorial.vagueWarning}</p>
-            <p className="mt-3">
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
               <Link
                 href={localePath(lang, "/my-pet")}
                 className="font-sans text-xs font-semibold text-brand hover:underline"
               >
                 {t("home.persButton")} →
               </Link>
-            </p>
+              <Link
+                href={localePath(lang, "/pet-insurance")}
+                className="font-sans text-xs font-semibold text-ink-soft hover:text-brand hover:underline"
+              >
+                {t("insurance.allergenTip")} →
+              </Link>
+            </div>
           </div>
         </div>
       </section>

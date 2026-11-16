@@ -476,7 +476,9 @@
     "mixedWetLabel": "Mischfütterung: Wie viel von diesem Nassfutter geben Sie pro Tag?",
     "mixedOff": "Nur dieses",
     "mixedSummaryDry": "Füttern Sie {dryGrams} g dieses Trockenfutters neben {wetGrams} g Nassfutter (~{wetKcal} kcal).",
-    "mixedSummaryWet": "Füttern Sie {wetGrams} g dieses Nassfutters ergänzt durch ~{dryGrams} g Trockenfutter (~{dryKcal} kcal)."
+    "mixedSummaryWet": "Füttern Sie {wetGrams} g dieses Nassfutters ergänzt durch ~{dryGrams} g Trockenfutter (~{dryKcal} kcal).",
+    "comparePricesTitle": "Aktuelle Preise vergleichen",
+    "comparePricesText": "Verfügbarkeit prüfen und Preise direkt nach Shop vergleichen:"
   },
   "pet": {
     "foodTitle": "Futter",
@@ -710,7 +712,14 @@
     "submit": "Zur Prüfung einreichen",
     "csvTitle": "Viele Produkte? CSV senden",
     "csvText": "Haben Sie ein größeres Sortiment? Laden Sie unsere CSV-Vorlage (Excel-kompatibel) herunter und senden Sie Ihre ausgefüllte Datei an [info@scanabowl.com](mailto:info@scanabowl.com). Bestehende Produkte auf Scanabowl werden automatisch ergänzt und neue hinzugefügt.",
-    "csvButton": "CSV-Vorlage herunterladen"
+    "csvButton": "CSV-Vorlage herunterladen",
+    "b2bTitle": "Siegel-Lizenz & Markenpartnerschaft",
+    "b2bIntro": "Schneidet Ihr Futter aus eigener Kraft sehr gut ab? Marken können nie eine bessere Note kaufen, aber transparent zusammenarbeiten.",
+    "badgeLicenseTitle": "Scanabowl-Bewertungssiegel (75+/100)",
+    "badgeLicenseText": "Futter, die unabhängig Note A oder B erreichen, können das offizielle Scanabowl-Siegel für Verpackung und Onlineshop lizenzieren.",
+    "verifiedPageTitle": "Verifizierte Markenseite",
+    "verifiedPageText": "Pflegen Sie offizielle Produktfotos, direkte Shop-Links oder einen Rabatt für Leser auf Ihrer eigenen Scanabowl-Markenseite.",
+    "b2bCta": "Partnerschaft anfragen"
   },
   "forms": {
     "productName": "Produktname",
@@ -1027,7 +1036,9 @@
     "lowestRatedFood": "Am niedrigsten bewertet",
     "allProductsTitle": "Alle {count} Sorten von {brand} auf einer Seite",
     "allProductsSubtitle": "{shown} von {total} Produkten angezeigt",
-    "searchPlaceholder": "Innerhalb von {brand} suchen (z. B. Welpe, Lachs, sterilised)…"
+    "searchPlaceholder": "Innerhalb von {brand} suchen (z. B. Welpe, Lachs, sterilised)…",
+    "brandRepText": "Arbeiten Sie bei {brand}?",
+    "brandRepCta": "Produkte aktualisieren oder Bewertungssiegel anfragen"
   },
   "allergenPages": {
     "metaTitle": "Hunde- & Katzenfutter ohne {allergen} – streng geprüft",
@@ -1046,5 +1057,51 @@
     "searchPlaceholder": "In Futter ohne {allergen} suchen (z. B. Marke, Welpe, Nassfutter)…",
     "indexTitle": "Allergenfreies Futter (ohne bestimmte Zutat)",
     "indexSubtitle": "Hat Ihr Hund oder Ihre Katze eine Futtermittelallergie oder Unverträglichkeit? Entdecken Sie alle streng geprüften Futtersorten ohne das jeweilige Allergen – inklusive Ausschluss vager Nebenerzeugnisse."
+  },
+  "support": {
+    "badge": "100 % kostenlos für alle Tierhalter",
+    "title": "Helfen Sie mit, Scanabowl unabhängig und ohne Paywall zu halten",
+    "text": "Wir stellen bewusst keine einzige Funktion hinter eine Bezahlschranke: Jeder Halter soll das Beste für seinen Hund oder seine Katze wählen können. Hat Ihnen der Rechner oder Allergiecheck geholfen? Unterstützen Sie freiwillig Hosting und Datenbankpflege.",
+    "cta": "Scanabowl freiwillig unterstützen",
+    "note": "Kein Abo · völlig unverbindlich",
+    "footerLink": "Scanabowl unterstützen (kostenlos halten)"
+  },
+  "insurance": {
+    "navTitle": "Tierkrankenversicherung & Kosten",
+    "metaTitle": "Tierkrankenversicherung für Hund & Katze: Wann lohnt sie sich?",
+    "metaDescription": "Ehrlicher Vergleich zwischen einer Tierkrankenversicherung und einem monatlichen Notfallpolster für Tierarztkosten – inklusive häufiger Ausschlüsse bei Allergien.",
+    "badge": "Unabhängiger Ratgeber",
+    "title": "Tierkrankenversicherung: sinnvoll oder selbst sparen?",
+    "intro": "Eine unerwartete Operation oder eine dauerhafte Allergiebehandlung kann Tausende Euro kosten. Vergleichen Sie mit unserem Rechner den typischen Monatsbeitrag mit einem eigenen Tierarzt-Sparpolster.",
+    "calcTitle": "Rechner: Versicherung vs. eigenes Tierarzt-Polster",
+    "calcSubtitle": "Richtwerte für Europa je nach Tierart und Einstiegsalter.",
+    "ageLabel": "Alter bei Abschluss",
+    "age": {
+      "young": "Welpe / Kitten (< 2 J.)",
+      "adult": "Erwachsen (2–6 J.)",
+      "senior": "Senior (7+ J.)"
+    },
+    "optionInsure": "Tierversicherung (Richtwert)",
+    "optionBuffer": "Selbst monatlich zurücklegen",
+    "perMonth": "/ Monat",
+    "fiveYearCost": "Beiträge in 5 Jahren: ca. €{min} – €{max}",
+    "fiveYearBuffer": "Gespart nach 5 Jahren: €{total}",
+    "insureNote": "Deckt unerwartete hohe OP-Kosten ab Beginn (Wartezeit von meist 30 Tagen und Selbstbeteiligung beachten).",
+    "bufferNote": "Das Geld bleibt Ihnen, wenn Ihr Tier gesund bleibt, reicht aber erst nach einiger Sparzeit für große OPs.",
+    "checklistTitle": "Wann eine Versicherung oft sinnvoll ist",
+    "checklist": [
+      "**Früh abschließen:** bevor Allergien, Gelenkprobleme oder Vorerkrankungen in der Tierarztakte stehen.",
+      "**Kleines Notfallpolster:** wenn eine plötzliche OP von €1.500–€3.000 schwer auf einmal zu bezahlen wäre.",
+      "**Rassetypische Risiken:** bei Rassen mit bekannten Risiken für Hüfte, Knie, Wirbelsäule oder Herz."
+    ],
+    "exclusionsTitle": "Darauf sollten Sie im Kleingedruckten achten",
+    "exclusions": [
+      "**Vorerkrankungen ausgeschlossen:** War Ihr Tier bereits wegen Juckreiz, Durchfall oder Ohrenentzündungen in Behandlung, sind Allergien meist ausgeschlossen.",
+      "**Jahreslimit & Selbstbehalt:** Prüfen Sie die jährliche Erstattungsgrenze (oft €2.500–€5.000) und Ihren Eigenanteil.",
+      "**Vorsorge & Futter:** Normales Futter, Impfungen und Diätfutter sind in Basistarifen meist nicht enthalten."
+    ],
+    "preventionTitle": "Gute Ernährung bleibt die beste Vorsorge",
+    "preventionText": "Viele Magen-, Darm- und Hautprobleme beginnen täglich im Napf. Prüfen Sie das Futter Ihres Tieres kostenlos auf Allergene und Nährstoffbalance.",
+    "allergenTip": "Ratgeber Tierarztkosten & Versicherung bei Allergien"
   }
 }

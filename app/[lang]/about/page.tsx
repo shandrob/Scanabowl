@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Sections } from "@/components/ui/LongPage";
 import { Rich } from "@/components/ui/Rich";
+import { SupportBanner } from "@/components/ui/SupportBanner";
 import { aboutStory } from "@/lib/about";
 import { isLocale, localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -57,6 +58,8 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       <div className="prose-scan mt-12">
         <Sections sections={sections} />
       </div>
+
+      <SupportBanner lang={lang} t={t} />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </div>

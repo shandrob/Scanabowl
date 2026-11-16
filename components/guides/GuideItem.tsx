@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GradeBadge, gradeOf } from "@/components/ui/grade";
+import { IconExternal } from "@/components/ui/Icons";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { ScoreRing } from "@/components/ui/ScoreRing";
 import type { ProductDetail } from "@/lib/data/types";
@@ -7,6 +8,7 @@ import type { GuideDef } from "@/lib/guides/defs";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import type { TFunction } from "@/lib/i18n/t";
 import { foodTypeLabel, gradeLabel, scoreAria, stageLabel } from "@/lib/labels";
+import { shopLinks } from "@/lib/shops";
 
 const num = (v: number, lang: Locale, digits = 0) => v.toLocaleString(lang, { maximumFractionDigits: digits, minimumFractionDigits: digits });
 
@@ -26,6 +28,7 @@ export function GuideItem({ p, rank, def, lang, t }: { p: ProductDetail; rank: n
     }
   }
   if (p.animalProteinShare !== null) facts.push(t("guides.factAnimal", { pct: Math.round(p.animalProteinShare * 100) }));
+  const primaryShop = shopLinks({ ean: p.ean, name: p.name, brand: p.brand, bolUrl: p.bolUrl, zooplusUrl: p.zooplusUrl }, lang, `scanabowl-${lang}-guide-${def.slug}`)[0];
 
   return (
     <article className="flex flex-col gap-4 rounded-2xl border border-line bg-paper p-4 shadow-card sm:flex-row sm:items-center sm:p-5">
@@ -54,6 +57,17 @@ export function GuideItem({ p, rank, def, lang, t }: { p: ProductDetail; rank: n
         {facts.length > 0 && <p className="mt-2 font-sans text-xs tabular-nums text-ink-soft">{facts.join(" · ")}</p>}
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href={href} prefetch={false} className="font-sans text-sm font-semibold text-brand hover:underline">{t("guides.view")} →</Link>
+          {primaryShop && (
+            <a
+              href={primaryShop.url}
+              target="_blank"
+              rel="sponsored nofollow noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-full border border-line bg-cream px-3 py-1 font-sans text-xs font-semibold text-ink transition hover:border-brand hover:text-brand-deep"
+            >
+              {primaryShop.exact ? t("order.zooplusExact") : t("order.zooplusButton")}
+              <IconExternal className="h-3 w-3" />
+            </a>
+          )}
         </div>
       </div>
     </article>

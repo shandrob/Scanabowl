@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { GradeBadge, gradeOf } from "@/components/ui/grade";
-import { IconPaw, IconSearch, IconX } from "@/components/ui/Icons";
+import { IconExternal, IconPaw, IconSearch, IconX } from "@/components/ui/Icons";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { ScoreRing } from "@/components/ui/ScoreRing";
 import { MAX_COMPARE, useCompare } from "@/lib/compare/store";
@@ -18,6 +18,7 @@ import { usePets } from "@/lib/pets/store";
 import { personalFit } from "@/lib/scoring/personalize";
 import type { PetProfile, Species } from "@/lib/scoring/types";
 import { matchesQuery, queryTerms, searchHaystack } from "@/lib/search";
+import { shopLinks } from "@/lib/shops";
 
 const DEFAULT_WEIGHT: Record<Species, number> = { dog: 15, cat: 4 };
 
@@ -473,6 +474,34 @@ export function CompareTool() {
                   ))}
                 </div>
               ))}
+
+              {/* Multi-Shop Price Comparison Row */}
+              <div className="grid items-center divide-x divide-line border-t border-line bg-cream/60" style={grid}>
+                <span className="px-4 py-3 font-sans text-xs font-medium text-ink-soft">{t("order.comparePricesTitle")}</span>
+                {rows.map(({ e }) => {
+                  const links = shopLinks({ ean: e.e, name: e.n, brand: e.b, zooplusUrl: e.zp }, lang, `scanabowl-${lang}-compare`).slice(0, 2);
+                  return (
+                    <div key={e.i} className="flex flex-col gap-1.5 p-3">
+                      {links.map((s) => (
+                        <a
+                          key={s.id}
+                          href={s.url}
+                          target="_blank"
+                          rel="sponsored nofollow noopener noreferrer"
+                          className={`inline-flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 font-sans text-xs font-semibold transition ${
+                            s.id === "zooplus"
+                              ? "bg-brand text-white hover:bg-brand-deep"
+                              : "border border-line bg-paper text-ink hover:border-brand hover:text-brand-deep"
+                          }`}
+                        >
+                          {s.label}
+                          <IconExternal className="h-3.5 w-3.5" />
+                        </a>
+                      ))}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
           <p className="mt-4 max-w-3xl font-sans text-xs leading-relaxed text-ink-faint">{t("compare.note")}</p>

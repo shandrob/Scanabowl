@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BrandForm } from "@/components/forms/BrandForm";
-import { IconCheck, IconShield } from "@/components/ui/Icons";
+import { IconAward, IconCheck, IconShield } from "@/components/ui/Icons";
 import { Rich } from "@/components/ui/Rich";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createRaw, createT } from "@/lib/i18n/t";
 import { pageMeta } from "@/lib/meta";
+import { SITE } from "@/lib/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -62,6 +63,29 @@ export default async function BrandsPage({ params }: { params: Promise<{ lang: s
                 <li key={i} className="flex gap-2.5 text-sm text-ink"><IconCheck className="mt-0.5 h-5 w-5 shrink-0 text-grade-a" /><Rich text={s} /></li>
               ))}
             </ul>
+          </section>
+          <section id="b2b" className="rounded-2xl border border-line bg-paper p-6 shadow-card">
+            <h2 className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-brand-deep">
+              <IconAward className="h-5 w-5 text-brand" />
+              {t("brands.b2bTitle")}
+            </h2>
+            <p className="mt-2 font-sans text-sm leading-relaxed text-ink-soft">{t("brands.b2bIntro")}</p>
+            <ul className="mt-4 space-y-3 font-sans text-sm text-ink">
+              <li className="rounded-xl border border-line bg-cream/70 p-3.5">
+                <p className="font-semibold text-brand-deep">{t("brands.badgeLicenseTitle")}</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink-soft">{t("brands.badgeLicenseText")}</p>
+              </li>
+              <li className="rounded-xl border border-line bg-cream/70 p-3.5">
+                <p className="font-semibold text-brand-deep">{t("brands.verifiedPageTitle")}</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink-soft">{t("brands.verifiedPageText")}</p>
+              </li>
+            </ul>
+            <a
+              href={`mailto:${SITE.email}?subject=${encodeURIComponent("Scanabowl Brand Partnership / Score Badge")}`}
+              className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand px-4 py-2.5 font-sans text-sm font-semibold text-white transition hover:bg-brand-deep"
+            >
+              {t("brands.b2bCta")}
+            </a>
           </section>
         </aside>
       </div>

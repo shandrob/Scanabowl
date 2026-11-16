@@ -227,6 +227,12 @@ export default async function BrandPage({ params }: Props) {
       <div className="mt-12 max-w-3xl space-y-2 font-sans text-xs text-ink-faint">
         {b.notScored > 0 && <p>{t("brandPages.notScoredNote", { brand: b.name, count: b.notScored })}</p>}
         <p>{t("brandPages.independent", { brand: b.name })}</p>
+        <p>
+          {t("brandPages.brandRepText", { brand: b.name })}{" "}
+          <Link href={`${localePath(lang, "/brands")}#b2b`} className="font-semibold text-brand hover:underline">
+            {t("brandPages.brandRepCta")} →
+          </Link>
+        </p>
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

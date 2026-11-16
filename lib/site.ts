@@ -12,11 +12,15 @@ export const SITE = {
       : "info@scanabowl.com",
   /** bol.com partner "site id" from the Partner Platform; empty = plain (non-affiliate) links */
   bolSiteId: process.env.NEXT_PUBLIC_BOL_SITE_ID ?? "",
-  /** Awin affiliate network: publisher id of Scanabowl and the merchant id of the zooplus NL-BE programme */
+  /** Awin affiliate network: publisher id of Scanabowl and merchant ids */
   awin: {
     publisherId: process.env.NEXT_PUBLIC_AWIN_PUBLISHER_ID ?? "3106869",
     zooplusMerchantId: process.env.NEXT_PUBLIC_AWIN_ZOOPLUS_MID ?? "8139",
+    brekzMerchantId: process.env.NEXT_PUBLIC_AWIN_BREKZ_MID ?? "",
   },
+  /** Optional Amazon Associates tag and voluntary supporter donation URL (set in Vercel env) */
+  amazonTag: process.env.NEXT_PUBLIC_AMAZON_TAG ?? "",
+  supportUrl: process.env.NEXT_PUBLIC_SUPPORT_URL ?? "",
   company: {
     kvk: process.env.NEXT_PUBLIC_KVK ?? "",
     vat: process.env.NEXT_PUBLIC_VAT ?? "",

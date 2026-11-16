@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CurrentFoodAdvice } from "@/components/pet/CurrentFoodAdvice";
 import { PetManager } from "@/components/pet/PetManager";
+import { SupportBanner } from "@/components/ui/SupportBanner";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT } from "@/lib/i18n/t";
@@ -26,6 +27,7 @@ export default async function MyPetPage({ params }: { params: Promise<{ lang: st
         <PetManager />
       </div>
       <CurrentFoodAdvice />
+      <SupportBanner lang={lang} t={t} />
     </div>
   );
 }

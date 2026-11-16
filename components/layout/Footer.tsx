@@ -36,18 +36,21 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
             ["/compare", t("nav.compare")],
             ["/foods/brand", t("nav.allBrands")],
             ["/my-pet", t("nav.myPet")],
+            ["/pet-insurance", t("insurance.navTitle")],
             ["/blog", t("nav.blog")],
             ["/how-we-score", t("nav.howWeScore")],
           ])}
           {col(t("footer.contribute"), [
             ["/suggest", t("nav.suggest")],
             ["/brands", t("nav.brands")],
+            ["/about#support", t("support.footerLink")],
             ["/about", t("nav.about")],
             ["/contact", t("nav.contact")],
           ])}
           {col(t("footer.legal"), [
             ["/privacy", t("nav.privacy")],
             ["/terms", t("nav.terms")],
+            ["/affiliate", t("nav.affiliate")],
           ])}
         </div>
         <div className="mt-10 border-t border-line pt-6 text-xs leading-relaxed text-ink-faint">

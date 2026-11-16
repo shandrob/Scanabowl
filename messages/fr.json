@@ -476,7 +476,9 @@
     "mixedWetLabel": "Bi-nutrition : quelle quantité de cette pâtée donnez-vous par jour ?",
     "mixedOff": "Seulement ceci",
     "mixedSummaryDry": "Donnez {dryGrams} g de ces croquettes en complément de {wetGrams} g de pâtée (~{wetKcal} kcal).",
-    "mixedSummaryWet": "Donnez {wetGrams} g de cette pâtée complétés par ~{dryGrams} g de croquettes (~{dryKcal} kcal)."
+    "mixedSummaryWet": "Donnez {wetGrams} g de cette pâtée complétés par ~{dryGrams} g de croquettes (~{dryKcal} kcal).",
+    "comparePricesTitle": "Comparer les prix actuels",
+    "comparePricesText": "Vérifiez la disponibilité et comparez les prix par boutique :"
   },
   "pet": {
     "foodTitle": "Alimentation",
@@ -710,7 +712,14 @@
     "submit": "Soumettre pour vérification",
     "csvTitle": "Beaucoup de produits ? Envoyez un CSV",
     "csvText": "Vous avez une gamme plus large ? Téléchargez notre modèle CSV (compatible Excel) et envoyez votre fichier complété à [info@scanabowl.com](mailto:info@scanabowl.com). Les produits existants sur Scanabowl sont automatiquement enrichis et les nouveaux ajoutés.",
-    "csvButton": "Télécharger le modèle CSV"
+    "csvButton": "Télécharger le modèle CSV",
+    "b2bTitle": "Licence du badge & partenariats marques",
+    "b2bIntro": "Votre aliment obtient naturellement une note élevée ? Les marques ne peuvent jamais acheter une meilleure note, mais peuvent collaborer en toute transparence.",
+    "badgeLicenseTitle": "Badge de score Scanabowl (75+/100)",
+    "badgeLicenseText": "Les aliments obtenant de manière indépendante la note A ou B peuvent licencier le badge officiel Scanabowl pour leurs emballages et boutique en ligne.",
+    "verifiedPageTitle": "Page marque vérifiée",
+    "verifiedPageText": "Gérez les photos officielles, liens directs vers votre boutique ou une réduction visiteurs sur votre page marque Scanabowl.",
+    "b2bCta": "Demander un partenariat"
   },
   "forms": {
     "productName": "Nom du produit",
@@ -1027,7 +1036,9 @@
     "lowestRatedFood": "Moins bien noté",
     "allProductsTitle": "Les {count} aliments {brand} sur une seule page",
     "allProductsSubtitle": "{shown} sur {total} produits affichés",
-    "searchPlaceholder": "Rechercher dans {brand} (p. ex. chiot, saumon, stérilisé)…"
+    "searchPlaceholder": "Rechercher dans {brand} (p. ex. chiot, saumon, stérilisé)…",
+    "brandRepText": "Vous représentez {brand} ?",
+    "brandRepCta": "Mettre à jour vos produits ou demander le badge de score"
   },
   "allergenPages": {
     "metaTitle": "Aliment chien & chat sans {allergen} – contrôle strict",
@@ -1046,5 +1057,51 @@
     "searchPlaceholder": "Rechercher parmi les aliments sans {allergen} (p. ex. marque, chiot, pâtée)…",
     "indexTitle": "Aliments sans allergène (sans ingrédient spécifique)",
     "indexSubtitle": "Votre chien ou chat souffre d’une allergie ou intolérance alimentaire ? Découvrez tous les aliments strictement contrôlés sans cet allergène – avec exclusion automatique des sous-produits vagues."
+  },
+  "support": {
+    "badge": "100 % gratuit pour tous les propriétaires",
+    "title": "Aidez à garder Scanabowl indépendant et sans mur payant",
+    "text": "Nous choisissons volontairement de tout laisser gratuit : chaque propriétaire doit pouvoir offrir le meilleur à son chien ou chat. Nos outils vous ont aidé à économiser ou à choisir sereinement ? Vous pouvez soutenir nos serveurs et mises à jour.",
+    "cta": "Soutenir Scanabowl",
+    "note": "Sans abonnement · entièrement libre",
+    "footerLink": "Soutenir Scanabowl (garder le site gratuit)"
+  },
+  "insurance": {
+    "navTitle": "Assurance animaux & frais vétérinaires",
+    "metaTitle": "Assurance chien & chat : est-ce vraiment rentable ?",
+    "metaDescription": "Comparaison honnête entre une assurance santé animale et une épargne vétérinaire mensuelle, y compris les exclusions fréquentes liées aux allergies.",
+    "badge": "Guide consommateur indépendant",
+    "title": "Assurance animale : utile ou épargner soi-même ?",
+    "intro": "Une opération imprévue ou un traitement chronique contre les allergies peut coûter des milliers d'euros. Utilisez notre simulateur pour comparer une cotisation mensuelle avec votre propre cagnotte vétérinaire.",
+    "calcTitle": "Simulateur : assurance vs épargne vétérinaire personnelle",
+    "calcSubtitle": "Estimations européennes indicatives selon l'espèce et l'âge à la souscription.",
+    "ageLabel": "Âge à la souscription",
+    "age": {
+      "young": "Chiot / chaton (< 2 ans)",
+      "adult": "Adulte (2–6 ans)",
+      "senior": "Senior (7+ ans)"
+    },
+    "optionInsure": "Assurance santé (estimation)",
+    "optionBuffer": "Épargner chaque mois soi-même",
+    "perMonth": "/ mois",
+    "fiveYearCost": "Cotisations sur 5 ans : env. {min} € – {max} €",
+    "fiveYearBuffer": "Épargné après 5 ans : {total} €",
+    "insureNote": "Couvre rapidement les grosses chirurgies imprévues (attention au délai de carence d'environ 30 jours et à la franchise).",
+    "bufferNote": "L'argent reste à vous si votre animal reste en bonne santé, mais ne couvre les grosses factures qu'une fois la réserve constituée.",
+    "checklistTitle": "Quand l'assurance est souvent judicieuse",
+    "checklist": [
+      "**Souscrire jeune :** avant que des allergies, troubles articulaires ou maladies chroniques ne figurent au dossier vétérinaire.",
+      "**Réserve d'urgence limitée :** si une facture soudaine de 1 500 € à 3 000 € serait difficile à régler d'un coup.",
+      "**Races sensibles :** pour les races sujettes aux problèmes de hanches, genoux, dos ou cœur."
+    ],
+    "exclusionsTitle": "Lisez attentivement ces clauses",
+    "exclusions": [
+      "**Antécédents exclus :** si votre animal a déjà consulté pour démangeaisons, diarrhée ou otites, les allergies sont souvent exclues.",
+      "**Plafond annuel & franchise :** vérifiez le plafond de remboursement annuel (souvent 2 500 €–5 000 €) et votre reste à charge.",
+      "**Alimentation & prévention :** croquettes, vaccins et régimes vétérinaires sont rarement remboursés dans les formules de base."
+    ],
+    "preventionTitle": "Une bonne alimentation reste la meilleure prévention",
+    "preventionText": "Beaucoup de troubles digestifs et cutanés commencent chaque jour dans la gamelle. Vérifiez gratuitement les allergènes et l'équilibre nutritionnel de son aliment.",
+    "allergenTip": "Guide frais vétérinaires & assurance pour allergies"
   }
 }
