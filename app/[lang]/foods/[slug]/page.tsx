@@ -13,7 +13,7 @@ import { ProductImage } from "@/components/ui/ProductImage";
 import { detailToIndex } from "@/lib/data/index-entry";
 import type { ImageCredit } from "@/lib/data/types";
 import { brandPageSlug } from "@/lib/data/brands";
-import { alternativesFor, benchmarks, getProduct, typeRank } from "@/lib/data/products";
+import { alternativesFor, benchmarks, getProduct, packVariantsFor, typeRank } from "@/lib/data/products";
 import { guidesFor } from "@/lib/guides/defs";
 import { GUIDE_TEXT } from "@/lib/guides/content";
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
@@ -66,7 +66,13 @@ export default async function ProductPage({ params }: Props) {
   const p = await getProduct(slug);
   if (!p) notFound();
   const t = createT(await getDictionary(lang));
-  const [alternatives, brandSlug, rank, bench] = await Promise.all([alternativesFor(p), brandPageSlug(p.brand), typeRank(p), benchmarks(p)]);
+  const [alternatives, brandSlug, rank, bench, variants] = await Promise.all([
+    alternativesFor(p),
+    brandPageSlug(p.brand),
+    typeRank(p),
+    benchmarks(p),
+    packVariantsFor(p),
+  ]);
   const entry = detailToIndex(p);
   const guides = guidesFor(p);
 
@@ -154,7 +160,39 @@ export default async function ProductPage({ params }: Props) {
             {p.pack && <li className="rounded-full border border-line bg-paper px-3 py-1">{p.pack}</li>}
             {p.ean && <li className="rounded-full border border-line bg-paper px-3 py-1 tabular-nums text-ink-faint">EAN {p.ean}</li>}
           </ul>
-          <div className="mt-4"><CompareButton id={p.id} species={p.species} /></div>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <CompareButton id={p.id} species={p.species} />
+          </div>
+          {variants.length > 1 && (
+            <div className="mt-4">
+              <p className="font-sans text-xs font-semibold text-ink-soft">{t("product.packSizesTitle")}</p>
+              <div className="mt-1.5 flex flex-wrap gap-2">
+                {variants.map((v) => {
+                  const perKgStr = v.perKg !== null ? v.perKg.toFixed(2).replace(".", lang === "en" ? "." : ",") : null;
+                  return (
+                    <Link
+                      key={v.id}
+                      href={localePath(lang, `/foods/${v.slug}`)}
+                      prefetch={false}
+                      aria-current={v.current ? "page" : undefined}
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-sans text-xs font-semibold tabular-nums transition ${
+                        v.current
+                          ? "border-brand bg-brand text-white shadow-sm"
+                          : "border-[#E2DDD5] bg-paper text-ink hover:border-brand-mid hover:bg-brand-soft hover:text-brand-deep"
+                      }`}
+                    >
+                      <span>{v.pack}</span>
+                      {perKgStr && (
+                        <span className={v.current ? "text-white/90" : "text-ink-faint"}>
+                          · {t("order.perKg", { price: perKgStr })}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           {p.imageCredit && (
             <p className="mt-2 hidden font-sans text-xs text-ink-faint sm:block">
               <PhotoCredit credit={p.imageCredit} t={t} />
@@ -167,6 +205,24 @@ export default async function ProductPage({ params }: Props) {
         <div className="space-y-8">
           {p.score !== null && <PersonalPanel entry={entry} species={p.species} ingredientsText={p.ingredientsText} price={p.price} />}
           <ScorePanel p={p} t={t} lang={lang} rank={rank} />
+
+          {/* Mobile Quick Jump to Portions, Shop Prices & Alternatives */}
+          <div className="grid grid-cols-2 gap-2.5 lg:hidden">
+            <a
+              href="#order-section"
+              className="flex items-center justify-center rounded-xl border border-brand/25 bg-brand-soft/60 px-3 py-2.5 text-center font-sans text-xs font-semibold text-brand-deep transition hover:bg-brand-soft"
+            >
+              {t("product.mobileJumpOrder")} ↓
+            </a>
+            {alternatives.length > 0 && (
+              <a
+                href="#alternatives"
+                className="flex items-center justify-center rounded-xl border border-[#E2DDD5] bg-paper px-3 py-2.5 text-center font-sans text-xs font-semibold text-ink shadow-sm transition hover:border-brand-mid"
+              >
+                {t("product.mobileJumpAlt")} ↓
+              </a>
+            )}
+          </div>
 
           {/* Ingredient Transparency Card */}
           <section aria-labelledby="ingr-h" className="rounded-2xl border border-line bg-paper p-6 shadow-card sm:p-8">
@@ -183,19 +239,21 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <aside className="space-y-6 lg:self-start">
-          <OrderCard
-            ean={p.ean}
-            name={p.name}
-            brand={p.brand}
-            pack={p.pack}
-            price={p.price}
-            bolUrl={p.bolUrl}
-            zooplusUrl={p.zooplusUrl}
-            species={p.species}
-            foodType={p.foodType}
-            kcalPer100g={p.nutrition?.kcalPer100g ?? null}
-          />
-          <Alternatives candidates={alternatives} species={p.species} currentScore={p.score} />
+          <div id="order-section" className="scroll-mt-24">
+            <OrderCard
+              ean={p.ean}
+              name={p.name}
+              brand={p.brand}
+              pack={p.pack}
+              price={p.price}
+              bolUrl={p.bolUrl}
+              zooplusUrl={p.zooplusUrl}
+              species={p.species}
+              foodType={p.foodType}
+              kcalPer100g={p.nutrition?.kcalPer100g ?? null}
+            />
+          </div>
+          <Alternatives candidates={alternatives} species={p.species} currentScore={p.score} currentId={p.id} />
           <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft shadow-card">
             <h2 className="font-sans text-xs font-semibold text-ink">{t("product.dataTitle")}</h2>
             <p className="mt-2 leading-relaxed">{t(p.source === "brand" ? "product.dataBrand" : p.source === "scraped" ? "product.dataScraped" : "product.dataPack")}</p>

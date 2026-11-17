@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { SearchBox } from "@/components/foods/SearchBox";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
-import { IconChevron, IconGlobe, IconMenu, IconPaw, IconX } from "@/components/ui/Icons";
+import { IconChevron, IconGlobe, IconMenu, IconPaw, IconSearch, IconX } from "@/components/ui/Icons";
 import { LOCALES, LOCALE_COOKIE, LOCALE_NAMES, localePath, stripLocale } from "@/lib/i18n/config";
 import { usePets } from "@/lib/pets/store";
 
@@ -31,8 +32,25 @@ export function Header() {
   // the mobile menu closes by itself when the page changes: remember *where* it was opened
   const [openAt, setOpenAt] = useState<string | null>(null);
   const open = openAt === pathname;
+  const [searchOpen, setSearchOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && searchOpen) setSearchOpen(false);
+      if (
+        e.key === "/" &&
+        !searchOpen &&
+        !["INPUT", "TEXTAREA", "SELECT"].includes((e.target as HTMLElement | null)?.tagName ?? "")
+      ) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [searchOpen]);
   useEffect(() => {
     if (!langOpen) return;
     const close = (e: MouseEvent) => {
@@ -73,6 +91,15 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label={t("nav.quickSearch")}
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line bg-paper px-3 font-sans text-sm font-medium text-ink-soft shadow-sm transition hover:border-brand-mid hover:text-brand-deep"
+          >
+            <IconSearch className="h-4 w-4 text-brand" />
+            <span className="hidden xl:inline">{t("search.button")}</span>
+          </button>
           <Link
             href={localePath(lang, "/my-pet")}
             className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-line bg-brand-soft px-3.5 py-1.5 font-sans text-sm font-medium text-brand-deep transition hover:border-brand-mid sm:inline-flex"
@@ -150,6 +177,33 @@ export function Header() {
             </li>
           </ul>
         </nav>
+      )}
+
+      {searchOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={t("nav.quickSearch")}
+          className="fixed inset-0 z-50 flex items-start justify-center bg-black/45 px-4 pt-20 sm:pt-24"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSearchOpen(false);
+          }}
+        >
+          <div className="w-full max-w-2xl rounded-2xl border border-line bg-cream p-5 shadow-lift sm:p-6">
+            <div className="mb-3 flex items-center justify-between">
+              <p className="font-display text-lg font-semibold text-brand-deep">{t("nav.quickSearch")}</p>
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                aria-label={t("common.close")}
+                className="rounded-lg border border-line bg-paper p-1.5 text-ink-soft hover:text-ink"
+              >
+                <IconX className="h-4 w-4" />
+              </button>
+            </div>
+            <SearchBox size="md" autoFocus onNavigate={() => setSearchOpen(false)} />
+          </div>
+        </div>
       )}
     </header>
   );

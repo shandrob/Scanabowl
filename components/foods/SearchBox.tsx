@@ -32,12 +32,16 @@ export function SearchBox({
   species,
   size = "lg",
   live,
+  autoFocus = false,
+  onNavigate,
 }: {
   initial?: string;
   species?: "dog" | "cat";
   size?: "lg" | "md";
   /** controlled mode used by the food finder: typing filters the list live */
   live?: { value: string; onChange: (v: string) => void };
+  autoFocus?: boolean;
+  onNavigate?: () => void;
 }) {
   const t = useT();
   const lang = useLang();
@@ -49,6 +53,7 @@ export function SearchBox({
   const [missing, setMissing] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [catalog, setCatalog] = useState<Array<{ entry: IndexEntry; sp: Species }> | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -113,6 +118,7 @@ export function SearchBox({
         const res = await fetch(`/api/ean/${ean}`);
         if (res.ok) {
           const { slug } = (await res.json()) as { slug: string };
+          onNavigate?.();
           router.push(localePath(lang, `/foods/${slug}`));
           return;
         }
@@ -124,11 +130,24 @@ export function SearchBox({
         setBusy(false);
       }
     },
-    [lang, router],
+    [lang, router, onNavigate],
   );
+
+  const big = size === "lg";
+  const showDropdown = !live && open && (suggestions.brands.length > 0 || suggestions.foods.length > 0);
+  const clampedActive = activeIndex >= 0 && activeIndex < suggestions.foods.length ? activeIndex : -1;
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (showDropdown && clampedActive >= 0) {
+      const picked = suggestions.foods[clampedActive];
+      if (picked) {
+        setOpen(false);
+        onNavigate?.();
+        router.push(localePath(lang, `/foods/${picked.entry.s}`));
+        return;
+      }
+    }
     setOpen(false);
     const q = value.trim();
     if (!q) return;
@@ -139,6 +158,7 @@ export function SearchBox({
     if (live) return; // the list is already filtered while typing
     const params = new URLSearchParams({ q });
     if (species) params.set("species", species);
+    onNavigate?.();
     router.push(`${localePath(lang, "/foods")}?${params.toString()}`);
   };
 
@@ -151,8 +171,19 @@ export function SearchBox({
     [lookup, setValue],
   );
 
-  const big = size === "lg";
-  const showDropdown = !live && open && (suggestions.brands.length > 0 || suggestions.foods.length > 0);
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showDropdown || suggestions.foods.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((i) => (i + 1) % suggestions.foods.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((i) => (i <= 0 ? suggestions.foods.length - 1 : i - 1));
+    } else if (e.key === "Escape") {
+      setOpen(false);
+      setActiveIndex(-1);
+    }
+  };
 
   return (
     <div ref={wrapRef} className="relative">
@@ -162,7 +193,12 @@ export function SearchBox({
           <input
             type="search"
             inputMode="search"
+            autoFocus={autoFocus}
             value={value}
+            role={live ? undefined : "combobox"}
+            aria-expanded={live ? undefined : showDropdown}
+            aria-controls={live ? undefined : "search-suggestions"}
+            aria-activedescendant={showDropdown && clampedActive >= 0 ? `search-opt-${clampedActive}` : undefined}
             onFocus={() => {
               ensureCatalog();
               setOpen(true);
@@ -171,7 +207,9 @@ export function SearchBox({
               ensureCatalog();
               setValue(e.target.value);
               setOpen(true);
+              setActiveIndex(-1);
             }}
+            onKeyDown={onKeyDown}
             placeholder={t("search.placeholder")}
             aria-label={t("search.label")}
             className={`w-full rounded-xl border border-[#D6D1C7] bg-paper pl-12 pr-4 font-sans text-ink shadow-sm placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand-soft ${big ? "h-14 text-base sm:text-lg" : "h-12 text-base"}`}
@@ -206,7 +244,10 @@ export function SearchBox({
                   <Link
                     key={b.slug}
                     href={localePath(lang, `/foods/brand/${b.slug}`)}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                      onNavigate?.();
+                    }}
                     className="inline-flex items-center gap-1.5 rounded-full border border-[#E2DDD5] bg-paper px-3 py-1 font-sans text-xs font-semibold text-brand-deep shadow-sm transition hover:border-brand-mid hover:bg-brand-soft"
                   >
                     <span>{b.name}</span>
@@ -218,15 +259,19 @@ export function SearchBox({
           )}
 
           {suggestions.foods.length > 0 && (
-            <ul className="divide-y divide-line">
-              {suggestions.foods.map(({ entry, sp }) => {
+            <ul id="search-suggestions" role="listbox" className="divide-y divide-line">
+              {suggestions.foods.map(({ entry, sp }, idx) => {
                 const st = scorePillStyle(entry.sc);
+                const isActive = idx === clampedActive;
                 return (
-                  <li key={entry.i}>
+                  <li key={entry.i} id={`search-opt-${idx}`} role="option" aria-selected={isActive}>
                     <Link
                       href={localePath(lang, `/foods/${entry.s}`)}
-                      onClick={() => setOpen(false)}
-                      className="flex items-center justify-between gap-3 px-4 py-3 transition hover:bg-cream"
+                      onClick={() => {
+                        setOpen(false);
+                        onNavigate?.();
+                      }}
+                      className={`flex items-center justify-between gap-3 px-4 py-3 transition ${isActive ? "bg-brand-soft/60" : "hover:bg-cream"}`}
                     >
                       <div className="min-w-0 flex-1">
                         <p className="truncate font-sans text-sm font-semibold text-ink">{entry.n}</p>

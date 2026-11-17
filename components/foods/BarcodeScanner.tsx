@@ -4,17 +4,28 @@ import { useEffect, useRef, useState } from "react";
 import { useT } from "@/components/i18n/DictionaryProvider";
 import { IconX } from "@/components/ui/Icons";
 
-type Detector = { detect: (v: HTMLVideoElement) => Promise<Array<{ rawValue: string }>> };
+type ImageSource = HTMLVideoElement | ImageBitmap | HTMLImageElement;
+type Detector = { detect: (v: ImageSource) => Promise<Array<{ rawValue: string }>> };
+const FORMATS = ["ean_13", "ean_8", "upc_a", "upc_e"];
+
+async function createDetector(): Promise<Detector> {
+  const native = (globalThis as unknown as { BarcodeDetector?: new (o: { formats: string[] }) => Detector }).BarcodeDetector;
+  if (native) return new native({ formats: FORMATS });
+  const mod = await import("barcode-detector/ponyfill");
+  return new mod.BarcodeDetector({ formats: FORMATS as never }) as unknown as Detector;
+}
 
 /**
- * Camera barcode scanner. Uses the browser's built-in BarcodeDetector when it exists
- * (Chrome/Android) and a small WebAssembly fallback everywhere else (e.g. iPhone Safari).
- * The camera image never leaves the phone.
+ * Camera barcode scanner with photo-upload fallback. Uses the browser's built-in BarcodeDetector
+ * when it exists (Chrome/Android) and a small WebAssembly fallback everywhere else (e.g. iPhone Safari).
+ * Images never leave the device.
  */
 export function BarcodeScanner({ onDetect, onClose }: { onDetect: (code: string) => void; onClose: () => void }) {
   const t = useT();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<"starting" | "scanning" | "denied" | "unsupported">("starting");
+  const [photoMsg, setPhotoMsg] = useState<string | null>(null);
   const doneRef = useRef(false);
 
   useEffect(() => {
@@ -28,14 +39,7 @@ export function BarcodeScanner({ onDetect, onClose }: { onDetect: (code: string)
           setStatus("unsupported");
           return;
         }
-        const formats = ["ean_13", "ean_8", "upc_a", "upc_e"];
-        const native = (globalThis as unknown as { BarcodeDetector?: new (o: { formats: string[] }) => Detector }).BarcodeDetector;
-        let detector: Detector;
-        if (native) detector = new native({ formats });
-        else {
-          const mod = await import("barcode-detector/ponyfill");
-          detector = new mod.BarcodeDetector({ formats: formats as never }) as unknown as Detector;
-        }
+        const detector = await createDetector();
         stream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 } },
           audio: false,
@@ -78,6 +82,31 @@ export function BarcodeScanner({ onDetect, onClose }: { onDetect: (code: string)
     };
   }, [onDetect, onClose]);
 
+  const onPhotoChange = async (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const file = ev.target.files?.[0];
+    ev.target.value = "";
+    if (!file) return;
+    setPhotoMsg(t("scan.photoChecking"));
+    try {
+      const detector = await createDetector();
+      const bitmap = await createImageBitmap(file);
+      try {
+        const codes = await detector.detect(bitmap);
+        const hit = codes.find((c) => /^\d{8,14}$/.test(c.rawValue));
+        if (hit) {
+          doneRef.current = true;
+          onDetect(hit.rawValue);
+          return;
+        }
+        setPhotoMsg(t("scan.photoNotFound"));
+      } finally {
+        bitmap.close();
+      }
+    } catch {
+      setPhotoMsg(t("scan.photoNotFound"));
+    }
+  };
+
   return (
     <div role="dialog" aria-modal="true" aria-label={t("scan.title")} className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4">
       <div className="w-full max-w-md overflow-hidden rounded-xl border border-line bg-paper shadow-lift">
@@ -95,12 +124,34 @@ export function BarcodeScanner({ onDetect, onClose }: { onDetect: (code: string)
             </div>
           )}
         </div>
-        <p className="border-t border-line px-4 py-3 font-sans text-sm text-ink-soft" role="status">
-          {status === "starting" && t("scan.starting")}
-          {status === "scanning" && t("scan.hint")}
-          {status === "denied" && t("scan.denied")}
-          {status === "unsupported" && t("scan.unsupported")}
-        </p>
+        <div className="space-y-3 border-t border-line px-4 py-3.5">
+          <p className="font-sans text-sm text-ink-soft" role="status">
+            {photoMsg ?? (
+              <>
+                {status === "starting" && t("scan.starting")}
+                {status === "scanning" && t("scan.hint")}
+                {status === "denied" && t("scan.denied")}
+                {status === "unsupported" && t("scan.unsupported")}
+              </>
+            )}
+          </p>
+          <div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              onChange={onPhotoChange}
+              className="hidden"
+            />
+            <button
+              type="button"
+              onClick={() => fileRef.current?.click()}
+              className="w-full rounded-lg border border-line bg-cream px-4 py-2 font-sans text-xs font-semibold text-brand-deep transition hover:border-brand hover:bg-brand-soft"
+            >
+              {t("scan.uploadPhoto")}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

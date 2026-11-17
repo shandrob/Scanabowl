@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { betterThanCurrent } from "../components/pet/CurrentFoodAdvice";
 import type { IndexEntry } from "../lib/data/types";
+import { decodePetProfile, encodePetProfile } from "../lib/pets/share";
 import { personalFit } from "../lib/scoring/personalize";
 import type { PetProfile } from "../lib/scoring/types";
 
@@ -74,5 +75,26 @@ describe("pet profile: better than the current food", () => {
   });
   it("follows the type the owner wants to feed", () => {
     expect(betterThanCurrent(index, pet({ preferredType: "wet" }), current).map((r) => r.e.i)).toEqual(["wet"]);
+  });
+});
+
+describe("pet profile: shareable link", () => {
+  it("round-trips a pet profile including allergies and mixed feeding", () => {
+    const original = pet({
+      name: "Luna & Bo",
+      allergens: ["chicken", "wheat"],
+      dislikes: ["fish"],
+      wetGramsPerDay: 85,
+      preferredType: "dry",
+    });
+    const token = encodePetProfile(original);
+    const decoded = decodePetProfile(token, "new-id");
+    expect(decoded).not.toBeNull();
+    expect(decoded?.name).toBe("Luna & Bo");
+    expect(decoded?.allergens).toEqual(["chicken", "wheat"]);
+    expect(decoded?.dislikes).toEqual(["fish"]);
+    expect(decoded?.wetGramsPerDay).toBe(85);
+    expect(decoded?.preferredType).toBe("dry");
+    expect(decodePetProfile("not-valid-base64", "x")).toBeNull();
   });
 });

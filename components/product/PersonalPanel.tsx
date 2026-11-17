@@ -91,7 +91,11 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
   const grade = gradeOf(fit.score);
   const petAllergens = [...active.allergens.map((a) => t(`allergen.${a}`)), ...active.customAllergens];
   const energy = dailyEnergy(active);
-  const grams = entry.k ? gramsPerDay(energy.kcal, entry.k) : null;
+  const wetGrams = entry.t === "dry" ? (active.wetGramsPerDay ?? 0) : 0;
+  const typicalWetKcalPer100g = species === "cat" ? 85 : 95;
+  const wetKcal = wetGrams > 0 ? Math.min(Math.round(energy.kcal * 0.85), Math.round((wetGrams * typicalWetKcalPer100g) / 100)) : 0;
+  const effectiveKcal = Math.max(0, energy.kcal - wetKcal);
+  const grams = entry.k ? gramsPerDay(effectiveKcal, entry.k) : null;
   const pack = packGrams(entry.pk);
   const perDay = price && pack && grams ? (price / pack) * grams : null;
   const currentFit = current && currentId === current.i ? personalFit(current, active) : null;
@@ -196,9 +200,14 @@ export function PersonalPanel({ entry, species, ingredientsText, price }: { entr
             )}
           </div>
           <p className="mt-3 text-sm">
-            {t("personal.portionText", { kcal: energy.kcal, grams })}
+            {t("personal.portionText", { kcal: effectiveKcal, grams })}
             {perDay !== null && <> {t("personal.costText", { cost: perDay.toFixed(2).replace(".", lang === "en" ? "." : ",") })}</>}
           </p>
+          {wetGrams > 0 && wetKcal > 0 && (
+            <p className="mt-1.5 font-sans text-xs font-medium text-brand-deep">
+              {t("personal.mixedNote", { wetGrams, name: active.name, wetKcal })}
+            </p>
+          )}
           {active.reproduction && <p className="mt-2 text-sm font-medium text-ink">{t("personal.reproNote", { name: active.name })}</p>}
           <p className="mt-2 font-sans text-xs text-ink-faint">{t(`personal.energyBasis.${energy.basis}`, { factor: energy.factor })} {t("personal.portionNote")}</p>
         </div>

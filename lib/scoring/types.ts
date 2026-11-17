@@ -185,4 +185,6 @@ export interface PetProfile {
   dislikes?: string[];
   /** pregnant or nursing: needs a food for growth and far more energy */
   reproduction?: "pregnant" | "nursing";
+  /** optional daily wet food amount (g) when mixed feeding, subtracted from dry food daily portions */
+  wetGramsPerDay?: number;
 }

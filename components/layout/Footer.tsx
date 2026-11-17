@@ -36,6 +36,7 @@ export function Footer({ lang, t }: { lang: Locale; t: TFunction }) {
             ["/compare", t("nav.compare")],
             ["/foods/brand", t("nav.allBrands")],
             ["/my-pet", t("nav.myPet")],
+            ["/label-decoder", t("nav.labelDecoder")],
             ["/pet-insurance", t("insurance.navTitle")],
             ["/blog", t("nav.blog")],
             ["/how-we-score", t("nav.howWeScore")],

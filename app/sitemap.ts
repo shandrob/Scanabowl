@@ -15,7 +15,7 @@ import { SITE } from "@/lib/site";
  * Blog posts live in /sitemap-blog.xml because they appear on their publish date, without a deployment.
  */
 
-const STATIC = ["", "/foods", "/best", "/compare", "/foods/brand", "/my-pet", "/pet-insurance", "/blog", "/how-we-score", "/suggest", "/brands", "/about", "/contact", "/privacy", "/terms", "/affiliate"];
+const STATIC = ["", "/foods", "/best", "/compare", "/foods/brand", "/my-pet", "/label-decoder", "/pet-insurance", "/blog", "/how-we-score", "/suggest", "/brands", "/about", "/contact", "/privacy", "/terms", "/affiliate"];
 
 const url = (lang: (typeof LOCALES)[number], path: string) => `${SITE.url}${localePath(lang, path)}`;
 const languages = (path: string) => Object.fromEntries(LOCALES.map((l) => [LOCALE_TAGS[l], url(l, path)]));

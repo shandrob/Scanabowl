@@ -1,4 +1,5 @@
 import "server-only";
+import { recipeKey } from "../guides/defs";
 import { packGrams } from "../pets/energy";
 import type { Species } from "../scoring/types";
 import type { IndexEntry, ProductDetail } from "./types";
@@ -179,4 +180,44 @@ export async function alternativesFor(p: ProductDetail, count = 20): Promise<Ind
     }
   }
   return merged.map(detailToIndex);
+}
+
+export interface PackVariant {
+  id: string;
+  slug: string;
+  pack: string;
+  price?: number;
+  perKg: number | null;
+  current: boolean;
+}
+
+/** Other pack sizes of the exact same recipe (same species, brand, food type, and recipe key). */
+export async function packVariantsFor(p: ProductDetail): Promise<PackVariant[]> {
+  if (!p.pack) return [];
+  const key = recipeKey(p);
+  if (!key) return [];
+  const list = [...(await table(p.species)).values()].filter(
+    (x) => x.brand === p.brand && x.foodType === p.foodType && x.pack && recipeKey(x) === key,
+  );
+  if (list.length < 2) return [];
+  const byGrams = new Map<number, ProductDetail>();
+  for (const x of list) {
+    const g = packGrams(x.pack);
+    if (!g || g <= 0) continue;
+    const prev = byGrams.get(g);
+    if (!prev || x.id === p.id || (prev.id !== p.id && !prev.price && x.price)) {
+      byGrams.set(g, x);
+    }
+  }
+  if (byGrams.size < 2) return [];
+  return [...byGrams.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([g, x]) => ({
+      id: x.id,
+      slug: x.slug,
+      pack: x.pack,
+      price: x.price,
+      perKg: x.price && x.price > 0 ? x.price / (g / 1000) : null,
+      current: x.id === p.id,
+    }));
 }

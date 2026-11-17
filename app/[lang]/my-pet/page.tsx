@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { CurrentFoodAdvice } from "@/components/pet/CurrentFoodAdvice";
 import { PetManager } from "@/components/pet/PetManager";
 import { SupportBanner } from "@/components/ui/SupportBanner";
@@ -24,7 +25,9 @@ export default async function MyPetPage({ params }: { params: Promise<{ lang: st
       <h1 className="font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{t("pet.title")}</h1>
       <p className="mt-2 max-w-2xl text-lg text-ink-soft">{t("pet.subtitle")}</p>
       <div className="mt-8">
-        <PetManager />
+        <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl border border-line bg-paper" aria-hidden />}>
+          <PetManager />
+        </Suspense>
       </div>
       <CurrentFoodAdvice />
       <SupportBanner lang={lang} t={t} />

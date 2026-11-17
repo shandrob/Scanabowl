@@ -18,7 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 import { field, readCsv } from "../lib/catalog/csv";
-import { knownBrands, normalizeEan, slugify } from "../lib/catalog/clean";
+import { knownBrands, normalizeEan, slugify, toSpecies } from "../lib/catalog/clean";
 import { rowToProduct, type CatalogProduct, type RowContext, type Source } from "../lib/catalog/records";
 import { packGrams } from "../lib/pets/energy";
 import { detectAllergens } from "../lib/scoring/allergens";
@@ -71,6 +71,27 @@ function nameKey(p: CatalogProduct): string {
   return `${p.species}|${slugify(p.brand)}|${slugify(p.name)}|${packGrams(p.pack) ?? slugify(p.pack)}`;
 }
 
+const SHOP_FILLER = new Set([
+  "hondenvoer", "kattenvoer", "hondenbrokken", "kattenbrokken", "droogvoer", "natvoer",
+  "hond", "kat", "dog", "cat", "droog", "nat", "blik", "maaltijdzakjes", "pouch",
+  "voor", "met", "en", "in", "van", "de", "het", "voordeelpakket", "multipack", "bonusbag",
+]);
+
+function zooplusSig(species: Species, brand: string, name: string, pack: string): string | null {
+  const g = packGrams(pack);
+  if (!g || g <= 0) return null;
+  const brandKey = slugify(brand);
+  if (!brandKey || brandKey === "overig") return null;
+  const brandTokens = new Set(brandKey.split("-"));
+  const tokens = slugify(
+    name.replace(/(\d+\s*x\s*)?\d+(?:[.,]\d+)?\s*(kg|g|gr|gram|ml|l)\b/gi, " "),
+  )
+    .split("-")
+    .filter((t) => t.length > 1 && !brandTokens.has(t) && !SHOP_FILLER.has(t));
+  if (tokens.length < 2) return null;
+  return `${species}|${brandKey}|${[...new Set(tokens)].sort().join("-")}|${g}`;
+}
+
 async function main() {
   const started = Date.now();
   fs.mkdirSync(OUT, { recursive: true });
@@ -100,12 +121,24 @@ async function main() {
   // database/zooplus/*.csv: the zooplus product file from Awin (npm run data:zooplus). Every food gets its exact
   // zooplus link by barcode; foods we did not have yet are added only when zooplus shows their ingredient list.
   const zooplus = new Map<string, { url: string; price?: string; pack?: string }>();
+  const zooplusBySig = new Map<string, { url: string; price?: string; pack?: string } | "AMBIGUOUS">();
   const zooplusNoLabel = new Set<string>();
   for (const file of csvFiles(path.join(DB, "zooplus"))) {
     for (const row of readCsv(file)) {
       const ean = normalizeEan(field(row, "ean"));
       const url = (row.zooplus_url ?? "").trim();
-      if (ean && url) zooplus.set(ean, { url, price: field(row, "price") || undefined, pack: field(row, "pack") || undefined });
+      const price = field(row, "price") || undefined;
+      const pack = field(row, "pack") || undefined;
+      if (ean && url) zooplus.set(ean, { url, price, pack });
+      if (url && pack) {
+        const sp = toSpecies(field(row, "species"), field(row, "name"));
+        const sig = sp ? zooplusSig(sp, field(row, "brand"), field(row, "name"), pack) : null;
+        if (sig) {
+          const prev = zooplusBySig.get(sig);
+          if (!prev) zooplusBySig.set(sig, { url, price, pack });
+          else if (prev !== "AMBIGUOUS" && prev.url !== url) zooplusBySig.set(sig, "AMBIGUOUS");
+        }
+      }
       if (!field(row, "ingredients")) {
         if (ean) zooplusNoLabel.add(ean);
         continue;
@@ -171,8 +204,17 @@ async function main() {
   }
   const products = [...byId.values()].sort((a, b) => a.brand.localeCompare(b.brand) || a.name.localeCompare(b.name));
   let zooplusLinked = 0;
+  let zooplusFuzzyLinked = 0;
   for (const p of products) {
-    const z = p.ean ? zooplus.get(p.ean) : undefined;
+    let z = p.ean ? zooplus.get(p.ean) : undefined;
+    if (!z && p.pack) {
+      const sig = zooplusSig(p.species, p.brand, p.name, p.pack);
+      const match = sig ? zooplusBySig.get(sig) : undefined;
+      if (match && match !== "AMBIGUOUS") {
+        z = match;
+        zooplusFuzzyLinked++;
+      }
+    }
     if (!z) continue;
     p.zooplusUrl = z.url;
     if (!p.pack && z.pack) p.pack = z.pack;
@@ -387,7 +429,7 @@ async function main() {
     `Scanabowl data build - ${meta.generatedAt}`,
     `Products: ${products.length} (dogs ${meta.counts.dog}, cats ${meta.counts.cat}); scored: ${meta.counts.scoredDog + meta.counts.scoredCat}`,
     `Rows read: ${raw.length}; unusable rows skipped: ${unusable}; images converted this run: ${imagesDone}; blog images: ${blogImages}; products with a photo: ${products.filter((p) => p.image).length}`,
-    ...(zooplus.size ? [`zooplus product file: ${zooplus.size} foods, ${zooplusLinked} linked to a food on the site; ${[...zooplusNoLabel].filter((e) => !eanMap[e]).length} new foods not added because zooplus shows no ingredient list`] : []),
+    ...(zooplus.size ? [`zooplus product file: ${zooplus.size} foods, ${zooplusLinked} linked to a food on the site (${zooplusFuzzyLinked} via recipe+pack match); ${[...zooplusNoLabel].filter((e) => !eanMap[e]).length} new foods not added because zooplus shows no ingredient list`] : []),
     "",
     `== TOXIC INGREDIENTS FOUND (${problems.hazards.length}) - please double-check the ingredient text`,
     ...problems.hazards.slice(0, 60),

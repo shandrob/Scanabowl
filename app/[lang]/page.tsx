@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/foods/ProductCard";
 import { SearchBox } from "@/components/foods/SearchBox";
 import { IconArrow, IconBarcode, IconCheck, IconPaw, IconSearch, IconShield } from "@/components/ui/Icons";
 import { listPosts } from "@/lib/blog";
+import { ALLERGEN_SLUGS } from "@/lib/data/allergens";
 import { detailToIndex } from "@/lib/data/index-entry";
 import { HERO_EXAMPLES, POPULAR_FOODS, popularBrands } from "@/lib/data/popular";
 import { productCounts, topProducts } from "@/lib/data/products";
@@ -370,6 +371,29 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
           ))}
         </div>
+
+        {/* Allergen-Free Discovery Bar */}
+        <div className="mt-6 rounded-xl border border-line bg-paper p-5 shadow-card sm:p-6">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <h3 className="font-display text-xl font-semibold text-brand-deep">{t("home.allergenTitle")}</h3>
+              <p className="mt-1 font-sans text-sm text-ink-soft">{t("home.allergenText")}</p>
+            </div>
+          </div>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {ALLERGEN_SLUGS.map((slug) => (
+              <li key={slug}>
+                <Link
+                  href={localePath(lang, `/foods/without/${slug}`)}
+                  prefetch={false}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#E2DDD5] bg-cream px-3.5 py-2 font-sans text-sm font-medium text-ink transition hover:border-brand-mid hover:bg-brand-soft hover:text-brand-deep"
+                >
+                  <span>{t("finder.without")} {t(`allergen.${slug}`).toLowerCase()}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* Personalise for Your Pet */}
@@ -515,8 +539,21 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      {/* Brands Submission Banner */}
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      {/* Interactive Label Decoder & Brands Submission Banners */}
+      <section className="mx-auto max-w-6xl space-y-5 px-4 py-14 sm:px-6">
+        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-brand/25 bg-brand-tint p-6 shadow-card sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <h2 className="font-display text-2xl font-semibold text-brand-deep">{t("home.decoderTitle")}</h2>
+            <p className="mt-1 max-w-2xl font-sans text-ink-soft">{t("home.decoderText")}</p>
+          </div>
+          <Link
+            href={localePath(lang, "/label-decoder")}
+            className="shrink-0 rounded-lg bg-brand px-5 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition hover:bg-brand-deep"
+          >
+            {t("home.decoderButton")}
+          </Link>
+        </div>
+
         <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-line bg-paper p-6 shadow-card sm:flex-row sm:items-center sm:p-8">
           <div>
             <h2 className="font-display text-2xl font-semibold text-brand-deep">{t("home.brandTitle")}</h2>

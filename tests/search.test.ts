@@ -24,4 +24,9 @@ describe("food search", () => {
     expect(find("kip zalm", "Acana", "Acana Adult Kip")).toBe(false);
     expect(find("orijen", "Acana", "Acana Adult Kip")).toBe(false);
   });
+  it("tolerates minor typos in brand and product names", () => {
+    expect(find("royl canin", "Royal Canin", "Royal Canin Adult")).toBe(true);
+    expect(find("orjen", "Orijen", "Orijen Original Dog")).toBe(true);
+    expect(find("edgard coper", "Edgard & Cooper", "Edgard&Cooper Adult Kip")).toBe(true);
+  });
 });

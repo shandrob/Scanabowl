@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FoodPicker } from "@/components/foods/FoodPicker";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { IconCheck, IconInfo, IconPaw, IconX } from "@/components/ui/Icons";
 import { localePath } from "@/lib/i18n/config";
 import { dailyEnergy, lifeStageOf } from "@/lib/pets/energy";
+import { decodePetProfile, encodePetProfile } from "@/lib/pets/share";
 import { newPetId, usePets } from "@/lib/pets/store";
 import { ALLERGEN_IDS, COMMON_ALLERGENS } from "@/lib/scoring/allergens";
 import type { ActivityLevel, BodyCondition, DogSize, PetProfile, Species } from "@/lib/scoring/types";
@@ -56,6 +58,7 @@ function Segmented<T extends string>({ value, onChange, options, name }: { value
 export function PetManager() {
   const t = useT();
   const lang = useLang();
+  const searchParams = useSearchParams();
   const { pets, active, save, remove, setActive } = usePets();
   const [blankPet] = useState(() => blank());
   // `edit` holds unsaved changes; without any, the form simply shows the stored active pet
@@ -68,6 +71,61 @@ export function PetManager() {
   const ageMode = ageChoice ?? (draft.birthDate ? "date" : "years");
   const [saved, setSaved] = useState<PetProfile | null>(null);
   const [errors, setErrors] = useState<{ name?: boolean; weight?: boolean }>({});
+  const [copiedShare, setCopiedShare] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [dismissedToken, setDismissedToken] = useState<string | null>(null);
+
+  const shareToken = searchParams.get("pet");
+  const sharedPet = useMemo(() => {
+    if (!shareToken || shareToken === dismissedToken) return null;
+    return decodePetProfile(shareToken, "shared-preview");
+  }, [shareToken, dismissedToken]);
+
+  const copyShareLink = async () => {
+    const token = encodePetProfile({
+      ...draft,
+      name: draft.name.trim(),
+    });
+    const url = `${window.location.origin}${localePath(lang, "/my-pet")}?pet=${encodeURIComponent(token)}`;
+    setShareUrl(url);
+    let ok = false;
+    if (window.isSecureContext && navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(url);
+        ok = true;
+      } catch {
+        ok = false;
+      }
+    }
+    if (!ok) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = url;
+        ta.style.position = "fixed";
+        ta.style.top = "0";
+        ta.style.left = "0";
+        ta.style.width = "1px";
+        ta.style.height = "1px";
+        ta.style.padding = "0";
+        ta.style.border = "0";
+        ta.style.opacity = "0.01";
+        document.body.appendChild(ta);
+        ta.focus({ preventScroll: true });
+        ta.select();
+        ta.setSelectionRange(0, url.length);
+        ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+      } catch {
+        ok = false;
+      }
+    }
+    if (ok) {
+      setCopiedShare(true);
+      window.setTimeout(() => setCopiedShare(false), 3000);
+    }
+  };
+
+  const wetPresets = draft.species === "cat" ? [0, 85, 100, 170] : [0, 100, 200, 400];
 
   const set = <K extends keyof PetProfile>(key: K, value: PetProfile[K]) => setEdit({ ...draft, [key]: value });
   const setSpecies = (sp: Species) =>
@@ -141,6 +199,39 @@ export function PetManager() {
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
       <form onSubmit={onSubmit} noValidate className="space-y-8">
+        {sharedPet && (
+          <div className="flex flex-col gap-3 rounded-2xl border border-brand/30 bg-brand-soft/60 p-5 sm:flex-row sm:items-center sm:justify-between" role="status">
+            <p className="font-sans text-sm font-medium text-brand-deep">
+              {t("pet.sharedBanner", { name: sharedPet.name })}
+            </p>
+            <div className="flex shrink-0 flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const imported = { ...sharedPet, id: newPetId() };
+                  save(imported);
+                  setEdit(null);
+                  setSaved(imported);
+                  setDismissedToken(shareToken);
+                  window.history.replaceState(null, "", localePath(lang, "/my-pet"));
+                }}
+                className="rounded-full bg-brand px-4 py-2 font-sans text-xs font-semibold text-white transition hover:bg-brand-deep"
+              >
+                {t("pet.sharedSave", { name: sharedPet.name })}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setDismissedToken(shareToken);
+                  window.history.replaceState(null, "", localePath(lang, "/my-pet"));
+                }}
+                className="rounded-full border border-line bg-paper px-3.5 py-2 font-sans text-xs font-semibold text-ink-soft hover:text-ink"
+              >
+                {t("pet.sharedDismiss")}
+              </button>
+            </div>
+          </div>
+        )}
         {/* pet tabs */}
         {pets.length > 0 && (
           <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label={t("pet.yourPets")}>
@@ -260,6 +351,31 @@ export function PetManager() {
             <span className={labelCls}>{t("pet.preferredType")}</span>
             <Segmented<"any" | "dry" | "wet"> name={t("pet.preferredType")} value={draft.preferredType ?? "any"} onChange={(v) => set("preferredType", v === "any" ? undefined : v)} options={[["any", t("pet.preferredAny")], ["dry", t("type.dry")], ["wet", t("type.wet")]]} />
           </div>
+          {draft.preferredType !== "wet" && (
+            <div>
+              <span className={labelCls}>{t("pet.mixedWetLabel")}</span>
+              <div className="grid grid-cols-4 gap-2">
+                {wetPresets.map((g) => {
+                  const activeWet = (draft.wetGramsPerDay ?? 0) === g;
+                  return (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => set("wetGramsPerDay", g === 0 ? undefined : g)}
+                      className={`rounded-xl border px-3 py-2 font-sans text-sm font-semibold tabular-nums transition ${
+                        activeWet
+                          ? "border-brand bg-brand-soft text-brand-deep ring-2 ring-brand/25"
+                          : "border-line bg-paper text-ink-soft hover:border-brand/40"
+                      }`}
+                    >
+                      {g === 0 ? t("order.mixedOff") : `${g} g`}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="mt-1 text-xs text-ink-faint">{t("pet.mixedWetHint")}</p>
+            </div>
+          )}
           <div>
             <span className={labelCls}>{t("pet.dislikes", { name: draft.name.trim() || t("pet.previewTitle") })}</span>
             <div className="flex flex-wrap gap-2" role="group" aria-label={t("pet.dislikes", { name: draft.name.trim() || t("pet.previewTitle") })}>
@@ -365,6 +481,27 @@ export function PetManager() {
             </dl>
           ) : (
             <p className="mt-3 text-sm text-ink-soft">{t("pet.previewEmpty")}</p>
+          )}
+          {preview && (
+            <div className="mt-4 space-y-2 border-t border-line pt-4">
+              <button
+                type="button"
+                onClick={copyShareLink}
+                className="w-full rounded-xl border border-line bg-cream px-4 py-2.5 font-sans text-xs font-semibold text-brand-deep transition hover:border-brand hover:bg-brand-soft"
+              >
+                {copiedShare ? t("pet.shareCopied") : t("pet.shareButton")}
+              </button>
+              {shareUrl && (
+                <input
+                  type="text"
+                  readOnly
+                  value={shareUrl}
+                  aria-label={t("pet.shareButton")}
+                  onClick={(e) => e.currentTarget.select()}
+                  className="h-9 w-full rounded-lg border border-line bg-cream/70 px-2.5 font-sans text-xs text-ink-soft focus:border-brand focus:outline-none"
+                />
+              )}
+            </div>
           )}
         </section>
         <section className="rounded-2xl border border-line bg-paper p-5 text-sm text-ink-soft shadow-card">

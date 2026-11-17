@@ -64,7 +64,9 @@ export function OrderCard({
   const [weightInput, setWeightInput] = useState<string>(String(defaultWeight));
   const [activity, setActivity] = useState<Activity>(matchedPet?.activity ?? "moderate");
   const [customPrice, setCustomPrice] = useState<string>(price && price > 0 ? price.toFixed(2) : "");
-  const [wetGrams, setWetGrams] = useState<number>(0);
+  const [wetGrams, setWetGrams] = useState<number>(
+    foodType !== "wet" && matchedPet?.wetGramsPerDay ? matchedPet.wetGramsPerDay : 0,
+  );
 
   const parsedWeight = Number.parseFloat(weightInput.replace(",", "."));
   const weightKg = Number.isFinite(parsedWeight) && parsedWeight > 0 ? parsedWeight : defaultWeight;
@@ -330,7 +332,11 @@ export function OrderCard({
                     : "border border-line bg-cream text-ink hover:border-brand hover:bg-paper hover:text-brand-deep"
                 }`}
               >
-                <span className="truncate">{s.label}</span>
+                <span className="truncate">
+                  {s.id === "zooplus" && s.exact && price !== undefined && price > 0
+                    ? `${s.label} · €${fmtMoney(price)}`
+                    : s.label}
+                </span>
                 <IconExternal className="h-3.5 w-3.5 shrink-0" />
               </a>
             ))}

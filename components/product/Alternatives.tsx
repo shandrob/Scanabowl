@@ -26,10 +26,12 @@ export function Alternatives({
   candidates,
   species,
   currentScore,
+  currentId,
 }: {
   candidates: IndexEntry[];
   species: Species;
   currentScore?: number | null;
+  currentId?: string;
 }) {
   const t = useT();
   const lang = useLang();
@@ -138,6 +140,17 @@ export function Alternatives({
                   <ScoreRing score={displayScore} grade={grade} size={46} label={scoreAria(t, displayScore, grade)} />
                 </div>
               </Link>
+              {currentId && (
+                <div className="mt-1 flex justify-end px-1">
+                  <Link
+                    href={`${localePath(lang, "/compare")}?species=${species}&f=${encodeURIComponent(currentId)},${encodeURIComponent(e.i)}`}
+                    prefetch={false}
+                    className="font-sans text-[11px] font-semibold text-brand hover:underline"
+                  >
+                    {t("product.compareAlt")} →
+                  </Link>
+                </div>
+              )}
             </li>
           );
         })}

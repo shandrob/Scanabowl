@@ -57,8 +57,54 @@ export function queryTerms(query: string): string[][] {
     });
 }
 
+function withinOneEdit(a: string, b: string): boolean {
+  const la = a.length;
+  const lb = b.length;
+  if (Math.abs(la - lb) > 1) return false;
+  if (a === b) return true;
+  if (la === lb) {
+    let diff = 0;
+    for (let i = 0; i < la; i++) {
+      if (a[i] !== b[i]) {
+        // adjacent transposition ("roaly" vs "royal")
+        if (diff === 0 && i + 1 < la && a[i] === b[i + 1] && a[i + 1] === b[i]) {
+          i++;
+          diff++;
+          continue;
+        }
+        diff++;
+        if (diff > 1) return false;
+      }
+    }
+    return diff === 1;
+  }
+  const [shorter, longer] = la < lb ? [a, b] : [b, a];
+  let i = 0;
+  let j = 0;
+  let skipped = false;
+  while (i < shorter.length && j < longer.length) {
+    if (shorter[i] === longer[j]) {
+      i++;
+      j++;
+    } else if (skipped) {
+      return false;
+    } else {
+      skipped = true;
+      j++;
+    }
+  }
+  return true;
+}
+
 export function matchesQuery(haystack: string, terms: string[][]): boolean {
-  return terms.every((alternatives) => alternatives.some((a) => haystack.includes(a)));
+  let tokens: string[] | null = null;
+  return terms.every((alternatives) => {
+    if (alternatives.some((a) => haystack.includes(a))) return true;
+    const fuzzyAlts = alternatives.filter((a) => a.length >= 4 && !/^\d+$/.test(a));
+    if (!fuzzyAlts.length) return false;
+    tokens ??= haystack.split(" ");
+    return fuzzyAlts.some((a) => tokens!.some((tok) => withinOneEdit(a, tok)));
+  });
 }
 
 /** The searchable text of a food: brand, name and barcode. */

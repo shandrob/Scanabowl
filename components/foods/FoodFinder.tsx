@@ -23,6 +23,7 @@ const PAGE = 24;
 type Sort = "match" | "score" | "value" | "price" | "name" | "kcal";
 /** the most common food allergens in dogs and cats (Mueller et al., 2016) plus a few frequent choices */
 const EXCLUDE_CHIPS = ["chicken", "beef", "fish", "dairy", "wheat", "lamb", "pork", "turkey", "egg"] as const;
+const PROTEIN_CHIPS = ["chicken", "beef", "fish", "lamb", "turkey", "duck", "rabbit", "insect"] as const;
 /** slider value that means "no maximum" */
 const NO_CARB_LIMIT = 70;
 
@@ -76,6 +77,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
   const [sort, setSort] = useState<Sort>((params.get("sort") as Sort) || "score");
   // label filters that work without a pet profile
   const [exclude, setExclude] = useState<string[]>(() => (params.get("ex") ?? "").split(",").filter((a) => (EXCLUDE_CHIPS as readonly string[]).includes(a)));
+  const [includeProteins, setIncludeProteins] = useState<string[]>(() => (params.get("inc") ?? "").split(",").filter((p) => (PROTEIN_CHIPS as readonly string[]).includes(p)));
   const [single, setSingle] = useState(params.get("sp") === "1");
   const [minProtein, setMinProtein] = useState(Number(params.get("minp") ?? 0));
   const [maxCarbs, setMaxCarbs] = useState(Number(params.get("maxc") ?? NO_CARB_LIMIT) || NO_CARB_LIMIT);
@@ -98,7 +100,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
   }, [species]);
 
   // "show more" resets by itself whenever a filter changes
-  const signature = [species, q, type, stage, brand, grainFree, minScore, sort, extra, ignorePet, exclude.join(","), single, minProtein, maxCarbs].join("|");
+  const signature = [species, q, type, stage, brand, grainFree, minScore, sort, extra, ignorePet, exclude.join(","), includeProteins.join(","), single, minProtein, maxCarbs].join("|");
   const [more, setMore] = useState({ signature, shown: PAGE });
   const shown = more.signature === signature ? more.shown : PAGE;
 
@@ -114,12 +116,13 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
     if (minScore) p.set("min", String(minScore));
     if (sort !== "score") p.set("sort", sort);
     if (exclude.length) p.set("ex", exclude.join(","));
+    if (includeProteins.length) p.set("inc", includeProteins.join(","));
     if (single) p.set("sp", "1");
     if (minProtein) p.set("minp", String(minProtein));
     if (maxCarbs < NO_CARB_LIMIT) p.set("maxc", String(maxCarbs));
     const qs = p.toString();
     window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
-  }, [species, speciesTouched, q, type, stage, brand, grainFree, minScore, sort, exclude, single, minProtein, maxCarbs]);
+  }, [species, speciesTouched, q, type, stage, brand, grainFree, minScore, sort, exclude, includeProteins, single, minProtein, maxCarbs]);
 
   const pet = active && active.species === species && !ignorePet ? active : null;
 
@@ -137,6 +140,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
       if (minScore && (e.sc ?? 0) < minScore) continue;
       // "without chicken" also hides vague "meat and animal derivatives" that may contain chicken
       if (exclude.length && exclude.some((a) => e.ad.includes(a) || e.ap.includes(a))) continue;
+      if (includeProteins.length && !includeProteins.every((p) => e.pr.includes(p))) continue;
       if (single && !(e.pr.length === 1 && e.ap.length === 0)) continue;
       if (minProtein && (e.nu?.[0] ?? 0) < minProtein) continue;
       if (maxCarbs < NO_CARB_LIMIT && (e.cb === undefined || e.cb > maxCarbs)) continue;
@@ -169,7 +173,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
       return (b.e.sc ?? -1) - (a.e.sc ?? -1) || a.e.n.localeCompare(b.e.n);
     });
     return { rows, hiddenByAllergy };
-  }, [index, q, type, stage, brand, grainFree, minScore, sort, extra, pet, searchText, exclude, single, minProtein, maxCarbs]);
+  }, [index, q, type, stage, brand, grainFree, minScore, sort, extra, pet, searchText, exclude, includeProteins, single, minProtein, maxCarbs]);
 
   // Does the search find anything at all, ignoring the filters? If not, look at the other species (people often
   // search a cat food while the dog tab is open) and, if that finds nothing either, report the missing food.
@@ -268,6 +272,26 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
         </div>
         <p className="mt-1.5 text-xs leading-snug text-ink-faint">{t("finder.withoutHint")}</p>
       </fieldset>
+      <fieldset className="border-t border-line pt-3">
+        <legend className={label}>{t("finder.withProtein")}</legend>
+        <div className="flex flex-wrap gap-1.5">
+          {PROTEIN_CHIPS.map((p) => {
+            const on = includeProteins.includes(p);
+            return (
+              <button
+                key={p}
+                type="button"
+                aria-pressed={on}
+                onClick={() => setIncludeProteins((cur) => (on ? cur.filter((x) => x !== p) : [...cur, p]))}
+                className={`rounded-full border px-2.5 py-0.5 font-sans text-xs font-medium transition ${on ? "border-brand bg-brand-soft text-brand-deep font-semibold" : "border-line bg-cream text-ink-soft hover:border-brand"}`}
+              >
+                {t(`allergen.${p}`)}
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-1.5 text-xs leading-snug text-ink-faint">{t("finder.withProteinHint")}</p>
+      </fieldset>
       <label className="flex cursor-pointer items-start gap-3 text-sm text-ink">
         <input type="checkbox" checked={single} onChange={(e) => setSingle(e.target.checked)} className="mt-0.5 h-4 w-4 rounded accent-brand" />
         <span>{t("finder.singleProtein")}</span>
@@ -294,6 +318,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
           setMinScore(0);
           setGrainFree(false);
           setExclude([]);
+          setIncludeProteins([]);
           setSingle(false);
           setMinProtein(0);
           setMaxCarbs(NO_CARB_LIMIT);
@@ -443,6 +468,7 @@ export function FoodFinder({ brands }: { brands: Meta["brands"] }) {
                       setMinScore(0);
                       setGrainFree(false);
                       setExclude([]);
+                      setIncludeProteins([]);
                       setSingle(false);
                       setMinProtein(0);
                       setMaxCarbs(NO_CARB_LIMIT);
