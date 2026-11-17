@@ -495,7 +495,10 @@
     "mixedSummaryDry": "Feed {dryGrams} g of this dry food alongside {wetGrams} g wet food (~{wetKcal} kcal).",
     "mixedSummaryWet": "Feed {wetGrams} g of this wet food topped up with ~{dryGrams} g dry kibble (~{dryKcal} kcal).",
     "comparePricesTitle": "Compare current prices",
-    "comparePricesText": "Check availability and compare live prices across shops:"
+    "comparePricesText": "Check availability and compare live prices across shops:",
+    "directTitle": "Available directly at",
+    "searchOtherTitle": "Search by name in other shops",
+    "searchAt": "Search {shop}"
   },
   "pet": {
     "foodTitle": "Food",

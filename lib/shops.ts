@@ -76,6 +76,7 @@ export function shopLinks(p: ShopTarget, lang: Locale, clickRef: string): ShopLi
       id: "brekz",
       label: "Brekz",
       url: brekzUrl(p, lang, clickRef),
+      exact: false,
     },
   ];
 
@@ -84,6 +85,7 @@ export function shopLinks(p: ShopTarget, lang: Locale, clickRef: string): ShopLi
       id: "bol",
       label: "bol.com",
       url: bolAffiliateUrl({ ean: p.ean, name: p.name, bolUrl: p.bolUrl }, clickRef),
+      exact: Boolean(p.bolUrl),
     });
   }
 
@@ -91,6 +93,7 @@ export function shopLinks(p: ShopTarget, lang: Locale, clickRef: string): ShopLi
     id: "amazon",
     label: lang === "de" ? "Amazon.de" : lang === "fr" ? "Amazon.fr" : "Amazon.nl",
     url: amazonUrl(p, lang),
+    exact: false,
   });
 
   return links;

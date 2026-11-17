@@ -495,7 +495,10 @@
     "mixedSummaryDry": "Donnez {dryGrams} g de ces croquettes en complément de {wetGrams} g de pâtée (~{wetKcal} kcal).",
     "mixedSummaryWet": "Donnez {wetGrams} g de cette pâtée complétés par ~{dryGrams} g de croquettes (~{dryKcal} kcal).",
     "comparePricesTitle": "Comparer les prix actuels",
-    "comparePricesText": "Vérifiez la disponibilité et comparez les prix par boutique :"
+    "comparePricesText": "Vérifiez la disponibilité et comparez les prix par boutique :",
+    "directTitle": "Voir directement chez",
+    "searchOtherTitle": "Rechercher par nom dans d’autres boutiques",
+    "searchAt": "Rechercher sur {shop}"
   },
   "pet": {
     "foodTitle": "Alimentation",

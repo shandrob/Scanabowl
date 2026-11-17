@@ -495,7 +495,10 @@
     "mixedSummaryDry": "Geef {dryGrams} g van deze brok naast {wetGrams} g natvoer (~{wetKcal} kcal).",
     "mixedSummaryWet": "Geef {wetGrams} g van dit natvoer aangevuld met ~{dryGrams} g droge brokken (~{dryKcal} kcal).",
     "comparePricesTitle": "Actuele prijzen vergelijken",
-    "comparePricesText": "Bekijk waar dit voer op voorraad is en vergelijk direct de prijs per winkel:"
+    "comparePricesText": "Bekijk waar dit voer op voorraad is en vergelijk direct de prijs per winkel:",
+    "directTitle": "Direct bekijken bij",
+    "searchOtherTitle": "Zoek op naam bij andere winkels",
+    "searchAt": "Zoek bij {shop}"
   },
   "pet": {
     "foodTitle": "Voer",

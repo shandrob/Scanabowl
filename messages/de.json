@@ -495,7 +495,10 @@
     "mixedSummaryDry": "Füttern Sie {dryGrams} g dieses Trockenfutters neben {wetGrams} g Nassfutter (~{wetKcal} kcal).",
     "mixedSummaryWet": "Füttern Sie {wetGrams} g dieses Nassfutters ergänzt durch ~{dryGrams} g Trockenfutter (~{dryKcal} kcal).",
     "comparePricesTitle": "Aktuelle Preise vergleichen",
-    "comparePricesText": "Verfügbarkeit prüfen und Preise direkt nach Shop vergleichen:"
+    "comparePricesText": "Verfügbarkeit prüfen und Preise direkt nach Shop vergleichen:",
+    "directTitle": "Direkt ansehen bei",
+    "searchOtherTitle": "In anderen Shops nach Namen suchen",
+    "searchAt": "Bei {shop} suchen"
   },
   "pet": {
     "foodTitle": "Futter",

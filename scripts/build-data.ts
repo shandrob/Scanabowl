@@ -18,7 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 import { field, readCsv } from "../lib/catalog/csv";
-import { knownBrands, normalizeEan, slugify, toSpecies } from "../lib/catalog/clean";
+import { inferFoodType, knownBrands, normalizeEan, slugify, toSpecies } from "../lib/catalog/clean";
 import { rowToProduct, type CatalogProduct, type RowContext, type Source } from "../lib/catalog/records";
 import { packGrams } from "../lib/pets/energy";
 import { detectAllergens } from "../lib/scoring/allergens";
@@ -75,21 +75,68 @@ const SHOP_FILLER = new Set([
   "hondenvoer", "kattenvoer", "hondenbrokken", "kattenbrokken", "droogvoer", "natvoer",
   "hond", "kat", "dog", "cat", "droog", "nat", "blik", "maaltijdzakjes", "pouch",
   "voor", "met", "en", "in", "van", "de", "het", "voordeelpakket", "multipack", "bonusbag",
+  "recipe", "food", "complete", "compleet", "dry", "wet", "breeds", "breed", "science",
+  "plan", "prescription", "diet", "veterinary", "nutrition", "health", "care",
+  "with", "und", "mit", "et", "au", "aux",
 ]);
 
-function zooplusSig(species: Species, brand: string, name: string, pack: string): string | null {
-  const g = packGrams(pack);
-  if (!g || g <= 0) return null;
-  const brandKey = slugify(brand);
-  if (!brandKey || brandKey === "overig") return null;
-  const brandTokens = new Set(brandKey.split("-"));
-  const tokens = slugify(
-    name.replace(/(\d+\s*x\s*)?\d+(?:[.,]\d+)?\s*(kg|g|gr|gram|ml|l)\b/gi, " "),
-  )
+const ZP_SYN: Record<string, string> = {
+  chicken: "kip", huhnchen: "kip", huhn: "kip", poulet: "kip",
+  beef: "rund", rind: "rund", boeuf: "rund",
+  lamb: "lam", lamm: "lam", agneau: "lam",
+  salmon: "zalm", lachs: "zalm", saumon: "zalm",
+  turkey: "kalkoen", pute: "kalkoen", truthahn: "kalkoen", dinde: "kalkoen",
+  duck: "eend", ente: "eend", canard: "eend",
+  rabbit: "konijn", kaninchen: "konijn",
+  fish: "vis", fisch: "vis", poisson: "vis", zeevis: "vis",
+  tuna: "tonijn", thunfisch: "tonijn",
+  venison: "hert", hirsch: "hert",
+  pork: "varken", schwein: "varken",
+  rice: "rijst", reis: "rijst", riz: "rijst",
+  potato: "aardappel", kartoffel: "aardappel",
+  grainfree: "graanvrij", getreidefrei: "graanvrij",
+  sterilized: "sterilised", gesteriliseerd: "sterilised", kastriert: "sterilised",
+  kittens: "kitten", welpe: "puppy", puppies: "puppy",
+  small: "mini", large: "maxi",
+};
+
+function zooplusBrandKey(brand: string): string {
+  const s = slugify(brand).replace(/-/g, " ").trim();
+  if (!s || s === "overig") return "";
+  if (s.startsWith("hill s")) return "hills";
+  if (s.startsWith("royal canin")) return "royalcanin";
+  if (s.startsWith("purina pro plan") || s.startsWith("pro plan")) return "proplan";
+  if (s.startsWith("purina one")) return "purinaone";
+  if (s.startsWith("edgard")) return "edgardcooper";
+  if (s.startsWith("animonda")) return "animonda";
+  return s.replace(/\s+/g, "");
+}
+
+function zooplusTokens(brand: string, name: string): string[] {
+  const bk = zooplusBrandKey(brand);
+  const cleaned = slugify(
+    name
+      .replace(/(\d+\s*x\s*)?\d+(?:[.,]\d+)?\s*(kg|g|gr|gram|ml|l)\b/gi, " ")
+      .replace(/wild\s*zwijn/gi, "wildzwijn")
+      .replace(/zoete\s*aardappel/gi, "zoeteaardappel")
+      .replace(/grain\s*free/gi, "graanvrij"),
+  );
+  const toks = cleaned
     .split("-")
-    .filter((t) => t.length > 1 && !brandTokens.has(t) && !SHOP_FILLER.has(t));
-  if (tokens.length < 2) return null;
-  return `${species}|${brandKey}|${[...new Set(tokens)].sort().join("-")}|${g}`;
+    .map((t) => ZP_SYN[t] ?? t)
+    .filter((t) => t.length > 1 && !SHOP_FILLER.has(t) && t !== bk);
+  return [...new Set(toks)];
+}
+
+interface ZooplusEntry {
+  url: string;
+  price?: string;
+  pack?: string;
+  packGrams: number | null;
+  foodType: string;
+  tokens: string[];
+  hasYoung: boolean;
+  hasSenior: boolean;
 }
 
 async function main() {
@@ -121,7 +168,7 @@ async function main() {
   // database/zooplus/*.csv: the zooplus product file from Awin (npm run data:zooplus). Every food gets its exact
   // zooplus link by barcode; foods we did not have yet are added only when zooplus shows their ingredient list.
   const zooplus = new Map<string, { url: string; price?: string; pack?: string }>();
-  const zooplusBySig = new Map<string, { url: string; price?: string; pack?: string } | "AMBIGUOUS">();
+  const zooplusByBrand = new Map<string, ZooplusEntry[]>();
   const zooplusNoLabel = new Set<string>();
   for (const file of csvFiles(path.join(DB, "zooplus"))) {
     for (const row of readCsv(file)) {
@@ -130,13 +177,27 @@ async function main() {
       const price = field(row, "price") || undefined;
       const pack = field(row, "pack") || undefined;
       if (ean && url) zooplus.set(ean, { url, price, pack });
-      if (url && pack) {
+      if (url) {
         const sp = toSpecies(field(row, "species"), field(row, "name"));
-        const sig = sp ? zooplusSig(sp, field(row, "brand"), field(row, "name"), pack) : null;
-        if (sig) {
-          const prev = zooplusBySig.get(sig);
-          if (!prev) zooplusBySig.set(sig, { url, price, pack });
-          else if (prev !== "AMBIGUOUS" && prev.url !== url) zooplusBySig.set(sig, "AMBIGUOUS");
+        const bk = zooplusBrandKey(field(row, "brand"));
+        if (sp && bk) {
+          const tokens = zooplusTokens(field(row, "brand"), field(row, "name"));
+          if (tokens.length >= 2) {
+            const ft = inferFoodType({ name: field(row, "name"), declared: field(row, "foodType"), pack });
+            const key = `${sp}|${bk}`;
+            const list = zooplusByBrand.get(key) ?? [];
+            list.push({
+              url,
+              price,
+              pack,
+              packGrams: pack ? packGrams(pack) : null,
+              foodType: ft,
+              tokens,
+              hasYoung: tokens.some((t) => t === "puppy" || t === "kitten" || t === "junior"),
+              hasSenior: tokens.some((t) => t === "senior" || t === "mature"),
+            });
+            zooplusByBrand.set(key, list);
+          }
         }
       }
       if (!field(row, "ingredients")) {
@@ -207,12 +268,37 @@ async function main() {
   let zooplusFuzzyLinked = 0;
   for (const p of products) {
     let z = p.ean ? zooplus.get(p.ean) : undefined;
-    if (!z && p.pack) {
-      const sig = zooplusSig(p.species, p.brand, p.name, p.pack);
-      const match = sig ? zooplusBySig.get(sig) : undefined;
-      if (match && match !== "AMBIGUOUS") {
-        z = match;
-        zooplusFuzzyLinked++;
+    const exactEan = Boolean(z);
+    if (!z) {
+      const bk = zooplusBrandKey(p.brand);
+      const cands = bk ? zooplusByBrand.get(`${p.species}|${bk}`) : undefined;
+      if (cands) {
+        const pt = zooplusTokens(p.brand, p.name);
+        if (pt.length >= 2) {
+          const pg = p.pack ? packGrams(p.pack) : null;
+          let best: ZooplusEntry | null = null;
+          let bestScore = 0;
+          let bestSamePack = false;
+          for (const c of cands) {
+            if ((p.foodType === "dry" || p.foodType === "wet") && (c.foodType === "dry" || c.foodType === "wet") && c.foodType !== p.foodType) continue;
+            if (p.lifeStage === "young" && !c.hasYoung) continue;
+            if (p.lifeStage === "adult" && (c.hasYoung || c.hasSenior)) continue;
+            if (p.lifeStage === "senior" && !c.hasSenior) continue;
+            const inter = pt.filter((t) => c.tokens.includes(t)).length;
+            const union = new Set([...pt, ...c.tokens]).size;
+            const score = inter / union;
+            const samePack = Boolean(pg && c.packGrams && pg === c.packGrams);
+            if (score > bestScore || (score === bestScore && samePack && !bestSamePack)) {
+              bestScore = score;
+              best = c;
+              bestSamePack = samePack;
+            }
+          }
+          if (best && bestScore >= 0.72) {
+            z = best;
+            zooplusFuzzyLinked++;
+          }
+        }
       }
     }
     if (!z) continue;
@@ -223,9 +309,13 @@ async function main() {
       if (Number.isFinite(n) && n > 0 && n < 1000) {
         const pg = packGrams(p.pack);
         const zg = z.pack ? packGrams(z.pack) : null;
-        // When zooplus sells a multipack (e.g. 6x400g) under the single-can EAN (400g), scale price to match p.pack
-        const scaled = pg && zg && pg !== zg ? Math.round(n * (pg / zg) * 100) / 100 : n;
-        if (scaled > 0 && scaled < 1000) p.price = scaled;
+        if (exactEan) {
+          // When zooplus sells a multipack (e.g. 6x400g) under the single-can EAN (400g), scale price to match p.pack
+          const scaled = pg && zg && pg !== zg ? Math.round(n * (pg / zg) * 100) / 100 : n;
+          if (scaled > 0 && scaled < 1000) p.price = scaled;
+        } else if (pg && zg && pg === zg) {
+          p.price = n;
+        }
       }
     }
     zooplusLinked++;

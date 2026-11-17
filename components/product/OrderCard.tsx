@@ -122,6 +122,8 @@ export function OrderCard({
     name || ean
       ? shopLinks({ ean, name, brand, bolUrl, zooplusUrl }, lang, `scanabowl-${lang}-${ean || "product"}`)
       : [];
+  const exactShops = shops.filter((s) => s.exact);
+  const searchShops = shops.filter((s) => !s.exact);
 
   if (effectivePrice === null && !dailyGrams && shops.length === 0) return null;
 
@@ -315,32 +317,61 @@ export function OrderCard({
 
       {shops.length > 0 && (
         <div className={dailyGrams !== null || (price !== undefined && price > 0) ? "mt-5 border-t border-line pt-4" : ""}>
-          <h3 id={price && price > 0 ? undefined : dailyGrams !== null ? undefined : "order-h"} className="font-display text-base font-semibold text-brand-deep">
-            {t("order.comparePricesTitle")}
-          </h3>
-          <p className="mt-0.5 font-sans text-xs text-ink-soft">{t("order.comparePricesText")}</p>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            {shops.map((s) => (
-              <a
-                key={s.id}
-                href={s.url}
-                target="_blank"
-                rel="sponsored nofollow noopener noreferrer"
-                className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2 font-sans text-xs font-semibold transition ${
-                  s.id === "zooplus"
-                    ? "bg-brand text-white hover:bg-brand-deep"
-                    : "border border-line bg-cream text-ink hover:border-brand hover:bg-paper hover:text-brand-deep"
-                }`}
-              >
-                <span className="truncate">
-                  {s.id === "zooplus" && s.exact && price !== undefined && price > 0
-                    ? `${s.label} · €${fmtMoney(price)}`
-                    : s.label}
-                </span>
-                <IconExternal className="h-3.5 w-3.5 shrink-0" />
-              </a>
-            ))}
-          </div>
+          {exactShops.length > 0 ? (
+            <>
+              <h3 id={price && price > 0 ? undefined : dailyGrams !== null ? undefined : "order-h"} className="font-display text-base font-semibold text-brand-deep">
+                {t("order.directTitle")}
+              </h3>
+              <div className="mt-2.5 flex flex-col gap-2">
+                {exactShops.map((s) => (
+                  <a
+                    key={s.id}
+                    href={s.url}
+                    target="_blank"
+                    rel="sponsored nofollow noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition hover:bg-brand-deep"
+                  >
+                    <span className="truncate">
+                      {s.id === "zooplus"
+                        ? `${t("order.zooplusExact")}${price !== undefined && price > 0 ? ` · €${fmtMoney(price)}` : ""}`
+                        : s.label}
+                    </span>
+                    <IconExternal className="h-4 w-4 shrink-0" />
+                  </a>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h3 id={price && price > 0 ? undefined : dailyGrams !== null ? undefined : "order-h"} className="font-display text-base font-semibold text-brand-deep">
+                {t("order.comparePricesTitle")}
+              </h3>
+              <p className="mt-0.5 font-sans text-xs text-ink-soft">{t("order.comparePricesText")}</p>
+            </>
+          )}
+
+          {searchShops.length > 0 && (
+            <div className={exactShops.length > 0 ? "mt-4 border-t border-line/70 pt-3" : "mt-3"}>
+              {exactShops.length > 0 && (
+                <p className="mb-2 font-sans text-[11px] font-medium text-ink-faint">{t("order.searchOtherTitle")}</p>
+              )}
+              <div className="grid grid-cols-2 gap-2">
+                {searchShops.map((s) => (
+                  <a
+                    key={s.id}
+                    href={s.url}
+                    target="_blank"
+                    rel="sponsored nofollow noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-line bg-cream px-3 py-2 font-sans text-xs font-semibold text-ink transition hover:border-brand hover:bg-paper hover:text-brand-deep"
+                  >
+                    <span className="truncate">{t("order.searchAt", { shop: s.label })}</span>
+                    <IconExternal className="h-3.5 w-3.5 shrink-0" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           <p className="mt-2.5 font-sans text-[11px] leading-relaxed text-ink-faint">
             {t("order.disclosure")}{" "}
             <Link href={localePath(lang, "/affiliate")} className="underline hover:text-ink">
