@@ -15,6 +15,7 @@ import { GUIDES } from "@/lib/guides/defs";
 import { LOCALE_TAGS, alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createRaw, createT } from "@/lib/i18n/t";
+import { clampDescription } from "@/lib/meta";
 import { Rich } from "@/components/ui/Rich";
 import { SITE } from "@/lib/site";
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const t = createT(await getDictionary(lang));
   return {
     title: { absolute: t("meta.title") },
-    description: t("meta.description"),
+    description: clampDescription(t("meta.description")),
     alternates: { canonical: localePath(lang), languages: alternateLanguages() },
   };
 }

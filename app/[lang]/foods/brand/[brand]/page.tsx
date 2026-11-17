@@ -11,6 +11,7 @@ import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT } from "@/lib/i18n/t";
 import { foodTypeLabel } from "@/lib/labels";
+import { clampDescription } from "@/lib/meta";
 import { SITE } from "@/lib/site";
 
 /**
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const path = `/foods/brand/${slug}`;
   return {
     title: t("brandPages.metaTitle", { brand: b.name }),
-    description: t("brandPages.metaDescription", { brand: b.name, count: b.count }),
+    description: clampDescription(t("brandPages.metaDescription", { brand: b.name, count: b.count })),
     alternates: { canonical: localePath(lang, path), languages: alternateLanguages(path) },
   };
 }

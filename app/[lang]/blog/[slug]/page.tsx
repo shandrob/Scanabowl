@@ -8,6 +8,7 @@ import { getPost, listPosts, postLanguages, publishedSlugs } from "@/lib/blog";
 import { LOCALES, LOCALE_TAGS, isLocale, localePath, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT } from "@/lib/i18n/t";
+import { clampDescription } from "@/lib/meta";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -27,9 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(lang, slug);
   if (!post) return {};
   const langs = postLanguages(slug);
+  const description = clampDescription(post.description);
   return {
     title: post.title,
-    description: post.description,
+    description,
     alternates: {
       canonical: localePath(lang, `/blog/${slug}`),
       languages: Object.fromEntries(langs.map((l) => [LOCALE_TAGS[l], localePath(l, `/blog/${slug}`)])),
@@ -37,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: "article",
       title: post.title,
-      description: post.description,
+      description,
       publishedTime: post.date.toISOString(),
       images: post.cover ? [{ url: post.cover }] : [{ url: "/og.png", width: 1200, height: 630 }],
     },

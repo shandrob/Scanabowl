@@ -6,6 +6,7 @@ import { allBrands, MIN_FOODS_FOR_PAGE, MIN_SCORED_FOR_RANKING } from "@/lib/dat
 import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT, type TFunction } from "@/lib/i18n/t";
+import { clampDescription } from "@/lib/meta";
 
 /** Brand data only changes with a deployment: built once, never refreshed on a timer. */
 export const revalidate = false;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const count = (await allBrands()).length;
   return {
     title: t("brandPages.indexMetaTitle"),
-    description: t("brandPages.indexMetaDescription", { count }),
+    description: clampDescription(t("brandPages.indexMetaDescription", { count })),
     alternates: { canonical: localePath(lang, "/foods/brand"), languages: alternateLanguages("/foods/brand") },
   };
 }

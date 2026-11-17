@@ -12,6 +12,7 @@ import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT } from "@/lib/i18n/t";
 import { speciesLabel } from "@/lib/labels";
+import { clampDescription } from "@/lib/meta";
 import { SITE } from "@/lib/site";
 
 /**
@@ -36,11 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!text) return {};
   const path = `/best/${guide}`;
   const image = g.top.find((p) => p.image)?.image;
+  const description = clampDescription(text.description);
   return {
     title: text.title,
-    description: text.description,
+    description,
     alternates: { canonical: localePath(lang, path), languages: alternateLanguages(path) },
-    openGraph: { title: text.title, description: text.description, url: localePath(lang, path), ...(image ? { images: [{ url: image }] } : {}) },
+    openGraph: { title: text.title, description, url: localePath(lang, path), ...(image ? { images: [{ url: image }] } : {}) },
   };
 }
 

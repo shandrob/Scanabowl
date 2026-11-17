@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Scanabowl – Ist das Futter Ihres Tieres wirklich gut? Unabhängige Bewertungen für Hunde- und Katzenfutter",
-    "description": "Suchen Sie jedes Hunde- oder Katzenfutter und sehen Sie eine unabhängige Bewertung auf Basis von Zutaten und Nährwerten. Persönlich für Ihr Tier, Allergene werden herausgefiltert."
+    "description": "Hunde- und Katzenfutter nachschlagen: unabhängige Bewertung nach Zutaten und Nährwerten, mit persönlichem Allergiefilter für Ihr Tier."
   },
   "nav": {
     "best": "Bestenlisten",
@@ -212,7 +212,7 @@
     "hiddenByFilters": "{count} Futter passen zu Ihrer Suche, liegen aber außerhalb Ihrer Filter (zum Beispiel Futter ohne Bewertung).",
     "showHidden": "Anzeigen",
     "metaTitle": "Hunde- und Katzenfutter finden – unabhängige Bewertungen",
-    "metaDescription": "Hunde- und Katzenfutter nach Bewertung, Art und Lebensphase durchsuchen und vergleichen. Nach Marke und Allergie filtern, sortiert nach einer unabhängigen Bewertung von 0–100.",
+    "metaDescription": "Hunde- und Katzenfutter nach Bewertung, Art und Lebensphase vergleichen. Nach Marke und Allergie filtern, unabhängig bewertet (0–100).",
     "title": "Das richtige Futter finden",
     "subtitle": "Vergleichen Sie {count} bewertete Futter für Hunde und Katzen. Hunde und Katzen werden getrennt bewertet.",
     "species": "Tier",
@@ -253,8 +253,8 @@
     "splitTextFirst": "{forms} stammen vom selben Rohstoff ({count} Formen), zusammen schätzungsweise {pct} % der Rezeptur – möglicherweise mehr als die erste Zutat ({first}). Hersteller dürfen einen Rohstoff so aufgeteilt angeben; das ist kein Fehler, macht die Reihenfolge auf dem Etikett aber weniger aussagekräftig.",
     "rankInType": "Platz {rank} von {total} · {type} · {species}",
     "metaTitle": "{name} – Bewertung {score}/100",
-    "metaDescription": "{name} von {brand}: unabhängige Scanabowl-Bewertung {score}/100 für {species}futter, mit Zutatenanalyse, Nährwerten und Allergiecheck.",
-    "metaDescriptionNoScore": "{name} von {brand}: Zutaten und Nährwerte von {species}futter.",
+    "metaDescription": "{name} von {brand}: Scanabowl-Bewertung {score}/100 ({species}). Zutaten, Nährwerte und Allergiecheck.",
+    "metaDescriptionNoScore": "{name} von {brand}: Zutaten und Nährwerte ({species}).",
     "jsonLdDescription": "{name} von {brand} – von Scanabowl analysiertes Tierfutter.",
     "scoreTitle": "Scanabowl-Bewertung",
     "howCalculated": "Wie wird das berechnet?",
@@ -500,7 +500,7 @@
     "betterText": "Dieselbe Futterart, ohne Zutaten, die Ihr Tier nicht verträgt oder nicht mag, mit höherer Übereinstimmung. Ein Futter pro Marke.",
     "compareCurrent": "Mit dem aktuellen Futter vergleichen",
     "metaTitle": "Mein Tier – persönlicher Futterberater",
-    "metaDescription": "Erstellen Sie ein Profil für Ihren Hund oder Ihre Katze mit Alter, Gewicht und Allergien. Scanabowl blendet Futter aus, das Ihr Tier nicht fressen darf, und berechnet die Tagesration.",
+    "metaDescription": "Profil für Hund oder Katze mit Alter, Gewicht und Allergien anlegen. Scanabowl filtert ungeeignetes Futter aus und berechnet die Tagesration.",
     "title": "Das Profil Ihres Tieres",
     "subtitle": "Erzählen Sie uns von Ihrem Hund oder Ihrer Katze. Alles bleibt auf diesem Gerät – es gibt kein Konto und nichts wird an uns gesendet.",
     "yourPets": "Ihre Tiere",
@@ -582,7 +582,7 @@
   },
   "method": {
     "metaTitle": "So bewerten wir Tierfutter",
-    "metaDescription": "Genau, wie die Scanabowl-Bewertung berechnet wird: Nährstoffprofil, Qualität der Zutaten und saubere Rezeptur – mit den wissenschaftlichen Quellen dahinter.",
+    "metaDescription": "So wird die Scanabowl-Bewertung berechnet: Nährstoffprofil, Zutatenqualität und saubere Rezeptur – inklusive der wissenschaftlichen Quellen.",
     "title": "So bewerten wir Tierfutter",
     "intro": "Jedes Futter erhält eine Bewertung von 0 bis 100. Sie wird mit einer festen Formel aus der Zutatenliste und den Analysewerten auf der Verpackung berechnet, nach veröffentlichten tierärztlichen Ernährungsrichtlinien. Diese Seite erklärt jeden Schritt, damit Sie es selbst beurteilen können.",
     "glance": "Die Bewertung auf einen Blick",
@@ -913,7 +913,7 @@
   },
   "guides": {
     "indexMetaTitle": "Bestes Hunde- und Katzenfutter {year}: unabhängige Bestenlisten",
-    "indexMetaDescription": "Das beste Kittenfutter, Welpenfutter, Nassfutter, Seniorfutter und mehr: Bestenlisten, automatisch nach einer unabhängigen Bewertung gereiht. Keine bezahlten Plätze.",
+    "indexMetaDescription": "Bestes Kitten-, Welpen-, Nass- und Seniorfutter: Bestenlisten automatisch nach unabhängiger Bewertung gereiht. Keine bezahlten Plätze.",
     "indexTitle": "Das beste Futter für Ihren Hund oder Ihre Katze",
     "indexIntro": "Bestenlisten für jede Situation, vom Kitten bis zum Senior und vom Nassfutter bis zum Futter mit einer Eiweißquelle. Jede Liste wird automatisch aus den Futtern in unserer Datenbank erstellt, sortiert nach ihrer Scanabowl-Bewertung.",
     "indexNote": "Die Listen werden bei jeder Aktualisierung der Datenbank neu berechnet. Keine Marke kann sich einen Platz kaufen. Wir erhalten möglicherweise eine Provision, wenn Sie über einen Link bestellen, aber das hat nie Einfluss auf die Reihenfolge.",
@@ -1013,7 +1013,7 @@
     "avg": "Durchschnitt {score}",
     "noAvg": "noch keine Bewertung",
     "metaTitle": "{brand}: Hunde- und Katzenfutter bewertet",
-    "metaDescription": "Wie schneidet {brand} ab? Die unabhängige Scanabowl-Bewertung von {count} Sorten von {brand}, berechnet aus Zutaten und Nährwerten.",
+    "metaDescription": "{brand}: unabhängige Scanabowl-Bewertung von {count} Sorten, berechnet aus Zutaten und Nährwerten.",
     "intro": "Scanabowl hat {count} Sorten von {brand} in der Datenbank. Jedes Futter wird anhand des Etiketts – Zutaten und Nährwerte – mit genau derselben Methode bewertet wie jede andere Marke.",
     "statFoods": "Sorten in der Datenbank",
     "statAvg": "Durchschnittliche Bewertung",
@@ -1042,7 +1042,7 @@
   },
   "allergenPages": {
     "metaTitle": "Hunde- & Katzenfutter ohne {allergen} – streng geprüft",
-    "metaDescription": "Alle {count} Alleinfuttermittel für Hunde und Katzen garantiert ohne {allergen} und ohne vage tierische oder pflanzliche Nebenerzeugnisse, sortiert nach Scanabowl-Bewertung.",
+    "metaDescription": "Alle {count} Alleinfutter ohne {allergen} und ohne vage Nebenerzeugnisse, sortiert nach Scanabowl-Bewertung.",
     "strictBadge": "Streng geprüft · auch frei von vagen Nebenerzeugnissen",
     "h1": "Tierfutter ohne {allergen}",
     "intro": "Suchen Sie Hundefutter oder Katzenfutter ohne {allergen}? Hier finden Sie alle {count} Alleinfuttermittel aus unserer Datenbank, die kein {allergen} enthalten und keine vagen Sammelbegriffe verwenden, hinter denen sich {allergen} verbergen könnte.",
@@ -1069,7 +1069,7 @@
   "insurance": {
     "navTitle": "Tierkrankenversicherung & Kosten",
     "metaTitle": "Tierkrankenversicherung für Hund & Katze: Wann lohnt sie sich?",
-    "metaDescription": "Ehrlicher Vergleich zwischen einer Tierkrankenversicherung und einem monatlichen Notfallpolster für Tierarztkosten – inklusive häufiger Ausschlüsse bei Allergien.",
+    "metaDescription": "Ehrlicher Vergleich: Tierkrankenversicherung vs. monatliches Notfallpolster für Tierarztkosten – inklusive häufiger Allergie-Ausschlüsse.",
     "badge": "Unabhängiger Ratgeber",
     "title": "Tierkrankenversicherung: sinnvoll oder selbst sparen?",
     "intro": "Eine unerwartete Operation oder eine dauerhafte Allergiebehandlung kann Tausende Euro kosten. Vergleichen Sie mit unserem Rechner den typischen Monatsbeitrag mit einem eigenen Tierarzt-Sparpolster.",

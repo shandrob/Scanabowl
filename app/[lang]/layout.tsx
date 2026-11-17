@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { LOCALES, LOCALE_TAGS, alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT } from "@/lib/i18n/t";
+import { clampDescription } from "@/lib/meta";
 import { SITE } from "@/lib/site";
 
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", axes: ["opsz"], display: "swap" });
@@ -26,10 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const t = createT(await getDictionary(lang));
+  const description = clampDescription(t("meta.description"));
   return {
     metadataBase: new URL(SITE.url),
     title: { default: t("meta.title"), template: `%s | Scanabowl` },
-    description: t("meta.description"),
+    description,
     applicationName: "Scanabowl",
     alternates: { canonical: localePath(lang), languages: alternateLanguages() },
     openGraph: {
@@ -37,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       siteName: "Scanabowl",
       locale: LOCALE_TAGS[lang].replace("-", "_"),
       title: t("meta.title"),
-      description: t("meta.description"),
+      description,
       images: [{ url: "/og.png", width: 1200, height: 630, alt: "Scanabowl" }],
     },
     twitter: { card: "summary_large_image" },

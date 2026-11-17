@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Scanabowl – Is het voer van jouw huisdier echt goed? Onafhankelijke scores voor hondenvoer en kattenvoer",
-    "description": "Zoek elk hondenvoer of kattenvoer op en zie een onafhankelijke score op basis van ingrediënten en voedingswaarden. Persoonlijk voor jouw huisdier, met allergieën uitgefilterd."
+    "description": "Zoek honden- of kattenvoer op en bekijk de onafhankelijke score op ingrediënten en voedingswaarden, met allergiefilter voor jouw huisdier."
   },
   "nav": {
     "best": "Beste keuzes",
@@ -253,8 +253,8 @@
     "splitTextFirst": "{forms} komen van dezelfde grondstof ({count} vormen), samen naar schatting {pct}% van het recept – mogelijk meer dan het eerste ingrediënt ({first}). Fabrikanten mogen een grondstof zo verdeeld vermelden; het is geen fout, maar het maakt de volgorde op het etiket minder zeggend.",
     "rankInType": "Nr. {rank} van {total} · {type} · {species}",
     "metaTitle": "{name} – score {score}/100",
-    "metaDescription": "{name} van {brand}: onafhankelijke Scanabowl-score {score}/100 voor {species}voer, met ingrediëntenanalyse, voedingswaarden en allergiecheck.",
-    "metaDescriptionNoScore": "{name} van {brand}: ingrediënten en voedingswaarden van {species}voer.",
+    "metaDescription": "{name} van {brand}: Scanabowl-score {score}/100 ({species}). Ingrediënten, voedingswaarden en allergiecheck.",
+    "metaDescriptionNoScore": "{name} van {brand}: ingrediënten en voedingswaarden ({species}).",
     "jsonLdDescription": "{name} van {brand} – dierenvoer geanalyseerd door Scanabowl.",
     "scoreTitle": "Scanabowl-score",
     "howCalculated": "Hoe wordt dit berekend?",
@@ -500,7 +500,7 @@
     "betterText": "Hetzelfde soort voer, zonder ingrediënten die je dier niet mag of niet lust, met een hogere match. Eén voer per merk.",
     "compareCurrent": "Vergelijk met het huidige voer",
     "metaTitle": "Mijn huisdier – persoonlijke voedergids",
-    "metaDescription": "Maak een profiel voor je hond of kat met leeftijd, gewicht en allergieën. Scanabowl verbergt voer dat je dier niet mag eten en berekent de dagelijkse portie.",
+    "metaDescription": "Maak een profiel voor je hond of kat met leeftijd, gewicht en allergieën. Scanabowl filtert ongeschikt voer weg en berekent de dagportie.",
     "title": "Het profiel van je huisdier",
     "subtitle": "Vertel ons over je hond of kat. Alles blijft op dit apparaat – er is geen account en er wordt niets naar ons gestuurd.",
     "yourPets": "Jouw huisdieren",
@@ -913,7 +913,7 @@
   },
   "guides": {
     "indexMetaTitle": "Beste hondenvoer en kattenvoer {year}: onafhankelijke toplijsten",
-    "indexMetaDescription": "Het beste kittenvoer, puppyvoer, natvoer, seniorvoer en meer: toplijsten die automatisch gerangschikt zijn op een onafhankelijke score. Geen betaalde plekken.",
+    "indexMetaDescription": "Het beste kittenvoer, puppyvoer, natvoer en seniorvoer: toplijsten automatisch gerangschikt op onafhankelijke score. Geen betaalde plekken.",
     "indexTitle": "Het beste voer voor jouw hond of kat",
     "indexIntro": "Toplijsten per situatie, van kitten tot senior en van natvoer tot voer met één eiwitbron. Elke lijst wordt automatisch samengesteld uit de voeders in onze database, op volgorde van hun Scanabowl-score.",
     "indexNote": "De lijsten worden bij elke update van de database opnieuw berekend. Geen enkel merk kan een plek kopen. We verdienen mogelijk een commissie als je via een link bestelt, maar dat heeft nooit invloed op de volgorde.",
@@ -1013,7 +1013,7 @@
     "avg": "gemiddeld {score}",
     "noAvg": "nog geen score",
     "metaTitle": "{brand}: hondenvoer en kattenvoer beoordeeld",
-    "metaDescription": "Hoe scoort {brand}? De onafhankelijke Scanabowl-score van {count} voeders van {brand}, berekend uit ingrediënten en voedingswaarden.",
+    "metaDescription": "{brand}: onafhankelijke Scanabowl-score van {count} voeders, berekend uit ingrediënten en voedingswaarden.",
     "intro": "Scanabowl heeft {count} voeders van {brand} in de database. Elk voer is beoordeeld op het etiket – ingrediënten en voedingswaarden – met precies dezelfde methode als elk ander merk.",
     "statFoods": "Voeders in de database",
     "statAvg": "Gemiddelde score",
@@ -1042,7 +1042,7 @@
   },
   "allergenPages": {
     "metaTitle": "Honden- & kattenvoer zonder {allergen} – strikt gecontroleerd",
-    "metaDescription": "Alle {count} volledige honden- en kattenvoeders gegarandeerd zonder {allergen} en zonder vage dierlijke of plantaardige bijproducten, gerangschikt op Scanabowl-score.",
+    "metaDescription": "Alle {count} volledige voeders zonder {allergen} en zonder vage bijproducten, gerangschikt op Scanabowl-score.",
     "strictBadge": "Strikt gecontroleerd · ook vrij van vage bijproducten",
     "h1": "Dierenvoer zonder {allergen}",
     "intro": "Zoek je hondenvoer of kattenvoer zonder {allergen}? Hieronder staan alle {count} volledige voeders uit onze database waarin geen {allergen} zit én waarin geen vage groepsnamen staan waar {allergen} achter kan schuilen.",

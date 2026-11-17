@@ -9,6 +9,7 @@ import metaJson from "@/data/generated/meta.json";
 import { alternateLanguages, isLocale, localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT } from "@/lib/i18n/t";
+import { clampDescription } from "@/lib/meta";
 
 export const revalidate = 86400;
 
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const t = createT(await getDictionary(lang));
   return {
     title: t("finder.metaTitle"),
-    description: t("finder.metaDescription"),
+    description: clampDescription(t("finder.metaDescription")),
     alternates: { canonical: localePath(lang, "/foods"), languages: alternateLanguages("/foods") },
   };
 }

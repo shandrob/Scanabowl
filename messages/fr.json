@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Scanabowl – La nourriture de votre animal est-elle vraiment bonne ? Notes indépendantes pour croquettes et pâtées",
-    "description": "Recherchez n’importe quel aliment pour chien ou chat et obtenez une note indépendante basée sur ses ingrédients et ses valeurs nutritionnelles. Personnalisé pour votre animal, allergènes exclus."
+    "description": "Recherchez un aliment pour chien ou chat : note indépendante selon ingrédients et valeurs nutritionnelles, avec filtre d’allergènes pour votre animal."
   },
   "nav": {
     "best": "Meilleurs choix",
@@ -253,8 +253,8 @@
     "splitTextFirst": "{forms} proviennent de la même matière première ({count} formes), ensemble environ {pct} % de la recette – peut-être plus que le premier ingrédient ({first}). Les fabricants peuvent la déclarer ainsi répartie ; ce n'est pas une erreur, mais l'ordre de l'étiquette devient moins parlant.",
     "rankInType": "N° {rank} sur {total} · {type} · {species}",
     "metaTitle": "{name} – note {score}/100",
-    "metaDescription": "{name} de {brand} : note indépendante Scanabowl {score}/100 pour aliment {species}, avec analyse des ingrédients, valeurs nutritionnelles et contrôle des allergies.",
-    "metaDescriptionNoScore": "{name} de {brand} : ingrédients et valeurs nutritionnelles d’un aliment {species}.",
+    "metaDescription": "{name} de {brand} : note Scanabowl {score}/100 ({species}). Ingrédients, valeurs nutritionnelles et allergènes.",
+    "metaDescriptionNoScore": "{name} de {brand} : ingrédients et valeurs nutritionnelles ({species}).",
     "jsonLdDescription": "{name} de {brand} – aliment pour animaux analysé par Scanabowl.",
     "scoreTitle": "Note Scanabowl",
     "howCalculated": "Comment est-elle calculée ?",
@@ -500,7 +500,7 @@
     "betterText": "Le même type d'aliment, sans les ingrédients que votre animal ne tolère pas ou n'aime pas, avec une meilleure compatibilité. Un aliment par marque.",
     "compareCurrent": "Comparer avec l'aliment actuel",
     "metaTitle": "Mon animal – guide alimentaire personnel",
-    "metaDescription": "Créez un profil pour votre chien ou chat avec âge, poids et allergies. Scanabowl masque les aliments que votre animal ne peut pas manger et calcule la ration quotidienne.",
+    "metaDescription": "Créez un profil pour votre chien ou chat (âge, poids, allergies) : Scanabowl masque les aliments inadaptés et calcule la ration du jour.",
     "title": "Le profil de votre animal",
     "subtitle": "Parlez-nous de votre chien ou chat. Tout reste sur cet appareil – il n’y a pas de compte et rien ne nous est envoyé.",
     "yourPets": "Vos animaux",
@@ -681,7 +681,7 @@
   },
   "brands": {
     "metaTitle": "Pour les marques d’aliments pour animaux – ajoutez votre aliment",
-    "metaDescription": "Les fabricants d’aliments pour animaux peuvent soumettre leurs produits gratuitement. Chaque soumission est vérifiée et notée avec la même méthode indépendante.",
+    "metaDescription": "Les fabricants peuvent soumettre leurs aliments gratuitement. Chaque produit est vérifié et noté selon la même méthode indépendante.",
     "title": "Ajoutez votre aliment pour animaux",
     "intro": "Facilitez la tâche des propriétaires pour trouver votre aliment. Soumettez vos produits avec la liste complète des ingrédients et l’analyse. Nous vérifions tout et notons chaque aliment avec exactement la même méthode.",
     "howTitle": "Comment ça marche",
@@ -913,7 +913,7 @@
   },
   "guides": {
     "indexMetaTitle": "Meilleure nourriture pour chien et chat {year} : classements indépendants",
-    "indexMetaDescription": "La meilleure nourriture pour chaton, pour chiot, la meilleure pâtée, la nourriture senior et plus : des classements établis automatiquement selon un score indépendant. Aucune place payante.",
+    "indexMetaDescription": "Meilleures nourritures chaton, chiot, pâtée et senior : classements établis automatiquement selon un score indépendant. Aucune place payante.",
     "indexTitle": "La meilleure nourriture pour votre chien ou votre chat",
     "indexIntro": "Des classements pour chaque situation, du chaton au senior et de la pâtée à la nourriture à une seule protéine. Chaque liste est établie automatiquement à partir des aliments de notre base, dans l'ordre de leur score Scanabowl.",
     "indexNote": "Les listes sont recalculées à chaque mise à jour de la base. Aucune marque ne peut acheter une place. Nous pouvons toucher une commission si vous commandez via un lien, mais cela n'influence jamais l'ordre.",
@@ -949,7 +949,7 @@
     "addCard": "Ajouter {name} à la comparaison",
     "removeCard": "Retirer {name} de la comparaison",
     "metaTitle": "Comparer la nourriture pour chien et chat",
-    "metaDescription": "Comparez deux ou trois aliments côte à côte : score, protéines, matières grasses, calories, portion journalière et coût par jour pour votre chien ou votre chat.",
+    "metaDescription": "Comparez 2 ou 3 aliments côte à côte : score, protéines, graisses, calories, ration journalière et coût par jour pour votre chien ou chat.",
     "title": "Comparer des aliments",
     "intro": "Comparez jusqu'à trois aliments côte à côte. Vous voyez le score et les valeurs nutritionnelles, combien de grammes votre animal mange par jour et, si vous saisissez le prix, ce que cela coûte par jour.",
     "add": "Ajouter un aliment",
@@ -1003,7 +1003,7 @@
   },
   "brandPages": {
     "indexMetaTitle": "Toutes les marques d’aliments pour chiens et chats comparées",
-    "indexMetaDescription": "Comparez {count} marques d’aliments pour chiens et chats selon leur note Scanabowl moyenne, calculée à partir des ingrédients et des valeurs nutritionnelles.",
+    "indexMetaDescription": "Comparez {count} marques pour chiens et chats selon leur note Scanabowl moyenne, calculée à partir des ingrédients et valeurs nutritionnelles.",
     "indexTitle": "Toutes les marques",
     "indexIntro": "Comment les marques s’en sortent-elles en moyenne ? Voici chaque marque ayant au moins {min} aliments dans notre base, avec la note moyenne des aliments que nous pouvons évaluer. Cliquez sur une marque pour voir tous ses aliments.",
     "topTitle": "Marques les mieux notées",
@@ -1013,7 +1013,7 @@
     "avg": "moyenne {score}",
     "noAvg": "pas encore noté",
     "metaTitle": "{brand} : aliments pour chiens et chats notés",
-    "metaDescription": "Quelle note pour {brand} ? La note Scanabowl indépendante de {count} aliments {brand}, calculée à partir des ingrédients et des valeurs nutritionnelles.",
+    "metaDescription": "{brand} : note Scanabowl indépendante de {count} aliments, calculée selon ingrédients et valeurs nutritionnelles.",
     "intro": "Scanabowl compte {count} aliments {brand} dans sa base. Chaque aliment est évalué d’après son étiquette – ingrédients et valeurs nutritionnelles – avec exactement la même méthode que toutes les autres marques.",
     "statFoods": "Aliments dans la base",
     "statAvg": "Note moyenne",
@@ -1042,7 +1042,7 @@
   },
   "allergenPages": {
     "metaTitle": "Aliment chien & chat sans {allergen} – contrôle strict",
-    "metaDescription": "Les {count} aliments complets pour chiens et chats garantis sans {allergen} et sans sous-produits animaux ou végétaux vagues, classés selon la note Scanabowl.",
+    "metaDescription": "Les {count} aliments complets sans {allergen} ni sous-produits vagues, classés selon la note Scanabowl.",
     "strictBadge": "Contrôle strict · également sans sous-produits vagues",
     "h1": "Aliment pour animaux sans {allergen}",
     "intro": "Vous cherchez un aliment pour chien ou chat sans {allergen} ? Voici les {count} aliments complets de notre base qui ne contiennent pas de {allergen} et n’utilisent aucun terme générique vague pouvant cacher du {allergen}.",

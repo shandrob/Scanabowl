@@ -20,6 +20,7 @@ import { alternateLanguages, isLocale, localePath, type Locale } from "@/lib/i18
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { createT, type TFunction } from "@/lib/i18n/t";
 import { foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
+import { clampDescription } from "@/lib/meta";
 import { SITE } from "@/lib/site";
 
 /**
@@ -44,12 +45,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!p) return {};
   const t = createT(await getDictionary(lang));
   const title = p.score !== null ? t("product.metaTitle", { name: p.name, score: p.score }) : p.name;
-  const description = t(p.score !== null ? "product.metaDescription" : "product.metaDescriptionNoScore", {
-    name: p.name,
-    brand: p.brand,
-    score: p.score ?? 0,
-    species: speciesLabel(t, p.species),
-  });
+  const description = clampDescription(
+    t(p.score !== null ? "product.metaDescription" : "product.metaDescriptionNoScore", {
+      name: p.name,
+      brand: p.brand,
+      score: p.score ?? 0,
+      species: speciesLabel(t, p.species),
+    }),
+  );
   const path = `/foods/${slug}`;
   return {
     title,
