@@ -239,10 +239,28 @@ export const BRAND_STORIES: Record<string, BrandEditorial> = {
   "bf-petfood": {
     origin: "NL",
     text: {
-      nl: "BF®Petfood (voorheen Biofood) is een Nederlands familiebedrijf uit Friesland dat sinds 1989 natuurlijke honden- en kattenvoeding en supplementen maakt, waaronder koudgeperste brokken, gestoomde vleesmaaltijden en EU-biologische voeding.",
-      en: "BF®Petfood (formerly Biofood) is a Dutch family business from Friesland crafting natural dog and cat food and supplements since 1989, including cold-pressed kibble, steamed meat meals and EU-organic recipes.",
-      de: "BF®Petfood (ehemals Biofood) ist ein niederländisches Familienunternehmen aus Friesland, das seit 1989 natürliches Hunde- und Katzenfutter sowie Nahrungsergänzungsmittel herstellt – von kaltgepresstem Trockenfutter bis zu EU-Bio-Menüs.",
-      fr: "BF®Petfood (anciennement Biofood) est une entreprise familiale néerlandaise de Frise qui fabrique depuis 1989 des aliments naturels et compléments pour chiens et chats, dont des croquettes pressées à froid et des recettes bio.",
+      nl: "BF®Petfood is een Nederlands familiebedrijf uit Friesland dat sinds 1989 natuurlijke honden- en kattenvoeding en supplementen maakt, waaronder koudgeperste brokken, krokante brokken en gestoomde vleesmaaltijden.",
+      en: "BF®Petfood is a Dutch family business from Friesland crafting natural dog and cat food and supplements since 1989, including cold-pressed kibble, extruded kibble and steamed meat meals.",
+      de: "BF®Petfood ist ein niederländisches Familienunternehmen aus Friesland, das seit 1989 natürliches Hunde- und Katzenfutter sowie Nahrungsergänzungsmittel herstellt – von kaltgepresstem Trockenfutter bis zu gedämpften Fleischmenüs.",
+      fr: "BF®Petfood est une entreprise familiale néerlandaise de Frise qui fabrique depuis 1989 des aliments naturels et compléments pour chiens et chats, dont des croquettes pressées à froid et des repas de viande cuits à la vapeur.",
+    },
+  },
+  biofood: {
+    origin: "NL",
+    text: {
+      nl: "BIOFOOD is de officiële EU-biologische lijn van het Friese familiebedrijf BF®Petfood (Biofood Diervoeding B.V., opgericht in 1989). Het assortiment bestaat uit biologische brokken en biologische vleesmenu's voor hond en kat.",
+      en: "BIOFOOD is the official EU-organic line of Dutch family business BF®Petfood (Biofood Diervoeding B.V., founded in 1989 in Friesland), offering certified organic kibble and wet meat menus for dogs and cats.",
+      de: "BIOFOOD ist die offizielle EU-Bio-Linie des friesischen Familienunternehmens BF®Petfood (Biofood Diervoeding B.V., gegründet 1989) mit zertifiziertem Bio-Trockenfutter und Bio-Fleischmenüs für Hunde und Katzen.",
+      fr: "BIOFOOD est la gamme officielle certifiée bio UE de l'entreprise familiale néerlandaise BF®Petfood (Biofood Diervoeding B.V., fondée en 1989 en Frise), proposant des croquettes et menus carnés biologiques pour chiens et chats.",
+    },
+  },
+  cavom: {
+    origin: "NL",
+    text: {
+      nl: "Cavom is een Nederlands hondenvoermerk van het onafhankelijke familiebedrijf VDM Diervoederfabriek B.V. uit Drachten (Friesland), vooral bekend om zijn koudgeperste brokken met ontsloten granen, gedroogd vlees of vis, rundvet en zalmolie.",
+      en: "Cavom is a Dutch dog food brand produced by independent family-owned mill VDM Diervoederfabriek B.V. in Drachten (Friesland), best known for its cold-pressed kibble made with extruded grains, dried meat or fish, beef fat and salmon oil.",
+      de: "Cavom ist eine niederländische Hundefuttermarke des unabhängigen Familienbetriebs VDM Diervoederfabriek B.V. aus Drachten (Friesland), bekannt für kaltgepresstes Trockenfutter mit aufgeschlossenem Getreide, getrocknetem Fleisch oder Fisch und Lachsöl.",
+      fr: "Cavom est une marque néerlandaise d'aliments pour chiens fabriquée par l'entreprise familiale indépendante VDM Diervoederfabriek B.V. à Drachten (Frise), connue pour ses croquettes pressées à froid à base de céréales extrudées, viande ou poisson déshydraté et huile de saumon.",
     },
   },
   "wellness-core": {
@@ -256,14 +274,161 @@ export const BRAND_STORIES: Record<string, BrandEditorial> = {
   },
 };
 
+export interface SharedProducer {
+  note: string;
+  sisterSlugs: string[];
+}
+
+interface ProducerGroup {
+  brands: string[];
+  note: Record<Locale, string>;
+}
+
+/**
+ * Verified brand groups produced by the same manufacturer or factory facility.
+ * Kept strictly factual so pet owners can see which brands share production origins.
+ */
+const PRODUCER_GROUPS: ProducerGroup[] = [
+  {
+    brands: ["bf-petfood", "biofood"],
+    note: {
+      nl: "BF Petfood (natuurlijke lijn) en BIOFOOD (biologische lijn) komen van dezelfde producent/fabriek (BF®Petfood / Biofood Diervoeding B.V. uit Drachten, Friesland).",
+      en: "BF Petfood (natural range) and BIOFOOD (organic range) come from the same producer/factory (BF®Petfood / Biofood Diervoeding B.V. in Drachten, Netherlands).",
+      de: "BF Petfood (natürliche Linie) und BIOFOOD (Bio-Linie) stammen vom selben Hersteller/Werk (BF®Petfood / Biofood Diervoeding B.V. aus Drachten, Niederlande).",
+      fr: "BF Petfood (gamme naturelle) et BIOFOOD (gamme biologique) proviennent du même producteur/usine (BF®Petfood / Biofood Diervoeding B.V. à Drachten, Pays-Bas).",
+    },
+  },
+  {
+    brands: ["acana", "orijen"],
+    note: {
+      nl: "Acana en Orijen worden allebei gemaakt door Champion Petfoods in dezelfde eigen keukens (Canada/VS).",
+      en: "Acana and Orijen are both made by Champion Petfoods in its own kitchens (Canada/USA).",
+      de: "Acana und Orijen werden beide von Champion Petfoods in denselben eigenen Küchen (Kanada/USA) hergestellt.",
+      fr: "Acana et Orijen sont tous deux fabriqués par Champion Petfoods dans ses propres cuisines (Canada/États-Unis).",
+    },
+  },
+  {
+    brands: ["belcando", "leonardo", "bewi-dog"],
+    note: {
+      nl: "Belcando, Leonardo en Bewi Dog worden geproduceerd in dezelfde fabriek van BEWITAL petfood in Südlohn-Oeding (Duitsland).",
+      en: "Belcando, Leonardo and Bewi Dog are produced in the same BEWITAL petfood factory in Südlohn-Oeding (Germany).",
+      de: "Belcando, Leonardo und Bewi Dog werden im selben Werk von BEWITAL petfood in Südlohn-Oeding (Deutschland) hergestellt.",
+      fr: "Belcando, Leonardo et Bewi Dog sont produits dans la même usine BEWITAL petfood à Südlohn-Oeding (Allemagne).",
+    },
+  },
+  {
+    brands: ["brit", "carnilove", "profine", "sam-s-field", "planet-pet-society"],
+    note: {
+      nl: "Brit, Carnilove, Profine, Sam's Field en Planet Pet Society worden alle gemaakt door dezelfde Europese fabrikant: VAFO Group (Tsjechië).",
+      en: "Brit, Carnilove, Profine, Sam's Field and Planet Pet Society are all manufactured by the same European producer: VAFO Group (Czech Republic).",
+      de: "Brit, Carnilove, Profine, Sam's Field und Planet Pet Society stammen alle vom selben europäischen Hersteller: der VAFO Group (Tschechien).",
+      fr: "Brit, Carnilove, Profine, Sam's Field et Planet Pet Society sont tous fabriqués par le même producteur européen : VAFO Group (République tchèque).",
+    },
+  },
+  {
+    brands: ["opti-life", "lara", "happy-life", "versele-laga-classic", "nutritional-balance"],
+    note: {
+      nl: "Opti Life, Lara, Happy Life, Versele-Laga Classic en Nutritional Balance worden gemaakt door dezelfde Belgische fabrikant: Versele-Laga (Deinze, België).",
+      en: "Opti Life, Lara, Happy Life, Versele-Laga Classic and Nutritional Balance are made by the same Belgian manufacturer: Versele-Laga (Deinze, Belgium).",
+      de: "Opti Life, Lara, Happy Life, Versele-Laga Classic und Nutritional Balance stammen vom selben belgischen Hersteller: Versele-Laga (Deinze, Belgien).",
+      fr: "Opti Life, Lara, Happy Life, Versele-Laga Classic et Nutritional Balance sont fabriqués par le même fabricant belge : Versele-Laga (Deinze, Belgique).",
+    },
+  },
+  {
+    brands: ["fleischeslust", "meatlove", "steakhouse", "pussy-deluxe"],
+    note: {
+      nl: "Fleischeslust, Meatlove, Steakhouse en Pussy Deluxe worden geproduceerd door dezelfde Duitse fabrikant: Fleischeslust Tiernahrung GmbH.",
+      en: "Fleischeslust, Meatlove, Steakhouse and Pussy Deluxe are produced by the same German manufacturer: Fleischeslust Tiernahrung GmbH.",
+      de: "Fleischeslust, Meatlove, Steakhouse und Pussy Deluxe werden vom selben deutschen Hersteller produziert: Fleischeslust Tiernahrung GmbH.",
+      fr: "Fleischeslust, Meatlove, Steakhouse et Pussy Deluxe sont produits par le même fabricant allemand : Fleischeslust Tiernahrung GmbH.",
+    },
+  },
+  {
+    brands: ["denkadog", "denkacat", "pawr"],
+    note: {
+      nl: "Denkadog, Denkacat en PAWR komen van dezelfde Nederlandse producent: IPP Inter Pet Products B.V. (Breda).",
+      en: "Denkadog, Denkacat and PAWR come from the same Dutch producer: IPP Inter Pet Products B.V. (Breda, Netherlands).",
+      de: "Denkadog, Denkacat und PAWR stammen vom selben niederländischen Hersteller: IPP Inter Pet Products B.V. (Breda).",
+      fr: "Denkadog, Denkacat et PAWR proviennent du même producteur néerlandais : IPP Inter Pet Products B.V. (Breda, Pays-Bas).",
+    },
+  },
+  {
+    brands: ["iams", "eukanuba"],
+    note: {
+      nl: "De Europese droogvoerlijnen van Iams en Eukanuba (Spectrum Brands) worden geproduceerd in dezelfde fabriek in Coevorden (Nederland, geëxploiteerd door United Petfood).",
+      en: "European dry food lines for Iams and Eukanuba (Spectrum Brands) are manufactured at the same factory in Coevorden (Netherlands, operated by United Petfood).",
+      de: "Die europäischen Trockenfutterlinien von Iams und Eukanuba (Spectrum Brands) werden im selben Werk in Coevorden (Niederlande, betrieben von United Petfood) hergestellt.",
+      fr: "Les gammes sèches européennes d'Iams et d'Eukanuba (Spectrum Brands) sont fabriquées dans la même usine à Coevorden (Pays-Bas, exploitée par United Petfood).",
+    },
+  },
+  {
+    brands: ["jarco", "sjef-s-cuisine", "monopets", "natural-fresh-meat", "yamipets"],
+    note: {
+      nl: "Jarco, Sjef's Cuisine, Monopets, Natural Fresh Meat en Yamipets vallen onder dezelfde Nederlandse producent/groep (Yamipets).",
+      en: "Jarco, Sjef's Cuisine, Monopets, Natural Fresh Meat and Yamipets belong to the same Dutch producer group (Yamipets).",
+      de: "Jarco, Sjef's Cuisine, Monopets, Natural Fresh Meat und Yamipets gehören zur selben niederländischen Herstellergruppe (Yamipets).",
+      fr: "Jarco, Sjef's Cuisine, Monopets, Natural Fresh Meat et Yamipets appartiennent au même groupe producteur néerlandais (Yamipets).",
+    },
+  },
+  {
+    brands: ["hobbyfirst-canex", "hobbyfirst-feline", "canex", "euro-premium"],
+    note: {
+      nl: "HobbyFirst Canex, HobbyFirst Feline, Canex en Euro-Premium worden geproduceerd binnen dezelfde Belgische diervoedergroep: Group Depre / Beduco (Schoten, België).",
+      en: "HobbyFirst Canex, HobbyFirst Feline, Canex and Euro-Premium are produced within the same Belgian pet food group: Group Depre / Beduco (Schoten, Belgium).",
+      de: "HobbyFirst Canex, HobbyFirst Feline, Canex und Euro-Premium werden innerhalb derselben belgischen Tierfuttergruppe hergestellt: Group Depre / Beduco (Schoten, Belgien).",
+      fr: "HobbyFirst Canex, HobbyFirst Feline, Canex et Euro-Premium sont produits au sein du même groupe belge : Group Depre / Beduco (Schoten, Belgique).",
+    },
+  },
+  {
+    brands: ["fokker", "prima-quality"],
+    note: {
+      nl: "Fokker en Prima Quality worden ontwikkeld en geproduceerd door dezelfde Nederlandse fabrikant: Fokker Petfood.",
+      en: "Fokker and Prima Quality are formulated and produced by the same Dutch manufacturer: Fokker Petfood.",
+      de: "Fokker und Prima Quality werden vom selben niederländischen Hersteller entwickelt und produziert: Fokker Petfood.",
+      fr: "Fokker et Prima Quality sont formulés et produits par le même fabricant néerlandais : Fokker Petfood.",
+    },
+  },
+  {
+    brands: ["amanova", "trovet"],
+    note: {
+      nl: "Amanova en Trovet vallen allebei onder de Spaanse fabrikant Visán (Arganda del Rey, Madrid), waar Amanova en nieuwere Trovet-lijnen zoals Trovet Plus worden geproduceerd.",
+      en: "Amanova and Trovet both belong to Spanish manufacturer Visán (Arganda del Rey, Madrid), where Amanova and newer Trovet lines such as Trovet Plus are produced.",
+      de: "Amanova und Trovet gehören beide zum spanischen Hersteller Visán (Arganda del Rey, Madrid), wo Amanova und neuere Trovet-Linien wie Trovet Plus produziert werden.",
+      fr: "Amanova et Trovet appartiennent tous deux au fabricant espagnol Visán (Arganda del Rey, Madrid), où sont produits Amanova et des gammes récentes comme Trovet Plus.",
+    },
+  },
+  {
+    brands: ["gimcat", "gimdog", "gimdog-little-darling"],
+    note: {
+      nl: "GimCat, Gimdog en GimDog Little Darling worden gemaakt door dezelfde Duitse fabrikant: H. von Gimborn GmbH.",
+      en: "GimCat, Gimdog and GimDog Little Darling are made by the same German manufacturer: H. von Gimborn GmbH.",
+      de: "GimCat, Gimdog und GimDog Little Darling stammen vom selben deutschen Hersteller: H. von Gimborn GmbH.",
+      fr: "GimCat, Gimdog et GimDog Little Darling sont fabriqués par le même fabricant allemand : H. von Gimborn GmbH.",
+    },
+  },
+];
+
+function getSharedProducer(slug: string, lang: Locale): SharedProducer | null {
+  const group = PRODUCER_GROUPS.find((g) => g.brands.includes(slug));
+  if (!group) return null;
+  return {
+    note: group.note[lang],
+    sisterSlugs: group.brands.filter((s) => s !== slug),
+  };
+}
+
 /**
  * Build a warm, transparent editorial summary for ANY brand on Scanabowl, combining a curated brand story
  * (when available) with live facts from our database.
  */
-export function getBrandStory(b: BrandSummary, lang: Locale): { curated: string | null; origin: string | null; dataSummary: string } {
+export function getBrandStory(
+  b: BrandSummary,
+  lang: Locale,
+): { curated: string | null; origin: string | null; dataSummary: string; sharedProducer: SharedProducer | null } {
   const entry = BRAND_STORIES[b.slug];
   const curated = entry?.text[lang] ?? null;
   const origin = entry?.origin ?? null;
+  const sharedProducer = getSharedProducer(b.slug, lang);
 
   const hasDog = (b.dog?.count ?? 0) > 0;
   const hasCat = (b.cat?.count ?? 0) > 0;
@@ -281,7 +446,7 @@ export function getBrandStory(b: BrandSummary, lang: Locale): { curated: string 
     if (anPct !== null) {
       parts.push(`Gemiddeld komt circa **${anPct}%** van het eiwit in de beoordeelde recepten uit dierlijke ingrediënten${gfPct > 0 ? `, en **${gfPct}%** van het assortiment is graanvrij` : ""}.`);
     }
-    return { curated, origin, dataSummary: parts.join(" ") };
+    return { curated, origin, dataSummary: parts.join(" "), sharedProducer };
   }
 
   if (lang === "de") {
@@ -295,7 +460,7 @@ export function getBrandStory(b: BrandSummary, lang: Locale): { curated: string 
     if (anPct !== null) {
       parts.push(`Durchschnittlich stammen etwa **${anPct}%** des Proteins aus tierischen Zutaten${gfPct > 0 ? `, und **${gfPct}%** der Produkte sind getreidefrei` : ""}.`);
     }
-    return { curated, origin, dataSummary: parts.join(" ") };
+    return { curated, origin, dataSummary: parts.join(" "), sharedProducer };
   }
 
   if (lang === "fr") {
@@ -309,7 +474,7 @@ export function getBrandStory(b: BrandSummary, lang: Locale): { curated: string 
     if (anPct !== null) {
       parts.push(`En moyenne, environ **${anPct}%** des protéines proviennent d’ingrédients animaux${gfPct > 0 ? `, et **${gfPct}%** des recettes sont sans céréales` : ""}.`);
     }
-    return { curated, origin, dataSummary: parts.join(" ") };
+    return { curated, origin, dataSummary: parts.join(" "), sharedProducer };
   }
 
   // English default
@@ -323,5 +488,5 @@ export function getBrandStory(b: BrandSummary, lang: Locale): { curated: string 
   if (anPct !== null) {
     parts.push(`On average, an estimated **${anPct}%** of the protein in rated recipes comes from animal sources${gfPct > 0 ? `, and **${gfPct}%** of the range is grain-free` : ""}.`);
   }
-  return { curated, origin, dataSummary: parts.join(" ") };
+  return { curated, origin, dataSummary: parts.join(" "), sharedProducer };
 }

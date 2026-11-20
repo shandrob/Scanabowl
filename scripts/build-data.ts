@@ -21,6 +21,7 @@ import { field, readCsv } from "../lib/catalog/csv";
 import { inferFoodType, knownBrands, normalizeEan, slugify, toSpecies } from "../lib/catalog/clean";
 import { rowToProduct, type CatalogProduct, type RowContext, type Source } from "../lib/catalog/records";
 import { packGrams } from "../lib/pets/energy";
+import { recipeKey } from "../lib/guides/defs";
 import { detectAllergens } from "../lib/scoring/allergens";
 import { scoreProduct } from "../lib/scoring/score";
 import { speciesIn } from "../lib/scoring/taxonomy";
@@ -366,6 +367,20 @@ async function main() {
     const credit = credits.get(p.ean);
     if (credit) p.imageCredit = credit;
   }
+  // Share product photos across pack sizes of the same recipe (e.g. 1.5 kg -> 5 kg without its own EAN/photo)
+  const photoByRecipe = new Map<string, { image: string; imageCredit?: CatalogProduct["imageCredit"] }>();
+  for (const p of products) {
+    if (!p.image) continue;
+    const key = `${p.species}|${p.foodType}|${recipeKey(p)}`;
+    if (!photoByRecipe.has(key)) photoByRecipe.set(key, { image: p.image, imageCredit: p.imageCredit });
+  }
+  for (const p of products) {
+    if (p.image) continue;
+    const donor = photoByRecipe.get(`${p.species}|${p.foodType}|${recipeKey(p)}`);
+    if (!donor) continue;
+    p.image = donor.image;
+    if (donor.imageCredit) p.imageCredit = donor.imageCredit;
+  }
 
   // ---------------------------------------------------------------- blog images
   // content/blog/<slug>/*.png|jpg -> public/blog-images/<slug>/*.webp (max 1600 px wide)
@@ -479,7 +494,7 @@ async function main() {
     if (p.category === "complete") {
       if (!p.ingredients) problems.noIngredients.push(label);
       else if (!p.analysis) problems.noAnalysis.push(label);
-      const isPlantBased = /\b(plant[-\s]?based|plantaardig\w*|veggie|vegetal|vega|vegetarisch\w*|vegan\w*)\b/i.test(`${p.brand} ${p.name}`);
+      const isPlantBased = /\b(plant[-\s]?based|plantaardig\w*|veggie|vegetal|vega|vegetarisch\w*|vegan\w*|hypo[-\s]?sensitive\s+groente)\b/i.test(`${p.brand} ${p.name}`);
       if (result.score !== null && (result.animalProteinShare ?? 0) === 0 && result.ingredients.length > 0 && !isPlantBased) problems.suspicious.push(`${label}  (no animal ingredient recognised: check the ingredient text)`);
       if (result.confidence === "low") problems.lowConfidence++;
       if (result.flags.some((f) => f.severity === "hazard")) problems.hazards.push(`${label}  -> ${result.flags.filter((f) => f.severity === "hazard").map((f) => f.code).join(",")}`);

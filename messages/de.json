@@ -49,6 +49,7 @@
   },
   "type": { "dry": "Trockenfutter", "wet": "Nassfutter", "frozen": "Tiefgefroren / roh", "semi": "Halbfeucht", "other": "Sonstiges" },
   "stage": { "youngDog": "Welpe / Junghund", "youngCat": "Kitten / Jungkatze", "adult": "Erwachsen", "senior": "Senior", "all": "Alle Lebensphasen" },
+  "category": { "complete": "Alleinfutter", "complementary": "Ergänzungsfutter", "treat": "Snack / Leckerli", "supplement": "Ergänzungsmittel", "veterinary": "Tierarzt-Diätfutter" },
   "grade": {
     "A": "Ausgezeichnet",
     "B": "Gut",
@@ -753,6 +754,7 @@
     "productNamePh": "z. B. Adult Lachs & Reis",
     "brand": "Marke",
     "species": "Tier",
+    "category": "Kategorie",
     "ean": "Barcode (EAN)",
     "eanHint": "Die Nummer unter dem Barcode, 8 oder 13 Ziffern.",
     "ingredients": "Zutaten / Zusammensetzung",
@@ -1056,6 +1058,7 @@
     "scoredCount": "bewertet",
     "statLowest": "Niedrigste Bewertung",
     "aboutTitle": "Über die Marke {brand}",
+    "sameFactoryTitle": "Gleicher Hersteller / gleiches Werk",
     "rangeByType": "Sortiment nach Futterart",
     "avgPillarsTitle": "Durchschnittlicher Aufbau der Bewertung",
     "highlightsTitle": "Am höchsten & niedrigsten bewertet von {brand}",

@@ -49,6 +49,7 @@
   },
   "type": { "dry": "Dry food", "wet": "Wet food", "frozen": "Frozen / raw", "semi": "Semi-moist", "other": "Other" },
   "stage": { "youngDog": "Puppy / junior", "youngCat": "Kitten / junior", "adult": "Adult", "senior": "Senior", "all": "All life stages" },
+  "category": { "complete": "Complete food", "complementary": "Complementary food", "treat": "Treat / snack", "supplement": "Supplement", "veterinary": "Veterinary diet" },
   "grade": {
     "A": "Excellent",
     "B": "Good",
@@ -753,6 +754,7 @@
     "productNamePh": "e.g. Adult Salmon & Rice",
     "brand": "Brand",
     "species": "Animal",
+    "category": "Category",
     "ean": "Barcode (EAN)",
     "eanHint": "The number under the barcode, 8 or 13 digits.",
     "ingredients": "Ingredients / composition",
@@ -1056,6 +1058,7 @@
     "scoredCount": "scored",
     "statLowest": "Lowest score",
     "aboutTitle": "About {brand}",
+    "sameFactoryTitle": "Same manufacturer / factory",
     "rangeByType": "Product range by food type",
     "avgPillarsTitle": "Average score breakdown",
     "highlightsTitle": "Highest & lowest rated from {brand}",

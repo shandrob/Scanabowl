@@ -59,6 +59,9 @@ export default async function BrandPage({ params }: Props) {
   const t = createT(await getDictionary(lang));
   const topShare = b.scored ? Math.round(((b.grades.A + b.grades.B) / b.scored) * 100) : null;
   const story = getBrandStory(b, lang);
+  const sisterBrands = story.sharedProducer
+    ? (await allBrands()).filter((other) => story.sharedProducer!.sisterSlugs.includes(other.slug))
+    : [];
   const url = `${SITE.url}${localePath(lang, `/foods/brand/${slug}`)}`;
 
   const jsonLd = {
@@ -123,6 +126,28 @@ export default async function BrandPage({ params }: Props) {
           <p className="mt-3 font-sans text-[0.95rem] leading-relaxed text-ink-soft">
             <Rich text={story.dataSummary} />
           </p>
+
+          {story.sharedProducer && sisterBrands.length > 0 && (
+            <div className="mt-5 border-t border-line pt-4">
+              <p className="font-sans text-xs font-semibold text-ink-soft">{t("brandPages.sameFactoryTitle")}</p>
+              <p className="mt-1.5 font-sans text-[0.925rem] leading-relaxed text-ink-soft">
+                {story.sharedProducer.note}
+              </p>
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                {sisterBrands.map((other) => (
+                  <Link
+                    key={other.slug}
+                    href={localePath(lang, `/foods/brand/${other.slug}`)}
+                    prefetch={false}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#E2DDD5] bg-cream px-3.5 py-1.5 font-sans text-xs font-medium text-ink transition hover:border-brand/40 hover:text-brand"
+                  >
+                    <span>{other.name}</span>
+                    <span className="font-semibold tabular-nums text-ink-soft">({other.count})</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Food Type Breakdown Pills */}
           {b.byType.length > 0 && (

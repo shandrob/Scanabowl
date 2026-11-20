@@ -5,6 +5,7 @@ const r1 = (v: number) => Math.round(v * 10) / 10;
 /** Slim record for the browser, derived from the full product record (single source of truth). */
 export function detailToIndex(d: ProductDetail): IndexEntry {
   const n = d.nutrition;
+  const imgKey = d.image?.match(/^\/products\/([^/]+)\.webp$/)?.[1];
   return {
     i: d.id,
     e: d.ean,
@@ -18,6 +19,7 @@ export function detailToIndex(d: ProductDetail): IndexEntry {
     g: d.grade,
     gf: d.grainFree ? 1 : 0,
     im: d.image ? 1 : 0,
+    ...(imgKey && imgKey !== d.ean ? { img: imgKey } : {}),
     ad: d.allergens.definite,
     ap: d.allergens.possible,
     pr: d.proteins,

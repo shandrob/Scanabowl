@@ -194,7 +194,8 @@ export function cleanName(name: string): string {
 
 /** Brand fixes for scraper artefacts and sub-lines that belong to a parent brand. */
 const BRAND_ALIASES: Array<[RegExp, string]> = [
-  [/^(?:bf|bf\s*petfood|biofood)$/i, "BF Petfood"],
+  [/^(?:bf|bf\s*petfood)$/i, "BF Petfood"],
+  [/^biofood$/i, "BIOFOOD"],
   [/^royal canin veterinary( diets?)?$/i, "Royal Canin"],
   [/^hill'?s prescription diet$/i, "Hill's"],
   [/^pro plan veterinary( diets?)?$/i, "Pro Plan"],
@@ -257,7 +258,7 @@ export function knownBrands(rows: Array<{ name: string; brand: string }>): strin
 export function isGarbageRow(row: { name: string; ingredients: string }): boolean {
   const n = normalize(row.name);
   if (n.length < 6) return true;
-  if (/^(natvoer|droogvoer|kattenvoer|hondenvoer)$/.test(n)) return true;
+  if (/^(natvoer|droogvoer|diepvriesvoer|kattenvoer|hondenvoer)$/.test(n)) return true;
   if (row.ingredients.length > 4000) return true; // scraped a whole page instead of the ingredients block
   return false;
 }

@@ -49,6 +49,7 @@
   },
   "type": { "dry": "Croquettes", "wet": "Pâtée / aliment humide", "frozen": "Surgelé / cru", "semi": "Semi-humide", "other": "Autre" },
   "stage": { "youngDog": "Chiot / junior", "youngCat": "Chaton / junior", "adult": "Adulte", "senior": "Senior", "all": "Tous les âges" },
+  "category": { "complete": "Aliment complet", "complementary": "Aliment complémentaire", "treat": "Friandise / snack", "supplement": "Complément", "veterinary": "Aliment vétérinaire" },
   "grade": {
     "A": "Excellent",
     "B": "Bon",
@@ -753,6 +754,7 @@
     "productNamePh": "p. ex. Adult Saumon & Riz",
     "brand": "Marque",
     "species": "Animal",
+    "category": "Catégorie",
     "ean": "Code-barres (EAN)",
     "eanHint": "Le numéro sous le code-barres, 8 ou 13 chiffres.",
     "ingredients": "Ingrédients / composition",
@@ -1056,6 +1058,7 @@
     "scoredCount": "notés",
     "statLowest": "Note la plus basse",
     "aboutTitle": "À propos de la marque {brand}",
+    "sameFactoryTitle": "Même fabricant / usine",
     "rangeByType": "Gamme par type d’aliment",
     "avgPillarsTitle": "Détail moyen de la note",
     "highlightsTitle": "Meilleure et moins bonne note chez {brand}",

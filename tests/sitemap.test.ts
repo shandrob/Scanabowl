@@ -36,4 +36,20 @@ describe("brand pages", async () => {
       if (b.avg !== null) expect(b.avg).toBeLessThanOrEqual(b.best ?? 0);
     }
   });
+  it("split BIOFOOD from BF Petfood and resolve valid shared-producer sister links", async () => {
+    const { getBrandStory } = await import("../lib/data/brand-stories");
+    const bySlug = new Map(brands.map((b) => [b.slug, b]));
+    expect(bySlug.get("bf-petfood")?.count).toBe(120);
+    expect(bySlug.get("biofood")?.count).toBe(13);
+    for (const b of brands) {
+      const story = getBrandStory(b, "en");
+      if (!story.sharedProducer) continue;
+      expect(story.sharedProducer.sisterSlugs).not.toContain(b.slug);
+      for (const sister of story.sharedProducer.sisterSlugs) {
+        expect(bySlug.has(sister), `${b.slug} -> missing sister ${sister}`).toBe(true);
+      }
+    }
+    expect(getBrandStory(bySlug.get("biofood")!, "nl").sharedProducer?.sisterSlugs).toEqual(["bf-petfood"]);
+    expect(getBrandStory(bySlug.get("bf-petfood")!, "nl").sharedProducer?.sisterSlugs).toEqual(["biofood"]);
+  });
 });

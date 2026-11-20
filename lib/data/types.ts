@@ -88,6 +88,8 @@ export interface IndexEntry {
   gf: 0 | 1;
   /** has image */
   im: 0 | 1;
+  /** image file key (without .webp) when different from ean, e.g. inherited from a sibling pack size */
+  img?: string;
   /** definite allergens */
   ad: string[];
   /** possible allergens (vague label wording) */

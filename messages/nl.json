@@ -49,6 +49,7 @@
   },
   "type": { "dry": "Droogvoer", "wet": "Natvoer", "frozen": "Diepvries / rauw", "semi": "Halfvochtig", "other": "Overig" },
   "stage": { "youngDog": "Puppy / junior", "youngCat": "Kitten / junior", "adult": "Volwassen", "senior": "Senior", "all": "Alle leeftijden" },
+  "category": { "complete": "Volledig voer", "complementary": "Aanvullend voer", "treat": "Snack", "supplement": "Supplement", "veterinary": "Dieetvoer (dierenarts)" },
   "grade": {
     "A": "Uitstekend",
     "B": "Goed",
@@ -753,6 +754,7 @@
     "productNamePh": "bijv. Adult Zalm & Rijst",
     "brand": "Merk",
     "species": "Dier",
+    "category": "Categorie",
     "ean": "Barcode (EAN)",
     "eanHint": "Het nummer onder de barcode, 8 of 13 cijfers.",
     "ingredients": "Ingrediënten / samenstelling",
@@ -1056,6 +1058,7 @@
     "scoredCount": "beoordeeld",
     "statLowest": "Laagste score",
     "aboutTitle": "Over het merk {brand}",
+    "sameFactoryTitle": "Zelfde producent / fabriek",
     "rangeByType": "Assortiment per soort voer",
     "avgPillarsTitle": "Gemiddelde opbouw van de score",
     "highlightsTitle": "Hoogst en laagst scorend van {brand}",

@@ -41,7 +41,7 @@ export function ProductCard({
       className="group flex gap-4 rounded-xl border border-line bg-paper p-4 shadow-card transition hover:border-brand-mid/50 hover:shadow-lift focus-visible:outline-offset-4"
     >
       <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg border border-line bg-white p-1">
-        <ProductImage ean={entry.e} hasImage={entry.im === 1} alt="" size={96} />
+        <ProductImage ean={entry.img ?? entry.e} hasImage={entry.im === 1} alt="" size={96} />
       </div>
       <div className="min-w-0 flex-1">
         <p className="truncate font-sans text-xs font-semibold text-ink-faint">{entry.b}</p>

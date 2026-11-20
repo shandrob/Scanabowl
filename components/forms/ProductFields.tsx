@@ -1,6 +1,7 @@
 "use client";
 
 import { useT } from "@/components/i18n/DictionaryProvider";
+import type { Category } from "@/lib/scoring/types";
 import { Field, inputCls } from "./FormKit";
 
 export interface ProductDraft {
@@ -8,6 +9,7 @@ export interface ProductDraft {
   brand: string;
   species: "dog" | "cat";
   foodType: "dry" | "wet" | "frozen" | "other";
+  category: Category;
   lifeStage: "young" | "adult" | "senior" | "all";
   ean: string;
   ingredients: string;
@@ -21,6 +23,7 @@ export const emptyProduct = (brand = ""): ProductDraft => ({
   brand,
   species: "dog",
   foodType: "dry",
+  category: "complete",
   lifeStage: "adult",
   ean: "",
   ingredients: "",
@@ -75,6 +78,15 @@ export function ProductFields({
           <option value="wet">{t("type.wet")}</option>
           <option value="frozen">{t("type.frozen")}</option>
           <option value="other">{t("type.other")}</option>
+        </select>
+      </Field>
+      <Field id={id("category")} label={t("forms.category")}>
+        <select id={id("category")} className={inputCls} value={value.category} onChange={(e) => set("category", e.target.value as ProductDraft["category"])}>
+          <option value="complete">{t("category.complete")}</option>
+          <option value="complementary">{t("category.complementary")}</option>
+          <option value="treat">{t("category.treat")}</option>
+          <option value="supplement">{t("category.supplement")}</option>
+          <option value="veterinary">{t("category.veterinary")}</option>
         </select>
       </Field>
       <Field id={id("stage")} label={t("finder.stage")}>

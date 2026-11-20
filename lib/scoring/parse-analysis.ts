@@ -9,16 +9,25 @@ import { normalize, parseLabelNumber } from "./text";
  */
 
 const NUM = String.raw`(\d{1,3}(?:[.,]\d+)?)`;
-// up to 24 non-digit, non-letter-heavy characters between label and number
-const GAP = String.raw`[^0-9a-z%]{0,3}(?:[a-z ()\-/]{0,24}?)[:=\s]*`;
+// up to 24 non-digit, non-letter-heavy characters between label and number (never crossing a comma/semicolon/pipe)
+const GAP = String.raw`[^0-9a-z%,;|]{0,3}(?:[a-z ()\-/]{0,24}?)[:=\s]*`;
 
 function pick(t: string, labels: string): number | undefined {
-  // "31,0%"  or, when the % sign is missing, a number closed by ; , or end of text ("Ruw eiwit: 5,9;")
-  const re = new RegExp(`(?<![a-z])(?:${labels})(?![a-z]{4})${GAP}${NUM}(?:\\s*%|(?=\\s*(?:;|,|$)))`, "i");
-  const m = t.match(re);
-  if (!m) return undefined;
-  const n = parseLabelNumber(m[1]);
-  return n !== undefined && n >= 0 && n <= 100 ? n : undefined;
+  // "Ruw eiwit: 31,0%" or, when the % sign is missing, a number closed by ; , or end of text ("Ruw eiwit: 5,9;")
+  const after = new RegExp(`(?<![a-z])(?:${labels})(?![a-z]{4})${GAP}${NUM}(?:\\s*%|(?=\\s*(?:;|,|$)))`, "i");
+  const mAfter = t.match(after);
+  if (mAfter) {
+    const n = parseLabelNumber(mAfter[1]);
+    if (n !== undefined && n >= 0 && n <= 100) return n;
+  }
+  // Reverse order: "32,0% eiwit, 9,0% vetgehalte" / "84,0% vocht, 8,0% eiwit"
+  const before = new RegExp(`${NUM}\\s*%\\s*(?:${labels})(?![a-z]{4})`, "i");
+  const mBefore = t.match(before);
+  if (mBefore) {
+    const n = parseLabelNumber(mBefore[1]);
+    if (n !== undefined && n >= 0 && n <= 100) return n;
+  }
+  return undefined;
 }
 
 const LABELS = {

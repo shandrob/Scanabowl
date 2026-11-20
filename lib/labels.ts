@@ -1,9 +1,13 @@
 import type { TFunction } from "./i18n/t";
-import type { FoodType, Grade, LifeStage, Species } from "./scoring/types";
+import type { Category, FoodType, Grade, LifeStage, Species } from "./scoring/types";
 
 /** Human-readable labels for enum values; all text comes from the dictionary. */
 export function foodTypeLabel(t: TFunction, ft: FoodType): string {
   return t(`type.${ft === "semi-moist" ? "semi" : ft}`);
+}
+
+export function categoryLabel(t: TFunction, cat: Category): string {
+  return t(`category.${cat}`);
 }
 
 export function stageLabel(t: TFunction, stage: LifeStage, species: Species): string {

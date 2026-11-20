@@ -116,7 +116,7 @@ export function Alternatives({
                 className="group flex items-center gap-3 rounded-xl border border-line bg-cream/50 p-3 transition hover:border-brand-mid/50 hover:bg-paper hover:shadow-sm"
               >
                 <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-line bg-white p-1">
-                  <ProductImage ean={e.e} hasImage={e.im === 1} alt="" size={48} />
+                  <ProductImage ean={e.img ?? e.e} hasImage={e.im === 1} alt="" size={48} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-sans text-[11px] font-semibold text-brand">{e.b}</p>

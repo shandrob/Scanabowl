@@ -79,7 +79,7 @@ export function BrandForm() {
         </fieldset>
       ))}
       {products.length < MAX && (
-        <button type="button" onClick={() => setProducts((l) => [...l, { ...emptyProduct(), species: l[l.length - 1].species, foodType: l[l.length - 1].foodType }])} className="rounded-full border border-dashed border-line px-5 py-3 font-sans text-sm font-semibold text-brand hover:border-brand">
+        <button type="button" onClick={() => setProducts((l) => [...l, { ...emptyProduct(), species: l[l.length - 1].species, foodType: l[l.length - 1].foodType, category: l[l.length - 1].category }])} className="rounded-full border border-dashed border-line px-5 py-3 font-sans text-sm font-semibold text-brand hover:border-brand">
           + {t("brands.addProduct")}
         </button>
       )}

@@ -1,5 +1,7 @@
 import { stringify } from "csv-stringify/sync";
+import { inferCategory } from "./catalog/clean";
 import { MASTER_COLUMNS } from "./catalog/csv";
+import type { Category } from "./scoring/types";
 
 /**
  * Validation + formatting of everything visitors send in. Kept free of I/O so it can be tested.
@@ -15,6 +17,7 @@ export interface ProductSubmission {
   species: "dog" | "cat";
   foodType: "dry" | "wet" | "frozen" | "other";
   lifeStage: "young" | "adult" | "senior" | "all";
+  category: Category;
   ean: string;
   ingredients: string;
   analysis: string;
@@ -83,18 +86,30 @@ function stripControl(s: string): string {
 
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+const CATEGORIES = ["complete", "complementary", "veterinary", "treat", "supplement"] as const;
+
 function cleanProduct(raw: unknown): ProductSubmission | null {
   if (!raw || typeof raw !== "object") return null;
   const r = raw as Record<string, unknown>;
+  const name = clip(r.name, 160);
+  const brand = clip(r.brand, 80);
+  const foodType = oneOf(r.foodType, ["dry", "wet", "frozen", "other"] as const, "dry");
+  const ingredients = clip(r.ingredients, 4000);
+  const analysis = clip(r.analysis, 1500);
+  const declaredCat = typeof r.category === "string" && (CATEGORIES as readonly string[]).includes(r.category) ? (r.category as Category) : undefined;
+  const inferred = inferCategory({ name, brand, declaredType: TYPE_NL[foodType], text: `${ingredients} ${analysis}` });
+  // Respect an explicit non-complete choice; if omitted or left at default "complete" on an "other" product, fall back to name/label inference.
+  const category: Category = declaredCat && (declaredCat !== "complete" || foodType !== "other") ? declaredCat : inferred;
   const p: ProductSubmission = {
-    name: clip(r.name, 160),
-    brand: clip(r.brand, 80),
+    name,
+    brand,
     species: oneOf(r.species, ["dog", "cat"] as const, "dog"),
-    foodType: oneOf(r.foodType, ["dry", "wet", "frozen", "other"] as const, "dry"),
+    foodType,
     lifeStage: oneOf(r.lifeStage, ["young", "adult", "senior", "all"] as const, "adult"),
+    category,
     ean: clip(r.ean, 20).replace(/[^\d]/g, ""),
-    ingredients: clip(r.ingredients, 4000),
-    analysis: clip(r.analysis, 1500),
+    ingredients,
+    analysis,
     pack: clip(r.pack, 60),
     url: clip(r.url, 300),
   };
@@ -159,6 +174,13 @@ export function parseSubmission(body: unknown): { ok: true; data: Submission } |
 const SPECIES_NL = { dog: "Hond", cat: "Kat" } as const;
 const TYPE_NL = { dry: "Droogvoer", wet: "Natvoer", frozen: "Diepvriesvoer", other: "Overig" } as const;
 const STAGE_NL = { young: "Jong (puppy/kitten)", adult: "Volwassen", senior: "Senior", all: "Alle leeftijden" } as const;
+const CATEGORY_NL: Record<Category, string> = {
+  complete: "Volledig",
+  complementary: "Aanvullend",
+  veterinary: "Dieetvoer (dierenarts)",
+  treat: "Snack",
+  supplement: "Supplement",
+};
 
 /** One CSV line per product in the master-database format, ready to paste into database/manual/*.csv */
 export function toCsvRows(s: Submission): string {
@@ -170,7 +192,7 @@ export function toCsvRows(s: Submission): string {
     doeldier: SPECIES_NL[p.species],
     voertype: TYPE_NL[p.foodType],
     levensfase: STAGE_NL[p.lifeStage],
-    categorie: "Volledig",
+    categorie: CATEGORY_NL[p.category],
     ingredienten: p.ingredients,
     analyse: p.analysis,
     verpakking: p.pack,
@@ -209,7 +231,7 @@ export function toText(s: Submission): string {
   if (s.reportRef) L.push("", `Betreft product: ${s.reportName ?? ""} (${s.reportRef})`);
   if (s.message) L.push("", "== BERICHT ==", s.message);
   s.products.forEach((p, i) => {
-    L.push("", `== PRODUCT ${i + 1} ==`, `Naam: ${p.name}`, `Merk: ${p.brand}`, `Dier: ${p.species}  Type: ${p.foodType}  Levensfase: ${p.lifeStage}`, `EAN: ${p.ean || "-"}  Verpakking: ${p.pack || "-"}`, `Link: ${p.url || "-"}`, "", "Ingrediënten:", p.ingredients || "-", "", "Analytische bestanddelen:", p.analysis || "-");
+    L.push("", `== PRODUCT ${i + 1} ==`, `Naam: ${p.name}`, `Merk: ${p.brand}`, `Dier: ${p.species}  Type: ${p.foodType}  Categorie: ${p.category}  Levensfase: ${p.lifeStage}`, `EAN: ${p.ean || "-"}  Verpakking: ${p.pack || "-"}`, `Link: ${p.url || "-"}`, "", "Ingrediënten:", p.ingredients || "-", "", "Analytische bestanddelen:", p.analysis || "-");
   });
   if (s.photos?.length) {
     L.push(

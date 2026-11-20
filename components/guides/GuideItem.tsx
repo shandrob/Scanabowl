@@ -37,7 +37,7 @@ export function GuideItem({ p, rank, def, lang, t }: { p: ProductDetail; rank: n
           {rank}
         </span>
         <Link href={href} prefetch={false} className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-cream p-1" tabIndex={-1} aria-hidden>
-          <ProductImage ean={p.ean} hasImage={!!p.image} alt="" size={96} />
+          <ProductImage ean={p.ean} image={p.image} hasImage={!!p.image} alt="" size={96} />
         </Link>
         <div className="flex shrink-0 flex-col items-center gap-1.5 sm:order-last">
           <ScoreRing score={p.score} grade={grade} size={64} label={scoreAria(t, p.score, grade)} />

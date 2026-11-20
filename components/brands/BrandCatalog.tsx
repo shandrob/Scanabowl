@@ -5,11 +5,11 @@ import { ProductCard } from "@/components/foods/ProductCard";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { IconSearch } from "@/components/ui/Icons";
 import type { IndexEntry } from "@/lib/data/types";
-import { foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
+import { categoryLabel, foodTypeLabel, speciesLabel, stageLabel } from "@/lib/labels";
 import { packGrams } from "@/lib/pets/energy";
 import { usePets } from "@/lib/pets/store";
 import { personalFit } from "@/lib/scoring/personalize";
-import type { FoodType, LifeStage, Species } from "@/lib/scoring/types";
+import type { Category, FoodType, LifeStage, Species } from "@/lib/scoring/types";
 import { matchesQuery, queryTerms, searchHaystack } from "@/lib/search";
 
 type BrandSort = "score" | "value" | "price" | "name";
@@ -48,6 +48,7 @@ export function BrandCatalog({
   const hasBoth = dogItems.length > 0 && catItems.length > 0;
   const [speciesFilter, setSpeciesFilter] = useState<"all" | Species>("all");
   const [typeFilter, setTypeFilter] = useState<"all" | FoodType>("all");
+  const [categoryFilter, setCategoryFilter] = useState<"all" | Category>("all");
   const [stageFilter, setStageFilter] = useState<"all" | LifeStage>("all");
   const [grainFreeOnly, setGrainFreeOnly] = useState(false);
   const [q, setQ] = useState("");
@@ -67,6 +68,15 @@ export function BrandCatalog({
     return [...s];
   }, [allItems, speciesFilter]);
 
+  const availableCategories = useMemo(() => {
+    const order: Category[] = ["complete", "complementary", "veterinary", "treat", "supplement"];
+    const present = new Set<Category>();
+    for (const item of allItems) {
+      if (speciesFilter === "all" || item.species === speciesFilter) present.add(item.entry.c);
+    }
+    return order.filter((c) => present.has(c));
+  }, [allItems, speciesFilter]);
+
   const hasGrainFree = useMemo(
     () => allItems.some((item) => item.entry.gf === 1),
     [allItems],
@@ -77,6 +87,7 @@ export function BrandCatalog({
     const list = allItems.filter(({ entry, species }) => {
       if (speciesFilter !== "all" && species !== speciesFilter) return false;
       if (typeFilter !== "all" && entry.t !== typeFilter) return false;
+      if (categoryFilter !== "all" && entry.c !== categoryFilter) return false;
       if (stageFilter !== "all" && entry.l !== stageFilter && entry.l !== "all") return false;
       if (grainFreeOnly && entry.gf !== 1) return false;
       if (terms.length && !matchesQuery(searchHaystack(entry.b, entry.n, entry.e), terms)) return false;
@@ -89,10 +100,10 @@ export function BrandCatalog({
       if (sort === "value") return valueRatio(b.entry) - valueRatio(a.entry) || (b.entry.sc ?? -1) - (a.entry.sc ?? -1);
       return (b.entry.sc ?? -1) - (a.entry.sc ?? -1) || a.entry.n.localeCompare(b.entry.n);
     });
-  }, [allItems, speciesFilter, typeFilter, stageFilter, grainFreeOnly, q, sort]);
+  }, [allItems, speciesFilter, typeFilter, categoryFilter, stageFilter, grainFreeOnly, q, sort]);
 
   const activeFilters =
-    speciesFilter !== "all" || typeFilter !== "all" || stageFilter !== "all" || grainFreeOnly || q.trim().length > 0;
+    speciesFilter !== "all" || typeFilter !== "all" || categoryFilter !== "all" || stageFilter !== "all" || grainFreeOnly || q.trim().length > 0;
 
   return (
     <section aria-labelledby="brand-all-h" className="mt-12">
@@ -111,6 +122,7 @@ export function BrandCatalog({
             onClick={() => {
               setSpeciesFilter("all");
               setTypeFilter("all");
+              setCategoryFilter("all");
               setStageFilter("all");
               setGrainFreeOnly(false);
               setQ("");
@@ -238,6 +250,25 @@ export function BrandCatalog({
               </button>
             )}
           </div>
+
+          {availableCategories.length > 1 && (
+            <div className="flex flex-wrap gap-1.5">
+              {availableCategories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setCategoryFilter(categoryFilter === cat ? "all" : cat)}
+                  className={`rounded-full px-3 py-1.5 font-sans text-xs font-medium transition ${
+                    categoryFilter === cat
+                      ? "bg-brand-soft font-semibold text-brand-deep ring-1 ring-brand"
+                      : "border border-[#E2DDD5] bg-paper text-ink-soft hover:border-brand-mid hover:text-ink"
+                  }`}
+                >
+                  {categoryLabel(t, cat)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

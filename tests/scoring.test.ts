@@ -409,3 +409,24 @@ describe("dry and wet cat food are each measured against their own kind (method 
     expect(r.negatives.some((n) => n.code === "dry_food_cat")).toBe(false);
   });
 });
+
+describe("percentage-before-label analytical constituents", () => {
+  it("parses Dutch wet and dry labels where the percentage precedes the nutrient name", () => {
+    expect(parseAnalysis("84,0% vocht, 8,0% eiwit, 4,5% vetgehalte, 0,3% ruwe vezel, 2,0% ruwe as")).toEqual({
+      moisture: 84,
+      protein: 8,
+      fat: 4.5,
+      fibre: 0.3,
+      ash: 2,
+    });
+    expect(parseAnalysis("32,0% eiwit, 9,0% vetgehalte, 2,5% ruwe celstof, 8,0% ruwe as, 1,1% calcium, 1,0% fosfor, 0,4% taurine")).toEqual({
+      protein: 32,
+      fat: 9,
+      fibre: 2.5,
+      ash: 8,
+      calcium: 1.1,
+      phosphorus: 1,
+      taurine: 0.4,
+    });
+  });
+});

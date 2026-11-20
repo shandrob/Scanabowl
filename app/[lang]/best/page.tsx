@@ -45,7 +45,7 @@ function GuideCard({ g, lang, t, year }: { g: GuideData; lang: Locale; t: TFunct
       </div>
       {first && (
         <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-cream p-1" aria-hidden>
-          <ProductImage ean={first.ean} hasImage={!!first.image} alt="" size={80} />
+          <ProductImage ean={first.ean} image={first.image} hasImage={!!first.image} alt="" size={80} />
         </div>
       )}
     </Link>

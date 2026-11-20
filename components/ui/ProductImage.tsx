@@ -3,21 +3,24 @@ import Image from "next/image";
 /** Product photo, or a friendly bowl illustration when there is none. */
 export function ProductImage({
   ean,
+  image,
   hasImage,
   alt,
   size = 120,
   priority = false,
 }: {
   ean: string;
+  image?: string;
   hasImage: boolean;
   alt: string;
   size?: number;
   priority?: boolean;
 }) {
-  if (hasImage && ean) {
+  const src = image || (hasImage && ean ? `/products/${ean}.webp` : undefined);
+  if (src) {
     return (
       <Image
-        src={`/products/${ean}.webp`}
+        src={src}
         alt={alt}
         width={size}
         height={size}

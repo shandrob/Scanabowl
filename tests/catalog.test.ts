@@ -47,6 +47,26 @@ describe("submissions", () => {
     const r = parseSubmission({ kind: "brand", email: "a@b.nl", company: { name: "X", contact: "Y", website: "https://x.nl" }, products: many, authorised: true, consent: true });
     expect(r.ok && r.data.products.length).toBe(12);
   });
+
+  it("writes the chosen or inferred category (e.g. Snack for dog treats) into the CSV row", () => {
+    const treat = parseSubmission({
+      kind: "brand",
+      email: "gabe@pierrepark.com",
+      company: { name: "PierrePark", contact: "Gabe", website: "https://pierrepark.com" },
+      products: [{ ...product, name: "Sweet Potato Dog Treats", brand: "PierrePark", species: "dog", foodType: "other", ingredients: "Sweet potato" }],
+      authorised: true,
+      consent: true,
+    });
+    expect(treat.ok).toBe(true);
+    if (treat.ok) {
+      expect(treat.data.products[0].category).toBe("treat");
+      expect(toCsvRows(treat.data)).toContain('"Overig";"Volwassen";"Snack"');
+    }
+
+    const explicit = parseSubmission({ kind: "product", products: [{ ...product, category: "complementary" }] });
+    expect(explicit.ok).toBe(true);
+    if (explicit.ok) expect(toCsvRows(explicit.data)).toContain('"Aanvullend"');
+  });
 });
 
 describe("rowToProduct", () => {

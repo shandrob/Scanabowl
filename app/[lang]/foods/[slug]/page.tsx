@@ -113,7 +113,10 @@ export default async function ProductPage({ params }: Props) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: t("nav.foods"), item: `${SITE.url}${localePath(lang, "/foods")}` },
-          { "@type": "ListItem", position: 2, name: p.name, item: `${SITE.url}${localePath(lang, `/foods/${slug}`)}` },
+          ...(brandSlug
+            ? [{ "@type": "ListItem", position: 2, name: p.brand, item: `${SITE.url}${localePath(lang, `/foods/brand/${brandSlug}`)}` }]
+            : []),
+          { "@type": "ListItem", position: brandSlug ? 3 : 2, name: p.name, item: `${SITE.url}${localePath(lang, `/foods/${slug}`)}` },
         ],
       },
     ],
@@ -127,6 +130,12 @@ export default async function ProductPage({ params }: Props) {
           <li aria-hidden>/</li>
           <li><Link href={`${localePath(lang, "/foods")}?species=${p.species}`} className="hover:text-ink hover:underline">{speciesLabel(t, p.species, true)}</Link></li>
           <li aria-hidden>/</li>
+          {brandSlug && (
+            <>
+              <li><Link href={localePath(lang, `/foods/brand/${brandSlug}`)} className="hover:text-ink hover:underline">{p.brand}</Link></li>
+              <li aria-hidden>/</li>
+            </>
+          )}
           <li className="max-w-[16rem] truncate text-ink-soft" aria-current="page">{p.name}</li>
         </ol>
       </nav>
@@ -134,7 +143,7 @@ export default async function ProductPage({ params }: Props) {
       {/* Product Header */}
       <header className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center">
         <div className="h-40 w-40 shrink-0 overflow-hidden rounded-2xl border border-line bg-paper p-2 shadow-card">
-          <ProductImage ean={p.ean} hasImage={!!p.image} alt={p.name} size={200} priority />
+          <ProductImage ean={p.ean} image={p.image} hasImage={!!p.image} alt={p.name} size={200} priority />
         </div>
         {p.imageCredit && (
           <p className="-mt-3 font-sans text-xs text-ink-faint sm:hidden">
