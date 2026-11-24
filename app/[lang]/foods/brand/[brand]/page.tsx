@@ -59,9 +59,37 @@ export default async function BrandPage({ params }: Props) {
   const t = createT(await getDictionary(lang));
   const topShare = b.scored ? Math.round(((b.grades.A + b.grades.B) / b.scored) * 100) : null;
   const story = getBrandStory(b, lang);
+  const brandsAll = await allBrands();
   const sisterBrands = story.sharedProducer
-    ? (await allBrands()).filter((other) => story.sharedProducer!.sisterSlugs.includes(other.slug))
+    ? brandsAll.filter((other) => story.sharedProducer!.sisterSlugs.includes(other.slug))
     : [];
+  const comparePeers = (() => {
+    if (!b.bestFood) return [];
+    const sp = b.bestFood.species;
+    const curated = new Set([
+      "royal-canin", "prins", "edgard-en-cooper", "orijen", "acana", "farm-food",
+      "carocroc", "hill-s", "purina-one", "carnilove", "applaws", "renske", "cavom", "bf-petfood",
+    ]);
+    const candidates = brandsAll.filter((other) => {
+      if (other.slug === b.slug) return false;
+      const otherTop = other[sp]?.top.find((e) => e.sc !== null);
+      return Boolean(otherTop);
+    });
+    const sisterSet = new Set(sisterBrands.map((s) => s.slug));
+    const sorted = [...candidates].sort((x, y) => {
+      const xs = sisterSet.has(x.slug) ? 2 : curated.has(x.slug) ? 1 : 0;
+      const ys = sisterSet.has(y.slug) ? 2 : curated.has(y.slug) ? 1 : 0;
+      if (ys !== xs) return ys - xs;
+      return Math.abs((x.avg ?? 60) - (b.avg ?? 60)) - Math.abs((y.avg ?? 60) - (b.avg ?? 60));
+    });
+    return sorted.slice(0, 5).map((other) => ({
+      slug: other.slug,
+      name: other.name,
+      species: sp,
+      otherId: other[sp]!.top.find((e) => e.sc !== null)!.i,
+      myId: b.bestFood!.entry.i,
+    }));
+  })();
   const url = `${SITE.url}${localePath(lang, `/foods/brand/${slug}`)}`;
 
   const jsonLd = {
@@ -238,6 +266,28 @@ export default async function BrandPage({ params }: Props) {
               </p>
               <ProductCard entry={b.lowestFood.entry} species={b.lowestFood.species} lang={lang} t={t} />
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Compare with Popular Peer Brands */}
+      {comparePeers.length > 0 && (
+        <section aria-labelledby="compare-brands-h" className="mt-8 rounded-2xl border border-line bg-paper p-5 shadow-card sm:p-6">
+          <h2 id="compare-brands-h" className="font-sans text-xs font-semibold text-ink-soft">
+            {t("brandPages.compareWithTitle", { brand: b.name })}
+          </h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {comparePeers.map((peer) => (
+              <Link
+                key={peer.slug}
+                href={`${localePath(lang, "/compare")}?species=${peer.species}&f=${encodeURIComponent(peer.myId)},${encodeURIComponent(peer.otherId)}`}
+                prefetch={false}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E2DDD5] bg-cream px-3.5 py-1.5 font-sans text-xs font-medium text-ink transition hover:border-brand/40 hover:bg-brand-soft hover:text-brand-deep"
+              >
+                <span>{b.name} vs. {peer.name}</span>
+                <span aria-hidden className="text-brand">→</span>
+              </Link>
+            ))}
           </div>
         </section>
       )}

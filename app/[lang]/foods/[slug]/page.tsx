@@ -9,6 +9,7 @@ import { NutritionVisual } from "@/components/product/NutritionVisual";
 import { OrderCard } from "@/components/product/OrderCard";
 import { PersonalPanel } from "@/components/product/PersonalPanel";
 import { ScorePanel } from "@/components/product/ScorePanel";
+import { ShareFoodButton } from "@/components/product/ShareFoodButton";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { detailToIndex } from "@/lib/data/index-entry";
 import type { ImageCredit } from "@/lib/data/types";
@@ -171,6 +172,7 @@ export default async function ProductPage({ params }: Props) {
           </ul>
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <CompareButton id={p.id} species={p.species} />
+            <ShareFoodButton name={p.name} score={p.score} url={`${SITE.url}${localePath(lang, `/foods/${slug}`)}`} />
           </div>
           {variants.length > 1 && (
             <div className="mt-4">
