@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Analytics, type BeforeSendEvent } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 /**
  * Vercel Web Analytics: page views without cookies (visitors are counted by an anonymous hash that is
@@ -34,5 +35,10 @@ function useVisitCounter() {
 
 export function SiteAnalytics() {
   useVisitCounter();
-  return <Analytics beforeSend={beforeSend} />;
+  return (
+    <>
+      <Analytics beforeSend={beforeSend} />
+      <SpeedInsights />
+    </>
+  );
 }

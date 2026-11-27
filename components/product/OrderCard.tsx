@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { IconExternal } from "@/components/ui/Icons";
 import { localePath } from "@/lib/i18n/config";
+import { trackShopClick } from "@/lib/analytics";
 import { dailyEnergy, gramsPerDay, packGrams } from "@/lib/pets/energy";
 import { usePets } from "@/lib/pets/store";
 import type { FoodType, PetProfile, Species } from "@/lib/scoring/types";
@@ -329,6 +330,7 @@ export function OrderCard({
                     href={s.url}
                     target="_blank"
                     rel="sponsored nofollow noopener noreferrer"
+                    onClick={() => trackShopClick(s.id, true, brand, name)}
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition hover:bg-brand-deep"
                   >
                     <span className="truncate">
@@ -362,6 +364,7 @@ export function OrderCard({
                     href={s.url}
                     target="_blank"
                     rel="sponsored nofollow noopener noreferrer"
+                    onClick={() => trackShopClick(s.id, false, brand, name)}
                     className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-line bg-cream px-3 py-2 font-sans text-xs font-semibold text-ink transition hover:border-brand hover:bg-paper hover:text-brand-deep"
                   >
                     <span className="truncate">{t("order.searchAt", { shop: s.label })}</span>

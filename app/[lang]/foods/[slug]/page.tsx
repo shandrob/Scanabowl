@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: localePath(lang, path), languages: alternateLanguages(path) },
-    openGraph: { title, description, images: p.image ? [{ url: p.image }] : [{ url: "/og.png", width: 1200, height: 630 }] },
+    openGraph: { title, description },
   };
 }
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useT } from "@/components/i18n/DictionaryProvider";
 import { IconCheck } from "@/components/ui/Icons";
+import { trackShareFood } from "@/lib/analytics";
 
 /** One-tap WhatsApp share and copy-link actions for a product score page. */
 export function ShareFoodButton({ name, score, url }: { name: string; score: number | null; url: string }) {
@@ -19,6 +20,7 @@ export function ShareFoodButton({ name, score, url }: { name: string; score: num
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(url);
+      trackShareFood("copy_link", name, score);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -32,6 +34,7 @@ export function ShareFoodButton({ name, score, url }: { name: string; score: num
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackShareFood("whatsapp", name, score)}
         className="inline-flex items-center gap-2 rounded-full border border-[#E2DDD5] bg-paper px-4 py-2 font-sans text-sm font-medium text-ink transition hover:border-brand hover:bg-brand-soft hover:text-brand-deep md:hidden"
       >
         <svg viewBox="0 0 24 24" className="h-4 w-4 text-brand" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

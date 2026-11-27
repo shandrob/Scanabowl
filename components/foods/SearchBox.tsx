@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLang, useT } from "@/components/i18n/DictionaryProvider";
 import { BarcodeScanner } from "./BarcodeScanner";
 import { IconBarcode, IconSearch } from "@/components/ui/Icons";
-import { reportNoResults } from "@/lib/analytics";
+import { reportNoResults, trackBarcodeScan } from "@/lib/analytics";
 import { slugify } from "@/lib/catalog/clean";
 import { loadIndex } from "@/lib/data/client";
 import type { IndexEntry } from "@/lib/data/types";
@@ -118,12 +118,16 @@ export function SearchBox({
         const res = await fetch(`/api/ean/${ean}`);
         if (res.ok) {
           const { slug } = (await res.json()) as { slug: string };
+          trackBarcodeScan(lang, true, slug);
           onNavigate?.();
           router.push(localePath(lang, `/foods/${slug}`));
           return;
         }
         setMissing(ean);
-        if (res.status === 404) reportNoResults(lang, ean, "barcode");
+        if (res.status === 404) {
+          trackBarcodeScan(lang, false, ean);
+          reportNoResults(lang, ean, "barcode");
+        }
       } catch {
         setMissing(ean);
       } finally {
